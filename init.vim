@@ -1,7 +1,6 @@
 set mouse=a
-" set number
-set relativenumber
-" set hidden
+set number
+set hidden
 "set cursorline
 set expandtab 
 set autoindent
@@ -22,6 +21,7 @@ Plug 'preservim/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-commentary'
+Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 call plug#end()
 
 "open NERDTree automatically
@@ -32,6 +32,7 @@ let g:NERDTreeGitStatusWithFlags = 1
 
 let g:NERDTreeIgnore = ['^node_modules$']
 
+"source https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 let g:coc_global_extensions = ['coc-json', 
             \  'coc-git',
             \  'coc-html',
@@ -47,6 +48,9 @@ let g:coc_global_extensions = ['coc-json',
                 \   'coc-htmlhint',
                 \   'coc-html-css-support',
                 \   'coc-markdownlint',
+                \   'coc-sql',
+                \   'coc-stylelintplus',
+                \   'coc-tailwindcss',
                 \ ]
 
 "Smart way to move between windows
@@ -57,7 +61,7 @@ map <C-l> <C-W>l
 
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-e> :NERDTreeToggle<CR>
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
 "overwrite ctrl+z that close vim
@@ -65,6 +69,21 @@ nnoremap <c-z> :u<CR>      " Avoid using this**
 inoremap <c-z> <c-o>:u<CR>
 
 
+"terminal toggle 
+" set
+autocmd TermEnter term://*toggleterm#*
+      \ tnoremap <silent><C-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
+
+
+" By applying the mappings this way you can pass a count to your
+" mapping to open a specific window.
+" For example: 2<C-t> will open terminal 2
+
+nnoremap <silent><C-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
+inoremap <silent><C-t> <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>
+
 "comment
 "noremap <C-w> :Commentary<cr>
+
+
 
