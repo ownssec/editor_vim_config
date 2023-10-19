@@ -1,57 +1,42 @@
 set mouse=a
-set number
+" set number
 set relativenumber
-set hidden
+" set hidden
 "set cursorline
 set expandtab
 set autoindent
 set smartindent
 set shiftwidth=4
-set tabstop=4
-"set encoding=utf8
+set tabstop=4 set encoding=utf8
 set history=5000
 set clipboard=unnamedplus
 set scl=no
+set buftype=""
+let mapleader = ' '
 
 call plug#begin()
-# Plugins
 Plug 'preservim/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'github/copilot.vim'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-commentary'
 call plug#end()
 
-
-" open NERDTree automatically
+"open NERDTree automatically
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * NERDTree
 
 let g:NERDTreeGitStatusWithFlags = 1
-"let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-"let g:NERDTreeGitStatusNodeColorization = 1
-"let g:NERDTreeColorMapCustom = {
-    "\ "Staged"    : "#0ee375",  
-    "\ "Modified"  : "#d9bf91",  
-    "\ "Renamed"   : "#51C9FC",  
-    "\ "Untracked" : "#FCE77C",  
-    "\ "Unmerged"  : "#FC51E6",  
-    "\ "Dirty"     : "#FFBD61",  
-    "\ "Clean"     : "#87939A",   
-    "\ "Ignored"   : "#808080"   
-   "\ }                         
-
 
 let g:NERDTreeIgnore = ['^node_modules$']
 
 let g:coc_global_extensions = [
-  \ 'coc-tsserver',
-  \ 'coc-json',
-  \ 'coc-css',
-  \  'coc-eslint',
-  \  'coc-html',
-  \  'coc-prettier'
-  \ ]
+            \  'coc-tsserver',
+            \ 'coc-json',
+            \ 'coc-css',
+            \   'coc-eslint',
+            \ 'coc-html',
+            \ 'coc-prettier'
+   ]
 
 
 
@@ -61,12 +46,19 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-"close vim
+
+
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-e> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
+"overwrite ctrl+z that close vim
 nnoremap <c-z> :u<CR>      " Avoid using this**
 inoremap <c-z> <c-o>:u<CR>
 
 
-#comment
-noremap <C-/> :Commentary<cr>
+"comment
+"noremap <C-w> :Commentary<cr>
 
 
