@@ -32,22 +32,25 @@ let g:NERDTreeGitStatusWithFlags = 1
 
 let g:NERDTreeIgnore = ['^node_modules$']
 
-let g:coc_global_extensions = ['coc-json', 
-            \  'coc-git',
-            \  'coc-html',
-            \   'coc-tslint',
-                \  'coc-eslint',
-                \  'coc-clangd',
-                \  'coc-css',
-                \ 'coc-vetur',
-                \ 'coc-rome',
-                \ 'coc-prettier',
-                \'coc-cssmodules',
-                \'coc-explorer',
-                \   'coc-htmlhint',
-                \   'coc-html-css-support',
-                \   'coc-markdownlint',
-                \ ]
+let g:coc_global_extensions = [
+    'coc-json', 
+    'coc-git',
+    'coc-html',
+    'coc-tslint',
+    'coc-eslint',
+    'coc-css',
+    'coc-style',
+    'coc-vetur',
+    'coc-volar',
+    'coc-rome',
+    'coc-prettier',
+    'coc-cssmodules',
+    'coc-explorer',
+    'coc-htmlhint',
+    'coc-html-css-support',
+    'coc-markdownlint',
+    'coc-nginx'
+    ]
 
 "Smart way to move between windows
 map <C-j> <C-W>j
