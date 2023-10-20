@@ -17,8 +17,6 @@ autocmd ColorScheme *
         \ highlight special ctermfg=11
 colorscheme  tokyonight
 
-
-
 "Smart way to move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -33,9 +31,6 @@ nnoremap <C-f> :NERDTreeFind<CR>
 "overwrite ctrl+z that close vim
 nnoremap <c-z> :u<CR>      " Avoid using this**
 inoremap <c-z> <c-o>:u<CR>
-
-"comment
-"noremap <C-w> :Commentary<cr>
 
 " treesitter 
 lua << EOF
@@ -61,12 +56,66 @@ require("nvim-treesitter.configs").setup({
 })
 EOF
 
-"enable toggle term
-:lua require("toggleterm").setup()
+" treesitter 
+lua << EOF
+require("nvim-treesitter.configs").setup({
+    ensure_installed = {
+                \ "javascript",
+                \ "typescript", 
+                \ "lua", 
+                \ "lua", 
+                \ "vim", 
+                \ "json", 
+                \ "html", 
+                \ "tsx",
+                \ "css",
+                \ "http",
+                \ "jsonnet",
+                \ "php",
+                \ "sql",
+                \ "vue",
+                \ },
+    sync_install = false,
+    auto_install = true,
+    highlight = {
+        enable = true,
+    },
+})
+EOF
 
 
-"terminal toggle 
-" set
+" treesitter 
+lua << EOF
+require("nvim-treesitter.configs").setup({
+    ensure_installed = {'javascript',
+\'typescript', 
+\"lua", 
+\"lua", 
+\"vim", 
+\"json", 
+\"html", 
+\"tsx",
+\"css",
+\"http",
+\"jsonnet",
+\"php",
+\"sql",
+\"vue" },
+    sync_install = false,
+    auto_install = true,
+    highlight = {
+        enable = true,
+    },
+})
+EOF
+
+
+" treesitter 
+lua << EOF
+    require("toggleterm").setup()
+EOF
+
+" terminal toggle 
 autocmd TermEnter term://*toggleterm#*
       \ tnoremap <silent><A-1> <Cmd>exe "ToggleTerm 1"<CR>
 
@@ -105,6 +154,7 @@ tnoremap <silent><C-h> <Cmd>exe  "wincmd h"<CR>
 tnoremap <silent><C-l> <Cmd>exe  "wincmd l"<CR>
 
 
-:lua require("./plugins")
-
+lua << EOF 
+    require("./plugins")
+EOF
 

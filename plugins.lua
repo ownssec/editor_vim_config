@@ -40,18 +40,19 @@ packer.init({
 
 -- Install your plugins here
 return packer.startup(function(use)
-	use ("wbthomason/packer.nvim") -- Have packer manage itself	
+	use "wbthomason/packer.nvim" -- Have packer manage itself	
 
     --nvim-web-devicons
-	use("nvim-tree/nvim-web-devicons") -- Add entry here to install the plugin
+	use "nvim-tree/nvim-web-devicons" -- Add entry here to install the plugin
 
     
     use {"akinsho/toggleterm.nvim", tag = '*', config = function()
       require("toggleterm").setup()
     end}
 
+    use "nvim-tree/nvim-tree.lua"
 
-	use("preservim/nerdtree") -- Add entry here to install the plugin
+    use {"williamboman/mason.nvim"}
 
     --themes
     use "folke/tokyonight.nvim"
@@ -62,4 +63,6 @@ return packer.startup(function(use)
 		require("packer").sync()
 	end
 end)
+
+
 
