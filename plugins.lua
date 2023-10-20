@@ -45,8 +45,18 @@ return packer.startup(function(use)
     --nvim-web-devicons
 	use("nvim-tree/nvim-web-devicons") -- Add entry here to install the plugin
 
+    
+    use {"akinsho/toggleterm.nvim", tag = '*', config = function()
+      require("toggleterm").setup()
+    end}
+
+
+	use("preservim/nerdtree") -- Add entry here to install the plugin
+
     --themes
     use "folke/tokyonight.nvim"
+    use "bluz71/vim-nightfly-colors"
+
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()

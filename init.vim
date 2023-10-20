@@ -15,48 +15,7 @@ set buftype="buffer"
 autocmd ColorScheme *
         \ highlight constant ctermfg=160 |
         \ highlight special ctermfg=11
-colorscheme tokyonight
-
-
-call plug#begin()
-Plug 'preservim/nerdtree'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-commentary'
-Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-call plug#end()
-
-"open NERDTree automatically
-autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * NERDTree
-
-let g:NERDTreeGitStatusWithFlags = 1
-
-let g:NERDTreeIgnore = ['^node_modules$']
-
-"source https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
-let g:coc_global_extensions = ['coc-json', 
-            \  'coc-git',
-            \  'coc-html',
-            \   'coc-tslint',
-                \  'coc-eslint',
-                \  'coc-clangd',
-                \  'coc-css',
-                \ 'coc-vetur',
-                \ 'coc-rome',
-                \ 'coc-prettier',
-                \'coc-cssmodules',
-                \'coc-explorer',
-                \   'coc-htmlhint',
-                \   'coc-html-css-support',
-                \   'coc-markdownlint',
-                \   'coc-sql',
-                \   'coc-stylelintplus',
-                \   'coc-tailwindcss',
-                \ ]
-
-let g:ensure_installed = ['html']
+colorscheme  tokyonight
 
 
 
