@@ -22,6 +22,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-commentary'
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 
 "open NERDTree automatically
@@ -52,6 +53,10 @@ let g:coc_global_extensions = ['coc-json',
                 \   'coc-stylelintplus',
                 \   'coc-tailwindcss',
                 \ ]
+
+let g:ensure_installed = ['html']
+
+
 
 "Smart way to move between windows
 map <C-j> <C-W>j
@@ -86,4 +91,25 @@ inoremap <silent><C-t> <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>
 "noremap <C-w> :Commentary<cr>
 
 
-
+lua << EOF
+require("nvim-treesitter.configs").setup({
+    ensure_installed = {'javascript',
+                'typescript', 
+                "lua", 
+                "vim", 
+                "json", 
+                "html", 
+                "tsx",
+                "css",
+                "http",
+                "jsonnet",
+                "php",
+                "sql",
+                "vue" },
+    sync_install = false,
+    auto_install = true,
+    highlight = {
+        enable = true,
+    },
+})
+EOF
