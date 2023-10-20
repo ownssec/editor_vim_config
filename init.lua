@@ -80,7 +80,7 @@ vim.keymap.set('i', '<C-z>', '<Cmd>:u<CR>', { remap = true })
 
 
 
-vim.keymap.set('n', '<A-1>', '<Cmd>:ToggleTerm 1<CR>', { remap = true })
+vim.keymap.set('n', '<A-1>', '<Cmd>:ToggleTerm 1 size=100<CR>', { remap = true })
 vim.keymap.set('i', '<A-1>', '<Cmd>:ToggleTerm 1<CR>', { remap = true })
 vim.keymap.set('t', '<A-1>', '<Cmd>:ToggleTerm 1<CR>', { remap = true })
 
@@ -102,10 +102,17 @@ vim.keymap.set('t', '<A-4>', '<Cmd>:ToggleTerm 4<CR>', { remap = true })
 -- telescope
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<space>ff', builtin.find_files, {})
-vim.keymap.set('n', '<space>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<space>fw', builtin.live_grep, {})
 vim.keymap.set('n', '<space>fb', builtin.buffers, {})
 vim.keymap.set('n', '<space>fh', builtin.help_tags, {})
 
+
+require('telescope').setup{ 
+	defaults = 	{ 
+		file_ignore_patterns = {
+			"node_modules"
+		}
+	}} 
 
 -- pass to setup along with your other options
 require("nvim-tree").setup {
