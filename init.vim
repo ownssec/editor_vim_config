@@ -11,8 +11,11 @@ set history=5000
 set clipboard=unnamedplus
 set scl=no
 set buftype="buffer"
-let mapleader = ' '
 
+autocmd ColorScheme *
+        \ highlight constant ctermfg=160 |
+        \ highlight special ctermfg=11
+colorscheme tokyonight
 
 
 call plug#begin()
@@ -75,7 +78,7 @@ inoremap <c-z> <c-o>:u<CR>
 "comment
 "noremap <C-w> :Commentary<cr>
 
-
+" treesitter 
 lua << EOF
 require("nvim-treesitter.configs").setup({
     ensure_installed = {'javascript',
@@ -141,5 +144,8 @@ tnoremap <silent><C-j> <Cmd>exe  "wincmd j"<CR>
 tnoremap <silent><C-k> <Cmd>exe  "wincmd k"<CR>
 tnoremap <silent><C-h> <Cmd>exe  "wincmd h"<CR>
 tnoremap <silent><C-l> <Cmd>exe  "wincmd l"<CR>
+
+
+:lua require("./plugins")
 
 
