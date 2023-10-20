@@ -103,10 +103,8 @@ EOF
 :lua require("toggleterm").setup()
 
 
-:lua << EOF
-require'toggleterm'.setup {
-  shade_terminals = false
-}
+lua << EOF
+
 
 function _G.set_terminal_keymaps()
   local opts = {buffer = 0}
@@ -117,10 +115,11 @@ function _G.set_terminal_keymaps()
   vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
   vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
   vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+
 end
 
--- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+
+
 EOF
 
 "terminal toggle 
@@ -129,7 +128,9 @@ autocmd TermEnter term://*toggleterm#*
       \ tnoremap <silent><C-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
 
 autocmd TermEnter term://*toggleterm#*
-      \ tnoremap <silent><A-q> <Cmd>exe v:count2 . "ToggleTerm"<CR>
+      \ tnoremap <silent><A-q> <Cmd>exe "ToggleTerm 2"<CR>
+
+
 
 " By applying the mappings this way you can pass a count to your
 " mapping to open a specific window.
@@ -139,8 +140,7 @@ nnoremap <silent><C-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
 inoremap <silent><C-t> <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>
 
 
-
-nnoremap <silent><A-q> <Cmd>exe v:count2 . "ToggleTerm"<CR>
-inoremap <silent><A-q> <Esc><Cmd>exe v:count2 . "ToggleTerm"<CR>
+nnoremap <silent><A-q> <Cmd>exe  "ToggleTerm 2"<CR>
+inoremap <silent><A-q> <Esc><Cmd>exe  "ToggleTerm 2"<CR>
 
 
