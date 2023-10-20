@@ -50,6 +50,11 @@ return packer.startup(function(use)
       require("toggleterm").setup()
     end}
 
+    use {
+  'nvim-telescope/telescope.nvim', tag = '0.1.4',
+-- or                            , branch = '0.1.x',
+  requires = { {'nvim-lua/plenary.nvim'} }
+}
     use "nvim-tree/nvim-tree.lua"
 
     use {"williamboman/mason.nvim"}

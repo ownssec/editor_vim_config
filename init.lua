@@ -16,7 +16,7 @@ vim.cmd("set history=5000")
 vim.cmd("set clipboard=unnamedplus")
 vim.cmd("set scl=no")
 
-vim.g.leader = '' 
+vim.g.leader = 'space' 
 
 -- disable netrw at the very start of your init.lua
 vim.g.loaded_netrw = 1
@@ -96,6 +96,15 @@ vim.keymap.set('t', '<A-3>', '<Cmd>:ToggleTerm 3<CR>', { remap = true })
 vim.keymap.set('n', '<A-4>', '<Cmd>:ToggleTerm 4<CR>', { remap = true })
 vim.keymap.set('i', '<A-4>', '<Cmd>:ToggleTerm 4<CR>', { remap = true })
 vim.keymap.set('t', '<A-4>', '<Cmd>:ToggleTerm 4<CR>', { remap = true })
+
+
+-- telescope
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<space>ff', builtin.find_files, {})
+vim.keymap.set('n', '<space>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<space>fb', builtin.buffers, {})
+vim.keymap.set('n', '<space>fh', builtin.help_tags, {})
+
 
 -- pass to setup along with your other options
 require("nvim-tree").setup {
