@@ -1,5 +1,5 @@
 
-require("./plugins")
+require("plugins")
 
 require("mason").setup()
 
@@ -15,6 +15,7 @@ vim.cmd("set encoding=utf8")
 vim.cmd("set history=5000")
 vim.cmd("set clipboard=unnamedplus")
 vim.cmd("set scl=no")
+
 
 vim.g.leader = 'space' 
 
