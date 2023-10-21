@@ -5,8 +5,7 @@ require("mason").setup()
 
 vim.cmd("colorscheme tokyonight")
 vim.cmd("set number")
-vim.cmd("set hidden")
-vim.cmd("set expandtab")
+vim.cmd("set hidden") vim.cmd("set expandtab")
 vim.cmd("set autoindent")
 vim.cmd("set smartindent")
 vim.cmd("set shiftwidth=4")
@@ -55,8 +54,6 @@ local function my_on_attach(bufnr)
   api.config.mappings.default_on_attach(bufnr)
 
   -- custom mappings
-  vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent,        opts('Up'))
-  vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
   vim.keymap.set('n', '<C-e>',     "<Cmd>:NvimTreeClose<CR>",                  opts('Help'))
 
 end
@@ -69,6 +66,23 @@ vim.keymap.set('n', '<C-k>', '<C-W>k', { remap = true })
 vim.keymap.set('n', '<C-h>', '<C-W>h', { remap = true })
 vim.keymap.set('n', '<C-l>', '<C-W>l', { remap = true })
 
+
+
+-- vim.keymap.set('t', '<esc>', function () return '<C-\>' or '<C-n>', { remap = true })
+
+function _G.set_terminal_keymaps()
+  local opts = {buffer = 0}
+  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+  vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+end
+
+
+-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 -- to avoid force close
 vim.keymap.set('n', '<C-z>', '<Cmd>:u<CR>', { remap = true })
 vim.keymap.set('i', '<C-z>', '<Cmd>:u<CR>', { remap = true })
@@ -80,7 +94,7 @@ vim.keymap.set('i', '<C-z>', '<Cmd>:u<CR>', { remap = true })
 
 
 
-vim.keymap.set('n', '<A-1>', '<Cmd>:ToggleTerm 1 size=100<CR>', { remap = true })
+vim.keymap.set('n', '<A-1>', '<Cmd>:ToggleTerm 1<CR>', { remap = true })
 vim.keymap.set('i', '<A-1>', '<Cmd>:ToggleTerm 1<CR>', { remap = true })
 vim.keymap.set('t', '<A-1>', '<Cmd>:ToggleTerm 1<CR>', { remap = true })
 
@@ -97,6 +111,11 @@ vim.keymap.set('t', '<A-3>', '<Cmd>:ToggleTerm 3<CR>', { remap = true })
 vim.keymap.set('n', '<A-4>', '<Cmd>:ToggleTerm 4<CR>', { remap = true })
 vim.keymap.set('i', '<A-4>', '<Cmd>:ToggleTerm 4<CR>', { remap = true })
 vim.keymap.set('t', '<A-4>', '<Cmd>:ToggleTerm 4<CR>', { remap = true })
+
+-- toggleterm
+require'toggleterm'.setup {
+  shade_terminals = false
+}
 
 
 -- telescope
