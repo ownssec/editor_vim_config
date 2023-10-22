@@ -1,0 +1,4 @@
+-- install this first
+
+-- neovim v 0.10
+-- install git make pip python npm node and cargo
