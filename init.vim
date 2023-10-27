@@ -6,7 +6,7 @@ set autoindent
 set smartindent
 set shiftwidth=4
 set tabstop=4
-set encoding=utf8
+set encoding=UTF-8
 set history=5000
 set clipboard=unnamedplus
 set scl=no
@@ -16,17 +16,18 @@ colorscheme tokyonight
 
 
 
-call plug#begin()
+call plug#begin('~/.config/nvim')
     Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
-
-
+Plug 'numToStr/Comment.nvim'
 Plug 'preservim/nerdtree'
+Plug 'ryanoasis/vim-devicons'
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 
 call plug#end()
 
+:lua require('Comment').setup()
 lua << EOF
 require("mason").setup({
     ui = {
@@ -57,23 +58,19 @@ local DEFAULT_SETTINGS = {
                 "vetur-vls",
                 "vue-language-server"
              },
-
-    -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
-    -- This setting has no relation with the `ensure_installed` setting.
-    -- Can either be:
-    --   - false: Servers are not automatically installed.
-    --   - true: All servers set up via lspconfig are automatically installed.
-    --   - { exclude: string[] }: All servers set up via lspconfig, except the ones provided in the list, are automatically installed.
-    --       Example: automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }
-    ---@type boolean
-    automatic_installation = true,
-
-    -- See `:h mason-lspconfig.setup_handlers()`
-    ---@type table<string, fun(server_name: string)>?
-    handlers = nil,
+   automatic_installation = true,
+   handlers = nil,
 }
 EOF
 
+autocmd VimEnter * NERDTree
+
+autocmd BufWinEnter * if &buftype != 'quickfix' && getcmdwintype() == '' | silent NERDTreeMirror | endif
+
+autocmd BufEnter * if winnr() == winnr('h') && bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+
+nnoremap <C-n> :NERDTreeMirror<CR>:NERDTreeFocus<CR>
 
 autocmd StdinReadPre * let s:std_in=1
 
@@ -81,10 +78,6 @@ let g:NERDTreeGitStatusWithFlags = 1
 
 let g:NERDTreeIgnore = ['^node_modules$']
 
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
 
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
@@ -94,7 +87,6 @@ nnoremap <C-f> :NERDTreeFind<CR>
 nnoremap <c-z> :u<CR>      
 inoremap <c-z> <c-o>:u<CR>
 
-noremap <C-w> :Commentary<cr>
 
 
 :lua require("toggleterm").setup()
@@ -147,5 +139,11 @@ end
 
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+
 EOF
+
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
 
