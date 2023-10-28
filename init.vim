@@ -46,7 +46,9 @@ call plug#begin('~/.config/nvim')
     " For snippy users.
      Plug 'dcampos/nvim-snippy'
      Plug 'dcampos/cmp-snippy'
-        
+     Plug "rafamadriz/friendly-snippets"
+
+
 call plug#end()
 
 
@@ -74,12 +76,7 @@ nnoremap <C-f> :NERDTreeFind<CR>
 nnoremap <c-z> :u<CR>      
 inoremap <c-z> <c-o>:u<CR>
 
-
-
-
-lua << EOF
-    require("toggleterm").setup()
-EOF
+:lua require("toggleterm").setup()
 
 lua << EOF
     require'toggleterm'.setup {
@@ -147,7 +144,7 @@ lua << EOF
       -- REQUIRED - you must specify a snippet engine
       expand = function(args)
         vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
         -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
         -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
       end,
@@ -158,17 +155,16 @@ lua << EOF
     },
     mapping = cmp.mapping.preset.insert({
       ['<C-k>'] = cmp.mapping.select_prev_item(),
-    ['<C-j>'] = cmp.mapping.select_next_item(),
-    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-    
-    ['<C-d>'] = cmp.mapping.scroll_docs(4),
+      ['<C-j>'] = cmp.mapping.select_next_item(),
+      ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-d>'] = cmp.mapping.scroll_docs(4),
       ['<C-e>'] = cmp.mapping.abort(),
       ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       { name = 'vsnip' }, -- For vsnip users.
-      -- { name = 'luasnip' }, -- For luasnip users.
+      { name = 'luasnip' }, -- For luasnip users.
       -- { name = 'ultisnips' }, -- For ultisnips users.
       -- { name = 'snippy' }, -- For snippy users.
     }, {
@@ -202,8 +198,6 @@ lua << EOF
       { name = 'cmdline' }
     })
   })
-
-
 EOF
 
 
@@ -220,14 +214,13 @@ require'nvim-treesitter.configs'.setup {
                 "sql",
                 "vue"
              },
-
+ 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
 
   -- Automatically install missing parsers when entering buffer
   -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
   auto_install = true,
-
 
   ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
   -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
@@ -248,20 +241,14 @@ require'nvim-treesitter.configs'.setup {
             return true
         end
     end,
-
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
-  },
-  autotag = {
-    enable = true,
-    enable_rename = true,
-    enable_close = true,
-    enable_close_on_slash = true,
-    filetypes = ensure_installed,
-  },
+  }
+  
 }
-
 EOF
+
+
