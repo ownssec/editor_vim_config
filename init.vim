@@ -15,8 +15,6 @@ set modifiable
 colorscheme tokyonight
 
 call plug#begin('~/.config/nvim')
-    Plug 'williamboman/mason.nvim'
-    Plug 'williamboman/mason-lspconfig.nvim'
     Plug 'neovim/nvim-lspconfig'
     Plug 'numToStr/Comment.nvim'
     Plug 'preservim/nerdtree'
@@ -24,7 +22,7 @@ call plug#begin('~/.config/nvim')
     Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
+    
     " Autocompletion
     Plug 'neovim/nvim-lspconfig'
     Plug 'hrsh7th/cmp-nvim-lsp'
@@ -51,46 +49,8 @@ call plug#begin('~/.config/nvim')
         
 call plug#end()
 
-lua << EOF
 
-require('Comment').setup()
-
-require("mason").setup({
-    ui = {
-        icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗"
-        }
-    }
-})
-local DEFAULT_SETTINGS = {
-    ensure_installed = {
-                "css-lsp", 
-                "lua_ls", 
-                "custom-elements-languageserver",
-                "eslint-lsp",
-                "eslint_d",
-                "html-lsp",
-                "jsonlint",
-                "lua-language-server",
-                "prettierd",
-                "sql-formatter",
-                "sqlfmt",
-                "stylelint",
-                "tailwindcss-language-server",
-                "templ",
-                "vetur-vls",
-                "vue-language-server"
-             },
-   automatic_installation = true,
-   handlers = nil,
-}
-EOF
-
--- enable line numbers
 let NERDTreeShowLineNumbers=1
--- make sure relative line numbers are used
 autocmd FileType nerdtree setlocal number 
 
 
@@ -116,8 +76,10 @@ inoremap <c-z> <c-o>:u<CR>
 
 
 
-:lua require("toggleterm").setup()
 
+lua << EOF
+    require("toggleterm").setup()
+EOF
 
 lua << EOF
     require'toggleterm'.setup {
@@ -175,8 +137,8 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 
-
 lua << EOF
+
   -- Set up nvim-cmp.
   local cmp = require'cmp'
 
@@ -195,11 +157,13 @@ lua << EOF
       -- documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
-      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-k>'] = cmp.mapping.select_prev_item(),
+    ['<C-j>'] = cmp.mapping.select_next_item(),
+    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+    
+    ['<C-d>'] = cmp.mapping.scroll_docs(4),
       ['<C-e>'] = cmp.mapping.abort(),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
@@ -239,21 +203,65 @@ lua << EOF
     })
   })
 
-  -- Set up lspconfig.
-  local capabilities = require('cmp_nvim_lsp').default_capabilities()
-  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-  require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
-    capabilities = capabilities
-  }
-
-
-  -- nvim-treesitter
-  require'nvim-treesitter.configs'.setup {
-      autotag = {
-        enable = true,
-      }
-    }
-  require('nvim-ts-autotag').setup()
 
 EOF
 
+
+:lua require('Comment').setup()
+
+
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  -- A list of parser names, or "all" (the five listed parsers should always be installed)
+ ensure_installed = {
+                "html",
+                "json",
+                "lua",
+                "sql",
+                "vue"
+             },
+
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- Automatically install missing parsers when entering buffer
+  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+  auto_install = true,
+
+
+  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
+  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+
+  highlight = {
+    enable = true,
+
+    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+    -- the name of the parser)
+    -- list of language that will be disabled
+    disable = { "c", "rust" },
+    -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
+    disable = function(lang, buf)
+        local max_filesize = 100 * 1024 -- 100 KB
+        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+        if ok and stats and stats.size > max_filesize then
+            return true
+        end
+    end,
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+  autotag = {
+    enable = true,
+    enable_rename = true,
+    enable_close = true,
+    enable_close_on_slash = true,
+    filetypes = ensure_installed,
+  },
+}
+
+EOF
