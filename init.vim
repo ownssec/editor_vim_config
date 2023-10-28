@@ -14,6 +14,9 @@ set buftype="buffer"
 set modifiable
 colorscheme tokyonight
 
+
+let mapleader = ' '
+
 call plug#begin('~/.config/nvim')
     Plug 'neovim/nvim-lspconfig'
     Plug 'numToStr/Comment.nvim'
@@ -36,6 +39,9 @@ call plug#begin('~/.config/nvim')
      Plug 'saadparwaiz1/cmp_luasnip'
      Plug 'rafamadriz/friendly-snippets'
 
+     " telescope
+     Plug 'nvim-lua/plenary.nvim'
+     Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
 
 call plug#end()
 
@@ -239,3 +245,21 @@ require'nvim-treesitter.configs'.setup {
 EOF
 
 :lua require("luasnip.loaders.from_vscode").lazy_load()
+
+" Telescope nvim
+
+lua << EOF
+require('telescope').setup{}
+EOF
+
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fw <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" Using Lua functions
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
