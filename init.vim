@@ -15,7 +15,6 @@ set modifiable
 colorscheme tokyonight
 
 
-
 call plug#begin('~/.config/nvim')
     Plug 'williamboman/mason.nvim'
     Plug 'williamboman/mason-lspconfig.nvim'
@@ -60,6 +59,9 @@ lua <<EOF
   local cmp = require'cmp'
 
   cmp.setup({
+     completion = {
+        completeopt = 'menu,menuone,noinsert'
+     },
     snippet = {
       -- REQUIRED - you must specify a snippet engine
       expand = function(args)
