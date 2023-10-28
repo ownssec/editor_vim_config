@@ -41,20 +41,24 @@ call plug#begin('~/.config/nvim')
 
      " telescope
      Plug 'nvim-lua/plenary.nvim'
-     Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
+     " Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
+     
+     Plug 'williamboman/mason.nvim'
+
+
 
 call plug#end()
-
 
 
 let NERDTreeShowLineNumbers=1
 autocmd FileType nerdtree setlocal number 
 
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '~'
 
 autocmd BufEnter * if winnr() == winnr('h') && bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
     \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 
-nnoremap <C-n> :NERDTreeMirror<CR>:NERDTreeFocus<CR>
 
 autocmd StdinReadPre * let s:std_in=1
 
@@ -63,7 +67,6 @@ let g:NERDTreeGitStatusWithFlags = 1
 let g:NERDTreeIgnore = ['^node_modules$']
 
 
-nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
@@ -110,7 +113,6 @@ lua << EOF
 function _G.set_terminal_keymaps()
   local opts = {buffer = 0}
   vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
-  vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
   vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
   vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
   vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
@@ -153,7 +155,6 @@ lua << EOF
       ['<C-j>'] = cmp.mapping.select_next_item(),
       ['<C-u>'] = cmp.mapping.scroll_docs(-4),
       ['<C-d>'] = cmp.mapping.scroll_docs(4),
-      ['<C-e>'] = cmp.mapping.abort(),
       ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
     sources = cmp.config.sources({
@@ -263,3 +264,9 @@ nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+
+
+
+lua << EOF
+require("mason").setup()
+EOF
