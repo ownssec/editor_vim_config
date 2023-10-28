@@ -31,25 +31,14 @@ call plug#begin('~/.config/nvim')
     Plug 'hrsh7th/cmp-cmdline'
     Plug 'hrsh7th/nvim-cmp'
 
-    " For vsnip users.
-    Plug 'hrsh7th/cmp-vsnip'
-    Plug 'hrsh7th/vim-vsnip'
-
     " For luasnip users.
-     Plug 'L3MON4D3/LuaSnip'
+     Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'} "
      Plug 'saadparwaiz1/cmp_luasnip'
-
-    " For ultisnips users.
-     Plug 'SirVer/ultisnips'
-     Plug 'quangnguyen30192/cmp-nvim-ultisnips'
-
-    " For snippy users.
-     Plug 'dcampos/nvim-snippy'
-     Plug 'dcampos/cmp-snippy'
-     Plug "rafamadriz/friendly-snippets"
+     Plug 'rafamadriz/friendly-snippets'
 
 
 call plug#end()
+
 
 
 let NERDTreeShowLineNumbers=1
@@ -163,7 +152,6 @@ lua << EOF
     }),
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
-      { name = 'vsnip' }, -- For vsnip users.
       { name = 'luasnip' }, -- For luasnip users.
       -- { name = 'ultisnips' }, -- For ultisnips users.
       -- { name = 'snippy' }, -- For snippy users.
@@ -210,7 +198,6 @@ require'nvim-treesitter.configs'.setup {
  ensure_installed = {
                 "html",
                 "json",
-                "lua",
                 "sql",
                 "vue"
              },
@@ -251,4 +238,4 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-
+:lua require("luasnip.loaders.from_vscode").lazy_load()
