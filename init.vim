@@ -50,7 +50,6 @@ call plug#begin('~/.config/nvim')
 call plug#end()
 
 " autocomplete. hrsh7th/nvim-cmp github...
-" autocomplete. hrsh7th/nvim-cmp github...
 
 lua <<EOF
   -- Set up nvim-cmp.
@@ -167,7 +166,10 @@ local DEFAULT_SETTINGS = {
 }
 EOF
 
-
+-- enable line numbers
+let NERDTreeShowLineNumbers=1
+-- make sure relative line numbers are used
+autocmd FileType nerdtree setlocal number 
 
 
 autocmd BufEnter * if winnr() == winnr('h') && bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
