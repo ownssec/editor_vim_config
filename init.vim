@@ -12,7 +12,7 @@ set clipboard=unnamedplus
 set scl=no 
 set buftype="buffer"
 set modifiable
-colorscheme tokyonight
+colorscheme tokyonight-night
 set noshowmode
 
 let mapleader = ' '
@@ -300,7 +300,7 @@ local bubbles_theme = {
   normal = {
     a = { fg = colors.white, bg = colors.black},
     b = { fg = colors.white, bg = colors.grey},
-    c = { fg = colors.cyan, bg = colors.black },
+    c = { fg = colors.white, bg = colors.black },
   },
 
   insert = { a = { fg = colors.white, bg = colors.black} },
@@ -319,13 +319,13 @@ local bubbles_theme = {
 require('lualine').setup {
   options = {
     icons_enabled = false,
-    theme = bubbles_theme,
+    theme = 'tokyonight',
     component_separators = '|',
     section_separators = { left = '|', right = '|' },
   },
   sections = {
     lualine_a = {
-      { 'mode', separator = { left = '' }, right_padding = 2 },
+      { 'mode', separator = { left = '|' }, right_padding = 2 },
     },
     lualine_b = { 'filename', 'branch' },
     lualine_c = { 'fileformat' },
@@ -348,3 +348,21 @@ require('lualine').setup {
 }
 
 EOF
+
+
+lua << EOF
+require("tokyonight").setup({
+  -- use the night style
+  style = "night",
+  -- disable italic for functions
+  styles = {
+    functions = {}
+  },
+  sidebars = { "qf", "vista_kind", "terminal", "packer" },
+  -- Change the "hint" color to the "orange" color, and make the "error" color bright red
+  on_colors = function(colors)
+    colors.bg = "#ffffff" 
+  end
+})
+EOF
+
