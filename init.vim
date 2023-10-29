@@ -20,7 +20,7 @@ let mapleader = ' '
 call plug#begin('~/.config/nvim')
     Plug 'neovim/nvim-lspconfig'
     Plug 'numToStr/Comment.nvim'
-    Plug 'preservim/nerdtree'
+    " Plug 'preservim/nerdtree'
     Plug 'ryanoasis/vim-devicons'
     Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 
@@ -49,30 +49,31 @@ call plug#begin('~/.config/nvim')
     Plug 'nvim-lualine/lualine.nvim'
     " If you want to have icons in your statusline choose one of these
     Plug 'nvim-tree/nvim-web-devicons'
+    Plug 'nvim-tree/nvim-tree.lua'
 
 call plug#end()
 
 
-let NERDTreeShowLineNumbers=1
-autocmd FileType nerdtree setlocal number 
-
-let g:NERDTreeDirArrowExpandable = '+'
-let g:NERDTreeDirArrowCollapsible = '~'
-
-autocmd BufEnter * if winnr() == winnr('h') && bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
-    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
-
-
-autocmd StdinReadPre * let s:std_in=1
-
-let g:NERDTreeGitStatusWithFlags = 1
-
-let g:NERDTreeIgnore = ['^node_modules$']
-
-
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <silent><C-e> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
+" let NERDTreeShowLineNumbers=1
+" autocmd FileType nerdtree setlocal number 
+"
+" let g:NERDTreeDirArrowExpandable = '+'
+" let g:NERDTreeDirArrowCollapsible = '~'
+"
+" autocmd BufEnter * if winnr() == winnr('h') && bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+"     \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+"
+"
+" autocmd StdinReadPre * let s:std_in=1
+"
+" let g:NERDTreeGitStatusWithFlags = 1
+"
+" let g:NERDTreeIgnore = ['^node_modules$']
+"
+"
+" nnoremap <C-n> :NERDTree<CR>
+" nnoremap <silent><C-e> :NERDTreeToggle<CR>
+" nnoremap <C-f> :NERDTreeFind<CR>
 
 nnoremap <c-z> :u<CR>      
 inoremap <c-z> <c-o>:u<CR>
@@ -123,7 +124,6 @@ function _G.set_terminal_keymaps()
   vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
 end
 
--- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 EOF
@@ -134,9 +134,10 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 
-lua << EOF
 
-  -- Set up nvim-cmp.
+
+
+lua << EOF
   local cmp = require'cmp'
 
   cmp.setup({
@@ -187,7 +188,6 @@ lua << EOF
     }
   })
 
-  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
@@ -268,20 +268,15 @@ nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
-
-
 lua << EOF
 require("mason").setup()
-
 EOF
 
 
 
 lua << EOF
--- require('lualine').setup()
 
 -- Bubbles config for lualine
-
 -- Author: lokesh-krishna
 -- MIT license, see LICENSE for more details.
 
@@ -354,7 +349,7 @@ lua << EOF
 require("tokyonight").setup({
   -- your configuration comes here
   -- or leave it empty to use the default settings
-  style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+  style = "night", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
   light_style = "day", -- The theme is used when the background is set to light
   transparent = false, -- Enable this to disable setting the background color
   terminal_colors = true, -- Configure the colors used when opening a `:terminal` in [Neovim](https://github.com/neovim/neovim)
@@ -391,3 +386,37 @@ require("tokyonight").setup({
 vim.cmd("colorscheme tokyonight-night")
 EOF
 
+
+lua << EOF
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+
+local function my_on_attach(bufnr)
+  local api = require "nvim-tree.api"
+
+  local function opts(desc)
+    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
+
+  -- default mappings
+  api.config.mappings.default_on_attach(bufnr)
+
+  -- custom mappings
+  vim.keymap.set('n', '<C-e>', api.tree.toggle,        opts('Up'))
+  vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
+end
+
+
+-- pass to setup along with your other options
+require("nvim-tree").setup {
+  ---
+  on_attach = my_on_attach,
+  ---
+}
+
+EOF
+
+nnoremap <silent><C-e> :NvimTreeToggle<CR>
+inoremap <silent><C-e> :NvimTreeToggle<CR>
