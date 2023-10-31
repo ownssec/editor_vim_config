@@ -58,8 +58,6 @@ call plug#begin('~/.config/nvim')
 
     Plug 'folke/tokyonight.nvim'
 
-    Plug 'rebelot/kanagawa.nvim'
-
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
     " or                                , { 'branch': '0.1.x' }
@@ -83,13 +81,14 @@ require("tokyonight").setup({
     sidebars = "dark", -- style for sidebars, see below
     floats = "dark", -- style for floating windows
   },
-  sidebars = {"qf", "vista_kind", "terminal", "packer"},
+  sidebars = {"qf", "help"},
   --- You can override specific color groups to use other groups or a hex color
   --- function will be called with a ColorScheme table
   ---@param colors ColorScheme
-  on_colors = function(colors) 
-      colors.bg = "#1f1f1f"
-  end,
+
+  -- on_colors = function(colors) 
+  --     colors.bg = "#1f1f1f"
+  -- end,
 
   --- You can override specific highlights to use other groups or a hex color
   --- function will be called with a Highlights and ColorScheme table
@@ -684,37 +683,6 @@ require("conform").setup({
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 EOF
 
-
-lua << EOF
--- Default options:
-require('kanagawa').setup({
-    compile = false,             -- enable compiling the colorscheme
-    undercurl = true,            -- enable undercurls
-    commentStyle = { italic = true },
-    functionStyle = {},
-    keywordStyle = { italic = true},
-    statementStyle = { bold = true },
-    typeStyle = {},
-    transparent = false,         -- do not set background color
-    dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
-    terminalColors = true,       -- define vim.g.terminal_color_{0,17}
-    colors = {                   -- add/modify theme and palette colors
-        palette = {},
-        theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
-    },
-    overrides = function(colors) -- add/modify highlights
-        return {}
-    end,
-    theme = "dragon",              -- Load "wave" theme when 'background' option is not set
-    background = {               -- map the value of 'background' option to a theme
-        dark = "wave",           -- try "dragon" !
-        light = "lotus"
-    },
-})
-
--- setup must be called before loading
-vim.cmd("colorscheme kanagawa")
-EOF
 
 
 lua << EOF
