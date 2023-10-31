@@ -19,9 +19,10 @@ set noshowmode
 let mapleader = ' '
 
 call plug#begin('~/.config/nvim')
-Plug 'neovim/nvim-lspconfig'
+    Plug 'neovim/nvim-lspconfig'
     Plug 'numToStr/Comment.nvim'
-    Plug 'ryanoasis/vim-devicons' Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+    Plug 'ryanoasis/vim-devicons' 
+    Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     
@@ -510,6 +511,14 @@ let g:closetag_close_shortcut = '<leader>>'
     
 
 " barbar tabs from active buffers
+
+" Move to previous/next
+nnoremap <silent><C-p> :BufferPrevious<CR>
+nnoremap <silent><C-n> :BufferNext<CR>
+nnoremap <silent><C-d> :BufferClose<CR>
+
+
+" barbar tabs from active buffers
 lua << EOF
 vim.g.barbar_auto_setup = false -- disable auto-setup
 
@@ -531,7 +540,7 @@ require'barbar'.setup {
   -- Enables/disable clickable tabs
   --  - left-click: go to buffer
   --  - middle-click: delete buffer
-  clickable = true,
+  clickable = true,  
 
   -- Excludes buffers from the tabline
   exclude_ft = {'javascript'},
@@ -577,16 +586,16 @@ require'barbar'.setup {
       custom_colors = false,
 
       -- Requires `nvim-web-devicons` if `true`
-      enabled = true,
+      enabled = false,
     },
-    separator = {left = '▎', right = ''},
+    separator = {left = '', right = ' ▎'},
 
     -- If true, add an additional separator at the end of the buffer list
     separator_at_end = true,
 
     -- Configure the icons on the bufferline when modified or pinned.
     -- Supports all the base icon options.
-    modified = {button = '●'},
+    modified = {button = '*'}, -- ●●●●●●
     pinned = {button = '', filename = true},
 
     -- Use a preconfigured buffer appearance— can be 'default', 'powerline', or 'slanted'
@@ -645,10 +654,6 @@ require'barbar'.setup {
   no_name_title = nil,
 }
 EOF
-" Move to previous/next
-nnoremap <silent><C-p> :BufferPrevious<CR>
-nnoremap <silent><C-n> :BufferNext<CR>
-nnoremap <silent><C-d> :BufferClose<CR>
 
 
 lua << EOF
