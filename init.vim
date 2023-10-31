@@ -19,9 +19,8 @@ set noshowmode
 let mapleader = ' '
 
 call plug#begin('~/.config/nvim')
-    Plug 'neovim/nvim-lspconfig'
+Plug 'neovim/nvim-lspconfig'
     Plug 'numToStr/Comment.nvim'
-    " Plug 'preservim/nerdtree'
     Plug 'ryanoasis/vim-devicons'
     Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 
@@ -40,9 +39,7 @@ call plug#begin('~/.config/nvim')
      Plug 'saadparwaiz1/cmp_luasnip'
 
      " Plug 'rafamadriz/friendly-snippets'
-
      Plug 'williamboman/mason.nvim'
-
 
     Plug 'nvim-lualine/lualine.nvim'
     " If you want to have icons in your statusline choose one of these
@@ -53,8 +50,14 @@ call plug#begin('~/.config/nvim')
 
     Plug 'windwp/nvim-ts-autotag'
 
+    Plug 'lewis6991/gitsigns.nvim' " OPTIONAL: for git status
+    Plug 'romgrk/barbar.nvim'
+   " formatter
+
 
 call plug#end()
+
+
 
 nnoremap <c-z> :u<CR>      
 inoremap <c-z> <c-o>:u<CR>
@@ -503,5 +506,14 @@ let g:closetag_shortcut = '>'
 "
 let g:closetag_close_shortcut = '<leader>>'
 
+" format after save
+    
+
+" barbar tabs from active buffers
+
+" Move to previous/next
+nnoremap <silent><C-p> :BufferPrevious<CR>
+nnoremap <silent><C-n> :BufferNext<CR>
+nnoremap <silent><C-d> :BufferClose<CR>
 
 
