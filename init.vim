@@ -13,7 +13,7 @@ set scl=no
 set buftype="buffer"
 set modifiable
 set hlsearch
-" colorscheme tokyonight
+" colorscheme tokyonight-moon
 set noshowmode
 
 let mapleader = ' '
@@ -51,13 +51,55 @@ call plug#begin('~/.config/nvim')
     Plug 'windwp/nvim-ts-autotag'
 
     Plug 'lewis6991/gitsigns.nvim' " OPTIONAL: for git status
-    Plug 'romgrk/barbar.nvim'
+     Plug 'romgrk/barbar.nvim'
 
    " formatter
-Plug 'stevearc/conform.nvim'
+    Plug 'stevearc/conform.nvim'
+
+    Plug 'folke/tokyonight.nvim'
+
+    Plug 'rebelot/kanagawa.nvim'
+
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
+    " or                                , { 'branch': '0.1.x' }
 
 call plug#end()
 
+
+
+lua << EOF
+require("tokyonight").setup({
+  -- your configuration comes here
+  -- or leave it empty to use the default settings
+  styles = {
+    -- Style to be applied to different syntax groups
+    -- Value is any valid attr-list value for `:help nvim_set_hl`
+    comments = { italic = true },
+    keywords = { italic = true },
+    functions = {},
+    variables = {},
+    -- Background styles. Can be "dark", "transparent" or "normal"
+    sidebars = "dark", -- style for sidebars, see below
+    floats = "dark", -- style for floating windows
+  },
+  sidebars = {"qf", "vista_kind", "terminal", "packer"},
+  --- You can override specific color groups to use other groups or a hex color
+  --- function will be called with a ColorScheme table
+  ---@param colors ColorScheme
+  on_colors = function(colors) 
+      colors.bg = "#1f1f1f"
+  end,
+
+  --- You can override specific highlights to use other groups or a hex color
+  --- function will be called with a Highlights and ColorScheme table
+  ---@param highlights Highlights
+  ---@param colors ColorScheme
+  on_highlights = function(highlights, colors) end,
+})
+vim.cmd("colorscheme tokyonight-night")
+
+EOF
 
 
 nnoremap <c-z> :u<CR>      
@@ -237,7 +279,6 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-:lua require("luasnip.loaders.from_vscode").lazy_load()
 
 lua << EOF
 require("mason").setup()
@@ -259,7 +300,8 @@ lua << EOF
 local colors = {
   blue   = '#80a0ff',
   cyan   = '#79dac8',
-  black  = '#080808',
+  black  = '#1f1f1f',
+  --black  = '#080808',
   white  = '#c6c6c6',
   red    = '#ff5189',
   violet = '#d183e8',
@@ -327,55 +369,13 @@ require('lualine').setup {
 
 EOF
 
-
-lua << EOF
-require("tokyonight").setup({
-  -- your configuration comes here
-  -- or leave it empty to use the default settings
-  style = "night", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
-  light_style = "day", -- The theme is used when the background is set to light
-  transparent = false, -- Enable this to disable setting the background color
-  terminal_colors = true, -- Configure the colors used when opening a `:terminal` in [Neovim](https://github.com/neovim/neovim)
-  styles = {
-    -- Style to be applied to different syntax groups
-    -- Value is any valid attr-list value for `:help nvim_set_hl`
-    comments = { italic = true },
-    keywords = { italic = true },
-    functions = {},
-    variables = {},
-    -- Background styles. Can be "dark", "transparent" or "normal"
-    sidebars = "dark", -- style for sidebars, see below
-    floats = "dark", -- style for floating windows
-  },
-  sidebars = { "qf", "help" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
-  day_brightness = 0, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
-  hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
-  dim_inactive = false, -- dims inactive windows
-  lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
-
-  --- You can override specific color groups to use other groups or a hex color
-  --- function will be called with a ColorScheme table
-  ---@param colors ColorScheme
-  on_colors = function(colors) 
-      colors.bg = "#1f1f1f"
-  end,
-
-  --- You can override specific highlights to use other groups or a hex color
-  --- function will be called with a Highlights and ColorScheme table
-  ---@param highlights Highlights
-  ---@param colors ColorScheme
-  on_highlights = function(highlights, colors) end,
-})
-vim.cmd("colorscheme tokyonight-night")
-EOF
-
-
 lua << EOF
 -- disable netrw at the very start of your init.lua
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-
+vim.opt.termguicolors = true
+-- disable netrw at the very start of your init.lua
 local function my_on_attach(bufnr)
   local api = require "nvim-tree.api"
 
@@ -389,6 +389,7 @@ local function my_on_attach(bufnr)
   -- custom mappings
   vim.keymap.set('n', '<C-e>', api.tree.toggle,        opts('Up'))
   vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
+
 end
 
 
@@ -396,6 +397,15 @@ end
 require("nvim-tree").setup {
   ---
   on_attach = my_on_attach,
+view = {
+    width = 30,
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
   ---
 }
 
@@ -673,3 +683,45 @@ require("conform").setup({
 })
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 EOF
+
+
+lua << EOF
+-- Default options:
+require('kanagawa').setup({
+    compile = false,             -- enable compiling the colorscheme
+    undercurl = true,            -- enable undercurls
+    commentStyle = { italic = true },
+    functionStyle = {},
+    keywordStyle = { italic = true},
+    statementStyle = { bold = true },
+    typeStyle = {},
+    transparent = false,         -- do not set background color
+    dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
+    terminalColors = true,       -- define vim.g.terminal_color_{0,17}
+    colors = {                   -- add/modify theme and palette colors
+        palette = {},
+        theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+    },
+    overrides = function(colors) -- add/modify highlights
+        return {}
+    end,
+    theme = "dragon",              -- Load "wave" theme when 'background' option is not set
+    background = {               -- map the value of 'background' option to a theme
+        dark = "wave",           -- try "dragon" !
+        light = "lotus"
+    },
+})
+
+-- setup must be called before loading
+vim.cmd("colorscheme kanagawa")
+EOF
+
+
+lua << EOF
+require('telescope').setup{}
+EOF
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fw <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
