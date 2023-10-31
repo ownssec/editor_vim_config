@@ -12,6 +12,7 @@ set clipboard=unnamedplus
 set scl=no 
 set buftype="buffer"
 set modifiable
+set hlsearch
 " colorscheme tokyonight
 set noshowmode
 
@@ -37,12 +38,9 @@ call plug#begin('~/.config/nvim')
     " For luasnip users.
      Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'} "
      Plug 'saadparwaiz1/cmp_luasnip'
-     Plug 'rafamadriz/friendly-snippets'
 
-     " telescope
-     Plug 'nvim-lua/plenary.nvim'
-     " Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
-     
+     " Plug 'rafamadriz/friendly-snippets'
+
      Plug 'williamboman/mason.nvim'
 
 
@@ -51,8 +49,10 @@ call plug#begin('~/.config/nvim')
     Plug 'nvim-tree/nvim-web-devicons'
     Plug 'nvim-tree/nvim-tree.lua'
 
+    Plug 'alvan/vim-closetag'
 
-    Plug 'onsails/lspkind.nvim'
+    Plug 'windwp/nvim-ts-autotag'
+
 
 call plug#end()
 
@@ -62,6 +62,9 @@ inoremap <c-z> <c-o>:u<CR>
 :lua require("toggleterm").setup()
 
 lua << EOF
+
+    require('nvim-ts-autotag').setup()
+
     require'toggleterm'.setup {
       shade_terminals = false
     }
@@ -120,27 +123,11 @@ map <C-l> <C-W>l
 
 lua << EOF
   local cmp = require'cmp'
-    local lspkind = require('lspkind')
-    cmp.setup {
-      formatting = {
-        format = lspkind.cmp_format({
-          mode = 'symbol', -- show only symbol annotations
-          maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-          ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-
-          -- The function below will be called before any actual modifications from lspkind
-          -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-          before = function (entry, vim_item)
-            return vim_item
-          end
-        })
-      }
-    }
-  cmp.setup({
+      cmp.setup({
    snippet = {
       -- REQUIRED - you must specify a snippet engine
       expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+       -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
         require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
         -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
         -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
@@ -201,13 +188,7 @@ EOF
 lua << EOF
 
 require'nvim-treesitter.configs'.setup {
- autotag = {
-    enable = true,
-    enable_rename = true,
-    enable_close = true,
-    enable_close_on_slash = true,
-    filetypes = { "html" , "xml" },
-  },
+ 
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
  ensure_installed = {
                 "html",
@@ -254,26 +235,12 @@ EOF
 
 :lua require("luasnip.loaders.from_vscode").lazy_load()
 
-" Telescope nvim
-
-lua << EOF
-require('telescope').setup{}
-EOF
-
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fw <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
-" Using Lua functions
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-
 lua << EOF
 require("mason").setup()
+---@class MasonSettings
+local DEFAULT_SETTINGS = {
+    install_root_dir = "~/.config/nvim",
+}
 EOF
 
 
@@ -298,15 +265,22 @@ local colors = {
 local bubbles_theme = {
   normal = {
     a = { fg = colors.white, bg = colors.black},
-    b = { fg = colors.white, bg = colors.grey},
+    b = { fg = colors.white, bg = colors.black},
     c = { fg = colors.white, bg = colors.black },
   },
 
   insert = { a = { fg = colors.white, bg = colors.black} },
-  visual = { a = { fg = colors.violet, bg = colors.black} },
-  terminal = { a = { fg = colors.cyan, bg = colors.black} },
-  command = { a = { fg = colors.blue, bg = colors.black} },
-  replace = { a = { fg = colors.blue, bg = colors.black} },
+  visual = { a = { fg = colors.white, bg = colors.black} },
+  terminal = { a = { fg = colors.white, bg = colors.black} },
+  command = { a = { fg = colors.white, bg = colors.black} },
+  replace = { a = { fg = colors.white, bg = colors.black} },
+
+ -- insert = { a = { fg = colors.white, bg = colors.black} },
+ --  visual = { a = { fg = colors.violet, bg = colors.black} },
+ --  terminal = { a = { fg = colors.cyan, bg = colors.black} },
+ --  command = { a = { fg = colors.blue, bg = colors.black} },
+ --  replace = { a = { fg = colors.blue, bg = colors.black} },
+
 
   inactive = {
     a = { fg = colors.white, bg = colors.black },
@@ -318,7 +292,8 @@ local bubbles_theme = {
 require('lualine').setup {
   options = {
     icons_enabled = false,
-    theme = 'tokyonight',
+    -- theme = 'tokyonight',
+    theme = bubbles_theme,
     component_separators = '|',
     section_separators = { left = '|', right = '|' },
   },
@@ -483,118 +458,50 @@ lua << EOF
 
 EOF
 
-lua << EOF
-local lspconfig = require'lspconfig'
-local lspconfig_configs = require'lspconfig.configs'
-local lspconfig_util = require 'lspconfig.util'
+" autoClose tag
 
-local function on_new_config(new_config, new_root_dir)
-  local function get_typescript_server_path(root_dir)
-    local project_root = lspconfig_util.find_node_modules_ancestor(root_dir)
-    return project_root and (lspconfig_util.path.join(project_root, 'node_modules', 'typescript', 'lib', 'tsserverlibrary.js'))
-      or ''
-  end
+" filenames like *.xml, *.html, *.xhtml, ...
+" These are the file extensions where this plugin is enabled.
+"
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
 
-  if
-    new_config.init_options
-    and new_config.init_options.typescript
-    and new_config.init_options.typescript.tsdk == ''
-  then
-    new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
-  end
-end
+" filenames like *.xml, *.xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+"
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
 
-local volar_cmd = {'vue-language-server', '--stdio'}
-local volar_root_dir = lspconfig_util.root_pattern 'package.json'
+" filetypes like xml, html, xhtml, ...
+" These are the file types where this plugin is enabled.
+"
+let g:closetag_filetypes = 'html,xhtml,phtml'
 
-lspconfig_configs.volar_api = {
-  default_config = {
-    cmd = volar_cmd,
-    root_dir = volar_root_dir,
-    on_new_config = on_new_config,
-    filetypes = { 'vue'},
-    -- If you want to use Volar's Take Over Mode (if you know, you know)
-    --filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
-    init_options = {
-      typescript = {
-        tsdk = ''
-      },
-      languageFeatures = {
-        implementation = true, -- new in @volar/vue-language-server v0.33
-        references = true,
-        definition = true,
-        typeDefinition = true,
-        callHierarchy = true,
-        hover = true,
-        rename = true,
-        renameFileRefactoring = true,
-        signatureHelp = true,
-        codeAction = true,
-        workspaceSymbol = true,
-        completion = {
-          defaultTagNameCase = 'both',
-          defaultAttrNameCase = 'kebabCase',
-          getDocumentNameCasesRequest = false,
-          getDocumentSelectionRequest = false,
-        },
-      }
-    },
-  }
-}
-lspconfig.volar_api.setup{}
+" filetypes like xml, xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+"
+let g:closetag_xhtml_filetypes = 'xhtml,jsx'
 
-lspconfig_configs.volar_doc = {
-  default_config = {
-    cmd = volar_cmd,
-    root_dir = volar_root_dir,
-    on_new_config = on_new_config,
+" integer value [0|1]
+" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+"
+let g:closetag_emptyTags_caseSensitive = 1
 
-    -- If you want to use Volar's Take Over Mode (if you know, you know):
-    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
-    init_options = {
-      typescript = {
-        tsdk = ''
-      },
-      languageFeatures = {
-        implementation = true, -- new in @volar/vue-language-server v0.33
-        documentHighlight = true,
-        documentLink = true,
-        codeLens = { showReferencesNotification = true},
-        -- not supported - https://github.com/neovim/neovim/pull/15723
-        semanticTokens = false,
-        diagnostics = true,
-        schemaRequestService = true,
-      }
-    },
-  }
-}
-lspconfig.volar_doc.setup{}
+" dict
+" Disables auto-close if not in a "valid" region (based on filetype)
 
-lspconfig_configs.volar_html = {
-  default_config = {
-    cmd = volar_cmd,
-    root_dir = volar_root_dir,
-    on_new_config = on_new_config,
+let g:closetag_regions = {
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ 'typescriptreact': 'jsxRegion,tsxRegion',
+    \ 'javascriptreact': 'jsxRegion',
+    \ }
 
-    -- If you want to use Volar's Take Over Mode (if you know, you know), intentionally no 'json':
-    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-    init_options = {
-      typescript = {
-        tsdk = ''
-      },
-      documentFeatures = {
-        selectionRange = true,
-        foldingRange = true,
-        linkedEditingRange = true,
-        documentSymbol = true,
-        -- not supported - https://github.com/neovim/neovim/pull/13654
-        documentColor = false,
-        documentFormatting = {
-          defaultPrintWidth = 100,
-        },
-      }
-    },
-  }
-}
-lspconfig.volar_html.setup{}
-EOF
+" Shortcut for closing tags, default is '>'
+"
+let g:closetag_shortcut = '>'
+
+" Add > at current position without closing the current tag, default is ''
+"
+let g:closetag_close_shortcut = '<leader>>'
+
+
+
