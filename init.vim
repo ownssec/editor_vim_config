@@ -51,29 +51,10 @@ call plug#begin('~/.config/nvim')
     Plug 'nvim-tree/nvim-web-devicons'
     Plug 'nvim-tree/nvim-tree.lua'
 
+
+    Plug 'onsails/lspkind.nvim'
+
 call plug#end()
-
-
-" let NERDTreeShowLineNumbers=1
-" autocmd FileType nerdtree setlocal number 
-"
-" let g:NERDTreeDirArrowExpandable = '+'
-" let g:NERDTreeDirArrowCollapsible = '~'
-"
-" autocmd BufEnter * if winnr() == winnr('h') && bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
-"     \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
-"
-"
-" autocmd StdinReadPre * let s:std_in=1
-"
-" let g:NERDTreeGitStatusWithFlags = 1
-"
-" let g:NERDTreeIgnore = ['^node_modules$']
-"
-"
-" nnoremap <C-n> :NERDTree<CR>
-" nnoremap <silent><C-e> :NERDTreeToggle<CR>
-" nnoremap <C-f> :NERDTreeFind<CR>
 
 nnoremap <c-z> :u<CR>      
 inoremap <c-z> <c-o>:u<CR>
@@ -139,9 +120,24 @@ map <C-l> <C-W>l
 
 lua << EOF
   local cmp = require'cmp'
+    local lspkind = require('lspkind')
+    cmp.setup {
+      formatting = {
+        format = lspkind.cmp_format({
+          mode = 'symbol', -- show only symbol annotations
+          maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+          ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
 
+          -- The function below will be called before any actual modifications from lspkind
+          -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+          before = function (entry, vim_item)
+            return vim_item
+          end
+        })
+      }
+    }
   cmp.setup({
-    snippet = {
+   snippet = {
       -- REQUIRED - you must specify a snippet engine
       expand = function(args)
         vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
@@ -203,7 +199,15 @@ EOF
 
 
 lua << EOF
+
 require'nvim-treesitter.configs'.setup {
+ autotag = {
+    enable = true,
+    enable_rename = true,
+    enable_close = true,
+    enable_close_on_slash = true,
+    filetypes = { "html" , "xml" },
+  },
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
  ensure_installed = {
                 "html",
@@ -213,7 +217,7 @@ require'nvim-treesitter.configs'.setup {
              },
  
   -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false,
+  sync_install = true,
 
   -- Automatically install missing parsers when entering buffer
   -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
@@ -420,3 +424,177 @@ EOF
 
 nnoremap <silent><C-e> :NvimTreeToggle<CR>
 inoremap <silent><C-e> :NvimTreeToggle<CR>
+
+
+
+lua << EOF
+    require'lspconfig'.pyright.setup{}
+
+
+    -- Setup language servers.
+    local lspconfig = require('lspconfig')
+    lspconfig.pyright.setup {}
+    lspconfig.tsserver.setup {}
+    lspconfig.rust_analyzer.setup {
+      -- Server-specific settings. See `:help lspconfig-setup`
+      settings = {
+        ['rust-analyzer'] = {},
+      },
+    }
+
+
+    -- Global mappings.
+    -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+    vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+    vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+    vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+
+    -- Use LspAttach autocommand to only map the following keys
+    -- after the language server attaches to the current buffer
+    vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local opts = { buffer = ev.buf }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+    vim.keymap.set('n', '<space>wl', function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, opts)
+    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', '<space>f', function()
+      vim.lsp.buf.format { async = true }
+    end, opts)
+  end,
+})
+
+EOF
+
+lua << EOF
+local lspconfig = require'lspconfig'
+local lspconfig_configs = require'lspconfig.configs'
+local lspconfig_util = require 'lspconfig.util'
+
+local function on_new_config(new_config, new_root_dir)
+  local function get_typescript_server_path(root_dir)
+    local project_root = lspconfig_util.find_node_modules_ancestor(root_dir)
+    return project_root and (lspconfig_util.path.join(project_root, 'node_modules', 'typescript', 'lib', 'tsserverlibrary.js'))
+      or ''
+  end
+
+  if
+    new_config.init_options
+    and new_config.init_options.typescript
+    and new_config.init_options.typescript.tsdk == ''
+  then
+    new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
+  end
+end
+
+local volar_cmd = {'vue-language-server', '--stdio'}
+local volar_root_dir = lspconfig_util.root_pattern 'package.json'
+
+lspconfig_configs.volar_api = {
+  default_config = {
+    cmd = volar_cmd,
+    root_dir = volar_root_dir,
+    on_new_config = on_new_config,
+    filetypes = { 'vue'},
+    -- If you want to use Volar's Take Over Mode (if you know, you know)
+    --filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
+    init_options = {
+      typescript = {
+        tsdk = ''
+      },
+      languageFeatures = {
+        implementation = true, -- new in @volar/vue-language-server v0.33
+        references = true,
+        definition = true,
+        typeDefinition = true,
+        callHierarchy = true,
+        hover = true,
+        rename = true,
+        renameFileRefactoring = true,
+        signatureHelp = true,
+        codeAction = true,
+        workspaceSymbol = true,
+        completion = {
+          defaultTagNameCase = 'both',
+          defaultAttrNameCase = 'kebabCase',
+          getDocumentNameCasesRequest = false,
+          getDocumentSelectionRequest = false,
+        },
+      }
+    },
+  }
+}
+lspconfig.volar_api.setup{}
+
+lspconfig_configs.volar_doc = {
+  default_config = {
+    cmd = volar_cmd,
+    root_dir = volar_root_dir,
+    on_new_config = on_new_config,
+
+    -- If you want to use Volar's Take Over Mode (if you know, you know):
+    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
+    init_options = {
+      typescript = {
+        tsdk = ''
+      },
+      languageFeatures = {
+        implementation = true, -- new in @volar/vue-language-server v0.33
+        documentHighlight = true,
+        documentLink = true,
+        codeLens = { showReferencesNotification = true},
+        -- not supported - https://github.com/neovim/neovim/pull/15723
+        semanticTokens = false,
+        diagnostics = true,
+        schemaRequestService = true,
+      }
+    },
+  }
+}
+lspconfig.volar_doc.setup{}
+
+lspconfig_configs.volar_html = {
+  default_config = {
+    cmd = volar_cmd,
+    root_dir = volar_root_dir,
+    on_new_config = on_new_config,
+
+    -- If you want to use Volar's Take Over Mode (if you know, you know), intentionally no 'json':
+    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+    init_options = {
+      typescript = {
+        tsdk = ''
+      },
+      documentFeatures = {
+        selectionRange = true,
+        foldingRange = true,
+        linkedEditingRange = true,
+        documentSymbol = true,
+        -- not supported - https://github.com/neovim/neovim/pull/13654
+        documentColor = false,
+        documentFormatting = {
+          defaultPrintWidth = 100,
+        },
+      }
+    },
+  }
+}
+lspconfig.volar_html.setup{}
+EOF
