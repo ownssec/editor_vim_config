@@ -47,24 +47,15 @@ call plug#begin('~/.config/nvim')
     Plug 'hrsh7th/cmp-cmdline'
     Plug 'hrsh7th/nvim-cmp'
 
-    " For vsnip users.
-    Plug 'hrsh7th/cmp-vsnip'
-    Plug 'hrsh7th/vim-vsnip'
-
     " For luasnip users.
-    Plug 'L3MON4D3/LuaSnip'
-    Plug 'saadparwaiz1/cmp_luasnip'
-
-    " For ultisnips users.
-    Plug 'SirVer/ultisnips'
-    Plug 'quangnguyen30192/cmp-nvim-ultisnips'
-
-    " For snippy users.
-    Plug 'dcampos/nvim-snippy'
-    Plug 'dcampos/cmp-snippy'
-    " end autocomp  
+    " Plug 'L3MON4D3/LuaSnip'
+    " Plug 'saadparwaiz1/cmp_luasnip'
 
 
+    " Use release branch (recommended)
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+    
 
 call plug#end()
 
@@ -500,62 +491,109 @@ nnoremap <leader>fw <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
-lua << EOF
-  local cmp = require'cmp'
-      cmp.setup({
-   snippet = {
-      -- REQUIRED - you must specify a snippet engine
-      expand = function(args)
-       -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-        require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-      end,
-    },
-    window = {
-      -- completion = cmp.config.window.bordered(),
-      -- documentation = cmp.config.window.bordered(),
-    },
-    mapping = cmp.mapping.preset.insert({
-      ['<C-k>'] = cmp.mapping.select_prev_item(),
-      ['<C-j>'] = cmp.mapping.select_next_item(),
-      ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    }),
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-      { name = 'luasnip' }, -- For luasnip users.
-      -- { name = 'ultisnips' }, -- For ultisnips users.
-      -- { name = 'snippy' }, -- For snippy users.
-    }, {
-      { name = 'buffer' },
-    })
-  })
+" lua << EOF
+"   local cmp = require'cmp'
+"       cmp.setup({
+"    snippet = {
+"       -- REQUIRED - you must specify a snippet engine
+"       expand = function(args)
+"        -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+"         require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+"         -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+"         -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+"       end,
+"     },
+"     window = {
+"       -- completion = cmp.config.window.bordered(),
+"       -- documentation = cmp.config.window.bordered(),
+"     },
+"     mapping = cmp.mapping.preset.insert({
+"       ['<C-k>'] = cmp.mapping.select_prev_item(),
+"       ['<C-j>'] = cmp.mapping.select_next_item(),
+"       ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+"     }),
+"     sources = cmp.config.sources({
+"       { name = 'nvim_lsp' },
+"       { name = 'luasnip' }, -- For luasnip users.
+"       -- { name = 'ultisnips' }, -- For ultisnips users.
+"       -- { name = 'snippy' }, -- For snippy users.
+"     }, {
+"       { name = 'buffer' },
+"     })
+"   })
+"
+"   -- Set configuration for specific filetype.
+"   cmp.setup.filetype('gitcommit', {
+"     sources = cmp.config.sources({
+"       { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+"     }, {
+"       { name = 'buffer' },
+"     })
+"   })
+"
+"   -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+"   cmp.setup.cmdline({ '/', '?' }, {
+"     mapping = cmp.mapping.preset.cmdline(),
+"     sources = {
+"       { name = 'buffer' }
+"     }
+"   })
+"
+"   cmp.setup.cmdline(':', {
+"     mapping = cmp.mapping.preset.cmdline(),
+"     sources = cmp.config.sources({
+"       { name = 'path' }
+"     }, {
+"       { name = 'cmdline' }
+"     })
+"   })
+" EOF
 
-  -- Set configuration for specific filetype.
-  cmp.setup.filetype('gitcommit', {
-    sources = cmp.config.sources({
-      { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
-    }, {
-      { name = 'buffer' },
-    })
-  })
+" coc config
+let g:coc_global_extensions = [
+  \ 'coc-html',
+  \ 'coc-highlight',
+  \ 'coc-html-css-support',
+  \ 'coc-just-complete',
+  \ 'coc-lua',
+  \ 'coc-prettier',
+  \ 'coc-css',
+  \ 'coc-stylelint',
+  \ 'coc-stylelintplus',
+  \ 'coc-vimlsp',
+  \ 'coc-clangd',
+  \ 'coc-vetur',
+  \ 'coc-eslint',
+  \ 'coc-tsserver',
+  \ 'coc-json',
+  \ 'coc-css',
+  \  'coc-explorer',
+  \  'coc-eslint',
+  \  'coc-prettier',
+  \  '@yaegassy/coc-laravel',
+  \  'coc-golines'
+  \ ]
 
-  -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline({ '/', '?' }, {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-      { name = 'buffer' }
-    }
-  })
+set hidden " Some servers have issues with backup files, see #649 set nobackup set nowritebackup " Better display for messages set cmdheight=2 " You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
 
-  cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-      { name = 'path' }
-    }, {
-      { name = 'cmdline' }
-    })
-  })
-EOF
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gr <Plug>(coc-references)
 
+" always show signcolumns
+set signcolumn=yes
+
+" use <tab> to trigger completion and navigate to the next complete item
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
