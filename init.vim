@@ -15,6 +15,7 @@ set modifiable
 set hlsearch
 " colorscheme tokyonight-moon
 set noshowmode
+set signcolumn=yes
 
 let mapleader = ' '
 
@@ -550,6 +551,17 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 " EOF
 
 " coc config
+
+
+set encoding=utf-8
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
+" delays and poor user experience
+set updatetime=300
+
 let g:coc_global_extensions = [
   \ 'coc-html',
   \ 'coc-highlight',
@@ -570,6 +582,7 @@ let g:coc_global_extensions = [
   \  'coc-explorer',
   \  'coc-eslint',
   \  'coc-prettier',
+  \  'coc-snippets',
   \  '@yaegassy/coc-laravel',
   \  'coc-golines'
   \ ]
@@ -581,19 +594,23 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gr <Plug>(coc-references)
 
-" always show signcolumns
-set signcolumn=yes
-
 " use <tab> to trigger completion and navigate to the next complete item
 function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-inoremap <silent><expr> <Tab>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ CheckBackspace() ? "\<TAB>" :
       \ coc#refresh()
 
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+let g:coc_snippet_next = '<TAB>'
+
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+    inoremap <silent><nowait><expr>  <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
+    inoremap <silent><nowait><expr>  <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
+endif
+
 
