@@ -7,7 +7,7 @@ set smartindent
 set shiftwidth=4
 set tabstop=4
 set encoding=UTF-8
-set history=5000
+set history=5000 
 set clipboard=unnamedplus
 set scl=no 
 set buftype="buffer"
@@ -19,14 +19,27 @@ set noshowmode
 let mapleader = ' '
 
 call plug#begin('~/.config/nvim')
-    Plug 'neovim/nvim-lspconfig'
     Plug 'numToStr/Comment.nvim'
     Plug 'ryanoasis/vim-devicons' 
     Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-    
-    " Autocompletion
+    Plug 'nvim-lualine/lualine.nvim'
+    " If you want to have icons in your statusline choose one of these
+    Plug 'nvim-tree/nvim-web-devicons'
+    Plug 'nvim-tree/nvim-tree.lua'
+
+
+    Plug 'lewis6991/gitsigns.nvim' " OPTIONAL: for git status
+     Plug 'romgrk/barbar.nvim'
+
+
+    Plug 'folke/tokyonight.nvim'
+
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
+    " or                                , { 'branch': '0.1.x' }
+
+    " autocomplete
     Plug 'neovim/nvim-lspconfig'
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-buffer'
@@ -34,33 +47,24 @@ call plug#begin('~/.config/nvim')
     Plug 'hrsh7th/cmp-cmdline'
     Plug 'hrsh7th/nvim-cmp'
 
+    " For vsnip users.
+    Plug 'hrsh7th/cmp-vsnip'
+    Plug 'hrsh7th/vim-vsnip'
+
     " For luasnip users.
-     Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'} "
-     Plug 'saadparwaiz1/cmp_luasnip'
+    Plug 'L3MON4D3/LuaSnip'
+    Plug 'saadparwaiz1/cmp_luasnip'
 
-     " Plug 'rafamadriz/friendly-snippets'
-     Plug 'williamboman/mason.nvim'
+    " For ultisnips users.
+    Plug 'SirVer/ultisnips'
+    Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 
-    Plug 'nvim-lualine/lualine.nvim'
-    " If you want to have icons in your statusline choose one of these
-    Plug 'nvim-tree/nvim-web-devicons'
-    Plug 'nvim-tree/nvim-tree.lua'
+    " For snippy users.
+    Plug 'dcampos/nvim-snippy'
+    Plug 'dcampos/cmp-snippy'
+    " end autocomp  
 
-    Plug 'alvan/vim-closetag'
 
-    Plug 'windwp/nvim-ts-autotag'
-
-    Plug 'lewis6991/gitsigns.nvim' " OPTIONAL: for git status
-     Plug 'romgrk/barbar.nvim'
-
-   " formatter
-    Plug 'stevearc/conform.nvim'
-
-    Plug 'folke/tokyonight.nvim'
-
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
-    " or                                , { 'branch': '0.1.x' }
 
 call plug#end()
 
@@ -106,17 +110,6 @@ inoremap <c-z> <c-o>:u<CR>
 
 :lua require("toggleterm").setup()
 
-lua << EOF
-
-    require('nvim-ts-autotag').setup()
-
-    require'toggleterm'.setup {
-      shade_terminals = false
-    }
-
-    -- if you only want these mappings for toggle term use term://*toggleterm#* instead
-    vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
-EOF
 
 autocmd TermEnter term://*toggleterm#*
       \ tnoremap <silent><A-1> <Cmd>exe  "ToggleTerm 1"<CR>
@@ -164,130 +157,9 @@ map <C-l> <C-W>l
 
 
 
-
-
-lua << EOF
-  local cmp = require'cmp'
-      cmp.setup({
-   snippet = {
-      -- REQUIRED - you must specify a snippet engine
-      expand = function(args)
-       -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-        require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-      end,
-    },
-    window = {
-      -- completion = cmp.config.window.bordered(),
-      -- documentation = cmp.config.window.bordered(),
-    },
-    mapping = cmp.mapping.preset.insert({
-      ['<C-k>'] = cmp.mapping.select_prev_item(),
-      ['<C-j>'] = cmp.mapping.select_next_item(),
-      ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-d>'] = cmp.mapping.scroll_docs(4),
-      ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    }),
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-      { name = 'luasnip' }, -- For luasnip users.
-      -- { name = 'ultisnips' }, -- For ultisnips users.
-      -- { name = 'snippy' }, -- For snippy users.
-    }, {
-      { name = 'buffer' },
-    })
-  })
-
-  -- Set configuration for specific filetype.
-  cmp.setup.filetype('gitcommit', {
-    sources = cmp.config.sources({
-      { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
-    }, {
-      { name = 'buffer' },
-    })
-  })
-
-  -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline({ '/', '?' }, {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-      { name = 'buffer' }
-    }
-  })
-
-  cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-      { name = 'path' }
-    }, {
-      { name = 'cmdline' }
-    })
-  })
+lua << EOF 
+require('Comment').setup()
 EOF
-
-
-:lua require('Comment').setup()
-
-
-lua << EOF
-
-require'nvim-treesitter.configs'.setup {
- 
-  -- A list of parser names, or "all" (the five listed parsers should always be installed)
- ensure_installed = {
-                "html",
-                "json",
-                "sql",
-                "vue"
-             },
- 
-  -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = true,
-
-  -- Automatically install missing parsers when entering buffer
-  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-  auto_install = true,
-
-  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-
-  highlight = {
-    enable = true,
-
-    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-    -- the name of the parser)
-    -- list of language that will be disabled
-    disable = { "c", "rust" },
-    -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
-    disable = function(lang, buf)
-        local max_filesize = 100 * 1024 -- 100 KB
-        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-        if ok and stats and stats.size > max_filesize then
-            return true
-        end
-    end,
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  }
-  
-}
-EOF
-
-
-lua << EOF
-require("mason").setup()
----@class MasonSettings
-local DEFAULT_SETTINGS = {
-    install_root_dir = "~/.config/nvim",
-}
-EOF
-
-
 
 lua << EOF
 
@@ -334,7 +206,7 @@ local bubbles_theme = {
   },
 }
 
-require('lualine').setup {
+require('lualine').setup({
   options = {
     icons_enabled = false,
     -- theme = 'tokyonight',
@@ -364,7 +236,7 @@ require('lualine').setup {
   },
   tabline = {},
   extensions = {},
-}
+})
 
 EOF
 
@@ -470,54 +342,6 @@ lua << EOF
 })
 
 EOF
-
-" autoClose tag
-
-" filenames like *.xml, *.html, *.xhtml, ...
-" These are the file extensions where this plugin is enabled.
-"
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
-
-" filenames like *.xml, *.xhtml, ...
-" This will make the list of non-closing tags self-closing in the specified files.
-"
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
-
-" filetypes like xml, html, xhtml, ...
-" These are the file types where this plugin is enabled.
-"
-let g:closetag_filetypes = 'html,xhtml,phtml'
-
-" filetypes like xml, xhtml, ...
-" This will make the list of non-closing tags self-closing in the specified files.
-"
-let g:closetag_xhtml_filetypes = 'xhtml,jsx'
-
-" integer value [0|1]
-" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
-"
-let g:closetag_emptyTags_caseSensitive = 1
-
-" dict
-" Disables auto-close if not in a "valid" region (based on filetype)
-
-let g:closetag_regions = {
-    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
-    \ 'javascript.jsx': 'jsxRegion',
-    \ 'typescriptreact': 'jsxRegion,tsxRegion',
-    \ 'javascriptreact': 'jsxRegion',
-    \ }
-
-" Shortcut for closing tags, default is '>'
-"
-let g:closetag_shortcut = '>'
-
-" Add > at current position without closing the current tag, default is ''
-"
-let g:closetag_close_shortcut = '<leader>>'
-
-" format after save
-    
 
 " barbar tabs from active buffers
 
@@ -665,31 +489,73 @@ require'barbar'.setup {
 EOF
 
 
-lua << EOF
-require("conform").setup({
-  formatters_by_ft = {
-    lua = { "stylua" },
-    -- Conform will run multiple formatters sequentially
-    python = { "isort", "black" },
-    -- Use a sub-list to run only the first available formatter
-    javascript = { { "prettierd", "prettier" } },
-  },
-  format_on_save = {
-    -- These options will be passed to conform.format()
-    timeout_ms = 500,
-    lsp_fallback = true,
-  },
-})
-vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-EOF
-
-
 
 lua << EOF
 require('telescope').setup{}
 EOF
+
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fw <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+lua << EOF
+  local cmp = require'cmp'
+      cmp.setup({
+   snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+       -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      end,
+    },
+    window = {
+      -- completion = cmp.config.window.bordered(),
+      -- documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-k>'] = cmp.mapping.select_prev_item(),
+      ['<C-j>'] = cmp.mapping.select_next_item(),
+      ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'luasnip' }, -- For luasnip users.
+      -- { name = 'ultisnips' }, -- For ultisnips users.
+      -- { name = 'snippy' }, -- For snippy users.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Set configuration for specific filetype.
+  cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+      { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline({ '/', '?' }, {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
+EOF
+
+
