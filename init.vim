@@ -603,7 +603,7 @@ endfunction
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#_select_confirm() :
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ CheckBackspace() ? "\<TAB>" :
+     \ CheckBackspace() ? "\<TAB>" :
       \ coc#refresh()
 
 let g:coc_snippet_next = '<TAB>'
@@ -613,4 +613,16 @@ if has('nvim-0.4.0') || has('patch-8.2.0750')
     inoremap <silent><nowait><expr>  <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
 endif
 
+" lua << EOF
+" local keyset = vim.keymap.set
+"
+" -- Formatting selected code
+" keyset("x", "<leader>f", "<Plug>(coc-format-selected)", {silent = true})
+" keyset("n", "<leader>f", "<Plug>(coc-format-selected)", {silent = true})
 
+" EOF
+
+" Use CTRL-S for selections ranges
+" Requires 'textDocument/selectionRange' support of language server
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)

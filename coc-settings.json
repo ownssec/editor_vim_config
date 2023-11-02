@@ -2,18 +2,24 @@
   "eslint.autoFixOnSave": true,
   "eslint.filetypes": [
     "lua",
+    "c++",
     "javascript",
     "javascriptreact",
     "typescript",
     "typescriptreact"
   ],
+  "coc.preferences.formatOnSave": true,
   "coc.preferences.formatOnSaveFiletypes": [
     "lua",
+    "c++",
     "javascript",
     "javascriptreact",
     "typescript",
     "typescriptreact"
   ],
+  "coc.preferences.formatOnType": true,
   "tsserver.formatOnType": true,
-  "coc.preferences.formatOnType": true
+  "eslint.enable": false,
+  "coc.preferences.formatOnType": true,
+  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/16.0.2/clangd_16.0.2/bin/clangd"
 }
