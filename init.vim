@@ -51,11 +51,11 @@ call plug#begin('~/.config/nvim')
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
     " or                                , { 'branch': '0.1.x' }
+  
 
-    " Use release branch (recommended)
+     " Use release branch (recommended)
    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-    
 
 call plug#end()
 
@@ -435,7 +435,6 @@ nnoremap <leader>fw <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
-
 " coc config
 
 let g:coc_global_extensions = [
@@ -444,7 +443,6 @@ let g:coc_global_extensions = [
   \ 'coc-html-css-support',
   \ 'coc-just-complete',
   \ 'coc-lua',
-  \ 'coc-prettier',
   \ 'coc-css',
   \ 'coc-stylelint',
   \ 'coc-stylelintplus',
@@ -456,8 +454,6 @@ let g:coc_global_extensions = [
   \ 'coc-json',
   \ 'coc-css',
   \  'coc-explorer',
-  \  'coc-eslint',
-  \  'coc-prettier',
   \  'coc-snippets',
   \  '@yaegassy/coc-laravel',
   \  'coc-golines',
@@ -465,6 +461,7 @@ let g:coc_global_extensions = [
   \  'coc-clang-format-style-options'
   \ ]
 
+" 'coc-prettier',
 
 
 nmap <silent> gd <Plug>(coc-definition)
@@ -487,3 +484,4 @@ let g:coc_snippet_next = '<TAB>'
 
 inoremap <silent><nowait><expr>  <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
 inoremap <silent><nowait><expr>  <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
+
