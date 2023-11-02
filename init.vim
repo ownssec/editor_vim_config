@@ -6,7 +6,6 @@ set autoindent
 set smartindent
 set shiftwidth=4
 set tabstop=4
-set encoding=UTF-8
 set history=5000 
 set clipboard=unnamedplus
 set scl=no 
@@ -16,6 +15,19 @@ set hlsearch
 " colorscheme tokyonight-moon
 set noshowmode
 set signcolumn=yes
+
+set encoding=utf-8
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+
+" Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
+" delays and poor user experience
+set updatetime=300
+
+set hidden  
+
 
 let mapleader = ' '
 
@@ -40,21 +52,8 @@ call plug#begin('~/.config/nvim')
     Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
     " or                                , { 'branch': '0.1.x' }
 
-    " autocomplete
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'hrsh7th/cmp-nvim-lsp'
-    Plug 'hrsh7th/cmp-buffer'
-    Plug 'hrsh7th/cmp-path'
-    Plug 'hrsh7th/cmp-cmdline'
-    Plug 'hrsh7th/nvim-cmp'
-
-    " For luasnip users.
-    " Plug 'L3MON4D3/LuaSnip'
-    " Plug 'saadparwaiz1/cmp_luasnip'
-
-
     " Use release branch (recommended)
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
     
 
@@ -249,8 +248,9 @@ local function my_on_attach(bufnr)
   -- default mappings
   api.config.mappings.default_on_attach(bufnr)
 
-  -- custom mappings
+ -- custom mappings
   vim.keymap.set('n', '<C-e>', api.tree.toggle,        opts('Up'))
+  vim.keymap.set('n', 'f', api.tree.toggle_help,        opts('Up'))
   vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
 
 end
@@ -277,63 +277,6 @@ EOF
 nnoremap <silent><C-e> :NvimTreeToggle<CR>
 inoremap <silent><C-e> :NvimTreeToggle<CR>
 
-
-
-lua << EOF
-    require'lspconfig'.pyright.setup{}
-
-
-    -- Setup language servers.
-    local lspconfig = require('lspconfig')
-    lspconfig.pyright.setup {}
-    lspconfig.tsserver.setup {}
-    lspconfig.rust_analyzer.setup {
-      -- Server-specific settings. See `:help lspconfig-setup`
-      settings = {
-        ['rust-analyzer'] = {},
-      },
-    }
-
-
-    -- Global mappings.
-    -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-    vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
-    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-    vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-    vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
-
-    -- Use LspAttach autocommand to only map the following keys
-    -- after the language server attaches to the current buffer
-    vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-  callback = function(ev)
-    -- Enable completion triggered by <c-x><c-o>
-    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-    -- Buffer local mappings.
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local opts = { buffer = ev.buf }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
-    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
-    vim.keymap.set('n', '<space>wl', function()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, opts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-    vim.keymap.set('n', '<space>f', function()
-      vim.lsp.buf.format { async = true }
-    end, opts)
-  end,
-})
-
-EOF
 
 " barbar tabs from active buffers
 
@@ -492,75 +435,8 @@ nnoremap <leader>fw <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
-" lua << EOF
-"   local cmp = require'cmp'
-"       cmp.setup({
-"    snippet = {
-"       -- REQUIRED - you must specify a snippet engine
-"       expand = function(args)
-"        -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-"         require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-"         -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-"         -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-"       end,
-"     },
-"     window = {
-"       -- completion = cmp.config.window.bordered(),
-"       -- documentation = cmp.config.window.bordered(),
-"     },
-"     mapping = cmp.mapping.preset.insert({
-"       ['<C-k>'] = cmp.mapping.select_prev_item(),
-"       ['<C-j>'] = cmp.mapping.select_next_item(),
-"       ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-"     }),
-"     sources = cmp.config.sources({
-"       { name = 'nvim_lsp' },
-"       { name = 'luasnip' }, -- For luasnip users.
-"       -- { name = 'ultisnips' }, -- For ultisnips users.
-"       -- { name = 'snippy' }, -- For snippy users.
-"     }, {
-"       { name = 'buffer' },
-"     })
-"   })
-"
-"   -- Set configuration for specific filetype.
-"   cmp.setup.filetype('gitcommit', {
-"     sources = cmp.config.sources({
-"       { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
-"     }, {
-"       { name = 'buffer' },
-"     })
-"   })
-"
-"   -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-"   cmp.setup.cmdline({ '/', '?' }, {
-"     mapping = cmp.mapping.preset.cmdline(),
-"     sources = {
-"       { name = 'buffer' }
-"     }
-"   })
-"
-"   cmp.setup.cmdline(':', {
-"     mapping = cmp.mapping.preset.cmdline(),
-"     sources = cmp.config.sources({
-"       { name = 'path' }
-"     }, {
-"       { name = 'cmdline' }
-"     })
-"   })
-" EOF
 
 " coc config
-
-
-set encoding=utf-8
-" Some servers have issues with backup files, see #649
-set nobackup
-set nowritebackup
-
-" Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
-" delays and poor user experience
-set updatetime=300
 
 let g:coc_global_extensions = [
   \ 'coc-html',
@@ -584,11 +460,12 @@ let g:coc_global_extensions = [
   \  'coc-prettier',
   \  'coc-snippets',
   \  '@yaegassy/coc-laravel',
-  \  'coc-golines'
+  \  'coc-golines',
+  \  'coc-sh',
+  \  'coc-clang-format-style-options'
   \ ]
 
-set hidden " Some servers have issues with backup files, see #649 set nobackup set nowritebackup " Better display for messages set cmdheight=2 " You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=300
+
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -608,21 +485,5 @@ inoremap <silent><expr> <TAB>
 
 let g:coc_snippet_next = '<TAB>'
 
-if has('nvim-0.4.0') || has('patch-8.2.0750')
-    inoremap <silent><nowait><expr>  <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
-    inoremap <silent><nowait><expr>  <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
-endif
-
-" lua << EOF
-" local keyset = vim.keymap.set
-"
-" -- Formatting selected code
-" keyset("x", "<leader>f", "<Plug>(coc-format-selected)", {silent = true})
-" keyset("n", "<leader>f", "<Plug>(coc-format-selected)", {silent = true})
-
-" EOF
-
-" Use CTRL-S for selections ranges
-" Requires 'textDocument/selectionRange' support of language server
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
+inoremap <silent><nowait><expr>  <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
+inoremap <silent><nowait><expr>  <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
