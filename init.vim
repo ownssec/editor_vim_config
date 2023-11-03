@@ -57,6 +57,7 @@ call plug#begin('~/.config/nvim')
   
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
+    Plug 'jiangmiao/auto-pairs'
 
 
 
