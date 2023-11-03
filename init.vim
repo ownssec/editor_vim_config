@@ -58,6 +58,9 @@ call plug#begin('~/.config/nvim')
 
 
 
+
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
 call plug#end()
 
 
@@ -541,3 +544,15 @@ EOF
     }
 
 EOF
+
+
+lua << EOF
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<S-p>', builtin.find_files, {})
+vim.keymap.set('n', '<S-o>', builtin.live_grep, {})
+--vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+EOF
+
+
