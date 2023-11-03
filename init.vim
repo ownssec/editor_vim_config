@@ -1,5 +1,5 @@
 set mouse=a
-set number set hidden
+set number 
 set expandtab 
 set autoindent 
 set smartindent
@@ -149,9 +149,7 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-lua << EOF 
-require("Comment").setup()
-EOF
+:lua require("Comment").setup()
 
 lua << EOF
 
@@ -459,6 +457,8 @@ let g:coc_global_extensions = [
   \  '@yaegassy/coc-laravel',
   \  'coc-golines',
   \  'coc-sh',
+  \  'coc-pyright',
+  \  'coc-cfn-lint',
   \  'coc-clang-format-style-options'
   \ ]
 
@@ -493,7 +493,25 @@ inoremap <silent><nowait><expr>  <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<
 lua << EOF
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "c", "html", "css", "javascript", "json", "php", "scss", "slint", "sql", "tsx", "typescript", "vue"},
+  ensure_installed = { 
+      "c", 
+  "lua", 
+  "vim", 
+  "vimdoc", 
+  "query", 
+  "c", 
+  "html", 
+  "css",
+  "javascript", 
+  "json",
+  "php",  
+  "scss", 
+  "slint", 
+  "sql", 
+  "tsx",
+  "typescript",
+  "python",
+  "vue"},
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
