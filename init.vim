@@ -138,7 +138,6 @@ function _G.set_terminal_keymaps()
   vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
   vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
   vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
-  vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
 end
 
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
@@ -279,9 +278,9 @@ inoremap <silent><C-e> :NvimTreeToggle<CR>
 
 
 " barbar tabs from active buffers
-
 " Move to previous/next
-nnoremap <silent><C-p> :BufferPrevious<CR>
+
+nnoremap <silent><C-m> :BufferPrevious<CR>
 nnoremap <silent><C-n> :BufferNext<CR>
 nnoremap <silent><C-d> :BufferClose<CR>
 
@@ -426,130 +425,158 @@ EOF
 
 
 lua << EOF
-require('telescope').setup{}
+
+require('telescope').setup{
+      defaults = {
+        -- Default configuration for telescope goes here:
+        -- config_key = value,
+        mappings = {
+          i = {
+         },
+        }
+      },
+      pickers = {
+        -- Default configuration for builtin pickers goes here:
+        -- picker_name = {
+        --   picker_config_key = value,
+        --   ...
+        -- }
+        -- Now the picker_config_key will be applied every time you call this
+        -- builtin picker
+      },
+      extensions = {
+        -- Your extension configuration goes here:
+        -- extension_name = {
+        --   extension_config_key = value,
+        -- }
+        -- please take a look at the readme of the extension you want to configure
+      },
+      
+    }
+
 EOF
 
 " Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fw <cmd>Telescope live_grep<cr>
+nnoremap <C-p> <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
-" coc config
+    " coc config
 
-let g:coc_global_extensions = [
-  \ 'coc-html',
-  \ 'coc-highlight',
-  \ 'coc-html-css-support',
-  \ 'coc-just-complete',
-  \ 'coc-lua',
-  \ 'coc-css',
-  \ 'coc-stylelint',
-  \ 'coc-stylelintplus',
-  \ 'coc-vimlsp',
-  \ 'coc-clangd',
-  \ 'coc-vetur',
-  \ 'coc-eslint',
-  \ 'coc-tsserver',
-  \ 'coc-json',
-  \ 'coc-css',
-  \  'coc-explorer',
-  \  'coc-snippets',
-  \  '@yaegassy/coc-laravel',
-  \  'coc-golines',
-  \  'coc-sh',
-  \  'coc-pyright',
-  \  'coc-cfn-lint',
-  \  'coc-clang-format-style-options'
-  \ ]
+    let g:coc_global_extensions = [
+      \ 'coc-html',
+      \ 'coc-highlight',
+      \ 'coc-html-css-support',
+      \ 'coc-just-complete',
+      \ 'coc-lua',
+      \ 'coc-css',
+      \ 'coc-stylelint',
+      \ 'coc-stylelintplus',
+      \ 'coc-vimlsp',
+      \ 'coc-clangd',
+      \ 'coc-vetur',
+      \ 'coc-eslint',
+      \ 'coc-tsserver',
+      \ 'coc-json',
+      \ 'coc-css',
+      \  'coc-explorer',
+      \  'coc-snippets',
+      \  '@yaegassy/coc-laravel',
+      \  'coc-golines',
+      \  'coc-sh',
+      \  'coc-pyright',
+      \  'coc-cfn-lint',
+      \  'coc-clang-format-style-options'
+      \ ]
 
-" 'coc-prettier',
-
-
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gr <Plug>(coc-references)
-
-" use <tab> to trigger completion and navigate to the next complete item
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-     \ CheckBackspace() ? "\<TAB>" :
-      \ coc#refresh()
-
-let g:coc_snippet_next = '<TAB>'
-
-inoremap <silent><nowait><expr>  <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
-inoremap <silent><nowait><expr>  <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
+    " 'coc-prettier',
 
 
+    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gy <Plug>(coc-type-definition)
+    nmap <silent> gr <Plug>(coc-references)
 
-" treesitter
+    " use <tab> to trigger completion and navigate to the next complete item
+    function! CheckBackspace() abort
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~# '\s'
+    endfunction
 
-lua << EOF
-require'nvim-treesitter.configs'.setup {
-  -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { 
+    inoremap <silent><expr> <TAB>
+          \ coc#pum#visible() ? coc#_select_confirm() :
+          \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+         \ CheckBackspace() ? "\<TAB>" :
+          \ coc#refresh()
+
+    let g:coc_snippet_next = '<TAB>'
+
+    inoremap <silent><nowait><expr>  <C-j> coc#pum#visible() ? coc#pum#next(1) : "\<C-j>"
+    inoremap <silent><nowait><expr>  <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
+
+
+
+    " treesitter
+
+    lua << EOF
+    require'nvim-treesitter.configs'.setup {
+      -- A list of parser names, or "all" (the five listed parsers should always be installed)
+      ensure_installed = { 
+          "c", 
+      "lua", 
+      "vim", 
+      "vimdoc", 
+      "query", 
       "c", 
-  "lua", 
-  "vim", 
-  "vimdoc", 
-  "query", 
-  "c", 
-  "html", 
-  "css",
-  "javascript", 
-  "json",
-  "php",  
-  "scss", 
-  "slint", 
-  "sql", 
-  "tsx",
-  "typescript",
-  "python",
-  "vue"},
+      "html", 
+      "css",
+      "javascript", 
+      "json",
+      "php",  
+      "scss", 
+      "slint", 
+      "sql", 
+      "tsx",
+      "typescript",
+      "python",
+      "vue"},
 
-  -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false,
+      -- Install parsers synchronously (only applied to `ensure_installed`)
+      sync_install = false,
 
-  -- Automatically install missing parsers when entering buffer
-  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-  auto_install = true,
+      -- Automatically install missing parsers when entering buffer
+      -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+      auto_install = true,
 
-  -- List of parsers to ignore installing (or "all")
-  ignore_install = { "" },
+      -- List of parsers to ignore installing (or "all")
+      ignore_install = { "" },
 
-  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
+      ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
+      -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
 
-  highlight = {
-    enable = true,
+      highlight = {
+        enable = true,
 
-    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-    -- the name of the parser)
-    -- list of language that will be disabled
-    disable = {  "rust" },
-    -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
-    disable = function(lang, buf)
-        local max_filesize = 100 * 1024 -- 100 KB
-        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-        if ok and stats and stats.size > max_filesize then
-            return true
-        end
-    end,
+        -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+        -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+        -- the name of the parser)
+        -- list of language that will be disabled
+        disable = {  "rust" },
+        -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
+        disable = function(lang, buf)
+            local max_filesize = 100 * 1024 -- 100 KB
+            local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+            if ok and stats and stats.size > max_filesize then
+                return true
+            end
+        end,
 
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = true,
-  },
-}
+        -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+        -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+        -- Using this option may slow down your editor, and you may see some duplicate highlights.
+        -- Instead of true it can also be a list of languages
+        additional_vim_regex_highlighting = true,
+      },
+    }
 
 EOF
