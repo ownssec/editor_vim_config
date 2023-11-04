@@ -53,12 +53,10 @@ call plug#begin('~/.config/nvim')
 
     Plug 'jiangmiao/auto-pairs'
 
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
-
-
     Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
     
+
+
 
   call plug#end()
 
@@ -396,15 +394,5 @@ inoremap <silent><C-e> :NvimTreeToggle<CR>
     }
 
 EOF
-
-lua << EOF
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<S-p>', builtin.find_files, {})
-vim.keymap.set('n', '<S-o>', builtin.live_grep, {})
---vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-
-EOF
-
 
 
