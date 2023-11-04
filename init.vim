@@ -11,7 +11,7 @@ set scl=no
 set modifiable
 set hlsearch
 set showtabline=0
-
+set autochdir
 " colorscheme tokyonight-moon
 set noshowmode
 set signcolumn=yes
@@ -54,10 +54,9 @@ call plug#begin('~/.config/nvim')
     Plug 'jiangmiao/auto-pairs'
 
     Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
+   
+
     
-
-
-
   call plug#end()
 
 
@@ -394,5 +393,3 @@ inoremap <silent><C-e> :NvimTreeToggle<CR>
     }
 
 EOF
-
-
