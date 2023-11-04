@@ -44,8 +44,8 @@ call plug#begin('~/.config/nvim')
 
     Plug 'nvim-lualine/lualine.nvim'
     " If you want to have icons in your statusline choose one of these
-    Plug 'nvim-tree/nvim-web-devicons'
-    Plug 'nvim-tree/nvim-tree.lua'
+    Plug '/nvim-web-devicons'
+    Plug '/nvim-tree.lua'
 
     Plug 'folke/tokyonight.nvim'
   
@@ -53,10 +53,11 @@ call plug#begin('~/.config/nvim')
 
     Plug 'jiangmiao/auto-pairs'
 
-    Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
-   
+    Plug '/nvim-web-devicons' " Recommended (for coloured icons)
+ 
 
-    
+
+
   call plug#end()
 
 
@@ -227,11 +228,13 @@ require('lualine').setup({
 
 EOF
 
+
 lua << EOF
 -- disable netrw at the very start of your init.lua
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+vim.opt.termguicolors = true
 -- disable netrw at the very start of your init.lua
 local function my_on_attach(bufnr)
   local api = require "nvim-tree.api"
@@ -245,26 +248,26 @@ local function my_on_attach(bufnr)
 
  -- custom mappings
   vim.keymap.set('n', '<C-e>', api.tree.toggle,        opts('Up'))
-  vim.keymap.set('n', '<C-f>', api.tree.toggle_help,        opts('Up'))
-  vim.keymap.set('n', '?',     api.tree.toggle_help,  opts('Help'))
+  vim.keymap.set('n', 'f', api.tree.toggle_help,        opts('Up'))
+  vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
 
 end
 
--- pass to setup along with your other options require("nvim-tree").setup {
+
+-- pass to setup along with your other options
 require("nvim-tree").setup {
+  ---
   on_attach = my_on_attach,
-  view ={
+view = {
     width = 30,
+    number = true
   },
-update_focused_file = {
-    enable = false,
-    update_root = false,
+  renderer = {
+    group_empty = true,
   },
-  actions = {
-    change_dir = {
-      enable = false,
-    }
-  }
+  filters = {
+    dotfiles = true,
+  },
   ---
 }
 
@@ -273,10 +276,10 @@ EOF
 nnoremap <silent><C-e> :NvimTreeToggle<CR>
 inoremap <silent><C-e> :NvimTreeToggle<CR>
 
+    
+
 
 " coc config
-
-
     let g:coc_global_extensions = [
       \ 'coc-html',
       \ 'coc-highlight',
@@ -296,6 +299,7 @@ inoremap <silent><C-e> :NvimTreeToggle<CR>
       \  'coc-explorer',
       \  'coc-snippets',
       \  '@yaegassy/coc-laravel',
+      \  '@yaegassy/coc-intelephense',
       \  'coc-golines',
       \  'coc-sh',
       \  'coc-pyright',
@@ -354,8 +358,9 @@ inoremap <silent><C-e> :NvimTreeToggle<CR>
       "python",
       "vue"},
 
+
       -- Install parsers synchronously (only applied to `ensure_installed`)
-      sync_install = true,
+      sync_install = false,
 
       -- Automatically install missing parsers when entering buffer
       -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
@@ -393,3 +398,4 @@ inoremap <silent><C-e> :NvimTreeToggle<CR>
     }
 
 EOF
+
