@@ -10,9 +10,7 @@ set clipboard=unnamedplus
 set scl=no 
 set modifiable
 set hlsearch
-set showtabline=2
-
-
+set showtabline=0
 
 " colorscheme tokyonight-moon
 set noshowmode
@@ -23,7 +21,6 @@ set encoding=utf-8
 set nobackup
 set nowritebackup
 
-set sessionoptions=options
 " Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
 " delays and poor user experience
 set updatetime=300
@@ -62,9 +59,6 @@ call plug#begin('~/.config/nvim')
 
     Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
     
-    "tab buffers   
-      Plug 'nvim-lua/plenary.nvim'        " Required for v0.4.0+
-      Plug 'willothy/nvim-cokeline'
 
   call plug#end()
 
@@ -229,6 +223,7 @@ require('lualine').setup({
     lualine_y = {},
     lualine_z = { 'location' },
   },
+   -- disabled_filetypes = {  'NVimTree' },
   tabline = {},
   extensions = {},
 })
@@ -240,7 +235,6 @@ lua << EOF
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-vim.opt.termguicolors = true
 -- disable netrw at the very start of your init.lua
 local function my_on_attach(bufnr)
   local api = require "nvim-tree.api"
@@ -254,25 +248,26 @@ local function my_on_attach(bufnr)
 
  -- custom mappings
   vim.keymap.set('n', '<C-e>', api.tree.toggle,        opts('Up'))
-  vim.keymap.set('n', 'f', api.tree.toggle_help,        opts('Up'))
-  vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
+  vim.keymap.set('n', '<C-f>', api.tree.toggle_help,        opts('Up'))
+  vim.keymap.set('n', '?',     api.tree.toggle_help,  opts('Help'))
 
 end
 
-
--- pass to setup along with your other options
+-- pass to setup along with your other options require("nvim-tree").setup {
 require("nvim-tree").setup {
-  ---
   on_attach = my_on_attach,
-view = {
+  view ={
     width = 30,
   },
-  renderer = {
-    group_empty = true,
+update_focused_file = {
+    enable = false,
+    update_root = false,
   },
-  filters = {
-    dotfiles = true,
-  },
+  actions = {
+    change_dir = {
+      enable = false,
+    }
+  }
   ---
 }
 
@@ -363,7 +358,7 @@ inoremap <silent><C-e> :NvimTreeToggle<CR>
       "vue"},
 
       -- Install parsers synchronously (only applied to `ensure_installed`)
-      sync_install = false,
+      sync_install = true,
 
       -- Automatically install missing parsers when entering buffer
       -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
@@ -410,100 +405,6 @@ vim.keymap.set('n', '<S-o>', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 EOF
-lua << EOF
-local get_hex = require('cokeline.hlgroups').get_hl_attr
 
-local yellow = vim.g.terminal_color_3
-
-require('cokeline').setup{
-  show_if_buffers_are_at_least = 1,
-
-  buffers = {
-    filter_valid = false,
-    filter_visible = false,
-    focus_on_delete = 'prev' or 'next',
-    new_buffers_position = 'last',
-    delete_on_right_click = false,
-  },
-  sidebar = {
-    ---@type string | string[]
-    default_hl = {
-    fg = function(buffer)
-      return
-        buffer.is_focused
-        and get_hex('Normal', 'fg')
-         or get_hex('Comment', 'fg')
-    end,
-    bg = function() return get_hex('ColorColumn', 'bg') end,
-  },
-    filetype = {  "neo-tree"  },
-    components = {
-      {
-        text = function(buf)
-          return buf.filetype
-        end,
-        fg = yellow,
-        bg = function() return get_hex('NvimTreeNormal', 'bg') end,
-        bold = true,
-      },
-    }
-  },
-    components = {
-    {
-      text = function(buffer) return (buffer.index ~= 1) and '▏' or '' end,
-    },
-    {
-      text = '  ',
-    },
-    {
-      text = function(buffer)
-        -- return buffer.devicon.icon
-        return ''
-      end,
-      fg = function(buffer)
-        return buffer.devicon.color
-      end,
-    },
-    {
-      text = ' ',
-    },
-    {
-      text = function(buffer) return buffer.filename .. '  ' end,
-      bold = function(buffer)
-        return buffer.is_focused
-      end,
-    },
-    {
-      text = '',
-      on_click = function(_, _, _, _, buffer)
-        buffer:delete()
-      end,
-    },
-    {
-      text = '  ',
-    },
-  },
-}
-
-local map = vim.api.nvim_set_keymap
-
-map("n", "<S-n>", "<Plug>(cokeline-focus-prev)", { silent = true })
-map("n", "<S-m>", "<Plug>(cokeline-focus-next)", { silent = true })
-
-for i = 1, 9 do
-  map(
-    "n",
-    ("<F%s>"):format(i),
-    ("<Plug>(cokeline-focus-%s)"):format(i),
-    { silent = true }
-  )
-  map(
-    "n",
-    ("<Leader>%s"):format(i),
-    ("<Plug>(cokeline-switch-%s)"):format(i),
-    { silent = true }
-  )
-end
-EOF
 
 
