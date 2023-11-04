@@ -8,9 +8,12 @@ set tabstop=4
 set history=5000 
 set clipboard=unnamedplus
 set scl=no 
-set buftype="buffer"
 set modifiable
 set hlsearch
+set showtabline=2
+
+
+
 " colorscheme tokyonight-moon
 set noshowmode
 set signcolumn=yes
@@ -20,10 +23,13 @@ set encoding=utf-8
 set nobackup
 set nowritebackup
 
-
+set sessionoptions=options
 " Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
 " delays and poor user experience
 set updatetime=300
+
+" In your init.lua or init.vim
+set termguicolors
 
 set hidden  
 
@@ -52,7 +58,15 @@ call plug#begin('~/.config/nvim')
 
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
-call plug#end()
+
+
+    Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
+    
+    "tab buffers   
+      Plug 'nvim-lua/plenary.nvim'        " Required for v0.4.0+
+      Plug 'willothy/nvim-cokeline'
+
+  call plug#end()
 
 
 
@@ -388,7 +402,6 @@ inoremap <silent><C-e> :NvimTreeToggle<CR>
 
 EOF
 
-
 lua << EOF
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<S-p>', builtin.find_files, {})
@@ -396,6 +409,28 @@ vim.keymap.set('n', '<S-o>', builtin.live_grep, {})
 --vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
+EOF
+lua << EOF
+ require('cokeline').setup()
+local map = vim.api.nvim_set_keymap
+
+map("n", "<S-n>", "<Plug>(cokeline-focus-prev)", { silent = true })
+map("n", "<S-m>", "<Plug>(cokeline-focus-next)", { silent = true })
+
+for i = 1, 9 do
+  map(
+    "n",
+    ("<F%s>"):format(i),
+    ("<Plug>(cokeline-focus-%s)"):format(i),
+    { silent = true }
+  )
+  map(
+    "n",
+    ("<Leader>%s"):format(i),
+    ("<Plug>(cokeline-switch-%s)"):format(i),
+    { silent = true }
+  )
+end
 EOF
 
 
