@@ -55,12 +55,10 @@ call plug#begin('~/.config/nvim')
     Plug 'jiangmiao/auto-pairs'
 
  
-    Plug 'smolck/command-completion.nvim'
 
     Plug 'lewis6991/gitsigns.nvim' " OPTIONAL: for git status
     Plug 'romgrk/barbar.nvim'
 
-    Plug 'sindrets/diffview.nvim'
 
 call plug#end()
 
@@ -402,10 +400,6 @@ inoremap <silent><C-e> :NvimTreeToggle<CR>
 
 EOF
 
-lua << EOF
-require('command-completion').setup {}
-EOF
-
 
 " barbar tabs from active buffers
 
@@ -551,4 +545,9 @@ require'barbar'.setup {
   no_name_title = nil,
 }
 EOF
+
+
+
+
+
 
