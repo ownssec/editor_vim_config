@@ -29,6 +29,8 @@ set updatetime=300
 set termguicolors
 
 set hidden  
+set ignorecase
+set smartcase
 
 
 let mapleader = ' '
