@@ -60,7 +60,6 @@ call plug#begin('~/.config/nvim')
  
 
     Plug 'nvim-lua/plenary.nvim'
-    Plug  'tanvirtin/vgit.nvim'
 
 call plug#end()
 
@@ -401,7 +400,4 @@ inoremap <silent><C-e> :NvimTreeToggle<CR>
 
 EOF
 
-lua << EOF
-require('vgit').setup()
-EOF
 
