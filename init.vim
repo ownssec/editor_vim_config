@@ -55,6 +55,8 @@ call plug#begin('~/.config/nvim')
 
     Plug '/nvim-web-devicons' " Recommended (for coloured icons)
  
+    Plug 'smolck/command-completion.nvim'
+
 
 
 
@@ -399,3 +401,7 @@ inoremap <silent><C-e> :NvimTreeToggle<CR>
 
 EOF
 
+
+lua << EOF
+require('command-completion').setup()
+EOF
