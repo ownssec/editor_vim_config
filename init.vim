@@ -37,7 +37,6 @@ let mapleader = ' '
 
 call plug#begin('~/.config/nvim')
 
-    " Use release branch (recommended)
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
     Plug 'numToStr/Comment.nvim'
@@ -45,9 +44,9 @@ call plug#begin('~/.config/nvim')
     Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 
     Plug 'nvim-lualine/lualine.nvim'
-    " If you want to have icons in your statusline choose one of these
-    Plug '/nvim-web-devicons'
-    Plug '/nvim-tree.lua'
+
+	Plug 'nvim-tree/nvim-web-devicons' " optional
+	Plug 'nvim-tree/nvim-tree.lua'
 
     Plug 'folke/tokyonight.nvim'
   
@@ -55,17 +54,15 @@ call plug#begin('~/.config/nvim')
 
     Plug 'jiangmiao/auto-pairs'
 
-    Plug '/nvim-web-devicons' " Recommended (for coloured icons)
  
     Plug 'smolck/command-completion.nvim'
 
     Plug 'lewis6991/gitsigns.nvim' " OPTIONAL: for git status
     Plug 'romgrk/barbar.nvim'
 
+    Plug 'sindrets/diffview.nvim'
 
-
-  call plug#end()
-
+call plug#end()
 
 
 lua << EOF
