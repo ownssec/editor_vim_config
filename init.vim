@@ -27,11 +27,11 @@ set updatetime=300
 
 " In your init.lua or init.vim
 set termguicolors
+set incsearch
 
 set hidden  
 set ignorecase
 set smartcase
-
 
 let mapleader = ' '
 
@@ -59,8 +59,35 @@ call plug#begin('~/.config/nvim')
     Plug 'lewis6991/gitsigns.nvim' " OPTIONAL: for git status
     Plug 'romgrk/barbar.nvim'
 
+    Plug 'nvim-lua/plenary.nvim'
+
+    if has('nvim')
+      function! UpdateRemotePlugins(...)
+        " Needed to refresh runtime files
+        let &rtp=&rtp
+        UpdateRemotePlugins
+      endfunction
+
+      Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
+    else
+      Plug 'gelguy/wilder.nvim'
+
+      " To use Python remote plugin features in Vim, can be skipped
+      Plug 'roxma/nvim-yarp'
+      Plug 'roxma/vim-hug-neovim-rpc'
+    endif
 
 call plug#end()
+
+
+" Default keys
+call wilder#setup({
+      \ 'modes': [':', '/', '?'],
+      \ 'next_key': '<Tab>',
+      \ 'previous_key': '<S-Tab>',
+      \ 'accept_key': '<Down>',
+      \ 'reject_key': '<Up>',
+      \ })
 
 
 lua << EOF
@@ -545,9 +572,5 @@ require'barbar'.setup {
   no_name_title = nil,
 }
 EOF
-
-
-
-
 
 
