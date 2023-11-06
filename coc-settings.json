@@ -2,5 +2,6 @@
   "eslint.autoFixOnSave": true,
   "eslint.enable": false,
   "coc.preferences.formatOnSave": true,
-  "snippets.ultisnips.pythonPrompt": false
+  "snippets.ultisnips.pythonPrompt": false,
+  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/16.0.2/clangd_16.0.2/bin/clangd"
 }

@@ -36,6 +36,7 @@ set smartcase
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+
 let mapleader = ' '
 
 call plug#begin('~/.config/nvim')
@@ -57,11 +58,14 @@ call plug#begin('~/.config/nvim')
 
     Plug 'jiangmiao/auto-pairs'
 
- 
-
     Plug 'nvim-lua/plenary.nvim'
 
+    " Plug
+    Plug 'sindrets/diffview.nvim'
+    
+
 call plug#end()
+
 
 lua << EOF
 require("tokyonight").setup({
@@ -302,6 +306,7 @@ inoremap <silent><C-e> :NvimTreeToggle<CR>
       \  '@yaegassy/coc-laravel',
       \  '@yaegassy/coc-intelephense',
       \  'coc-golines',
+      "\  'coc-git',
       \  'coc-sh',
       \  'coc-pyright',
       \  'coc-cfn-lint',
