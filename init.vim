@@ -15,7 +15,6 @@ set autochdir
 " colorscheme tokyonight-moon
 set noshowmode
 set signcolumn=yes
-
 set encoding=utf-8
 " Some servers have issues with backup files, see #649
 set nobackup
@@ -36,36 +35,34 @@ set smartcase
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-
 let mapleader = ' '
 
 call plug#begin('~/.config/nvim')
 
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
     Plug 'numToStr/Comment.nvim'
-    Plug 'ryanoasis/vim-devicons' 
     Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+
+    Plug 'ryanoasis/vim-devicons' 
+	Plug 'nvim-tree/nvim-web-devicons' " optional
 
     Plug 'nvim-lualine/lualine.nvim'
 
-	Plug 'nvim-tree/nvim-web-devicons' " optional
 	Plug 'nvim-tree/nvim-tree.lua'
 
     Plug 'folke/tokyonight.nvim'
   
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    "Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
     Plug 'jiangmiao/auto-pairs'
 
     Plug 'nvim-lua/plenary.nvim'
 
-    " Plug
-    Plug 'sindrets/diffview.nvim'
-    
+
+    Plug 'lewis6991/gitsigns.nvim'
+
 
 call plug#end()
-
 
 lua << EOF
 require("tokyonight").setup({
@@ -306,7 +303,6 @@ inoremap <silent><C-e> :NvimTreeToggle<CR>
       \  '@yaegassy/coc-laravel',
       \  '@yaegassy/coc-intelephense',
       \  'coc-golines',
-      "\  'coc-git',
       \  'coc-sh',
       \  'coc-pyright',
       \  'coc-cfn-lint',
@@ -314,6 +310,7 @@ inoremap <silent><C-e> :NvimTreeToggle<CR>
       \ ]
 
     " 'coc-prettier',
+      "\  'coc-git',
 
 
     nmap <silent> gd <Plug>(coc-definition)
@@ -338,71 +335,90 @@ inoremap <silent><C-e> :NvimTreeToggle<CR>
     inoremap <silent><nowait><expr>  <C-k> coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"
 
 
+lua << EOF
+require('gitsigns').setup {
+  signs = {
+    add          = { text = '│' },
+    change       = { text = '│' },
+    delete       = { text = '_' },
+    topdelete    = { text = '‾' },
+    changedelete = { text = '~' },
+    untracked    = { text = '┆' },
+  },
+  signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
+  numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
+  linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
+  word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
+  watch_gitdir = {
+    follow_files = true
+  },
+  attach_to_untracked = true,
+  current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+  current_line_blame_opts = {
+    virt_text = true,
+    virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+    delay = 1000,
+    ignore_whitespace = false,
+    virt_text_priority = 100,
+  },
+  current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+  sign_priority = 6,
+  update_debounce = 100,
+  status_formatter = nil, -- Use default
+  max_file_length = 40000, -- Disable if file is longer than this (in lines)
+  preview_config = {
+    -- Options passed to nvim_open_win
+    border = 'single',
+    style = 'minimal',
+    relative = 'cursor',
+    row = 0,
+    col = 1
+  },
+  yadm = {
+    enable = false
+  },
 
-    " treesitter
+  on_attach = function(bufnr)
+    local gs = package.loaded.gitsigns
 
-    lua << EOF
-    require'nvim-treesitter.configs'.setup {
-      -- A list of parser names, or "all" (the five listed parsers should always be installed)
-      ensure_installed = { 
-          "c", 
-      "lua", 
-      "vim", 
-      "vimdoc", 
-      "query", 
-      "c", 
-      "html", 
-      "css",
-      "javascript", 
-      "json",
-      "php",  
-      "scss", 
-      "slint", 
-      "sql", 
-      "tsx",
-      "typescript",
-      "python",
-      "vue"},
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
 
+    -- Navigation
+    map('n', ']c', function()
+      if vim.wo.diff then return ']c' end
+      vim.schedule(function() gs.next_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
 
-      -- Install parsers synchronously (only applied to `ensure_installed`)
-      sync_install = false,
+    map('n', '[c', function()
+      if vim.wo.diff then return '[c' end
+      vim.schedule(function() gs.prev_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
 
-      -- Automatically install missing parsers when entering buffer
-      -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-      auto_install = true,
+    -- Actions
+    map('n', '<leader>hs', gs.stage_hunk)
+    map('n', '<leader>hr', gs.reset_hunk)
+    map('v', '<leader>hs', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+    map('v', '<leader>hr', function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+    map('n', '<leader>hS', gs.stage_buffer)
+    map('n', '<leader>hu', gs.undo_stage_hunk)
+    map('n', '<leader>hR', gs.reset_buffer)
+    map('n', '<leader>hp', gs.preview_hunk)
+    map('n', '<leader>hb', function() gs.blame_line{full=true} end)
+    map('n', '<leader>tb', gs.toggle_current_line_blame)
+    map('n', '<leader>hd', gs.diffthis)
+    map('n', '<leader>hD', function() gs.diffthis('~') end)
+    map('n', '<leader>td', gs.toggle_deleted)
 
-      -- List of parsers to ignore installing (or "all")
-      ignore_install = { "" },
+    -- Text object
+    map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+  end
 
-      ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-      -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-
-      highlight = {
-        enable = true,
-
-        -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-        -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-        -- the name of the parser)
-        -- list of language that will be disabled
-        disable = {  "rust" },
-        -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
-        disable = function(lang, buf)
-            local max_filesize = 100 * 1024 -- 100 KB
-            local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-            if ok and stats and stats.size > max_filesize then
-                return true
-            end
-        end,
-
-        -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-        -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-        -- Using this option may slow down your editor, and you may see some duplicate highlights.
-        -- Instead of true it can also be a list of languages
-        additional_vim_regex_highlighting = true,
-      },
-    }
+}
 
 EOF
-
-
