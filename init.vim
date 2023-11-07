@@ -61,6 +61,23 @@ call plug#begin('~/.config/nvim')
 
     Plug 'lewis6991/gitsigns.nvim'
 
+    if has('nvim')
+      function! UpdateRemotePlugins(...)
+        " Needed to refresh runtime files
+        let &rtp=&rtp
+        UpdateRemotePlugins
+      endfunction
+
+      Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
+    else
+      Plug 'gelguy/wilder.nvim'
+
+      " To use Python remote plugin features in Vim, can be skipped
+      Plug 'roxma/nvim-yarp'
+      Plug 'roxma/vim-hug-neovim-rpc'
+    endif
+
+    Plug 'nixprime/cpsm'
 
 call plug#end()
 
@@ -422,3 +439,31 @@ require('gitsigns').setup {
 }
 
 EOF
+
+" nixprice /cpsm plugin
+
+let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+  
+call wilder#setup({
+  \ 'modes': [':', '/', '?'],
+  \ 'next_key': '<Tab>',
+  \ 'previous_key': '<S-Tab>',
+  \ 'accept_key': '<Down>',
+  \ 'reject_key': '<Up>',
+  \ })
+
+
+let g:loaded_remote_plugins     = 1
+
+lua << EOF
+
+local wilder = require('wilder')
+wilder.setup({modes = {':', '/', '?'}})
+
+wilder.set_option('renderer', wilder.popupmenu_renderer({
+  highlighter = wilder.basic_highlighter(),
+  left = {' ', wilder.popupmenu_devicons()},
+  right = {' ', wilder.popupmenu_scrollbar()},
+}))
+EOF
+
