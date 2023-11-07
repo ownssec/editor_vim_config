@@ -52,12 +52,10 @@ call plug#begin('~/.config/nvim')
 
     Plug 'folke/tokyonight.nvim'
   
-    "Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
     Plug 'jiangmiao/auto-pairs'
 
     Plug 'nvim-lua/plenary.nvim'
-
 
     Plug 'lewis6991/gitsigns.nvim'
 
@@ -472,27 +470,27 @@ EOF
 " treesitter
 lua << EOF
 require'nvim-treesitter.configs'.setup {
-  parser_install_dir = "~/nvim-treesitter/parsers",
+  -- parser_install_dir = "~/config/nvim/nvim-treesitter/parsers",
 
   ensure_installed = { 
-      "c", 
-  "lua", 
-  "vim", 
-  "vimdoc", 
-  "query", 
-  "c", 
-  "html", 
-  "css",
-  "javascript", 
-  "json",
-  "php",  
-  "scss", 
-  "slint", 
-  "sql", 
-  "tsx",
-  "typescript",
-  "python",
-  "vue"},
+    "c", 
+    "lua", 
+    "vim", 
+    "vimdoc", 
+    "query", 
+    "c", 
+    "html", 
+    "css",
+    "javascript", 
+    "json",
+    "php",  
+    "scss", 
+    "slint", 
+    "sql", 
+    "tsx",
+    "typescript",
+    "python",
+    "vue"},
 
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -532,7 +530,5 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = true,
   },
 }
-
 EOF
-
 
