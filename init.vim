@@ -101,9 +101,9 @@ require("tokyonight").setup({
   --- function will be called with a ColorScheme table
   ---@param colors ColorScheme
 
-  -- on_colors = function(colors) 
-  --     colors.bg = "#1f1f1f"
-  -- end,
+  on_colors = function(colors) 
+      colors.bg = "#1f1f1f"
+  end,
 
   --- You can override specific highlights to use other groups or a hex color
   --- function will be called with a Highlights and ColorScheme table
