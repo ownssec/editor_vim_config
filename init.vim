@@ -19,6 +19,7 @@ set encoding=utf-8
 " Some servers have issues with backup files, see #649
 set nobackup
 set nowritebackup
+set nohlsearch
 
 " Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
 " delays and poor user experience
@@ -362,6 +363,7 @@ inoremap <silent><C-e> :NvimTreeToggle<CR>
 " coc config
     let g:coc_global_extensions = [
       \ 'coc-html',
+      \ 'coc-svelte',
       \ 'coc-highlight',
       \ 'coc-html-css-support',
       \ 'coc-just-complete',
