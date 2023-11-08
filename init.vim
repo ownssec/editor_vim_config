@@ -37,7 +37,8 @@ filetype off                  " required
 
 let mapleader = ' '
 
-call plug#begin('~/.config/nvim')
+call plug#begin()
+" call plug#begin('~/.config/nvim')
 
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'numToStr/Comment.nvim'
@@ -50,9 +51,8 @@ call plug#begin('~/.config/nvim')
 
 	Plug 'nvim-tree/nvim-tree.lua'
 
-    Plug 'folke/tokyonight.nvim'
+    " Plug 'folke/tokyonight.nvim'
   
-
     Plug 'jiangmiao/auto-pairs'
 
     Plug 'nvim-lua/plenary.nvim'
@@ -79,12 +79,24 @@ call plug#begin('~/.config/nvim')
 
      Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
+
+     Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
+
+
+   Plug 'folke/tokyonight.nvim'
 call plug#end()
+
+
 
 lua << EOF
 require("tokyonight").setup({
   -- your configuration comes here
   -- or leave it empty to use the default settings
+  style = "night",
+  light_style = "day", -- The theme is used when the background is set to light
+  transparent = false, -- Enable this to disable setting the background color
+  terminal_colors = true, 
   styles = {
     -- Style to be applied to different syntax groups
     -- Value is any valid attr-list value for `:help nvim_set_hl`
@@ -95,23 +107,74 @@ require("tokyonight").setup({
     -- Background styles. Can be "dark", "transparent" or "normal"
     sidebars = "dark", -- style for sidebars, see below
     floats = "dark", -- style for floating windows
+
   },
+
   sidebars = {"qf", "help"},
   --- You can override specific color groups to use other groups or a hex color
   --- function will be called with a ColorScheme table
   ---@param colors ColorScheme
 
+
+
   on_colors = function(colors) 
-      colors.bg = "#1f1f1f"
+        colors.bg = "#1f1f1f"
+        colors.bg_dark = "#1f1f1f"
+        colors.bg_highlight = "#1f1f1f"
+        colors.terminal_black = "#1f1f1f"
   end,
 
   --- You can override specific highlights to use other groups or a hex color
   --- function will be called with a Highlights and ColorScheme table
   ---@param highlights Highlights
   ---@param colors ColorScheme
-  on_highlights = function(highlights, colors) end,
+  on_highlights = function(highlights, colors)
+  end,
+
+-- telescope borderless theme
+on_highlights = function(hl, c)
+    local prompt = "#2d3149"
+    hl.TelescopeNormal = {
+      -- bg = c.bg_dark,
+      -- fg = c.fg_dark,
+      bg = "#1f1f1f",
+      fg = "#ffffff",
+    }
+    hl.TelescopeBorder = {
+      -- bg = c.bg_dark,
+      bg = "#1f1f1f",
+      fg = "#1f1f1f",
+      -- fg = c.bg_dark,
+    }
+    hl.TelescopePromptNormal = {
+      bg = prompt,
+    }
+    hl.TelescopePromptBorder = {
+      bg = prompt,
+      fg = prompt,
+      -- bg = "#1f1f1f",
+      -- fg = "#ffffff",
+    }
+    hl.TelescopePromptTitle = {
+      bg = prompt,
+      fg = prompt,
+    }
+    hl.TelescopePreviewTitle = {
+      bg = c.bg_dark,
+      fg = c.bg_dark,
+    }
+    hl.TelescopeResultsTitle = {
+      bg = c.bg_dark,
+      fg = c.bg_dark,
+    }
+  end,
 })
 vim.cmd("colorscheme tokyonight-night")
+
+-- local util = require("tokyonight.util").setup({})
+
+-- util.night.bg = '#ffffff'
+
 
 EOF
 
@@ -529,6 +592,26 @@ require'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = true,
   },
+
+
 }
 EOF
+
+lua << EOF
+require('telescope').setup{ 
+  defaults = { 
+    file_ignore_patterns = { 
+      "node_modules" 
+    }
+  }
+}
+
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<S-p>', builtin.find_files, {})
+vim.keymap.set('n', '<S-o>', builtin.live_grep, {})
+--vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+EOF
+
 

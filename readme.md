@@ -8,5 +8,20 @@
 
 --important
 -- *install 
+
 npm i -g typescript-language-server
+
+
+--tokyonight Background . night theme
+--modified from folder...
+--example path : /home/e/.local/share/nvim/plugged/
+
+bg-color #1f1f1f
+
+
+-- for telescope find wors .
+-- need to install this ripgrep
+
+ sudo apt-get install ripgrep
+
 
