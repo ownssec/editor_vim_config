@@ -52,7 +52,7 @@ call plug#begin()
 
 	Plug 'nvim-tree/nvim-tree.lua'
 
-    " Plug 'folke/tokyonight.nvim'
+    Plug 'folke/tokyonight.nvim'
   
     Plug 'jiangmiao/auto-pairs'
 
@@ -386,7 +386,7 @@ inoremap <silent><C-e> :NvimTreeToggle<CR>
       \  'coc-sh',
       \  'coc-pyright',
       \  'coc-cfn-lint',
-      \  'coc-clang-format-style-options'
+      \  'coc-clang-format-style-options',
       \ ]
 
     " 'coc-prettier',
