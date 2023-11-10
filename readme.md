@@ -22,7 +22,7 @@ Have git, make, pip, python, npm, node and cargo installed on your system.
 --example path : /home/e/.local/share/nvim/plugged/
 night theme 
 bg && bg_dark color='#1f1f1f'
-bg-color #1f1f1f
+bg-color #1f1f1fe
 -- ............................--
 
 -- ............................--
@@ -30,4 +30,9 @@ bg-color #1f1f1f
 -- need to install this ripgrep
  sudo apt-get install ripgrep
 -- ............................--
+
+-- for coc-vetur . vue js support 
+npm i eslint eslint-plugin-vue -D
+
+
 

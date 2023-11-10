@@ -2,7 +2,7 @@ set mouse=a
 set number 
 set expandtab 
 set autoindent 
-set smartindent
+set smartindent 
 set shiftwidth=4
 set tabstop=4
 set history=5000 
@@ -373,7 +373,6 @@ inoremap <silent><C-e> :NvimTreeToggle<CR>
       \ 'coc-stylelintplus',
       \ 'coc-vimlsp',
       \ 'coc-clangd',
-      \ 'coc-vetur',
       \ 'coc-eslint',
       \ 'coc-tsserver',
       \ 'coc-json',
@@ -382,6 +381,8 @@ inoremap <silent><C-e> :NvimTreeToggle<CR>
       \  'coc-snippets',
       \  '@yaegassy/coc-laravel',
       \  '@yaegassy/coc-intelephense',
+      \ '@yaegassy/coc-typescript-vue-plugin',
+      \ '@yaegassy/coc-volar-tools',
       \  'coc-golines',
       \  'coc-sh',
       \  'coc-pyright',
@@ -566,7 +567,7 @@ require'nvim-treesitter.configs'.setup {
   auto_install = true,
 
   -- List of parsers to ignore installing (or "all")
-  ignore_install = { "" },
+  --ignore_install = { "" },
 
   ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
   -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
