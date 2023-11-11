@@ -68,7 +68,6 @@ call plug#begin()
 
 
     Plug 'williamboman/mason.nvim'
-    Plug 'williamboman/mason.nvim'
     Plug 'williamboman/mason-lspconfig.nvim'
     Plug 'neovim/nvim-lspconfig'
     Plug 'rafamadriz/friendly-snippets'
@@ -656,6 +655,7 @@ lua <<EOF
       expand = function(args)
         vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
         require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        require("mason-lspconfig").setup()
         -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
         -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
       end,
@@ -673,7 +673,8 @@ lua <<EOF
 
     }),
     sources = cmp.config.sources({
-      -- { name = 'nvim_lsp' },
+      --{ name = 'nvim_lsp' },
+      { name = 'mason-lspconfig' },
       { name = 'luasnip' , option = { show_autosnippets = true } }, -- For luasnip users.
       -- { name = 'ultisnips' }, -- For ultisnips users.
       -- { name = 'snippy' }, -- For snippy users.
@@ -703,7 +704,6 @@ lua <<EOF
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
       { name = 'path' },
-      { name = 'luasnip' },
     }, {
       { name = 'cmdline' }
     })
