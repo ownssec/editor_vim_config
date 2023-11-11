@@ -1,4 +1,4 @@
-set mouse=a
+
 set number 
 set expandtab 
 set autoindent 
@@ -12,7 +12,7 @@ set modifiable
 set hlsearch
 set showtabline=0
 set autochdir
-" colorscheme tokyonight-moon
+colorscheme habamax 
 set noshowmode
 set signcolumn=yes
 set encoding=utf-8
@@ -51,7 +51,6 @@ call plug#begin()
 
     Plug 'nvim-tree/nvim-tree.lua'
 
-    Plug 'folke/tokyonight.nvim'
 
     Plug 'jiangmiao/auto-pairs'
 
@@ -64,7 +63,7 @@ call plug#begin()
     Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
 
 
-    Plug 'folke/tokyonight.nvim'
+    "Plug 'folke/tokyonight.nvim'
 
 
     Plug 'williamboman/mason.nvim'
@@ -91,94 +90,94 @@ call plug#end()
 
 
 
-lua << EOF
-require("tokyonight").setup({
-  -- your configuration comes here
-  -- or leave it empty to use the default settings
-  style = "night",
-  light_style = "day", -- The theme is used when the background is set to light
-  transparent = false, -- Enable this to disable setting the background color
-  terminal_colors = true, 
-  styles = {
-    -- Style to be applied to different syntax groups
-    -- Value is any valid attr-list value for `:help nvim_set_hl`
-    comments = { italic = true },
-    keywords = { italic = true },
-    functions = {},
-    variables = {},
-    -- Background styles. Can be "dark", "transparent" or "normal"
-    sidebars = "dark", -- style for sidebars, see below
-    floats = "dark", -- style for floating windows
-
-  },
-
-  sidebars = {"qf", "help"},
-  --- You can override specific color groups to use other groups or a hex color
-  --- function will be called with a ColorScheme table
-  ---@param colors ColorScheme
-
-
-
-  on_colors = function(colors) 
-        colors.bg = "#1f1f1f"
-        colors.bg_dark = "#1f1f1f"
-        colors.bg_highlight = "#1f1f1f"
-        colors.terminal_black = "#1f1f1f"
-  end,
-
-  --- You can override specific highlights to use other groups or a hex color
-  --- function will be called with a Highlights and ColorScheme table
-  ---@param highlights Highlights
-  ---@param colors ColorScheme
-  on_highlights = function(highlights, colors)
-  end,
-
--- telescope borderless theme
-on_highlights = function(hl, c)
-    local prompt = "#2d3149"
-    hl.TelescopeNormal = {
-      -- bg = c.bg_dark,
-      -- fg = c.fg_dark,
-      bg = "#1f1f1f",
-      fg = "#ffffff",
-    }
-    hl.TelescopeBorder = {
-      -- bg = c.bg_dark,
-      bg = "#1f1f1f",
-      fg = "#1f1f1f",
-      -- fg = c.bg_dark,
-    }
-    hl.TelescopePromptNormal = {
-      bg = prompt,
-    }
-    hl.TelescopePromptBorder = {
-      bg = prompt,
-      fg = prompt,
-      -- bg = "#1f1f1f",
-      -- fg = "#ffffff",
-    }
-    hl.TelescopePromptTitle = {
-      bg = prompt,
-      fg = prompt,
-    }
-    hl.TelescopePreviewTitle = {
-      bg = c.bg_dark,
-      fg = c.bg_dark,
-    }
-    hl.TelescopeResultsTitle = {
-      bg = c.bg_dark,
-      fg = c.bg_dark,
-    }
-  end,
-})
-vim.cmd("colorscheme tokyonight-night")
-
--- local util = require("tokyonight.util").setup({})
-
--- util.night.bg = '#ffffff'
-
-
-EOF
+" lua << EOF
+" require("tokyonight").setup({
+"   -- your configuration comes here
+"   -- or leave it empty to use the default settings
+"   style = "night",
+"   light_style = "day", -- The theme is used when the background is set to light
+"   transparent = false, -- Enable this to disable setting the background color
+"   terminal_colors = true, 
+"   styles = {
+"     -- Style to be applied to different syntax groups
+"     -- Value is any valid attr-list value for `:help nvim_set_hl`
+"     comments = { italic = true },
+"     keywords = { italic = true },
+"     functions = {},
+"     variables = {},
+"     -- Background styles. Can be "dark", "transparent" or "normal"
+"     sidebars = "dark", -- style for sidebars, see below
+"     floats = "dark", -- style for floating windows
+"
+"   },
+"
+"   sidebars = {"qf", "help"},
+"   --- You can override specific color groups to use other groups or a hex color
+"   --- function will be called with a ColorScheme table
+"   ---@param colors ColorScheme
+"
+"
+"
+"   on_colors = function(colors) 
+"         colors.bg = "#1f1f1f"
+"         colors.bg_dark = "#1f1f1f"
+"         colors.bg_highlight = "#1f1f1f"
+"         colors.terminal_black = "#1f1f1f"
+"   end,
+"
+"   --- You can override specific highlights to use other groups or a hex color
+"   --- function will be called with a Highlights and ColorScheme table
+"   ---@param highlights Highlights
+"   ---@param colors ColorScheme
+"   on_highlights = function(highlights, colors)
+"   end,
+"
+" -- telescope borderless theme
+" on_highlights = function(hl, c)
+"     local prompt = "#2d3149"
+"     hl.TelescopeNormal = {
+"       -- bg = c.bg_dark,
+"       -- fg = c.fg_dark,
+"       bg = "#1f1f1f",
+"       fg = "#ffffff",
+"     }
+"     hl.TelescopeBorder = {
+"       -- bg = c.bg_dark,
+"       bg = "#1f1f1f",
+"       fg = "#1f1f1f",
+"       -- fg = c.bg_dark,
+"     }
+"     hl.TelescopePromptNormal = {
+"       bg = prompt,
+"     }
+"     hl.TelescopePromptBorder = {
+"       bg = prompt,
+"       fg = prompt,
+"       -- bg = "#1f1f1f",
+"       -- fg = "#ffffff",
+"     }
+"     hl.TelescopePromptTitle = {
+"       bg = prompt,
+"       fg = prompt,
+"     }
+"     hl.TelescopePreviewTitle = {
+"       bg = c.bg_dark,
+"       fg = c.bg_dark,
+"     }
+"     hl.TelescopeResultsTitle = {
+"       bg = c.bg_dark,
+"       fg = c.bg_dark,
+"     }
+"   end,
+" })
+" vim.cmd("colorscheme tokyonight-night")
+"
+" -- local util = require("tokyonight.util").setup({})
+"
+" -- util.night.bg = '#ffffff'
+"
+"
+" EOF
 
 
 nnoremap <c-z> :u<CR>      
@@ -634,29 +633,57 @@ vim.api.nvim_create_autocmd('LspAttach', {
 EOF
 
 lua << EOF
+local lspconfig = require('lspconfig')
+local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 require("mason").setup()
-require("mason-lspconfig").setup {
-    ensure_installed = {
-      },
-    automatic_installation = true
-    
-}
+require('mason-lspconfig').setup({
+  ensure_installed = {
+    'tsserver',
+    'eslint',
+    'html',
+    'cssls',
+    'volar',
+  },
+  handlers = {
+    function(server)
+      lspconfig[server].setup({
+        capabilities = lsp_capabilities,
+      })
+    end,
+    ['tsserver'] = function()
+      lspconfig.tsserver.setup({
+        capabilities = lsp_capabilities,
+        settings = {
+          completions = {
+            completeFunctionCalls = true
+          }
+        }
+      })
+    end
+  }
+})
 EOF
 
 
+
+
+
 lua <<EOF
+
   -- Set up nvim-cmp.
-  local cmp = require'cmp'
+
+ local cmp = require'cmp'
   require("luasnip.loaders.from_vscode").lazy_load()
 
   cmp.setup({
     snippet = {
       -- REQUIRED - you must specify a snippet engine
       expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        --require('mason').setup()
         require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        require("mason-lspconfig").setup()
-        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+         --require('cmp_luasnip').expand_snippet(args.body) -- For `snippy` users.
         -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
       end,
     },
@@ -673,9 +700,9 @@ lua <<EOF
 
     }),
     sources = cmp.config.sources({
-      --{ name = 'nvim_lsp' },
-      { name = 'mason-lspconfig' },
-      { name = 'luasnip' , option = { show_autosnippets = true } }, -- For luasnip users.
+      { name = 'nvim_lsp' },
+     { name = 'cmp_luasnip' },
+      { name = 'luasnip' , option = { use_show_condition = false, show_autosnippets=false} }, -- For luasnip users.
       -- { name = 'ultisnips' }, -- For ultisnips users.
       -- { name = 'snippy' }, -- For snippy users.
     }, {
@@ -710,3 +737,4 @@ lua <<EOF
   })
 
 EOF
+
