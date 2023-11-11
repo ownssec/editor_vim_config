@@ -62,12 +62,7 @@ call plug#begin()
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
 
-
     "Plug 'folke/tokyonight.nvim'
-
-
-    Plug 'williamboman/mason.nvim'
-    Plug 'williamboman/mason-lspconfig.nvim'
 
     Plug 'neovim/nvim-lspconfig'
     Plug 'rafamadriz/friendly-snippets'
@@ -633,39 +628,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 EOF
 
-lua << EOF
-local lspconfig = require('lspconfig')
-local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-require("mason").setup()
-require('mason-lspconfig').setup({
-  ensure_installed = {
-    'tsserver',
-    'eslint',
-    'html',
-    'cssls',
-    'volar',
-  },
-  -- handlers = {
-  --   function(server)
-  --     lspconfig[server].setup({
-  --       capabilities = lsp_capabilities,
-  --     })
-  --   end,
-  --   
-  --   },
-   automatic_installation = true,
-
-    -- See `:h mason-lspconfig.setup_handlers()`
-    ---@type table<string, fun(server_name: string)>?
-    handlers = nil,
-  })
-EOF
-
-
-
-
-
 lua <<EOF
 
 -- Add additional capabilities supported by nvim-cmp
@@ -674,7 +636,21 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local lspconfig = require('lspconfig')
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'volar' }
+local servers = { 'clangd', 
+        \ 'pyright',
+        \ 'tsserver', 
+        \ 'volar', 
+        \ 'vuels',
+        \  'cssls', 
+        \ 'eslint', 
+        \ 'sqlls', 
+        \'html', 
+        \'intelephense', 
+        \'stimulus_ls',
+        \'phan',
+        \'phpactor',
+        \}
+-- 'tailwindcss'
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     -- on_attach = my_custom_on_attach,
@@ -693,9 +669,8 @@ local luasnip = require 'luasnip'
     snippet = {
       -- REQUIRED - you must specify a snippet engine
       expand = function(args)
-        -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
         require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
       end,
     },
     window = {
@@ -715,8 +690,6 @@ local luasnip = require 'luasnip'
      { name = 'cmp_luasnip' },
       -- { name = 'luasnip' , option = { use_show_condition = false, show_autosnippets=false} }, -- For luasnip users.
       { name = 'luasnip'  }, -- For luasnip users.
-      -- { name = 'ultisnips' }, -- For ultisnips users.
-      -- { name = 'snippy' }, -- For snippy users.
     }, {
       { name = 'buffer' },
     })
