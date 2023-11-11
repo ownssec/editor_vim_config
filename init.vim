@@ -1,4 +1,3 @@
-
 set number 
 set expandtab 
 set autoindent 
@@ -12,7 +11,9 @@ set modifiable
 set hlsearch
 set showtabline=0
 set autochdir
-colorscheme habamax 
+
+" colorscheme catppuccin-mocha " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+
 set noshowmode
 set signcolumn=yes
 set encoding=utf-8
@@ -38,6 +39,7 @@ filetype off                  " required
 
 let mapleader = ' '
 
+
 call plug#begin()
 " call plug#begin('~/.config/nvim')
 
@@ -50,7 +52,6 @@ call plug#begin()
     Plug 'nvim-lualine/lualine.nvim'
 
     Plug 'nvim-tree/nvim-tree.lua'
-
 
     Plug 'jiangmiao/auto-pairs'
 
@@ -81,6 +82,11 @@ call plug#begin()
     Plug 'L3MON4D3/LuaSnip'
     Plug 'saadparwaiz1/cmp_luasnip'
 
+
+    Plug 'williamboman/mason.nvim'
+    Plug 'williamboman/mason-lspconfig.nvim'
+
+    Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 
 call plug#end()
 
@@ -629,28 +635,26 @@ vim.api.nvim_create_autocmd('LspAttach', {
 EOF
 
 lua <<EOF
-
--- Add additional capabilities supported by nvim-cmp
+-- -- Add additional capabilities supported by nvim-cmp
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local lspconfig = require('lspconfig')
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 local servers = { 'clangd', 
-        \ 'pyright',
-        \ 'tsserver', 
-        \ 'volar', 
-        \ 'vuels',
-        \  'cssls', 
-        \ 'eslint', 
-        \ 'sqlls', 
-        \'html', 
-        \'intelephense', 
-        \'stimulus_ls',
-        \'phan',
-        \'phpactor',
-        \}
+         'pyright',
+         'tsserver', 
+         'volar', 
+          'cssls', 
+         'sqlls', 
+        'html', 
+        'intelephense', 
+        'stimulus_ls',
+        'phan',
+        'phpactor',
+        }
 -- 'tailwindcss'
+-- local servers = {}
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     -- on_attach = my_custom_on_attach,
@@ -669,7 +673,7 @@ local luasnip = require 'luasnip'
     snippet = {
       -- REQUIRED - you must specify a snippet engine
       expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        --vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
         require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
       end,
     },
@@ -687,9 +691,9 @@ local luasnip = require 'luasnip'
     }),
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
-     { name = 'cmp_luasnip' },
+    -- { name = 'cmp_luasnip' },
       -- { name = 'luasnip' , option = { use_show_condition = false, show_autosnippets=false} }, -- For luasnip users.
-      { name = 'luasnip'  }, -- For luasnip users.
+      -- { name = 'luasnip' }, -- For luasnip users.
     }, {
       { name = 'buffer' },
     })
@@ -723,3 +727,27 @@ local luasnip = require 'luasnip'
 
 EOF
 
+
+
+lua << EOF
+require("mason").setup()
+require('mason-lspconfig').setup()
+EOF
+
+
+lua << EOF
+require("catppuccin").setup({
+    transparent_background = true, -- disables setting the background color.
+    highlight_overrides = {
+       
+        mocha = function(mocha)
+            return {
+                Normal = { bg = "#1f1f1f" }
+            }
+        end,
+    },
+})
+-- setup must be called before loading
+vim.cmd.colorscheme "catppuccin"
+
+EOF
