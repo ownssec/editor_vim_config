@@ -63,7 +63,7 @@ call plug#begin()
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
 
-    "Plug 'folke/tokyonight.nvim'
+    Plug 'folke/tokyonight.nvim'
 
     Plug 'neovim/nvim-lspconfig'
     Plug 'rafamadriz/friendly-snippets'
@@ -86,100 +86,110 @@ call plug#begin()
     Plug 'williamboman/mason.nvim'
     Plug 'williamboman/mason-lspconfig.nvim'
 
-    Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
-
+    " Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 call plug#end()
 
 
 
-" lua << EOF
-" require("tokyonight").setup({
-"   -- your configuration comes here
-"   -- or leave it empty to use the default settings
-"   style = "night",
-"   light_style = "day", -- The theme is used when the background is set to light
-"   transparent = false, -- Enable this to disable setting the background color
-"   terminal_colors = true, 
-"   styles = {
-"     -- Style to be applied to different syntax groups
-"     -- Value is any valid attr-list value for `:help nvim_set_hl`
-"     comments = { italic = true },
-"     keywords = { italic = true },
-"     functions = {},
-"     variables = {},
-"     -- Background styles. Can be "dark", "transparent" or "normal"
-"     sidebars = "dark", -- style for sidebars, see below
-"     floats = "dark", -- style for floating windows
-"
-"   },
-"
-"   sidebars = {"qf", "help"},
-"   --- You can override specific color groups to use other groups or a hex color
-"   --- function will be called with a ColorScheme table
-"   ---@param colors ColorScheme
-"
-"
-"
-"   on_colors = function(colors) 
-"         colors.bg = "#1f1f1f"
-"         colors.bg_dark = "#1f1f1f"
-"         colors.bg_highlight = "#1f1f1f"
-"         colors.terminal_black = "#1f1f1f"
-"   end,
-"
-"   --- You can override specific highlights to use other groups or a hex color
-"   --- function will be called with a Highlights and ColorScheme table
-"   ---@param highlights Highlights
-"   ---@param colors ColorScheme
-"   on_highlights = function(highlights, colors)
-"   end,
-"
-" -- telescope borderless theme
-" on_highlights = function(hl, c)
-"     local prompt = "#2d3149"
-"     hl.TelescopeNormal = {
-"       -- bg = c.bg_dark,
-"       -- fg = c.fg_dark,
-"       bg = "#1f1f1f",
-"       fg = "#ffffff",
-"     }
-"     hl.TelescopeBorder = {
-"       -- bg = c.bg_dark,
-"       bg = "#1f1f1f",
-"       fg = "#1f1f1f",
-"       -- fg = c.bg_dark,
-"     }
-"     hl.TelescopePromptNormal = {
-"       bg = prompt,
-"     }
-"     hl.TelescopePromptBorder = {
-"       bg = prompt,
-"       fg = prompt,
-"       -- bg = "#1f1f1f",
-"       -- fg = "#ffffff",
-"     }
-"     hl.TelescopePromptTitle = {
-"       bg = prompt,
-"       fg = prompt,
-"     }
-"     hl.TelescopePreviewTitle = {
-"       bg = c.bg_dark,
-"       fg = c.bg_dark,
-"     }
-"     hl.TelescopeResultsTitle = {
-"       bg = c.bg_dark,
-"       fg = c.bg_dark,
-"     }
-"   end,
-" })
-" vim.cmd("colorscheme tokyonight-night")
-"
-" -- local util = require("tokyonight.util").setup({})
-"
-" -- util.night.bg = '#ffffff'
-"
-"
-" EOF
+lua << EOF
+require("tokyonight").setup({
+  -- your configuration comes here
+  -- or leave it empty to use the default settings
+  style = "night",
+  light_style = "day", -- The theme is used when the background is set to light
+  transparent = false, -- Enable this to disable setting the background color
+  terminal_colors = true, 
+  styles = {
+    -- Style to be applied to different syntax groups
+    -- Value is any valid attr-list value for `:help nvim_set_hl`
+    comments = { italic = true },
+    keywords = { italic = true },
+    functions = {},
+    variables = {},
+    -- Background styles. Can be "dark", "transparent" or "normal"
+    sidebars = "dark", -- style for sidebars, see below
+    floats = "dark", -- style for floating windows
+
+  },
+
+  sidebars = {"qf", "help"},
+  --- You can override specific color groups to use other groups or a hex color
+  --- function will be called with a ColorScheme table
+  ---@param colors ColorScheme
+
+
+
+  on_colors = function(colors) 
+        colors.bg = "#1f1f1f"
+        -- colors.bg_dark = "#1f1f1f"
+        -- colors.terminal_black = "#1E1E1E"
+        -- colors.fg = "#ffffff"
+        -- colors.bg = "#000000"
+        -- colors.bg_dark = "#000000"
+        -- colors.terminal_black = "#000000"
+        colors.hint = colors.orange
+        colors.error = colors.red 
+        colors.warning= colors.red
+        colors.info= colors.red
+
+        colors.info= colors.red
+
+        colors.bg_sidebar = "#1f1f1f"
+  end,
+
+  --- You can override specific highlights to use other groups or a hex color
+  --- function will be called with a Highlights and ColorScheme table
+  ---@param highlights Highlights
+  ---@param colors ColorScheme
+  on_highlights = function(highlights, colors)
+  end,
+
+-- telescope borderless theme
+on_highlights = function(hl, c)
+    local prompt = "#2d3149"
+    hl.TelescopeNormal = {
+      -- bg = c.bg_dark,
+      -- fg = c.fg_dark,
+      bg = "#1f1f1f",
+      fg = "#ffffff",
+    }
+    hl.TelescopeBorder = {
+      -- bg = c.bg_dark,
+      bg = "#1f1f1f",
+      fg = "#1f1f1f",
+      -- fg = c.bg_dark,
+    }
+    hl.TelescopePromptNormal = {
+      bg = prompt,
+    }
+    hl.TelescopePromptBorder = {
+      bg = prompt,
+      fg = prompt,
+      -- bg = "#1f1f1f",
+      -- fg = "#ffffff",
+    }
+    hl.TelescopePromptTitle = {
+      bg = prompt,
+      fg = prompt,
+    }
+    hl.TelescopePreviewTitle = {
+      bg = c.bg_dark,
+      fg = c.bg_dark,
+    }
+    hl.TelescopeResultsTitle = {
+      bg = c.bg_dark,
+      fg = c.bg_dark,
+    }
+  end,
+})
+vim.cmd("colorscheme tokyonight-night")
+
+-- local util = require("tokyonight.util").setup({})
+
+-- util.night.bg = '#ffffff'
+
+
+EOF
 
 
 nnoremap <c-z> :u<CR>      
@@ -243,7 +253,7 @@ lua << EOF
 local colors = {
   blue   = '#80a0ff',
   cyan   = '#79dac8',
-  black  = '#1f1f1f',
+  black  = '#3c3c3c',
   --black  = '#080808',
   white  = '#c6c6c6',
   red    = '#ff5189',
@@ -539,7 +549,11 @@ require('telescope').setup{
   defaults = { 
     file_ignore_patterns = { 
       "node_modules" 
-    }
+    },
+    layout_config = {
+      vertical = { width = 0.5 }
+      -- other layout configuration here
+    },
   }
 }
 
@@ -735,19 +749,23 @@ require('mason-lspconfig').setup()
 EOF
 
 
-lua << EOF
-require("catppuccin").setup({
-    transparent_background = true, -- disables setting the background color.
-    highlight_overrides = {
-       
-        mocha = function(mocha)
-            return {
-                Normal = { bg = "#1f1f1f" }
-            }
-        end,
-    },
-})
--- setup must be called before loading
-vim.cmd.colorscheme "catppuccin"
-
-EOF
+" lua << EOF
+" require("catppuccin").setup({
+"     transparent_background = true, -- disables setting the background color.
+"     highlight_overrides = {
+"        
+"         mocha = function(mocha)
+"             return {
+"                 Normal = { bg = "#1f1f1f" }
+"             }
+"         end,
+"     },
+"     telescope = {
+"     enabled = true,
+"     -- style = "nvchad"
+"     }
+" })
+" -- setup must be called before loading
+" vim.cmd.colorscheme "catppuccin"
+"
+" EOF
