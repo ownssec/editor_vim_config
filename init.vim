@@ -45,57 +45,47 @@ call plug#begin()
     Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 
     Plug 'ryanoasis/vim-devicons' 
-	Plug 'nvim-tree/nvim-web-devicons' " optional
+    Plug 'nvim-tree/nvim-web-devicons' " optional
 
     Plug 'nvim-lualine/lualine.nvim'
 
-	Plug 'nvim-tree/nvim-tree.lua'
+    Plug 'nvim-tree/nvim-tree.lua'
 
     Plug 'folke/tokyonight.nvim'
-  
+
     Plug 'jiangmiao/auto-pairs'
 
     Plug 'nvim-lua/plenary.nvim'
 
     Plug 'lewis6991/gitsigns.nvim'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-    if has('nvim')
-      function! UpdateRemotePlugins(...)
-        " Needed to refresh runtime files
-        let &rtp=&rtp
-        UpdateRemotePlugins
-      endfunction
-
-      Plug 'gelguy/wilder.nvim', { 'do': function('UpdateRemotePlugins') }
-    else
-      Plug 'gelguy/wilder.nvim'
-
-      " To use Python remote plugin features in Vim, can be skipped
-      Plug 'roxma/nvim-yarp'
-      Plug 'roxma/vim-hug-neovim-rpc'
-    endif
-
-    Plug 'nixprime/cpsm'
-
-     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
-
-     Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
 
 
-   Plug 'folke/tokyonight.nvim'
+    Plug 'folke/tokyonight.nvim'
 
 
-   Plug 'williamboman/mason.nvim'
+    Plug 'williamboman/mason.nvim'
+    Plug 'williamboman/mason.nvim'
+    Plug 'williamboman/mason-lspconfig.nvim'
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'rafamadriz/friendly-snippets'
 
-   Plug 'neovim/nvim-lspconfig'
-   Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-buffer'
     Plug 'hrsh7th/cmp-path'
     Plug 'hrsh7th/cmp-cmdline'
-   Plug 'hrsh7th/nvim-cmp'
-   Plug 'L3MON4D3/LuaSnip'
+    Plug 'hrsh7th/nvim-cmp'
+
+    " For vsnip users.
+    Plug 'hrsh7th/cmp-vsnip'
+    Plug 'hrsh7th/vim-vsnip'
+
+    Plug 'L3MON4D3/LuaSnip'
+    Plug 'saadparwaiz1/cmp_luasnip'
 
 
 call plug#end()
@@ -460,33 +450,7 @@ require('gitsigns').setup {
 
 EOF
 
-" nixprice /cpsm plugin
 
-let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
-  
-call wilder#setup({
-  \ 'modes': [':', '/', '?'],
-  \ 'next_key': '<Tab>',
-  \ 'previous_key': '<S-Tab>',
-  \ 'accept_key': '<Down>',
-  \ 'reject_key': '<Up>',
-  \ })
-
-
-let g:loaded_remote_plugins     = 1
-
-lua << EOF
-
-local wilder = require('wilder')
-wilder.setup({modes = {':', '/', '?'}})
-
-wilder.set_option('renderer', wilder.popupmenu_renderer({
-  highlighter = wilder.basic_highlighter(),
-  left = {' ', wilder.popupmenu_devicons()},
-  right = {' ', wilder.popupmenu_scrollbar()},
-}))
-
-EOF
 
 
 " treesitter
@@ -671,12 +635,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 EOF
 
 lua << EOF
-require("mason").setup {
+require("mason").setup()
+require("mason-lspconfig").setup {
     ensure_installed = {
-        "stylua",
-        "shellcheck",
-        "shfmt",
-        "flake8",
       },
     automatic_installation = true
     
@@ -686,15 +647,15 @@ EOF
 
 lua <<EOF
   -- Set up nvim-cmp.
-  require("luasnip.loaders.from_vscode").lazy_load()
   local cmp = require'cmp'
+  require("luasnip.loaders.from_vscode").lazy_load()
 
   cmp.setup({
     snippet = {
       -- REQUIRED - you must specify a snippet engine
       expand = function(args)
-        -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-        require('nvim_lsp').lsp_expand(args.body) -- For `luasnip` users.
+        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
         -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
         -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
       end,
@@ -704,16 +665,47 @@ lua <<EOF
       -- documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
-      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      ['<Tab>'] = cmp.mapping.complete(),
-      ['<C-e>'] = cmp.mapping.abort(),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      ['<C-k>'] = cmp.mapping.select_prev_item(),
+      ['<C-j>'] = cmp.mapping.select_next_item(),
+      ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-d>'] = cmp.mapping.scroll_docs(4),
+      ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly 
+
     }),
     sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
+      -- { name = 'nvim_lsp' },
+      { name = 'luasnip' , option = { show_autosnippets = true } }, -- For luasnip users.
+      -- { name = 'ultisnips' }, -- For ultisnips users.
+      -- { name = 'snippy' }, -- For snippy users.
     }, {
       { name = 'buffer' },
+    })
+
+  })
+    -- Set configuration for specific filetype.
+  cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+      { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline({ '/', '?' }, {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' },
+      { name = 'luasnip' },
+    }, {
+      { name = 'cmdline' }
     })
   })
 
