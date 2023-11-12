@@ -12,8 +12,6 @@ set hlsearch
 set showtabline=0
 set autochdir
 
-" colorscheme catppuccin-mocha " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
-
 set noshowmode
 set signcolumn=yes
 set encoding=utf-8
@@ -109,7 +107,6 @@ require("tokyonight").setup({
     -- Background styles. Can be "dark", "transparent" or "normal"
     sidebars = "dark", -- style for sidebars, see below
     floats = "dark", -- style for floating windows
-
   },
 
   sidebars = {"qf", "help"},
@@ -749,23 +746,3 @@ require('mason-lspconfig').setup()
 EOF
 
 
-" lua << EOF
-" require("catppuccin").setup({
-"     transparent_background = true, -- disables setting the background color.
-"     highlight_overrides = {
-"        
-"         mocha = function(mocha)
-"             return {
-"                 Normal = { bg = "#1f1f1f" }
-"             }
-"         end,
-"     },
-"     telescope = {
-"     enabled = true,
-"     -- style = "nvchad"
-"     }
-" })
-" -- setup must be called before loading
-" vim.cmd.colorscheme "catppuccin"
-"
-" EOF
