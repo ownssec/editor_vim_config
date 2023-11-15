@@ -1,16 +1,17 @@
-set number 
-set expandtab 
-set autoindent 
-set smartindent 
+set number
+set expandtab
+set autoindent
+set smartindent
 set shiftwidth=4
 set tabstop=4
-set history=5000 
+set history=5000
 set clipboard=unnamedplus
-set scl=no 
+set scl=no
 set modifiable
 set hlsearch
 set showtabline=0
 set autochdir
+set modifiable
 
 set noshowmode
 set signcolumn=yes
@@ -28,7 +29,7 @@ set updatetime=300
 set termguicolors
 set incsearch
 
-set hidden  
+set hidden
 set ignorecase
 set smartcase
 
@@ -44,7 +45,7 @@ call plug#begin()
     Plug 'numToStr/Comment.nvim'
     Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 
-    Plug 'ryanoasis/vim-devicons' 
+    Plug 'ryanoasis/vim-devicons'
     Plug 'nvim-tree/nvim-web-devicons' " optional
 
     Plug 'nvim-lualine/lualine.nvim'
@@ -57,9 +58,6 @@ call plug#begin()
 
     Plug 'lewis6991/gitsigns.nvim'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
 
     Plug 'folke/tokyonight.nvim'
 
@@ -85,6 +83,17 @@ call plug#begin()
     Plug 'williamboman/mason-lspconfig.nvim'
 
     " Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+    Plug 'stevearc/conform.nvim'
+
+
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
+
+
+    Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
+    " Plug 'ryanoasis/vim-devicons' Icons without colours
+    Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+
 call plug#end()
 
 
@@ -96,7 +105,7 @@ require("tokyonight").setup({
   style = "night",
   light_style = "day", -- The theme is used when the background is set to light
   transparent = false, -- Enable this to disable setting the background color
-  terminal_colors = true, 
+  terminal_colors = true,
   styles = {
     -- Style to be applied to different syntax groups
     -- Value is any valid attr-list value for `:help nvim_set_hl`
@@ -116,7 +125,7 @@ require("tokyonight").setup({
 
 
 
-  on_colors = function(colors) 
+  on_colors = function(colors)
         colors.bg = "#1f1f1f"
         -- colors.bg_dark = "#1f1f1f"
         -- colors.terminal_black = "#1E1E1E"
@@ -125,7 +134,7 @@ require("tokyonight").setup({
         -- colors.bg_dark = "#000000"
         -- colors.terminal_black = "#000000"
         colors.hint = colors.orange
-        colors.error = colors.red 
+        colors.error = colors.red
         colors.warning= colors.red
         colors.info= colors.red
 
@@ -141,43 +150,6 @@ require("tokyonight").setup({
   on_highlights = function(highlights, colors)
   end,
 
--- telescope borderless theme
-on_highlights = function(hl, c)
-    local prompt = "#2d3149"
-    hl.TelescopeNormal = {
-      -- bg = c.bg_dark,
-      -- fg = c.fg_dark,
-      bg = "#1f1f1f",
-      fg = "#ffffff",
-    }
-    hl.TelescopeBorder = {
-      -- bg = c.bg_dark,
-      bg = "#1f1f1f",
-      fg = "#1f1f1f",
-      -- fg = c.bg_dark,
-    }
-    hl.TelescopePromptNormal = {
-      bg = prompt,
-    }
-    hl.TelescopePromptBorder = {
-      bg = prompt,
-      fg = prompt,
-      -- bg = "#1f1f1f",
-      -- fg = "#ffffff",
-    }
-    hl.TelescopePromptTitle = {
-      bg = prompt,
-      fg = prompt,
-    }
-    hl.TelescopePreviewTitle = {
-      bg = c.bg_dark,
-      fg = c.bg_dark,
-    }
-    hl.TelescopeResultsTitle = {
-      bg = c.bg_dark,
-      fg = c.bg_dark,
-    }
-  end,
 })
 vim.cmd("colorscheme tokyonight-night")
 
@@ -189,7 +161,7 @@ vim.cmd("colorscheme tokyonight-night")
 EOF
 
 
-nnoremap <c-z> :u<CR>      
+nnoremap <c-z> :u<CR>
 inoremap <c-z> <c-o>:u<CR>
 
 :lua require("toggleterm").setup()
@@ -323,8 +295,8 @@ EOF
 
 lua << EOF
 -- disable netrw at the very start of your init.lua
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
 
 vim.opt.termguicolors = true
 -- disable netrw at the very start of your init.lua
@@ -465,21 +437,21 @@ lua << EOF
 require'nvim-treesitter.configs'.setup {
   -- parser_install_dir = "~/config/nvim/nvim-treesitter/parsers",
 
-  ensure_installed = { 
-    "c", 
-    "lua", 
-    "vim", 
-    "vimdoc", 
-    "query", 
-    "c", 
-    "html", 
+  ensure_installed = {
+    "c",
+    "lua",
+    "vim",
+    "vimdoc",
+    "query",
+    "c",
+    "html",
     "css",
-    "javascript", 
+    "javascript",
     "json",
-    "php",  
-    "scss", 
-    "slint", 
-    "sql", 
+    "php",
+    "scss",
+    "slint",
+    "sql",
     "tsx",
     "typescript",
     "python",
@@ -541,27 +513,8 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-lua << EOF
-require('telescope').setup{ 
-  defaults = { 
-    file_ignore_patterns = { 
-      "node_modules" 
-    },
-    layout_config = {
-      vertical = { width = 0.5 }
-      -- other layout configuration here
-    },
-  }
-}
 
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<S-p>', builtin.find_files, {})
-vim.keymap.set('n', '<S-o>', builtin.live_grep, {})
---vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-EOF
-
-" LSP setup 
+" LSP setup
 lua << EOF
 
 -- require'lspconfig'.pyright.setup{}
@@ -652,17 +605,19 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local lspconfig = require('lspconfig')
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { 'clangd', 
-         'pyright',
-         'tsserver', 
-         'volar', 
-          'cssls', 
-         'sqlls', 
-        'html', 
-        'intelephense', 
-        'stimulus_ls',
-        'phan',
-        'phpactor',
+local servers = {
+    'clangd',
+    'pyright',
+    'tsserver',
+    'volar',
+    'cssls',
+    'sqlls',
+    'html',
+    'intelephense',
+    'stimulus_ls',
+    'phan',
+    'phpactor',
+    'svelte',
         }
 -- 'tailwindcss'
 -- local servers = {}
@@ -697,7 +652,7 @@ local luasnip = require 'luasnip'
       ['<C-j>'] = cmp.mapping.select_next_item(),
       ['<C-u>'] = cmp.mapping.scroll_docs(-4),
       ['<C-d>'] = cmp.mapping.scroll_docs(4),
-      ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly 
+      ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly
 
     }),
     sources = cmp.config.sources({
@@ -739,10 +694,46 @@ local luasnip = require 'luasnip'
 EOF
 
 
-
 lua << EOF
 require("mason").setup()
 require('mason-lspconfig').setup()
 EOF
 
 
+
+lua << EOF
+require("conform").setup({
+  format_on_save = {
+    -- These options will be passed to conform.format()
+    timeout_ms = 500,
+    lsp_fallback = true,
+  },
+})
+EOF
+
+
+lua << EOF
+require("telescope").setup{ 
+  defaults = { 
+    file_ignore_patterns = { 
+      "node_modules" 
+    },
+    layout_config = {
+      vertical = { width = 0.5 }
+    },
+  }
+}
+
+require("telescope").setup()
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<S-p>', builtin.find_files, {})
+vim.keymap.set('n', '<S-o>', builtin.live_grep, {})
+--vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+EOF
+
+
+lua << EOF
+require("bufferline").setup{}
+EOF
