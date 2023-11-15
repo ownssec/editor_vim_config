@@ -1,3 +1,4 @@
+" -------- options ------------
 set number
 set expandtab
 set autoindent
@@ -11,14 +12,10 @@ set modifiable
 set hlsearch
 set showtabline=0
 set modifiable
-
-set noshowmode
-set signcolumn=yes
-set encoding=utf-8
-" Some servers have issues with backup files, see #649
-set nobackup
-set nowritebackup
 set nohlsearch
+set incsearch
+set encoding=utf-8
+" -------- end options ------------
 
 " Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
 " delays and poor user experience
@@ -26,7 +23,6 @@ set updatetime=300
 
 " In your init.lua or init.vim
 set termguicolors
-set incsearch
 
 set hidden
 set ignorecase
