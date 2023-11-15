@@ -87,12 +87,11 @@ call plug#begin()
 
 
     Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
+    Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
 
 
     Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
-    " Plug 'ryanoasis/vim-devicons' Icons without colours
-    Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+    Plug 'ryanoasis/vim-devicons' 
 
 call plug#end()
 
@@ -339,7 +338,6 @@ EOF
 
 nnoremap <silent><C-e> :NvimTreeToggle<CR>
 inoremap <silent><C-e> :NvimTreeToggle<CR>
-
 
 lua << EOF
 require('gitsigns').setup {
@@ -715,16 +713,13 @@ EOF
 lua << EOF
 require("telescope").setup{ 
   defaults = { 
-    file_ignore_patterns = { 
-      "node_modules" 
-    },
+    file_ignore_patterns = { "./node_modules/*", "node_modules", "build/*" },
     layout_config = {
       vertical = { width = 0.5 }
     },
   }
 }
 
-require("telescope").setup()
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<S-p>', builtin.find_files, {})
 vim.keymap.set('n', '<S-o>', builtin.live_grep, {})
@@ -734,6 +729,17 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 EOF
 
 
-lua << EOF
-require("bufferline").setup{}
-EOF
+
+" telescope: require("telescope.health").check()
+"
+" Checking for required plugins ~
+" - OK plenary installed.
+" - OK nvim-treesitter installed.
+"
+" Checking external dependencies ~
+" - OK rg: found ripgrep 13.0.0
+" - OK fd: found fd 8.7.0
+"
+" ===== Installed extensions ===== ~
+
+
