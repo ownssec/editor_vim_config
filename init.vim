@@ -10,7 +10,6 @@ set scl=no
 set modifiable
 set hlsearch
 set showtabline=0
-set autochdir
 set modifiable
 
 set noshowmode
@@ -741,5 +740,4 @@ EOF
 " - OK fd: found fd 8.7.0
 "
 " ===== Installed extensions ===== ~
-
 
