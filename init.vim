@@ -608,11 +608,11 @@ local servers = {
     'html',
     'intelephense',
     'stimulus_ls',
-    'phan',
     'phpactor',
     'svelte',
         }
 -- 'tailwindcss'
+-- 'phan'
 -- local servers = {}
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -620,6 +620,10 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   }
 end
+
+-- lspconfig.phan.setup({
+--   capabilities = lsp_capabilities,
+-- })
 
 -- luasnip setup
 local luasnip = require 'luasnip'
@@ -648,11 +652,15 @@ local luasnip = require 'luasnip'
       ['<Tab>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly
 
     }),
+    -- https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/
     sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-    -- { name = 'cmp_luasnip' },
+     {name = 'path'},
+      {name = 'nvim_lsp', keyword_length = 1},
+      {name = 'buffer', keyword_length = 3},
+      {name = 'luasnip', keyword_length = 2},
+     -- { name = 'cmp_nvim_lsp' },
       -- { name = 'luasnip' , option = { use_show_condition = false, show_autosnippets=false} }, -- For luasnip users.
-      -- { name = 'luasnip' }, -- For luasnip users.
+       { name = 'luasnip' }, -- For luasnip users.
     }, {
       { name = 'buffer' },
     })
@@ -688,7 +696,7 @@ EOF
 
 
 lua << EOF
-require("mason").setup()
+require("mason").setup({})
 require('mason-lspconfig').setup()
 EOF
 
