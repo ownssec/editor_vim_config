@@ -600,20 +600,21 @@ local lspconfig = require('lspconfig')
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 local servers = {
     'clangd',
-    'pyright',
     'tsserver',
-    'volar',
     'cssls',
     'sqlls',
     'html',
     'intelephense',
     'stimulus_ls',
     'phpactor',
-    'svelte',
-        }
+}
 -- 'tailwindcss'
 -- 'phan'
 -- local servers = {}
+-- 'svelte',
+-- 'volar',
+-- 'pyright',
+
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     -- on_attach = my_custom_on_attach,
