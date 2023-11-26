@@ -607,6 +607,9 @@ local servers = {
     'intelephense',
     'stimulus_ls',
     'phpactor',
+    'tailwindcss',
+    'cssmodules_ls',
+    'emmet_language_server'
 }
 -- 'tailwindcss'
 -- 'phan'
