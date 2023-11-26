@@ -324,7 +324,7 @@ view = {
     group_empty = true,
   },
   filters = {
-    dotfiles = true,
+    dotfiles = false,
   },
   ---
 }
@@ -709,7 +709,7 @@ EOF
 lua << EOF
 require("conform").setup({
   format_on_save = {
-    -- These options will be passed to conform.format()
+    -, ".git"- These options will be passed to conform.format()
     timeout_ms = 500,
     lsp_fallback = true,
   },
@@ -719,8 +719,9 @@ EOF
 
 lua << EOF
 require("telescope").setup{ 
-  defaults = { 
-    file_ignore_patterns = { "./node_modules/*", "node_modules", "build/*" },
+  defaults = {
+    -- These options will be passed to conform.format()
+    file_ignore_patterns = { "./node_modules/*", "node_modules", "build/*"}
     layout_config = {
       vertical = { width = 0.5 }
     },
