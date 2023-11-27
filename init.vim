@@ -607,10 +607,11 @@ local servers = {
     'intelephense',
     'stimulus_ls',
     'phpactor',
-    'tailwindcss',
-    'cssmodules_ls',
-    'emmet_language_server'
 }
+
+-- 'tailwindcss',
+-- 'cssmodules_ls',
+-- 'emmet_language_server'
 -- 'tailwindcss'
 -- 'phan'
 -- local servers = {}
@@ -709,7 +710,7 @@ EOF
 lua << EOF
 require("conform").setup({
   format_on_save = {
-    -, ".git"- These options will be passed to conform.format()
+    -- These options will be passed to conform.format()
     timeout_ms = 500,
     lsp_fallback = true,
   },
@@ -721,7 +722,7 @@ lua << EOF
 require("telescope").setup{ 
   defaults = {
     -- These options will be passed to conform.format()
-    file_ignore_patterns = { "./node_modules/*", "node_modules", "build/*"}
+    file_ignore_patterns = { "./node_modules/*", "node_modules", "build/*"},
     layout_config = {
       vertical = { width = 0.5 }
     },
