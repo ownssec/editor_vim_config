@@ -592,43 +592,56 @@ vim.api.nvim_create_autocmd('LspAttach', {
 EOF
 
 lua <<EOF
+-- https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/
 -- -- Add additional capabilities supported by nvim-cmp
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local lspconfig = require('lspconfig')
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = {
-    'clangd',
-    'tsserver',
-    'cssls',
-    'sqlls',
-    'html',
-    'intelephense',
-    'stimulus_ls',
-    'phpactor',
-}
+lspconfig.tailwindcss.setup({ 
+ capabilities = capabilities
+})
+lspconfig.tsserver.setup({ 
+ capabilities = capabilities
+})
+lspconfig.cssls.setup({
+ capabilities = capabilities
+})
+lspconfig.clangd.setup({
+ capabilities = capabilities
+})
 
--- 'tailwindcss',
--- 'cssmodules_ls',
--- 'emmet_language_server'
--- 'tailwindcss'
--- 'phan'
--- local servers = {}
--- 'svelte',
--- 'volar',
--- 'pyright',
+lspconfig.cssls.setup({
+capabilities = capabilities
+})
 
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    -- on_attach = my_custom_on_attach,
-    capabilities = capabilities,
-  }
-end
+lspconfig.sqlls.setup({
+capabilities = capabilities
+})
 
--- lspconfig.phan.setup({
---   capabilities = lsp_capabilities,
--- })
+lspconfig.html.setup({
+capabilities = capabilities
+})
+
+lspconfig.intelephense.setup({
+capabilities = capabilities
+})
+lspconfig.stimulus_ls.setup({
+capabilities = capabilities
+})
+lspconfig.phpactor.setup({
+capabilities = capabilities
+})
+lspconfig.phan.setup({
+capabilities = capabilities
+})
+
+lspconfig.svelte.setup({
+capabilities = capabilities
+})
+
+
 
 -- luasnip setup
 local luasnip = require 'luasnip'
