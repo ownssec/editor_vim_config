@@ -1,5 +1,6 @@
 " -------- options ------------
 set number
+set relativenumber
 set expandtab
 set autoindent
 set smartindent
@@ -627,9 +628,9 @@ capabilities = capabilities
 lspconfig.intelephense.setup({
 capabilities = capabilities
 })
-lspconfig.stimulus_ls.setup({
-capabilities = capabilities
-})
+-- lspconfig.stimulus_ls.setup({
+-- capabilities = capabilities
+-- })
 lspconfig.phpactor.setup({
 capabilities = capabilities
 })
