@@ -821,13 +821,13 @@ local bufferline = require('bufferline')
         offsets = {
         {
             filetype = "NvimTree",
-            text = "File Explorer",
-            text = function()
-              return vim.fn.getcwd()
-            end,
+            -- text = "-------------",
+            -- text = function()
+            --   return vim.fn.getcwd()
+            -- end,
             highlight = "Directory",
-            separator = true, -- use a "true" to enable the default, or set your own character
-            text_align = "left"
+            -- separator = true, -- use a "true" to enable the default, or set your own character
+            -- text_align = "right"
         }
     }
             }
@@ -837,5 +837,7 @@ local bufferline = require('bufferline')
 
 EOF
 
-nnoremap <silent>[b :BufferLineCycleNext<CR>
-nnoremap <silent>b] :BufferLineCyclePrev<CR>
+" bufferline next and prev keymaps
+nnoremap <silent>t] :BufferLineCycleNext<CR>
+nnoremap <silent>t[ :BufferLineCyclePrev<CR>
+
