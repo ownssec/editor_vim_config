@@ -1,5 +1,7 @@
 " -------- options ------------
 set number
+:lua vim.api.nvim_set_hl(0, 'LineNr', { fg = "#6b7077"})
+hi CursorLineNr guifg=#ffffff
 set relativenumber
 set expandtab
 set autoindent
@@ -48,7 +50,7 @@ call plug#begin()
 
     Plug 'nvim-tree/nvim-tree.lua'
 
-    Plug 'jiangmiao/auto-pairs'
+    " Plug 'jiangmiao/auto-pairs'
 
     Plug 'nvim-lua/plenary.nvim'
 
@@ -88,6 +90,11 @@ call plug#begin()
 
     Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
     Plug 'ryanoasis/vim-devicons' 
+
+
+    Plug 'kdheepak/lazygit.nvim'
+
+
 
 call plug#end()
 
@@ -459,7 +466,6 @@ require'nvim-treesitter.configs'.setup {
     "python",
     "query",
     "regex",
-    "tsx",
     "typescript",
     "vim",
     "yaml",
@@ -515,7 +521,13 @@ lua << EOF
 -- Setup language servers.
 local lspconfig = require('lspconfig')
 lspconfig.pyright.setup {}
-lspconfig.tsserver.setup {}
+require('lspconfig').tsserver.setup({
+    init_options = {
+        preferences = {
+            disableSuggestions = true,
+        },
+    },
+})
 lspconfig.rust_analyzer.setup {
   -- Server-specific settings. See `:help lspconfig-setup`
   settings = {
@@ -600,9 +612,9 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local lspconfig = require('lspconfig')
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-lspconfig.tailwindcss.setup({ 
- capabilities = capabilities
-})
+-- lspconfig.tailwindcss.setup({ 
+--  capabilities = capabilities
+-- })
 lspconfig.tsserver.setup({ 
  capabilities = capabilities
 })
@@ -638,9 +650,9 @@ lspconfig.phan.setup({
 capabilities = capabilities
 })
 
-lspconfig.svelte.setup({
-capabilities = capabilities
-})
+-- lspconfig.svelte.setup({
+-- capabilities = capabilities
+-- })
 
 
 
@@ -764,4 +776,9 @@ EOF
 " - OK fd: found fd 8.7.0
 "
 " ===== Installed extensions ===== ~
+
+" setup mapping to call :LazyGit
+nnoremap <silent> <leader>gg :LazyGit<CR>
+
+
 
