@@ -1,7 +1,7 @@
 " -------- options ------------
 set number
-:lua vim.api.nvim_set_hl(0, 'LineNr', { fg = "#6b7077"})
-hi CursorLineNr guifg=#ffffff
+
+
 set relativenumber
 set expandtab
 set autoindent
@@ -779,6 +779,14 @@ EOF
 
 " setup mapping to call :LazyGit
 nnoremap <silent> <leader>gg :LazyGit<CR>
+
+
+" options
+set cursorline
+hi CursorLineNr guifg=#e6e3e3
+" hi CursorLineNr guifg=#ffffff
+:lua vim.api.nvim_set_hl(0, 'LineNr', { fg = "#646d5f"})
+" end options
 
 
 
