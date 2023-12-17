@@ -23,6 +23,7 @@ set encoding=utf-8
 set updatetime=300
 
 " In your init.lua or init.vim
+" for bufferline plugin
 set termguicolors
 
 set hidden
@@ -90,11 +91,17 @@ call plug#begin()
     Plug 'ryanoasis/vim-devicons' 
 
 
-    " Plug
+    " for git fixing encoding codeto codebase
     Plug 'sindrets/diffview.nvim'
 
 
+    Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
+    Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+
+    Plug 'romgrk/barbar.nvim'
+
 call plug#end()
+
 
 
 
@@ -298,7 +305,6 @@ lua << EOF
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
 
-vim.opt.termguicolors = true
 -- disable netrw at the very start of your init.lua
 local function my_on_attach(bufnr)
   local api = require "nvim-tree.api"
@@ -787,3 +793,49 @@ hi CursorLineNr guifg=#ffffff
 " end options
 
 
+lua << EOF
+-- vim.opt.termguicolors = true
+-- style here just type below
+-- :h bufflerline-styling
+local bufferline = require('bufferline')
+    bufferline.setup({
+        options = {
+            indicator = {
+                icon = '*', -- this should be omitted if indicator style is not 'icon'
+            },
+           show_buffer_icons = false,
+            show_duplicate_prefix = false,
+            style_preset = bufferline.style_preset.no_italic,
+            -- or you can combine these e.g.
+            style_preset = {
+                bufferline.style_preset.no_italic,
+                bufferline.style_preset.no_bold
+            },
+        enforce_regular_tabs = true,
+        diagnostics_indicator = function(count, level, diagnostics_dict, context)
+            if context.buffer:current() then
+                    return ''
+                end
+                return ''
+            end,
+        offsets = {
+        {
+            filetype = "NvimTree",
+            text = "File Explorer",
+            text = function()
+              return vim.fn.getcwd()
+            end,
+            highlight = "Directory",
+            separator = true, -- use a "true" to enable the default, or set your own character
+            text_align = "left"
+        }
+    }
+            }
+
+    })
+
+
+EOF
+
+nnoremap <silent>[b :BufferLineCycleNext<CR>
+nnoremap <silent>b] :BufferLineCyclePrev<CR>
