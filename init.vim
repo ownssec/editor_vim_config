@@ -90,8 +90,7 @@ call plug#begin()
     Plug 'ryanoasis/vim-devicons' 
 
 
-    Plug 'kdheepak/lazygit.nvim'
-
+    " Plug
 
 
 call plug#end()
@@ -784,11 +783,6 @@ set cursorline
 " hi CursorLineNr guifg=#e6e3e3
 hi CursorLineNr guifg=#ffffff
 :lua vim.api.nvim_set_hl(0, 'LineNr', { fg = "#646d5f"})
-" end options
-
-
-" end options
-" end options
 " end options
 
 
