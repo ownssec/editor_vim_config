@@ -654,9 +654,9 @@ lspconfig.phan.setup({
 capabilities = capabilities
 })
 
--- lspconfig.svelte.setup({
--- capabilities = capabilities
--- })
+lspconfig.svelte.setup({
+capabilities = capabilities
+})
 
 
 
