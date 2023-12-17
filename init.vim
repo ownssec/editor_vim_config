@@ -803,7 +803,7 @@ local bufferline = require('bufferline')
             indicator = {
                 icon = '*', -- this should be omitted if indicator style is not 'icon'
             },
-           show_buffer_icons = false,
+            show_buffer_icons = false,
             show_duplicate_prefix = false,
             style_preset = bufferline.style_preset.no_italic,
             -- or you can combine these e.g.
@@ -811,28 +811,27 @@ local bufferline = require('bufferline')
                 bufferline.style_preset.no_italic,
                 bufferline.style_preset.no_bold
             },
-        enforce_regular_tabs = true,
-        diagnostics_indicator = function(count, level, diagnostics_dict, context)
-            if context.buffer:current() then
-                    return ''
-                end
-                return ''
+            enforce_regular_tabs = true,
+            diagnostics_indicator = function(count, level, diagnostics_dict, context)
+                if context.buffer:current() then
+                        return ''
+                    end
+                    return ''
             end,
-        offsets = {
-        {
-            filetype = "NvimTree",
-            -- text = "-------------",
-            -- text = function()
-            --   return vim.fn.getcwd()
-            -- end,
-            highlight = "Directory",
-            -- separator = true, -- use a "true" to enable the default, or set your own character
-            -- text_align = "right"
-        }
-    }
-            }
-
-    })
+            offsets = {
+                  {
+                      filetype = "NvimTree",
+                      text = "",
+                      -- text = function()
+                      --   return vim.fn.getcwd()
+                      -- end,
+                      highlight = "Directory",
+                      -- separator = true, -- use a "true" to enable the default, or set your own character
+                      -- text_align = "left"
+                  }
+            },
+          }
+     })
 
 
 EOF
