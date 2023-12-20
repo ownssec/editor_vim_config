@@ -98,9 +98,6 @@ call plug#begin()
     Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
     Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 
-    Plug 'romgrk/barbar.nvim'
-
-
     Plug 'windwp/nvim-autopairs'
 
 call plug#end()
