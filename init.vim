@@ -100,6 +100,9 @@ call plug#begin()
 
     Plug 'romgrk/barbar.nvim'
 
+
+    Plug 'windwp/nvim-autopairs'
+
 call plug#end()
 
 
@@ -658,8 +661,6 @@ lspconfig.svelte.setup({
 capabilities = capabilities
 })
 
-
-
 -- luasnip setup
 local luasnip = require 'luasnip'
   -- Set up nvim-cmp.
@@ -840,3 +841,9 @@ EOF
 nnoremap <silent>t] :BufferLineCycleNext<CR>
 nnoremap <silent>t[ :BufferLineCyclePrev<CR>
 
+lua << EOF
+require('nvim-autopairs').setup({
+  disable_filetype = { "TelescopePrompt" , "vim" },
+  disable_in_macro = false
+})
+EOF
