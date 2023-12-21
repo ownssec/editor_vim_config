@@ -837,7 +837,7 @@ EOF
 " bufferline next and prev keymaps
 nnoremap <silent>]t :BufferLineCycleNext<CR>
 nnoremap <silent>[t :BufferLineCyclePrev<CR>
-nnoremap <silent>[tt :BufferLineCloseOthers<CR>
+nnoremap <silent>[ct :BufferLineCloseOthers<CR>
 
 lua << EOF
 require('nvim-autopairs').setup({
