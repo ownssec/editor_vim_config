@@ -88,7 +88,7 @@ call plug#begin()
 
 
     Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
-    Plug 'ryanoasis/vim-devicons' 
+    Plug 'ryanoasis/vim-devicons'
 
 
     " for git fixing encoding codeto codebase
@@ -99,6 +99,9 @@ call plug#begin()
     Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 
     Plug 'windwp/nvim-autopairs'
+
+    " formatter
+    Plug 'mhartington/formatter.nvim'
 
 call plug#end()
 
@@ -435,7 +438,9 @@ require('gitsigns').setup {
 EOF
 
 
-
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+set nofoldenable                     " Disable folding at startup.
 
 " treesitter
 lua << EOF
@@ -471,9 +476,10 @@ require'nvim-treesitter.configs'.setup {
     "query",
     "regex",
     "typescript",
+    "vue",
     "vim",
     "yaml",
-    "vue"},
+    },
 
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -512,7 +518,9 @@ require'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = true,
   },
-
+indent = {
+enable = true
+    },
 
 }
 EOF
@@ -616,10 +624,10 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local lspconfig = require('lspconfig')
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
--- lspconfig.tailwindcss.setup({ 
+-- lspconfig.tailwindcss.setup({
 --  capabilities = capabilities
 -- })
-lspconfig.tsserver.setup({ 
+lspconfig.tsserver.setup({
  capabilities = capabilities
 })
 lspconfig.cssls.setup({
@@ -650,13 +658,17 @@ capabilities = capabilities
 lspconfig.phpactor.setup({
 capabilities = capabilities
 })
-lspconfig.phan.setup({
-capabilities = capabilities
-})
+-- lspconfig.phan.setup({
+-- capabilities = capabilities
+-- })
 
 -- lspconfig.svelte.setup({
 -- capabilities = capabilities
 -- })
+
+-- require'lspconfig'.svelte.setup{}
+
+-- require'lspconfig'.vuels.setup{}
 
 -- luasnip setup
 local luasnip = require 'luasnip'
@@ -747,7 +759,7 @@ EOF
 
 
 lua << EOF
-require("telescope").setup{ 
+require("telescope").setup{
   defaults = {
     -- These options will be passed to conform.format()
     file_ignore_patterns = { "./node_modules/*", "node_modules", "build/*"},
@@ -844,4 +856,27 @@ require('nvim-autopairs').setup({
   disable_filetype = { "TelescopePrompt" , "vim" },
   disable_in_macro = false
 })
+EOF
+
+
+lua << EOF
+-- Utilities for creating configurations
+local util = require "formatter.util"
+
+-- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
+require("formatter").setup {
+  -- Enable or disable logging
+  logging = true,
+  -- Set the log level
+  log_level = vim.log.levels.WARN,
+  -- All formatter configurations are opt-in
+  filetype = {
+    -- Use the special "*" filetype for defining formatter configurations on
+    -- any filetype
+    ["*"] = {
+      require("formatter.filetypes.any").remove_trailing_whitespace
+    }
+  }
+}
+
 EOF
