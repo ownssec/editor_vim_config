@@ -100,8 +100,11 @@ call plug#begin()
 
     Plug 'windwp/nvim-autopairs'
 
+    Plug 'windwp/nvim-ts-autotag'
+
     " formatter
     Plug 'mhartington/formatter.nvim'
+
 
 call plug#end()
 
@@ -447,6 +450,9 @@ lua << EOF
 require'nvim-treesitter.configs'.setup {
   -- parser_install_dir = "~/config/nvim/nvim-treesitter/parsers",
 
+  autotag = {
+    enable = true,
+  },
   ensure_installed = {
     "c",
     "lua",
@@ -627,9 +633,9 @@ local lspconfig = require('lspconfig')
 -- lspconfig.tailwindcss.setup({
 --  capabilities = capabilities
 -- })
-lspconfig.tsserver.setup({
- capabilities = capabilities
-})
+-- lspconfig.tsserver.setup({
+--  capabilities = capabilities
+-- })
 lspconfig.cssls.setup({
  capabilities = capabilities
 })
@@ -672,9 +678,15 @@ capabilities = capabilities
 
 -- luasnip setup
 local luasnip = require 'luasnip'
-  -- Set up nvim-cmp.
+ -- Set up nvim-cmp.
 
- local cmp = require'cmp'
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+
+local cmp = require'cmp'
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done()
+)
   require("luasnip.loaders.from_vscode").lazy_load()
 
   cmp.setup({
@@ -700,12 +712,12 @@ local luasnip = require 'luasnip'
     -- https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/
     sources = cmp.config.sources({
      {name = 'path'},
-      {name = 'nvim_lsp', keyword_length = 1},
+      {name = 'luasnip', keyword_length = 1},
+      {name = 'nvim_lsp', keyword_length = 2},
       {name = 'buffer', keyword_length = 3},
-      {name = 'luasnip', keyword_length = 2},
      -- { name = 'cmp_nvim_lsp' },
       -- { name = 'luasnip' , option = { use_show_condition = false, show_autosnippets=false} }, -- For luasnip users.
-       { name = 'luasnip' }, -- For luasnip users.
+       -- { name = 'luasnip' }, -- For luasnip users.
     }, {
       { name = 'buffer' },
     })
