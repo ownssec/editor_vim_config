@@ -72,7 +72,8 @@ call plug#begin()
     Plug 'hrsh7th/cmp-vsnip'
     Plug 'hrsh7th/vim-vsnip'
 
-    Plug 'L3MON4D3/LuaSnip'
+    " follow latest release and install jsregexp.
+    Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
     Plug 'saadparwaiz1/cmp_luasnip'
 
 
@@ -104,6 +105,10 @@ call plug#begin()
 
     " formatter
     Plug 'mhartington/formatter.nvim'
+
+    " vim react snippets
+    " Plug 'SirVer/ultisnips'
+    " Plug 'mlaursen/vim-react-snippets'
 
 
 call plug#end()
@@ -535,7 +540,6 @@ EOF
 " LSP setup
 lua << EOF
 
--- require'lspconfig'.pyright.setup{}
 -- Setup language servers.
 local lspconfig = require('lspconfig')
 lspconfig.pyright.setup {}
@@ -633,9 +637,10 @@ local lspconfig = require('lspconfig')
 -- lspconfig.tailwindcss.setup({
 --  capabilities = capabilities
 -- })
--- lspconfig.tsserver.setup({
---  capabilities = capabilities
--- })
+lspconfig.tsserver.setup({
+ capabilities = capabilities
+})
+
 lspconfig.cssls.setup({
  capabilities = capabilities
 })
@@ -680,6 +685,14 @@ capabilities = capabilities
 local luasnip = require 'luasnip'
  -- Set up nvim-cmp.
 
+luasnip.filetype_extend("javascript", {"html"})
+luasnip.filetype_extend("javascriptreact", {"html"})
+luasnip.filetype_extend("typescriptreact", {"html"})
+
+require("luasnip/loaders/from_vscode").lazy_load()
+
+
+
 local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 
 local cmp = require'cmp'
@@ -687,7 +700,9 @@ cmp.event:on(
   'confirm_done',
   cmp_autopairs.on_confirm_done()
 )
-  require("luasnip.loaders.from_vscode").lazy_load()
+  -- require("luasnip.loaders.from_vscode").lazy_load()
+  -- require("luasnip/loaders/from_vscode").lazy_load()
+
 
   cmp.setup({
     snippet = {
@@ -712,9 +727,9 @@ cmp.event:on(
     -- https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/
     sources = cmp.config.sources({
      {name = 'path'},
-      {name = 'luasnip', keyword_length = 1},
-      {name = 'nvim_lsp', keyword_length = 2},
-      {name = 'buffer', keyword_length = 3},
+      {name = 'nvim_lsp', keyword_length = 1},
+      {name = 'buffer', keyword_length = 2},
+      {name = 'luasnip', keyword_length = 3},
      -- { name = 'cmp_nvim_lsp' },
       -- { name = 'luasnip' , option = { use_show_condition = false, show_autosnippets=false} }, -- For luasnip users.
        -- { name = 'luasnip' }, -- For luasnip users.
@@ -891,4 +906,7 @@ require("formatter").setup {
   }
 }
 
+EOF
+
+lua << EOF
 EOF
