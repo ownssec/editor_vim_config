@@ -689,8 +689,7 @@ local luasnip = require 'luasnip'
 luasnip.filetype_extend("javascript", {"html"})
 luasnip.filetype_extend("javascriptreact", {"html"})
 luasnip.filetype_extend("typescriptreact", {"html"})
-
-require("luasnip/loaders/from_vscode").lazy_load()
+-- require("luasnip/loaders/from_vscode").lazy_load()
 
 
 
@@ -700,9 +699,8 @@ local cmp = require'cmp'
 cmp.event:on(
   'confirm_done',
   cmp_autopairs.on_confirm_done()
-)
-  -- require("luasnip.loaders.from_vscode").lazy_load()
-  -- require("luasnip/loaders/from_vscode").lazy_load()
+) -- require("luasnip.loaders.from_vscode").lazy_load()
+  require("luasnip/loaders/from_vscode").lazy_load()
 
 
   cmp.setup({
@@ -729,8 +727,8 @@ cmp.event:on(
     sources = cmp.config.sources({
      {name = 'path'},
       {name = 'nvim_lsp', keyword_length = 1},
-      {name = 'buffer', keyword_length = 2},
-      {name = 'luasnip', keyword_length = 3},
+      {name = 'luasnip', keyword_length = 2},
+      {name = 'buffer', keyword_length = 3},
      -- { name = 'cmp_nvim_lsp' },
       -- { name = 'luasnip' , option = { use_show_condition = false, show_autosnippets=false} }, -- For luasnip users.
        -- { name = 'luasnip' }, -- For luasnip users.
@@ -881,8 +879,7 @@ nnoremap <silent>[ct :BufferLineCloseOthers<CR>
 
 lua << EOF
 require('nvim-autopairs').setup({
-  disable_filetype = { "TelescopePrompt" , "vim" },
-  disable_in_macro = false
+  disable_filetype = { "TelescopePrompt" , "vim" }, disable_in_macro = false
 })
 EOF
 
