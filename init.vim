@@ -1,4 +1,4 @@
-" -------- options ------------
+j" -------- options ------------
 set number
 set relativenumber
 set expandtab
@@ -7,6 +7,7 @@ set smartindent
 set shiftwidth=4
 set tabstop=4
 set history=5000
+" set clipboard=unnamedplus
 set clipboard=unnamedplus
 set scl=no
 set modifiable
@@ -93,7 +94,7 @@ call plug#begin()
 
 
     " for git fixing encoding codeto codebase
-    Plug 'sindrets/diffview.nvim'
+    " Plug 'sindrets/diffview.nvim'
 
 
     Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
