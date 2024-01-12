@@ -1,3 +1,5 @@
+"version 0.01
+
 " -------- options ------------
 set number
 set relativenumber
@@ -905,5 +907,3 @@ require("formatter").setup {
 
 EOF
 
-lua << EOF
-EOF
