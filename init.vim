@@ -873,7 +873,8 @@ local bufferline = require('bufferline')
 
 EOF
 
-" bufferline next and prev keymaps
+" bufferline next and prev keymaps " 
+
 nnoremap <silent>]t :BufferLineCycleNext<CR>
 nnoremap <silent>[t :BufferLineCyclePrev<CR>
 nnoremap <silent>[ct :BufferLineCloseOthers<CR>
