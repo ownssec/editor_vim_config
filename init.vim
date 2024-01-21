@@ -789,7 +789,7 @@ lua << EOF
 require("telescope").setup{
   defaults = {
     -- These options will be passed to conform.format()
-    file_ignore_patterns = { "./node_modules/*", "node_modules", "build/*"},
+    file_ignore_patterns = { "vendor", "./node_modules/*", "node_modules", "build/*"},
     layout_config = {
       vertical = { width = 0.5 }
     },
@@ -874,7 +874,6 @@ local bufferline = require('bufferline')
 EOF
 
 " bufferline next and prev keymaps " 
-
 nnoremap <silent>]t :BufferLineCycleNext<CR>
 nnoremap <silent>[t :BufferLineCyclePrev<CR>
 nnoremap <silent>[ct :BufferLineCloseOthers<CR>
