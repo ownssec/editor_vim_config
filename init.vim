@@ -342,16 +342,31 @@ end
 require("nvim-tree").setup {
   ---
   on_attach = my_on_attach,
-view = {
-    width = 30,
-    number = true
+    view = {
+        width = 30,
+        number = true
+        side="left",
   },
   renderer = {
     group_empty = true,
   },
   filters = {
-    dotfiles = false,
+       -- dotfiles = false,
+       -- custom = {"^\\.git"}
+       dotfiles = false,
+       git_clean = false,
+       no_buffer = false,
+       custom = { "node_modules" },
+       exclude={ ".env"}
   },
+   update_focused_file = {
+        enable = true,
+        update_cwd = true,
+    },
+    diagnostics = {
+    enable = true,
+    },
+
   ---
 }
 
@@ -669,9 +684,9 @@ capabilities = capabilities
 -- lspconfig.stimulus_ls.setup({
 -- capabilities = capabilities
 -- })
-lspconfig.phpactor.setup({
-capabilities = capabilities
-})
+-- lspconfig.phpactor.setup({
+-- capabilities = capabilities
+-- })
 -- lspconfig.phan.setup({
 -- capabilities = capabilities
 -- })
@@ -803,8 +818,6 @@ vim.keymap.set('n', '<S-o>', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 EOF
-
-
 
 " telescope: require("telescope.health").check()
 "
