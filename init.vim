@@ -344,7 +344,7 @@ require("nvim-tree").setup {
   on_attach = my_on_attach,
     view = {
         width = 30,
-        number = true
+        number = true,
         side="left",
   },
   renderer = {
@@ -366,7 +366,6 @@ require("nvim-tree").setup {
     diagnostics = {
     enable = true,
     },
-
   ---
 }
 
