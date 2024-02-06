@@ -185,6 +185,7 @@ EOF
 nnoremap <c-z> :u<CR>
 inoremap <c-z> <c-o>:u<CR>
 
+
 :lua require("toggleterm").setup()
 
 
