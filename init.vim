@@ -701,9 +701,11 @@ capabilities = capabilities
 local luasnip = require 'luasnip'
  -- Set up nvim-cmp.
 
+-- luasnip added html to extend the html extention suggestion. now working
 luasnip.filetype_extend("javascript", {"html"})
 luasnip.filetype_extend("javascriptreact", {"html"})
 luasnip.filetype_extend("typescriptreact", {"html"})
+luasnip.filetype_extend("html", {"html"})
 -- require("luasnip/loaders/from_vscode").lazy_load()
 
 
@@ -933,10 +935,14 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
     }
 )
 
+-- autoclose tag and change closing tag
 local filetypes = {
-    'html', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'tsx', 'jsx', 
-    'xml',
-    'php',
+    'html', 'javascript', 
+    'typescript', 'javascriptreact', 
+    'typescriptreact', 'svelte', 
+    'vue', 'tsx', 
+    'jsx', 'xml',
+    'php','blade',
     'markdown',
 }
 require('nvim-ts-autotag').setup({
