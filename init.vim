@@ -473,9 +473,7 @@ lua << EOF
 require'nvim-treesitter.configs'.setup {
   -- parser_install_dir = "~/config/nvim/nvim-treesitter/parsers",
 
-  autotag = {
-    enable = true,
-  },
+
   ensure_installed = {
     "c",
     "lua",
@@ -920,3 +918,29 @@ require("formatter").setup {
 
 EOF
 
+
+
+lua << EOF
+vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics,
+    {
+        underline = true,
+        virtual_text = {
+            spacing = 5,
+            severity_limit = 'Warning',
+        },
+        update_in_insert = true,
+    }
+)
+
+local filetypes = {
+    'html', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact', 'svelte', 'vue', 'tsx', 'jsx', 
+    'xml',
+    'php',
+    'markdown',
+}
+require('nvim-ts-autotag').setup({
+  filetypes =  filetypes
+})
+
+EOF
