@@ -929,7 +929,7 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
         underline = true,
         virtual_text = {
             spacing = 5,
-            severity_limit = 'Warning',
+            min = severity
         },
         update_in_insert = true,
     }
@@ -950,3 +950,10 @@ require('nvim-ts-autotag').setup({
 })
 
 EOF
+
+
+
+lua << EOF
+    require'nvim-tree.view'.View.winopts.relativenumber = true
+EOF
+
