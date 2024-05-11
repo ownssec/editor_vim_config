@@ -1,4 +1,5 @@
 "version 0.01
+"nvim 0.9.0 working stable
 
 " -------- options ------------
 set number
