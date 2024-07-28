@@ -5,7 +5,6 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 -- nerd font for icons_enabled
--- download
 https://www.nerdfonts.com/font-downloads
 
 -- ............................--
@@ -17,22 +16,11 @@ Have git, make, pip, python, npm, node and cargo installed on your system.
 -- ............................--
 
 -- ............................--
---tokyonight Background . night theme
---modified from folder...
---example path : /home/e/.local/share/nvim/plugged/
-night theme 
-bg && bg_dark color='#1f1f1f'
-bg-color #1f1f1fe
--- ............................--
-
--- ............................--
 -- for telescope find worse .
 -- need to install this ripgrep
  sudo apt-get install ripgrep
 -- ............................--
 
--- for coc-vetur . vue js support 
-npm i eslint eslint-plugin-vue -D
 
-
-
+-- for lazygit commit feature
+pip install neovim-remote
