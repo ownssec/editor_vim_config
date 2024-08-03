@@ -28,3 +28,5 @@ Have git, make, pip, python, npm, node and cargo installed on your system.
 
 -- for lazygit commit feature
 pip install neovim-remote
+
+https://tech.joellemena.com/ubuntu/install-neovim-0-9-ubuntu/
