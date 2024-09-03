@@ -1,5 +1,5 @@
-"version 0.01
-"nvim 0.9.0 working stable
+"version 0.02
+"nvim 0.10.0 working stable
 
 " -------- options ------------
 set number
@@ -509,7 +509,6 @@ require'nvim-treesitter.configs'.setup {
     "typescript",
     "vue",
     "vim",
-    "yaml",
     },
 
 
