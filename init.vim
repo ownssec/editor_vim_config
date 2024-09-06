@@ -1012,7 +1012,7 @@ EOF
 " setup mapping to call :LazyGit
 " nnoremap <silent> <leader>og :LazyGit<CR>
 " Map Ctrl+Shift+G to :LazyGit
-nnoremap <C-L> :LazyGit<CR>
+nnoremap <C-g> :LazyGit<CR>
 
 lua << EOF
 
