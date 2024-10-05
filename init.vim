@@ -87,7 +87,6 @@ call plug#begin()
     " Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
     Plug 'stevearc/conform.nvim'
 
-
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
 
@@ -117,6 +116,31 @@ call plug#begin()
     "lazygit
     " nvim v0.7.2
     Plug 'kdheepak/lazygit.nvim'
+
+
+    " node js setup
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    " this is for auto complete, prettier and tslinting
+    let g:coc_global_extensions = [
+        \ 'coc-tslint-plugin',
+        \ 'coc-json',
+        \ 'coc-tsserver',
+        \ 'coc-python',
+        \ 'coc-html',
+        \ 'coc-css',
+        \ 'coc-yaml',
+        \ 'coc-eslint',
+        \ 'coc-prettier'
+    \ ]
+
+    " list of CoC extensions needed
+
+    Plug 'jiangmiao/auto-pairs'
+    "this will auto close ( [ { " these two plugins will add highlighting and indenting to JSX and TSX files.
+    Plug 'yuezk/vim-js'
+    Plug 'HerringtonDarkholme/yats.vim'
+    Plug 'maxmellon/vim-jsx-pretty'
+    " End node js setup
 
 call plug#end()
 
@@ -418,9 +442,9 @@ require('gitsigns').setup {
     row = 0,
     col = 1
   },
-  yadm = {
-    enable = false
-  },
+  -- yadm = {
+  --   enable = false
+  -- },
 
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
@@ -555,97 +579,80 @@ enable = true
 }
 EOF
 
-
-" LSP setup
 lua << EOF
 
--- Setup language servers.
+-- Setup language servers
 local lspconfig = require('lspconfig')
+
+-- Python language server
 lspconfig.pyright.setup {}
-require('lspconfig').tsserver.setup({
-    init_options = {
-        preferences = {
-            disableSuggestions = true,
-        },
-    },
-})
+
+-- TypeScript language server
+-- lspconfig.tsserver.setup({
+--     init_options = {
+--         preferences = {
+--             disableSuggestions = true,
+--         },
+--     },
+-- })
+
+-- Rust language server
 lspconfig.rust_analyzer.setup {
-  -- Server-specific settings. See `:help lspconfig-setup`
-  settings = {
-    ['rust-analyzer'] = {},
-  },
+    settings = {
+        ['rust-analyzer'] = {},
+    },
 }
 
-dependencies = {
-  "jose-elias-alvarez/typescript.nvim",
-  init = function()
-    require("lazyvim.util").on_attach(function(_, buffer)
-      -- stylua: ignore
-      vim.keymap.set( "n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
-      vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
-    end)
-  end,
-}
----@class PluginLspOpts
-opts = {
-  ---@type lspconfig.options
-  servers = {
-    -- tsserver will be automatically installed with mason and loaded with lspconfig
-    tsserver = {},
-  },
-  -- you can do any additional lsp server setup here
-  -- return true if you don't want this server to be setup with lspconfig
-  ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-  setup = {
-    -- example to setup with typescript.nvim
-    tsserver = function(_, opts)
-      require("typescript").setup({ server = opts })
-      return true
+-- Plugin dependencies for TypeScript
+local dependencies = {
+    "jose-elias-alvarez/typescript.nvim",
+    init = function()
+        require("lazyvim.util").on_attach(function(_, buffer)
+            vim.keymap.set("n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
+            vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
+        end)
     end,
-    -- Specify * to use this function as a fallback for any server
-    -- ["*"] = function(server, opts) end,
-  },
 }
--- Global mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
+
+-- LSP server options
+local opts = {
+    servers = {
+        -- Example: tsserver will be automatically installed with mason and loaded with lspconfig
+        tsserver = {},
+    },
+    setup = {
+        ["*"] = function(server, opts)
+            require("typescript").setup({ server = opts })
+            return true
+        end,
+    },
+}
+
+-- Global mappings for diagnostics
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
--- Use LspAttach autocommand to only map the following keys
--- after the language server attaches to the current buffer
+-- Autocommand for LSP attach
 vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-  callback = function(ev)
-    -- Enable completion triggered by <c-x><c-o>
-    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-    -- Buffer local mappings.
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local opts = { buffer = ev.buf }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    -- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-    -- vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
-    -- vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
-    -- vim.keymap.set('n', '<space>wl', function()
-    --   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    -- end, opts)
-    -- vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-    -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-    -- vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
-    -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-    -- vim.keymap.set('n', '<space>f', function()
-        -- vim.lsp.buf.format { async = true }
-    -- end, opts)
-  end,
+    group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+    callback = function(ev)
+        vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+        local opts = { buffer = ev.buf }
+        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+    end,
 })
+
 EOF
 
-lua <<EOF
+
+
+
+lua << EOF
 -- https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/
 -- -- Add additional capabilities supported by nvim-cmp
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -656,7 +663,7 @@ local lspconfig = require('lspconfig')
 -- lspconfig.tailwindcss.setup({
 --  capabilities = capabilities
 -- })
-lspconfig.tsserver.setup({
+lspconfig.ts_ls.setup({
  capabilities = capabilities
 })
 
@@ -783,7 +790,6 @@ cmp.event:on(
   })
 
 EOF
-
 
 lua << EOF
 require("mason").setup({})
