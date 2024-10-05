@@ -1,4 +1,4 @@
-"version 0.02
+"version 0.03
 "nvim 0.10.0 working stable
 
 " -------- options ------------
@@ -79,10 +79,6 @@ call plug#begin()
     " follow latest release and install jsregexp.
     Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
     Plug 'saadparwaiz1/cmp_luasnip'
-
-
-    Plug 'williamboman/mason.nvim'
-    Plug 'williamboman/mason-lspconfig.nvim'
 
     " Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
     Plug 'stevearc/conform.nvim'
@@ -618,7 +614,7 @@ local dependencies = {
 local opts = {
     servers = {
         -- Example: tsserver will be automatically installed with mason and loaded with lspconfig
-        tsserver = {},
+        -- tsserver = {},
     },
     setup = {
         ["*"] = function(server, opts)
@@ -790,13 +786,6 @@ cmp.event:on(
   })
 
 EOF
-
-lua << EOF
-require("mason").setup({})
-require('mason-lspconfig').setup()
-EOF
-
-
 
 lua << EOF
 require("conform").setup({
