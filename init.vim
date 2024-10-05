@@ -113,10 +113,10 @@ call plug#begin()
     " nvim v0.7.2
     Plug 'kdheepak/lazygit.nvim'
 
-
     " node js setup
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " this is for auto complete, prettier and tslinting
+    " list of CoC extensions needed
     let g:coc_global_extensions = [
         \ 'coc-tslint-plugin',
         \ 'coc-json',
@@ -129,7 +129,6 @@ call plug#begin()
         \ 'coc-prettier'
     \ ]
 
-    " list of CoC extensions needed
 
     Plug 'jiangmiao/auto-pairs'
     "this will auto close ( [ { " these two plugins will add highlighting and indenting to JSX and TSX files.
@@ -579,6 +578,12 @@ lua << EOF
 
 -- Setup language servers
 local lspconfig = require('lspconfig')
+
+require'lspconfig'.cssls.setup {
+  cmd = { "vscode-css-language-server", "--stdio" },
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
 
 -- Python language server
 lspconfig.pyright.setup {}

@@ -17,6 +17,8 @@ Make sure you have installed the latest version of Neovim v0.9.0++.
 Have git, make, pip, python, npm, node and cargo installed on your system.
 
 -- npm i -g typescript-language-server
+-- npm install -g vscode-langservers-extracted
+
 -- ............................--
 
 -- ............................--
