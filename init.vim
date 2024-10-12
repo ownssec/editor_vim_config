@@ -87,10 +87,6 @@ call plug#begin()
     " Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
     Plug 'stevearc/conform.nvim'
 
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
-
-
     Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
     Plug 'ryanoasis/vim-devicons'
 
@@ -116,6 +112,10 @@ call plug#begin()
     "lazygit
     " nvim v0.7.2
     Plug 'kdheepak/lazygit.nvim'
+
+    " fuzzy finder
+    Plug 'echasnovski/mini.nvim'
+    Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }
 
 call plug#end()
 
@@ -805,27 +805,6 @@ require("conform").setup({
 })
 EOF
 
-
-lua << EOF
-require("telescope").setup{
-  defaults = {
-    -- These options will be passed to conform.format()
-    file_ignore_patterns = { "vendor", "./node_modules/*", "node_modules", "build/*"},
-    layout_config = {
-      vertical = { width = 0.5 }
-    },
-  }
-}
-
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<S-p>', builtin.find_files, {})
-vim.keymap.set('n', '<S-o>', builtin.live_grep, {})
---vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-
-EOF
-
-" telescope: require("telescope.health").check()
 "
 " Checking for required plugins ~
 " - OK plenary installed.
@@ -896,12 +875,6 @@ EOF
 nnoremap <silent>]t :BufferLineCycleNext<CR>
 nnoremap <silent>[t :BufferLineCyclePrev<CR>
 nnoremap <silent>[ct :BufferLineCloseOthers<CR>
-
-lua << EOF
-require('nvim-autopairs').setup({
-  disable_filetype = { "TelescopePrompt" , "vim" }, disable_in_macro = false
-})
-EOF
 
 
 lua << EOF
@@ -982,3 +955,106 @@ vim.g.lazygit_config_file_path = '' -- custom config file path
 vim.g.lazygit_config_file_path = {} -- table of custom config file paths
 
 EOF
+
+lua << EOF
+require('mini.pick').setup({
+-- Your configuration here
+
+  -- Delays (in ms; should be at least 1)
+  delay = {
+    -- Delay between forcing asynchronous behavior
+    async = 10,
+
+    -- Delay between computation start and visual feedback about it
+    busy = 50,
+  },
+
+  -- Keys for performing actions. See `:h MiniPick-actions`.
+  mappings = {
+    caret_left  = '<Left>',
+    caret_right = '<Right>',
+
+    choose            = '<CR>',
+    choose_in_split   = '<C-s>',
+    choose_in_tabpage = '<C-t>',
+    choose_in_vsplit  = '<C-v>',
+    choose_marked     = '<M-CR>',
+
+    delete_char       = '<BS>',
+    delete_char_right = '<Del>',
+    delete_left       = '<C-u>',
+    delete_word       = '<C-w>',
+
+    mark     = '<C-x>',
+    mark_all = '<C-a>',
+
+    move_down  = '<C-n>',
+    move_start = '<C-g>',
+    move_up    = '<C-p>',
+
+    paste = '<C-r>',
+
+    refine        = '<C-Space>',
+    refine_marked = '<M-Space>',
+
+    scroll_down  = '<C-f>',
+    scroll_left  = '<C-h>',
+    scroll_right = '<C-l>',
+    scroll_up    = '<C-b>',
+
+    stop = '<Esc>',
+
+    toggle_info    = '<S-Tab>',
+    toggle_preview = '<Tab>',
+  },
+
+  -- General options
+  options = {
+    -- Whether to show content from bottom to top
+    content_from_bottom = false,
+
+    -- Whether to cache matches (more speed and memory on repeated prompts)
+    use_cache = false,
+  },
+
+  -- Source definition. See `:h MiniPick-source`.
+  source = {
+    items = nil,
+    name  = nil,
+    cwd   = nil,
+
+    match   = nil,
+    show    = nil,
+    preview = nil,
+
+    choose        = nil,
+    choose_marked = nil,
+  },
+
+  -- Window related options
+  window = {
+    -- Float window config (table or callable returning it)
+    config = nil,
+
+    -- String to use as cursor in prompt
+    prompt_cursor = '▏',
+
+    -- String to use as prefix in prompt
+    prompt_prefix = '> ',
+
+    config = {
+      width = 250,  -- Set your desired width here
+      height = 20, -- Optionally set height too
+      border = 'single', -- Customize border if you want
+      row = vim.o.lines - 0,
+      col = 2,  -- Optional, adjust positioning
+    },
+    winblend = 0, 
+  },
+
+})
+EOF
+
+
+
+
