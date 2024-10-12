@@ -1,6 +1,6 @@
 "version 0.03
 "nvim 0.10.0 working stable
-
+"
 " -------- options ------------
 set number
 set relativenumber
@@ -80,6 +80,10 @@ call plug#begin()
     Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
     Plug 'saadparwaiz1/cmp_luasnip'
 
+
+    Plug 'williamboman/mason.nvim'
+    Plug 'williamboman/mason-lspconfig.nvim'
+
     " Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
     Plug 'stevearc/conform.nvim'
 
@@ -112,30 +116,6 @@ call plug#begin()
     "lazygit
     " nvim v0.7.2
     Plug 'kdheepak/lazygit.nvim'
-
-    " node js setup
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    " this is for auto complete, prettier and tslinting
-    " list of CoC extensions needed
-    let g:coc_global_extensions = [
-        \ 'coc-tslint-plugin',
-        \ 'coc-json',
-        \ 'coc-tsserver',
-        \ 'coc-python',
-        \ 'coc-html',
-        \ 'coc-css',
-        \ 'coc-yaml',
-        \ 'coc-eslint',
-        \ 'coc-prettier'
-    \ ]
-
-
-    Plug 'jiangmiao/auto-pairs'
-    "this will auto close ( [ { " these two plugins will add highlighting and indenting to JSX and TSX files.
-    Plug 'yuezk/vim-js'
-    Plug 'HerringtonDarkholme/yats.vim'
-    Plug 'maxmellon/vim-jsx-pretty'
-    " End node js setup
 
 call plug#end()
 
@@ -437,9 +417,9 @@ require('gitsigns').setup {
     row = 0,
     col = 1
   },
-  -- yadm = {
-  --   enable = false
-  -- },
+  yadm = {
+    enable = false
+  },
 
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
@@ -574,86 +554,97 @@ enable = true
 }
 EOF
 
+
+" LSP setup
 lua << EOF
 
--- Setup language servers
+-- Setup language servers.
 local lspconfig = require('lspconfig')
-
-require'lspconfig'.cssls.setup {
-  cmd = { "vscode-css-language-server", "--stdio" },
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
-
--- Python language server
 lspconfig.pyright.setup {}
-
--- TypeScript language server
--- lspconfig.tsserver.setup({
+-- require('lspconfig').tsserver.setup({
 --     init_options = {
 --         preferences = {
 --             disableSuggestions = true,
 --         },
 --     },
 -- })
-
--- Rust language server
 lspconfig.rust_analyzer.setup {
-    settings = {
-        ['rust-analyzer'] = {},
-    },
+  -- Server-specific settings. See `:help lspconfig-setup`
+  settings = {
+    ['rust-analyzer'] = {},
+  },
 }
 
--- Plugin dependencies for TypeScript
-local dependencies = {
-    "jose-elias-alvarez/typescript.nvim",
-    init = function()
-        require("lazyvim.util").on_attach(function(_, buffer)
-            vim.keymap.set("n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
-            vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
-        end)
+dependencies = {
+  "jose-elias-alvarez/typescript.nvim",
+  init = function()
+    require("lazyvim.util").on_attach(function(_, buffer)
+      -- stylua: ignore
+      vim.keymap.set( "n", "<leader>co", "TypescriptOrganizeImports", { buffer = buffer, desc = "Organize Imports" })
+      vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
+    end)
+  end,
+}
+---@class PluginLspOpts
+opts = {
+  ---@type lspconfig.options
+  servers = {
+    -- tsserver will be automatically installed with mason and loaded with lspconfig
+    -- tsserver = {},
+  },
+  -- you can do any additional lsp server setup here
+  -- return true if you don't want this server to be setup with lspconfig
+  ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
+  setup = {
+    -- example to setup with typescript.nvim
+    tsserver = function(_, opts)
+      require("typescript").setup({ server = opts })
+      return true
     end,
+    -- Specify * to use this function as a fallback for any server
+    -- ["*"] = function(server, opts) end,
+  },
 }
-
--- LSP server options
-local opts = {
-    servers = {
-        -- Example: tsserver will be automatically installed with mason and loaded with lspconfig
-        -- tsserver = {},
-    },
-    setup = {
-        ["*"] = function(server, opts)
-            require("typescript").setup({ server = opts })
-            return true
-        end,
-    },
-}
-
--- Global mappings for diagnostics
+-- Global mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
--- Autocommand for LSP attach
+-- Use LspAttach autocommand to only map the following keys
+-- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-    callback = function(ev)
-        vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-        local opts = { buffer = ev.buf }
-        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    end,
-})
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local opts = { buffer = ev.buf }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+    -- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+    -- vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+    -- vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+    -- vim.keymap.set('n', '<space>wl', function()
+    --   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    -- end, opts)
+    -- vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+    -- vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+    -- vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+    -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    -- vim.keymap.set('n', '<space>f', function()
+        -- vim.lsp.buf.format { async = true }
+    -- end, opts)
+  end,
+})
 EOF
 
-
-
-
-lua << EOF
+lua <<EOF
 -- https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/
 -- -- Add additional capabilities supported by nvim-cmp
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -664,6 +655,10 @@ local lspconfig = require('lspconfig')
 -- lspconfig.tailwindcss.setup({
 --  capabilities = capabilities
 -- })
+-- lspconfig.tsserver.setup({
+--  capabilities = capabilities
+-- })
+
 lspconfig.ts_ls.setup({
  capabilities = capabilities
 })
@@ -792,6 +787,14 @@ cmp.event:on(
 
 EOF
 
+
+lua << EOF
+require("mason").setup({})
+require('mason-lspconfig').setup()
+EOF
+
+
+
 lua << EOF
 require("conform").setup({
   format_on_save = {
@@ -902,9 +905,8 @@ EOF
 
 
 lua << EOF
-
+-- Utilities for creating configurations
 local util = require "formatter.util"
-
 
 -- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
 require("formatter").setup {
@@ -913,65 +915,17 @@ require("formatter").setup {
   -- Set the log level
   log_level = vim.log.levels.WARN,
   -- All formatter configurations are opt-in
-   filetype = {
-    html = {
-      -- Prettier formatter for HTML
-      function()
-        return {
-          exe = "prettier",
-          args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
-          stdin = true,
-        }
-      end,
-    },
-  },
-
   filetype = {
-    -- Formatter configurations for filetype "lua" go here
-    -- and will be executed in order
-    lua = {
-      -- "formatter.filetypes.lua" defines default configurations for the
-      -- "lua" filetype
-      require("formatter.filetypes.lua").stylua,
-
-      -- You can also define your own configuration
-      function()
-        -- Supports conditional formatting
-        if util.get_current_buffer_file_name() == "special.lua" then
-          return nil
-        end
-
-        -- Full specification of configurations is down below and in Vim help
-        -- files
-        return {
-          exe = "stylua",
-          args = {
-            "--search-parent-directories",
-            "--stdin-filepath",
-            util.escape_path(util.get_current_buffer_file_path()),
-            "--",
-            "-",
-          },
-          stdin = true,
-        }
-      end
-    },
-
     -- Use the special "*" filetype for defining formatter configurations on
     -- any filetype
     ["*"] = {
-      -- "formatter.filetypes.any" defines default configurations for any
-      -- filetype
       require("formatter.filetypes.any").remove_trailing_whitespace
     }
   }
 }
+
 EOF
 
-augroup FormatAutogroup
-  autocmd!
-  autocmd BufWritePost * FormatWrite
-augroup END
 
 
 lua << EOF
@@ -1012,7 +966,7 @@ EOF
 " setup mapping to call :LazyGit
 " nnoremap <silent> <leader>og :LazyGit<CR>
 " Map Ctrl+Shift+G to :LazyGit
-nnoremap <C-g> :LazyGit<CR>
+nnoremap <C-G> :LazyGit<CR>
 
 lua << EOF
 

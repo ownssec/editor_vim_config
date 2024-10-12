@@ -18,6 +18,10 @@ Have git, make, pip, python, npm, node and cargo installed on your system.
 
 -- npm i -g typescript-language-server
 -- npm install -g vscode-langservers-extracted
+-- npm install -g intelephense
+-- npm install --save-dev eslint-plugin-prettier eslint-config-prettier
+-- npm install --save-dev eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-plugin-react eslint-plugin-react-hooks prettier eslint-config-prettier eslint-plugin-prettier
+
 
 -- ............................--
 
