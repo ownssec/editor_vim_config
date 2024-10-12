@@ -1053,8 +1053,8 @@ require('mini.pick').setup({
   },
 
 })
+
 EOF
 
-
-
-
+nnoremap <S-p> <Cmd>exe  ":Pick files"<CR>
+nnoremap <S-o> <Cmd>exe  ":Pick grep_live"<CR>
