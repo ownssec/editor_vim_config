@@ -413,9 +413,9 @@ require('gitsigns').setup {
     row = 0,
     col = 1
   },
-  yadm = {
-    enable = false
-  },
+  -- yadm = {
+  --   enable = false
+  -- },
 
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
@@ -556,20 +556,28 @@ lua << EOF
 
 -- Setup language servers.
 local lspconfig = require('lspconfig')
-lspconfig.pyright.setup {}
--- require('lspconfig').tsserver.setup({
---     init_options = {
---         preferences = {
---             disableSuggestions = true,
---         },
---     },
--- })
-lspconfig.rust_analyzer.setup {
-  -- Server-specific settings. See `:help lspconfig-setup`
-  settings = {
-    ['rust-analyzer'] = {},
-  },
-}
+
+
+-- Intelephense setup for PHP
+lspconfig.intelephense.setup({
+    settings = {
+        intelephense = {
+            files = {
+                maxSize = 5000000,  -- Adjust if you have large files
+            },
+        },
+    },
+    on_attach = function(client, bufnr)
+        -- Keymaps for LSP actions
+        local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+        local opts = { noremap=true, silent=true }
+
+        buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+        buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+        buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+        buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    end,
+}) 
 
 dependencies = {
   "jose-elias-alvarez/typescript.nvim",
@@ -593,10 +601,10 @@ opts = {
   ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
   setup = {
     -- example to setup with typescript.nvim
-    tsserver = function(_, opts)
-      require("typescript").setup({ server = opts })
-      return true
-    end,
+    -- tsserver = function(_, opts)
+    --   require("typescript").setup({ server = opts })
+    --   return true
+    -- end,
     -- Specify * to use this function as a fallback for any server
     -- ["*"] = function(server, opts) end,
   },
@@ -651,9 +659,7 @@ local lspconfig = require('lspconfig')
 -- lspconfig.tailwindcss.setup({
 --  capabilities = capabilities
 -- })
--- lspconfig.tsserver.setup({
---  capabilities = capabilities
--- })
+
 
 lspconfig.ts_ls.setup({
  capabilities = capabilities
@@ -786,7 +792,9 @@ EOF
 
 lua << EOF
 require("mason").setup({})
-require('mason-lspconfig').setup()
+require("mason-lspconfig").setup({
+    ensure_installed = { "intelephense" },
+})
 EOF
 
 
