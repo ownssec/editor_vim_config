@@ -21,19 +21,7 @@ Have git, make, pip, python, npm, node and cargo installed on your system.
 -- npm install -g intelephense
 -- npm install --save-dev eslint-plugin-prettier eslint-config-prettier
 -- npm install --save-dev eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-plugin-react eslint-plugin-react-hooks prettier eslint-config-prettier eslint-plugin-prettier
-
-
--- ............................--
-
--- ............................--
--- for telescope find worse .
--- need to install this ripgrep
- sudo apt-get install ripgrep
--- ............................--
-
-
--- for lazygit commit feature
-pip install neovim-remote
+-- sudo apt install xclip ( for tmux copy selected files using ctrl + [ )
 
 --neovim install--
 
