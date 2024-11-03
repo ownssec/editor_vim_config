@@ -91,9 +91,6 @@ call plug#begin()
     Plug 'ryanoasis/vim-devicons'
 
 
-    " for git fixing encoding codeto codebase
-    " Plug 'sindrets/diffview.nvim'
-
 
     Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
     Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
@@ -113,6 +110,13 @@ call plug#begin()
     Plug 'echasnovski/mini.nvim'
     Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }
 
+
+
+    " git integration "
+    " for git fixing encoding codeto codebase
+    " Plug 'akinsho/git-conflict.nvim', { 'tag': '*' }
+    " Plug
+    Plug 'sindrets/diffview.nvim'
 
 call plug#end()
 
@@ -1037,9 +1041,47 @@ require('mini.pick').setup({
 })
 require('mini.pairs').setup()
 require('mini.completion').setup()
+
 EOF
 
 nnoremap <S-p> <Cmd>exe  ":Pick files"<CR>
 nnoremap <S-o> <Cmd>exe  ":Pick grep_live"<CR>
 
 let mapleader = " "
+
+lua << EOF
+
+-- Define the toggle function
+local function toggle_diffview()
+  local view = require("diffview.lib").get_current_view()
+  if view then
+    vim.cmd(":DiffviewClose")
+  else
+    vim.cmd(":DiffviewOpen")
+  end
+end
+
+-- Set up Diffview with custom key mappings
+require("diffview").setup({
+  keymaps = {
+    view = {
+      ["<C-o>"] = ":DiffviewChooseOurs<CR>",
+      ["<C-t>"] = ":DiffviewChooseTheirs<CR>",
+      ["<C-b>"] = ":DiffviewChooseBase<CR>",
+      ["<C-a>"] = ":DiffviewChooseAll<CR>",
+    },
+    file_panel = {
+      -- Map Ctrl + G to toggle Diffview
+      ["<C-p>"] = toggle_diffview,
+    },
+    view_panel = {
+      -- Map Ctrl + G in view mode as well
+      ["<C-p>"] = toggle_diffview,
+    }
+  }
+})
+
+-- Optionally, map Ctrl + G globally for normal mode to toggle Diffview
+vim.keymap.set("n", "<C-p>", toggle_diffview, { noremap = true, silent = true })
+EOF
+
