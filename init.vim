@@ -113,6 +113,7 @@ call plug#begin()
     Plug 'echasnovski/mini.nvim'
     Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }
 
+
 call plug#end()
 
 
@@ -1034,8 +1035,11 @@ require('mini.pick').setup({
   },
 
 })
-
+require('mini.pairs').setup()
+require('mini.completion').setup()
 EOF
 
 nnoremap <S-p> <Cmd>exe  ":Pick files"<CR>
 nnoremap <S-o> <Cmd>exe  ":Pick grep_live"<CR>
+
+let mapleader = " "
