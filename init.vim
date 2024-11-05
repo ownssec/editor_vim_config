@@ -258,11 +258,11 @@ local bubbles_theme = {
     c = { fg = colors.white, bg = colors.mainBGcolor },
   },
 
-  insert = { a = { fg = colors.white, bg = colors.black} },
-  visual = { a = { fg = colors.white, bg = colors.black} },
-  terminal = { a = { fg = colors.white, bg = colors.black} },
-  command = { a = { fg = colors.white, bg = colors.black} },
-  replace = { a = { fg = colors.white, bg = colors.black} },
+  insert = { a = { fg = colors.white, bg = colors.mainBGcolor} },
+  visual = { a = { fg = colors.white, bg = colors.mainBGcolor} },
+  terminal = { a = { fg = colors.white, bg = colors.mainBGcolor} },
+  command = { a = { fg = colors.white, bg = colors.mainBGcolor} },
+  replace = { a = { fg = colors.white, bg = colors.mainBGcolor} },
 
  -- insert = { a = { fg = colors.white, bg = colors.black} },
  --  visual = { a = { fg = colors.violet, bg = colors.black} },
@@ -272,9 +272,9 @@ local bubbles_theme = {
 
 
   inactive = {
-    a = { fg = colors.white, bg = colors.black },
-    b = { fg = colors.white, bg = colors.black },
-    c = { fg = colors.black, bg = colors.black },
+    a = { fg = colors.white, bg = colors.mainBGcolor },
+    b = { fg = colors.white, bg = colors.mainBGcolor },
+    c = { fg = colors.black, bg = colors.mainBGcolor },
   },
 }
 
