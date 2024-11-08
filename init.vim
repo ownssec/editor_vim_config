@@ -91,7 +91,7 @@ call plug#begin()
     " for git fixing encoding code to codebase
     Plug 'akinsho/git-conflict.nvim', { 'tag': '*' }
 
-    Plug 'sindrets/diffview.nvim'
+    " Plug 'sindrets/diffview.nvim'
 
 call plug#end()
 
@@ -704,7 +704,7 @@ require('mini.pick').setup({
 
 })
 require('mini.pairs').setup()
-require('mini.completion').setup()
+-- require('mini.completion').setup()
 
 EOF
 
@@ -713,34 +713,13 @@ nnoremap <S-o> <Cmd>exe  ":Pick grep_live"<CR>
 
 lua << EOF
 
-local function toggle_diffview()
-  local view = require("diffview.lib").get_current_view()
-  if view then
-    vim.cmd(":DiffviewClose")
-  else
-    vim.cmd(":DiffviewOpen")
-  end
-end
-
-require("diffview").setup({
-  keymaps = {
-    view = {
-      ["<C-o>"] = ":DiffviewChooseOurs<CR>",
-      ["<C-t>"] = ":DiffviewChooseTheirs<CR>",
-      ["<C-b>"] = ":DiffviewChooseBase<CR>",
-      ["<C-a>"] = ":DiffviewChooseAll<CR>",
-    },
-    file_panel = {
-      ["<C-p>"] = toggle_diffview,
-    },
-    view_panel = {
-      ["<C-p>"] = toggle_diffview,
-    }
-  }
-})
-
+-- GitConflictChooseOurs — Select the current changes.
+-- GitConflictChooseTheirs — Select the incoming changes.
+-- GitConflictChooseBoth — Select both changes.
+-- GitConflictChooseNone — Select none of the changes.
+-- GitConflictNextConflict — Move to the next conflict.
+-- GitConflictPrevConflict — Move to the previous conflict.
+-- GitConflictListQf — Get all conflict to quickfix
 require('git-conflict').setup()
-
-vim.keymap.set("n", "<C-p>", toggle_diffview, { noremap = true, silent = true })
 
 EOF
