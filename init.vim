@@ -1,5 +1,4 @@
-
-"version 0.03
+"version 0.04
 "nvim 0.10.0 working stable
 "
 " -------- options ------------
@@ -90,9 +89,6 @@ call plug#begin()
     " git integration "
     " for git fixing encoding code to codebase
     Plug 'akinsho/git-conflict.nvim', { 'tag': '*' }
-
-    " Plug 'sindrets/diffview.nvim'
-
 call plug#end()
 
 
@@ -704,12 +700,14 @@ require('mini.pick').setup({
 
 })
 require('mini.pairs').setup()
--- require('mini.completion').setup()
+require('mini.completion').setup()
 
 EOF
 
 nnoremap <S-p> <Cmd>exe  ":Pick files"<CR>
 nnoremap <S-o> <Cmd>exe  ":Pick grep_live"<CR>
+
+
 
 lua << EOF
 
@@ -720,6 +718,16 @@ lua << EOF
 -- GitConflictNextConflict — Move to the next conflict.
 -- GitConflictPrevConflict — Move to the previous conflict.
 -- GitConflictListQf — Get all conflict to quickfix
-require('git-conflict').setup()
-
+require'git-conflict'.setup {
+  default_mappings = {
+    ours = 'o',
+    theirs = 't',
+    none = '0',
+    both = 'b',
+    next = 'n',
+    prev = 'p',
+  },
+}
 EOF
+nnoremap <C-G> :GitConflictListQf<CR>
+
