@@ -353,6 +353,17 @@ EOF
 lua << EOF
 
 local lspconfig = require('lspconfig')
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+local function on_attach(client, bufnr)
+    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+    local opts = { noremap=true, silent=true }
+
+    buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+    buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+end
 
 lspconfig.intelephense.setup({
     settings = {
@@ -362,15 +373,12 @@ lspconfig.intelephense.setup({
             },
         },
     },
-    on_attach = function(client, bufnr)
-        local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-        local opts = { noremap=true, silent=true }
+    on_attach = on_attach,
+})
 
-        buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-        buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-        buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-        buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    end,
+lspconfig.ts_ls.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
 })
 
 dependencies = {
@@ -399,26 +407,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
  end,
 })
-EOF
-
-lua <<EOF
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local lspconfig = require('lspconfig')
 
-lspconfig.ts_ls.setup({
- capabilities = capabilities
-})
-
 lspconfig.cssls.setup({
+ on_attach = on_attach,
  capabilities = capabilities
-})
-lspconfig.clangd.setup({
- capabilities = capabilities
-})
-
-lspconfig.cssls.setup({
-capabilities = capabilities
 })
 
 lspconfig.sqlls.setup({
@@ -429,18 +423,12 @@ lspconfig.html.setup({
 capabilities = capabilities
 })
 
-lspconfig.intelephense.setup({
-capabilities = capabilities
-})
 local luasnip = require 'luasnip'
 
 luasnip.filetype_extend("javascript", {"html"})
 luasnip.filetype_extend("javascriptreact", {"html"})
 luasnip.filetype_extend("typescriptreact", {"html"})
 luasnip.filetype_extend("html", {"html"})
-
-
-
 
 local cmp = require'cmp'
 cmp.event:on('confirm_done')
