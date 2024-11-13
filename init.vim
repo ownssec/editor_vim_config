@@ -85,7 +85,6 @@ call plug#begin()
     Plug 'echasnovski/mini.nvim', { 'branch': 'stable' }
 
 
-
     " git integration "
     " for git fixing encoding code to codebase
     Plug 'akinsho/git-conflict.nvim', { 'tag': '*' }
@@ -689,12 +688,34 @@ require('mini.pick').setup({
 })
 require('mini.pairs').setup()
 require('mini.completion').setup()
+require('mini.indentscope').setup(
+{
+  draw = {
+    delay = 0,
+    animation = require('mini.indentscope').gen_animation.none(),
+    priority = 2,
+  },
+
+  mappings = {
+    object_scope = 'ii',
+    object_scope_with_border = 'ai',
+    goto_top = '[i',
+    goto_bottom = ']i',
+  },
+
+  options = {
+    border = 'both',
+    indent_at_cursor = true,
+    try_as_border = false,
+  },
+
+  symbol = '╎',
+})
 
 EOF
 
 nnoremap <S-p> <Cmd>exe  ":Pick files"<CR>
 nnoremap <S-o> <Cmd>exe  ":Pick grep_live"<CR>
-
 
 
 lua << EOF
