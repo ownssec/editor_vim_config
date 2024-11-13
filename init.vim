@@ -687,13 +687,13 @@ require('mini.pick').setup({
 
 })
 require('mini.pairs').setup()
--- require('mini.completion').setup()
+require('mini.move').setup()
 require('mini.indentscope').setup(
 {
   draw = {
-    delay = 0,
-    animation = require('mini.indentscope').gen_animation.none(),
-    priority = 2,
+       delay = 0,
+      animation = require('mini.indentscope').gen_animation.linear({ duration = 10 }),
+       priority = 2,
   },
 
   mappings = {
@@ -712,7 +712,10 @@ require('mini.indentscope').setup(
   symbol = '╎',
 })
 
+vim.cmd([[highlight MiniIndentscopeSymbol guifg=#473e43]])
 EOF
+
+
 
 nnoremap <S-p> <Cmd>exe  ":Pick files"<CR>
 nnoremap <S-o> <Cmd>exe  ":Pick grep_live"<CR>
