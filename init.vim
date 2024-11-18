@@ -376,6 +376,8 @@ lspconfig.intelephense.setup({
 })
 
 lspconfig.ts_ls.setup({
+    cmd = { "typescript-language-server", "--stdio" },
+    filetypes = { "javascript", "javascriptreact" },
     on_attach = on_attach,
     capabilities = capabilities,
 })
@@ -709,7 +711,7 @@ require('mini.indentscope').setup(
     try_as_border = false,
   },
 
-  symbol = '╎',
+  symbol = '.',   --'╎',
 })
 
 vim.cmd([[highlight MiniIndentscopeSymbol guifg=#473e43]])
