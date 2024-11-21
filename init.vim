@@ -689,7 +689,6 @@ require('mini.pick').setup({
 
 })
 require('mini.pairs').setup()
-require('mini.move').setup()
 require('mini.indentscope').setup(
 {
   draw = {
