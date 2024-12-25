@@ -133,4 +133,13 @@ return require("packer").startup(function(use)
 		end,
 		requires = { "nvim-web-devicons" },
 	})
+
+	-- Bufferline.nvim (added plugin)
+	use({
+		"akinsho/bufferline.nvim",
+		tag = "*", -- specify the tag as '*'
+		config = function()
+			require("config.bufferline") -- you can configure it here if needed
+		end,
+	})
 end)
