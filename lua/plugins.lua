@@ -65,29 +65,11 @@ return require("packer").startup(function(use)
 	use("onsails/lspkind-nvim")
 	use({
 		"L3MON4D3/LuaSnip",
-		-- follow latest release.
 		tag = "v<CurrentMajor>.*",
-	})
-
-	-- cmp: Autocomplete
-	use({
-		"hrsh7th/nvim-cmp",
-		event = "InsertEnter",
 		config = function()
-			require("config.cmp")
+			require("luasnip").setup()
 		end,
 	})
-
-	use({
-		"hrsh7th/cmp-nvim-lsp",
-		config = function()
-			require("config.cmp")
-		end,
-	})
-
-	use("hrsh7th/cmp-buffer")
-	use("hrsh7th/cmp-path")
-	use("hrsh7th/cmp-cmdline")
 
 	-- LSP diagnostics, code actions, and more via Lua.
 	use({
@@ -162,6 +144,51 @@ return require("packer").startup(function(use)
 		"nyoom-engineering/oxocarbon.nvim",
 		config = function()
 			require("config.editortheme")
+		end,
+	})
+
+	-- cmp: Autocomplete
+	use({
+		"hrsh7th/nvim-cmp",
+		event = "InsertEnter",
+		config = function()
+			require("config.cmpconf")
+		end,
+	})
+
+	use("hrsh7th/cmp-nvim-lsp")
+	use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
+	use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
+
+	-- Add cmdline completion
+	use({
+		"hrsh7th/cmp-cmdline",
+		after = "nvim-cmp",
+		config = function()
+			local cmp = require("cmp")
+
+			cmp.event:on("confirm_done")
+
+			-- Cmdline completion
+			cmp.setup.cmdline({ "/", "?" }, {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = {
+					{ name = "buffer" }, -- Suggest from the buffer in search mode
+				},
+			})
+
+			cmp.setup.cmdline(":", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = cmp.config.sources({
+					{ name = "path" },
+					{ name = "cmdline" },
+				}, {
+					{ name = "cmdline", keyword_length = 1 }, -- Suggest commands in cmdline mode
+					completion = {
+						keyword_length = 1, -- Trigger completion after typing the first letter
+					},
+				}),
+			})
 		end,
 	})
 end)
