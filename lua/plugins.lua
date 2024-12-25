@@ -1,4 +1,4 @@
--- 📂lua/🌑plugins.lua
+-- lua/plugins.lua
 
 -- Automatically run: PackerCompile
 vim.api.nvim_create_autocmd("BufWritePost", {
@@ -15,19 +15,12 @@ return require("packer").startup(function(use)
     use("rebelot/kanagawa.nvim")
 
     -- Auto pairs
-    use {
-      'windwp/nvim-autopairs',
-      config = function()
-        local status, autopairs = pcall(require, "nvim-autopairs")
-        if not status then
-          return
-        end
-
-        autopairs.setup({
-          disable_filetype = { "TelescopePrompt", "vim" },
-        })
-      end
-    }
+    use({
+        "windwp/nvim-autopairs",
+        config = function()
+            require("config.autopairs")
+        end,
+    })
 
    -- Git
     use({
@@ -45,11 +38,72 @@ return require("packer").startup(function(use)
       end,
     })    
 
-    -- File tree: nvim-treesitter with TSUpdate
-    -- use({
-    --   'nvim-treesitter/nvim-treesitter',
-    --   run = ':TSUpdate',
-    -- })    
+    -- Treesitter
+    use({
+        "nvim-treesitter/nvim-treesitter",
+        run = function()
+            require("nvim-treesitter.install").update({ with_sync = true })
+        end,
+        config = function()
+            require("config.treesitter")
+        end,
+    })
+
+    use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" })
+
+    -- LSP
+    use({
+        "neovim/nvim-lspconfig",
+        config = function()
+            require("config.lsp")
+        end,
+    })
+
+    use("onsails/lspkind-nvim")
+    use({
+        "L3MON4D3/LuaSnip",
+        -- follow latest release.
+        tag = "v<CurrentMajor>.*",
+    })
+
+    -- cmp: Autocomplete
+    use({
+        "hrsh7th/nvim-cmp",
+        event = "InsertEnter",
+        config = function()
+            require("config.cmp")
+        end,
+    })
+
+    use("hrsh7th/cmp-nvim-lsp")
+
+    use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
+
+    use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
+
+    -- LSP diagnostics, code actions, and more via Lua.
+    use({
+        "jose-elias-alvarez/null-ls.nvim",
+        config = function()
+            require("config.null_ls")
+        end,
+        requires = { "nvim-lua/plenary.nvim" },
+    })
+
+    -- Mason: Portable package manager
+    use({
+        "williamboman/mason.nvim",
+        config = function()
+            require("mason").setup()
+        end,
+    })
+
+    use({
+        "williamboman/mason-lspconfig.nvim",
+        config = function()
+            require("config.mason")
+        end,
+    })
 
    -- Terminal
     use({

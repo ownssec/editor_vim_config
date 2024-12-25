@@ -1,3 +1,4 @@
+-- lua/settings.lua
 
 local global = vim.g
 local o = vim.o

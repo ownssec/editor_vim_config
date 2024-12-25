@@ -1,4 +1,4 @@
--- 📂lua/📂configs/🌑gitsigns.lua
+-- lua/configs/gitsigns.lua
 
 local status, gitsigns = pcall(require, "gitsigns")
 
@@ -8,8 +8,8 @@ end
 
 gitsigns.setup({
     signs = {
-        add = { text = "│" },
-        change = { text = "│" },
+        add = { text = "+" },
+        change = { text = "-" },
         delete = { text = "_" },
         topdelete = { text = "‾" },
         changedelete = { text = "~" },
@@ -43,9 +43,6 @@ gitsigns.setup({
         relative = "cursor",
         row = 0,
         col = 1,
-    },
-    yadm = {
-        enable = false,
-    },
+    }
 })
 
