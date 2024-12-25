@@ -29,6 +29,20 @@ return require("packer").startup(function(use)
       end
     }
 
+    -- File tree: nvim-treesitter with TSUpdate
+    use({
+      'nvim-tree/nvim-tree.lua',
+      config = function()
+            require("config.nvimtree")
+      end,
+    })    
+
+    -- File tree: nvim-treesitter with TSUpdate
+    -- use({
+    --   'nvim-treesitter/nvim-treesitter',
+    --   run = ':TSUpdate',
+    -- })    
+
    -- Terminal
     use({
         "akinsho/toggleterm.nvim",
