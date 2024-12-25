@@ -117,6 +117,14 @@ return require("packer").startup(function(use)
         end,
     })
 
+   --fuzzy finder and mini picker
+   use({
+        'echasnovski/mini.nvim',
+        config = function()
+            require("config.mini")
+        end,
+    })
+
    -- Statusline
     use({
         "nvim-lualine/lualine.nvim",

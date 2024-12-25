@@ -24,6 +24,7 @@ require("nvim-tree").setup {
     width = 60,
     number = true,
     side = "left",
+    relativenumber = true
   },
   renderer = {
     group_empty = true,
@@ -43,3 +44,4 @@ require("nvim-tree").setup {
     enable = true,
   },
 }
+

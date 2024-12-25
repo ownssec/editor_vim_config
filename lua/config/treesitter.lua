@@ -39,3 +39,10 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
+-- Normal mode mapping
+vim.api.nvim_set_keymap('n', '<C-e>', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+
+-- Insert mode mapping
+vim.api.nvim_set_keymap('i', '<C-e>', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+
+
