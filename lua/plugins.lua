@@ -46,7 +46,7 @@ return require("packer").startup(function(use)
         end,
         config = function()
             require("config.treesitter")
-        end,
+         end,
     })
 
     use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" })
