@@ -26,12 +26,12 @@ return require("packer").startup(function(use)
 	})
 
 	-- Git
-	use({
-		"lewis6991/gitsigns.nvim",
-		config = function()
-			require("config.gitsigns")
-		end,
-	})
+	-- use({
+	-- 	"lewis6991/gitsigns.nvim",
+	-- 	config = function()
+	-- 		require("config.gitsigns")
+	-- 	end,
+	-- })
 
 	-- File tree: nvim-treesitter with TSUpdate
 	use({
@@ -85,13 +85,13 @@ return require("packer").startup(function(use)
 	use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
 
 	-- LSP diagnostics, code actions, and more via Lua.
-	use({
-		"jose-elias-alvarez/null-ls.nvim",
-		config = function()
-			require("config.null_ls")
-		end,
-		requires = { "nvim-lua/plenary.nvim" },
-	})
+	-- use({
+	-- 	"jose-elias-alvarez/null-ls.nvim",
+	-- 	config = function()
+	-- 		require("config.null_ls")
+	-- 	end,
+	-- 	requires = { "nvim-lua/plenary.nvim" },
+	-- })
 
 	use({
 		"williamboman/mason-lspconfig.nvim",
@@ -149,6 +149,14 @@ return require("packer").startup(function(use)
 		tag = "*",
 		config = function()
 			require("config.gitconflict")
+		end,
+	})
+
+	-- editor Theme
+	use({
+		"nyoom-engineering/oxocarbon.nvim",
+		config = function()
+			require("config.editortheme")
 		end,
 	})
 end)
