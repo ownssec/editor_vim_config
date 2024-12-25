@@ -78,20 +78,25 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use("hrsh7th/cmp-nvim-lsp")
+	use({
+		"hrsh7th/cmp-nvim-lsp",
+		config = function()
+			require("config.cmp")
+		end,
+	})
 
-	use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
-
-	use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
+	use("hrsh7th/cmp-buffer")
+	use("hrsh7th/cmp-path")
+	use("hrsh7th/cmp-cmdline")
 
 	-- LSP diagnostics, code actions, and more via Lua.
-	-- use({
-	-- 	"jose-elias-alvarez/null-ls.nvim",
-	-- 	config = function()
-	-- 		require("config.null_ls")
-	-- 	end,
-	-- 	requires = { "nvim-lua/plenary.nvim" },
-	-- })
+	use({
+		"jose-elias-alvarez/null-ls.nvim",
+		config = function()
+			require("config.null_ls")
+		end,
+		requires = { "nvim-lua/plenary.nvim" },
+	})
 
 	use({
 		"williamboman/mason-lspconfig.nvim",

@@ -7,44 +7,45 @@ end
 
 local lspkind = require("lspkind")
 
-cmp.setup({
-	snippet = {
-		expand = function(args)
-			require("luasnip").lsp_expand(args.body)
-		end,
-	},
-	mapping = cmp.mapping.preset.insert({
-		["<C-d>"] = cmp.mapping.scroll_docs(-4),
-		["<C-f>"] = cmp.mapping.scroll_docs(4),
-		["<C-Space>"] = cmp.mapping.complete(),
-		["<C-e>"] = cmp.mapping.close(),
-		["<CR>"] = cmp.mapping.confirm({
-			behavior = cmp.ConfirmBehavior.Replace,
-			select = true,
-		}),
-	}),
-	sources = cmp.config.sources({
-		{ name = "nvim_lsp" },
-		{ name = "buffer" },
-	}),
+local cmp = require('cmp')
 
-	cmp.setup.cmdline(":", {
-		mapping = cmp.mapping.preset.cmdline(),
-		sources = cmp.config.sources({
-			{ name = "path" },
-		}, {
-			{ name = "cmdline" },
-		}),
-		matching = { disallow_symbol_nonprefix_matching = false },
-	}),
+cmp.setup({
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'buffer' },
+    { name = 'path' },
+    { name = 'cmdline' },
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['<Tab>'] = cmp.mapping.select_next_item(),
+    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+  }),
 })
 
-local luasnip = require("luasnip")
+-- Cmdline completions
+cmp.setup.cmdline({ '/', '?' }, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' },
+  },
+})
 
-luasnip.filetype_extend("javascript", { "html" })
-luasnip.filetype_extend("javascriptreact", { "html" })
-luasnip.filetype_extend("typescriptreact", { "html" })
-luasnip.filetype_extend("html", { "html" })
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' },
+    { name = 'cmdline' },
+  }),
+})
+
+-- local luasnip = require("luasnip")
+--
+-- luasnip.filetype_extend("javascript", { "html" })
+-- luasnip.filetype_extend("javascriptreact", { "html" })
+-- luasnip.filetype_extend("typescriptreact", { "html" })
+-- luasnip.filetype_extend("html", { "html" })
 
 vim.cmd([[
   set completeopt=menuone,noinsert,noselect
