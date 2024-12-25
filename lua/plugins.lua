@@ -29,6 +29,14 @@ return require("packer").startup(function(use)
       end
     }
 
+   -- Git
+    use({
+        "lewis6991/gitsigns.nvim",
+        config = function()
+            require("config.gitsigns")
+        end,
+    })
+
     -- File tree: nvim-treesitter with TSUpdate
     use({
       'nvim-tree/nvim-tree.lua',
