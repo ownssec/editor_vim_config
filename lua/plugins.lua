@@ -139,7 +139,16 @@ return require("packer").startup(function(use)
 		"akinsho/bufferline.nvim",
 		tag = "*", -- specify the tag as '*'
 		config = function()
-			require("config.bufferline") -- you can configure it here if needed
+			require("config.bufferline")
+		end,
+	})
+
+	-- Git Conflict plugin
+	use({
+		"akinsho/git-conflict.nvim",
+		tag = "*",
+		config = function()
+			require("config.gitconflict")
 		end,
 	})
 end)
