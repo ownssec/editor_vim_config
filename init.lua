@@ -2,10 +2,5 @@ require("settings")
 require("plugins")
 require("keymap")
 
-local themeStatus, kanagawa = pcall(require, "kanagawa")
+colorscheme desert
 
-if themeStatus then
-	vim.cmd("colorscheme kanagawa")
-else
-	return
-end

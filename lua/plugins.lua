@@ -11,8 +11,11 @@ return require("packer").startup(function(use)
     -- Packer
     use("wbthomason/packer.nvim")
 
-    -- Colorschema
-    use("rebelot/kanagawa.nvim")
+    -- Common utilities
+    use("nvim-lua/plenary.nvim")
+
+    -- Icons
+    use("nvim-tree/nvim-web-devicons")
 
     -- Auto pairs
     use({
@@ -114,23 +117,15 @@ return require("packer").startup(function(use)
         end,
     })
 
-    -- Background Transparent
+   -- Statusline
     use({
-        "xiyaowong/nvim-transparent",
+        "nvim-lualine/lualine.nvim",
+        event = "BufEnter",
         config = function()
-            require("transparent").setup({
-                enable = true,
-                extra_groups = {
-                    "BufferLineTabClose",
-                    "BufferlineBufferSelected",
-                    "BufferLineFill",
-                    "BufferLineBackground",
-                    "BufferLineSeparator",
-                    "BufferLineIndicatorSelected",
-                },
-                exclude = {},
-            })
+            require("config.lualine")
         end,
+        requires = { "nvim-web-devicons" },
     })
+    
 end)
 

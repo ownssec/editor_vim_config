@@ -9,9 +9,22 @@ vim.opt.foldenable = false
 
 require'nvim-treesitter.configs'.setup {
   ensure_installed = {
-    "c", "lua", "vim", "vimdoc", "query", "html", "css", "javascript", "json", "php", 
-    "scss", "slint", "sql", "tsx", "typescript", "python", "bash", "markdown", 
-    "markdown_inline", "regex", "vue"
+    "lua",
+    "vim",
+    "vimdoc",
+    "query",
+    "html",
+    "css",
+    "javascript",
+    "json",
+    "php", 
+    "scss",
+    "slint",
+    "sql",
+    "tsx",
+    "typescript",
+    "bash",
+    "regex"
   },
   sync_install = true,
   auto_install = true,
