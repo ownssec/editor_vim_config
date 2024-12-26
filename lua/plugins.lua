@@ -156,30 +156,7 @@ return require("packer").startup(function(use)
 		"hrsh7th/cmp-cmdline",
 		after = "nvim-cmp",
 		config = function()
-			local cmp = require("cmp")
-
-			cmp.event:on("confirm_done")
-
-			-- Cmdline completion
-			cmp.setup.cmdline({ "/", "?" }, {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = {
-					{ name = "buffer" }, -- Suggest from the buffer in search mode
-				},
-			})
-
-			cmp.setup.cmdline(":", {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources({
-					{ name = "path" },
-					{ name = "cmdline" },
-				}, {
-					{ name = "cmdline", keyword_length = 1 }, -- Suggest commands in cmdline mode
-					completion = {
-						keyword_length = 1, -- Trigger completion after typing the first letter
-					},
-				}),
-			})
+			require("config.cmpconf")
 		end,
 	})
 
@@ -187,18 +164,7 @@ return require("packer").startup(function(use)
 	use({
 		"stevearc/conform.nvim",
 		config = function()
-			require("conform").setup({
-				formatters_by_ft = {
-					lua = { "stylua" },
-					javascript = { "prettierd" },
-					typescript = { "prettierd" },
-					php = { "phpcsfixer" },
-				},
-				format_on_save = {
-					timeout_ms = 500, -- Timeout for formatting
-					lsp_fallback = true, -- Use LSP formatting if no formatter is defined
-				},
-			})
+			require("config.cmpconf")
 		end,
 	})
 end)
