@@ -132,7 +132,7 @@ return require("packer").startup(function(use)
 
 	-- editor Theme
 	use({
-		'folke/tokyonight.nvim',
+		"folke/tokyonight.nvim",
 		config = function()
 			require("config.editortheme")
 		end,
@@ -184,5 +184,21 @@ return require("packer").startup(function(use)
 	})
 
 	--formatter
-    use('MunifTanjim/prettier.nvim')
+	use({
+		"stevearc/conform.nvim",
+		config = function()
+			require("conform").setup({
+				formatters_by_ft = {
+					lua = { "stylua" },
+					javascript = { "prettierd" },
+					typescript = { "prettierd" },
+					-- Add other filetypes and formatters here
+				},
+				format_on_save = {
+					timeout_ms = 500, -- Timeout for formatting
+					lsp_fallback = true, -- Use LSP formatting if no formatter is defined
+				},
+			})
+		end,
+	})
 end)
