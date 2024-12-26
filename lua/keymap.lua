@@ -16,10 +16,10 @@ vim.opt.smartindent = true -- set smartindent
 vim.opt.shiftwidth = 4 -- set shiftwidth=4
 vim.opt.tabstop = 4 -- set tabstop=4
 vim.opt.history = 5000 -- set history=5000
-vim.opt.clipboard = "unnamedplus" -- set clipboard=unnamedplus
+vim.opt.clipboard = "unnamedplus" 
 vim.opt.scl = "no" -- set scl=no
 vim.opt.modifiable = true -- set modifiable
-vim.opt.hlsearch = true -- set hlsearch
+vim.opt.hlsearch = true 
 vim.opt.showtabline = 0 -- set showtabline=0
 vim.opt.incsearch = true -- set incsearch
 vim.opt.encoding = "utf-8" -- set encoding=utf-8
@@ -32,3 +32,5 @@ vim.opt.ignorecase = true -- set ignorecase
 vim.opt.smartcase = true -- set smartcase
 vim.opt.compatible = false -- set nocompatible
 vim.opt.filetype = "off" -- set filetype off
+
+

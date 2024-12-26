@@ -13,9 +13,9 @@ masonlsp.setup({
 		"html",
 		"jsonls",
 		"ts_ls",
-		"stylua",
-		"black",
-		"isort",
-		"prettierd",
+		-- "stylua",
+		-- "black",
+		-- "isort",
+		-- "prettierd",
 	},
 })
