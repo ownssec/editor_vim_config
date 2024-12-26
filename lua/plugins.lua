@@ -192,7 +192,7 @@ return require("packer").startup(function(use)
 					lua = { "stylua" },
 					javascript = { "prettierd" },
 					typescript = { "prettierd" },
-					-- Add other filetypes and formatters here
+					php = { "phpcsfixer" },
 				},
 				format_on_save = {
 					timeout_ms = 500, -- Timeout for formatting

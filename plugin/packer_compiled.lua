@@ -123,7 +123,7 @@ _G.packer_plugins = {
     url = "https://github.com/hrsh7th/cmp-path"
   },
   ["conform.nvim"] = {
-    config = { "\27LJ\2\n¶\2\0\0\5\0\14\0\0176\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\n\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\0035\4\b\0=\4\t\3=\3\v\0025\3\f\0=\3\r\2B\0\2\1K\0\1\0\19format_on_save\1\0\2\17lsp_fallback\2\15timeout_ms\3Ù\3\21formatters_by_ft\1\0\2\21formatters_by_ft\0\19format_on_save\0\15typescript\1\2\0\0\14prettierd\15javascript\1\2\0\0\14prettierd\blua\1\0\3\blua\0\15javascript\0\15typescript\0\1\2\0\0\vstylua\nsetup\fconform\frequire\0" },
+    config = { "\27LJ\2\n∆\2\0\0\5\0\16\0\0196\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\f\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\0035\4\b\0=\4\t\0035\4\n\0=\4\v\3=\3\r\0025\3\14\0=\3\15\2B\0\2\1K\0\1\0\19format_on_save\1\0\2\17lsp_fallback\2\15timeout_ms\3Ù\3\21formatters_by_ft\1\0\2\21formatters_by_ft\0\19format_on_save\0\bphp\1\2\0\0\15phpcsfixer\15typescript\1\2\0\0\14prettierd\15javascript\1\2\0\0\14prettierd\blua\1\0\4\blua\0\15javascript\0\bphp\0\15typescript\0\1\2\0\0\vstylua\nsetup\fconform\frequire\0" },
     loaded = true,
     path = "/home/e/.local/share/nvim/site/pack/packer/start/conform.nvim",
     url = "https://github.com/stevearc/conform.nvim"
@@ -247,7 +247,7 @@ try_loadstring("\27LJ\2\n2\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\23config.
 time([[Config for tokyonight.nvim]], false)
 -- Config for: conform.nvim
 time([[Config for conform.nvim]], true)
-try_loadstring("\27LJ\2\n¶\2\0\0\5\0\14\0\0176\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\n\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\0035\4\b\0=\4\t\3=\3\v\0025\3\f\0=\3\r\2B\0\2\1K\0\1\0\19format_on_save\1\0\2\17lsp_fallback\2\15timeout_ms\3Ù\3\21formatters_by_ft\1\0\2\21formatters_by_ft\0\19format_on_save\0\15typescript\1\2\0\0\14prettierd\15javascript\1\2\0\0\14prettierd\blua\1\0\3\blua\0\15javascript\0\15typescript\0\1\2\0\0\vstylua\nsetup\fconform\frequire\0", "config", "conform.nvim")
+try_loadstring("\27LJ\2\n∆\2\0\0\5\0\16\0\0196\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\f\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\0035\4\b\0=\4\t\0035\4\n\0=\4\v\3=\3\r\0025\3\14\0=\3\15\2B\0\2\1K\0\1\0\19format_on_save\1\0\2\17lsp_fallback\2\15timeout_ms\3Ù\3\21formatters_by_ft\1\0\2\21formatters_by_ft\0\19format_on_save\0\bphp\1\2\0\0\15phpcsfixer\15typescript\1\2\0\0\14prettierd\15javascript\1\2\0\0\14prettierd\blua\1\0\4\blua\0\15javascript\0\bphp\0\15typescript\0\1\2\0\0\vstylua\nsetup\fconform\frequire\0", "config", "conform.nvim")
 time([[Config for conform.nvim]], false)
 -- Config for: mini.nvim
 time([[Config for mini.nvim]], true)
@@ -297,8 +297,8 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au BufEnter * ++once lua require("packer.load")({'lualine.nvim'}, { event = "BufEnter *" }, _G.packer_plugins)]]
 vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'nvim-cmp'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au BufEnter * ++once lua require("packer.load")({'lualine.nvim'}, { event = "BufEnter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 
