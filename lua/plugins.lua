@@ -71,15 +71,6 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- LSP diagnostics, code actions, and more via Lua.
-	use({
-		"jose-elias-alvarez/null-ls.nvim",
-		config = function()
-			require("config.null_ls")
-		end,
-		requires = { "nvim-lua/plenary.nvim" },
-	})
-
 	use({
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
@@ -141,7 +132,7 @@ return require("packer").startup(function(use)
 
 	-- editor Theme
 	use({
-		"nyoom-engineering/oxocarbon.nvim",
+		'folke/tokyonight.nvim',
 		config = function()
 			require("config.editortheme")
 		end,
@@ -191,4 +182,7 @@ return require("packer").startup(function(use)
 			})
 		end,
 	})
+
+	--formatter
+    use('MunifTanjim/prettier.nvim')
 end)

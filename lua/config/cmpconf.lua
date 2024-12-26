@@ -12,7 +12,7 @@ local lspkind = require("lspkind")
 -- Configure nvim-cmp
 cmp.setup({
 	snippet = {
-		expand = function(args)
+        expand = function(args)
 			require("luasnip").lsp_expand(args.body) -- Use 'luasnip' for snippet expansion
 		end,
 	},
