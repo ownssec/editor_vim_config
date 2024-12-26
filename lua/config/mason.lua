@@ -17,6 +17,5 @@ masonlsp.setup({
 		"black",
 		"isort",
 		"prettierd",
-		"phpcsfixer",
 	},
 })
