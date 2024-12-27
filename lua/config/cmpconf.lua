@@ -21,10 +21,7 @@ cmp.setup({
 		["<C-f>"] = cmp.mapping.scroll_docs(4), -- Scroll documentation down
 		["<C-Space>"] = cmp.mapping.complete(), -- Trigger completion menu
 		["<C-e>"] = cmp.mapping.close(), -- Close completion menu
-		["<CR>"] = cmp.mapping.confirm({
-			behavior = cmp.ConfirmBehavior.Replace, -- Replace text on confirm
-			select = true, -- Automatically select the first match
-		}),
+		["<Tab>"] = cmp.mapping.confirm({ select = true }),
 	}),
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" }, -- LSP completions
