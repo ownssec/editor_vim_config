@@ -80,6 +80,7 @@ require("mini.pick").setup({
 		winblend = 0,
 	},
 })
+
 require("mini.indentscope").setup({
 	draw = {
 		delay = 0,
