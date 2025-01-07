@@ -10,6 +10,7 @@ vim.api.nvim_set_keymap("n", "<C-l>", "<C-W>l", { noremap = true, silent = true 
 -- Set options
 vim.opt.number = true -- set number
 vim.opt.relativenumber = true -- set relativenumber
+
 vim.opt.expandtab = true -- set expandtab
 vim.opt.autoindent = true -- set autoindent
 vim.opt.smartindent = true -- set smartindent
@@ -31,4 +32,10 @@ vim.opt.hidden = true -- set hidden
 vim.opt.ignorecase = true -- set ignorecase
 vim.opt.smartcase = true -- set smartcase
 vim.opt.compatible = false -- set nocompatible
-vim.opt.filetype = "off" -- set filetype off
+
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		vim.opt.fillchars = { eob = "~" }
+		vim.cmd("highlight EndOfBuffer guifg=Grey")
+	end,
+})

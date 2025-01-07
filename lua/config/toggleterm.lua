@@ -1,7 +1,7 @@
 local status, toggleterm = pcall(require, "toggleterm")
 
 if not status then
-  return
+	return
 end
 
 toggleterm.setup()
@@ -27,14 +27,13 @@ vim.api.nvim_set_keymap("t", "<A-4>", "<Cmd>exe 'ToggleTerm 4'<CR>", keymap_opts
 
 -- Function to set terminal keymaps
 function _G.set_terminal_keymaps()
-  local opts = { buffer = 0 }
-  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
-  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
-  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
-  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
-  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+	local opts = { buffer = 0 }
+	vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
+	vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
+	vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
+	vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
+	vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
 end
 
 -- Autocommand to set keymaps for terminal buffers
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
-
+vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
