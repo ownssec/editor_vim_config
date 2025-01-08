@@ -134,7 +134,7 @@ return require("packer").startup(function(use)
 	use({
 		"folke/tokyonight.nvim",
 		config = function()
-			require("config.editortheme")
+			require("config.theme")
 		end,
 	})
 
