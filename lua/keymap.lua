@@ -36,6 +36,8 @@ vim.opt.compatible = false -- set nocompatible
 vim.api.nvim_create_autocmd("VimEnter", {
 	callback = function()
 		vim.opt.fillchars = { eob = "~" }
+		vim.opt.statuscolumn =
+			"%s%=%{v:lnum == line('.') ? printf('~ %d', v:lnum) : printf('%d', abs(v:lnum - line('.')))}"
 		vim.cmd("highlight EndOfBuffer guifg=Grey")
 	end,
 })
