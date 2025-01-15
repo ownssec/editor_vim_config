@@ -4,28 +4,31 @@ if not status then
 	return
 end
 
-toggleterm.setup()
+toggleterm.setup({
+	open_mapping = [[<A-`>]],
+	shade_terminals = true,
+	direction = "horizontal",
+	float_opts = {
+		border = "curved",
+		width = vim.o.columns,
+		height = vim.o.lines,
+		winblend = 0,
+	},
+})
 
--- Key mappings for different terminals (1 to 4)
 local keymap_opts = { noremap = true, silent = true }
 
-vim.api.nvim_set_keymap("n", "<A-1>", "<Cmd>exe 'ToggleTerm 1'<CR>", keymap_opts)
-vim.api.nvim_set_keymap("i", "<A-1>", "<Esc><Cmd>exe 'ToggleTerm 1'<CR>", keymap_opts)
-vim.api.nvim_set_keymap("t", "<A-1>", "<Cmd>exe 'ToggleTerm 1'<CR>", keymap_opts)
+vim.api.nvim_set_keymap("n", "<A-`>", "<Cmd>ToggleTerm 5 direction=float<CR>", keymap_opts)
+vim.api.nvim_set_keymap("i", "<A-`>", "<Esc><Cmd>ToggleTerm 5 direction=float<CR>", keymap_opts)
+vim.api.nvim_set_keymap("t", "<A-`>", "<Cmd>ToggleTerm 5 direction=float<CR>", keymap_opts)
 
-vim.api.nvim_set_keymap("n", "<A-2>", "<Cmd>exe 'ToggleTerm 2'<CR>", keymap_opts)
-vim.api.nvim_set_keymap("i", "<A-2>", "<Esc><Cmd>exe 'ToggleTerm 2'<CR>", keymap_opts)
-vim.api.nvim_set_keymap("t", "<A-2>", "<Cmd>exe 'ToggleTerm 2'<CR>", keymap_opts)
+-- Keep the existing keybindings for terminals 1-4
+for i = 1, 4 do
+	vim.api.nvim_set_keymap("n", "<A-" .. i .. ">", "<Cmd>exe 'ToggleTerm " .. i .. "'<CR>", keymap_opts)
+	vim.api.nvim_set_keymap("i", "<A-" .. i .. ">", "<Esc><Cmd>exe 'ToggleTerm " .. i .. "'<CR>", keymap_opts)
+	vim.api.nvim_set_keymap("t", "<A-" .. i .. ">", "<Cmd>exe 'ToggleTerm " .. i .. "'<CR>", keymap_opts)
+end
 
-vim.api.nvim_set_keymap("n", "<A-3>", "<Cmd>exe 'ToggleTerm 3'<CR>", keymap_opts)
-vim.api.nvim_set_keymap("i", "<A-3>", "<Esc><Cmd>exe 'ToggleTerm 3'<CR>", keymap_opts)
-vim.api.nvim_set_keymap("t", "<A-3>", "<Cmd>exe 'ToggleTerm 3'<CR>", keymap_opts)
-
-vim.api.nvim_set_keymap("n", "<A-4>", "<Cmd>exe 'ToggleTerm 4'<CR>", keymap_opts)
-vim.api.nvim_set_keymap("i", "<A-4>", "<Esc><Cmd>exe 'ToggleTerm 4'<CR>", keymap_opts)
-vim.api.nvim_set_keymap("t", "<A-4>", "<Cmd>exe 'ToggleTerm 4'<CR>", keymap_opts)
-
--- Function to set terminal keymaps
 function _G.set_terminal_keymaps()
 	local opts = { buffer = 0 }
 	vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
