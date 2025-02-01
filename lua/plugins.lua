@@ -167,4 +167,13 @@ return require("packer").startup(function(use)
 			require("config.conform")
 		end,
 	})
+
+	-- rest api
+	use({
+		"lima1909/resty.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("config.resty")
+		end,
+	})
 end)
