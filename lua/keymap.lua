@@ -32,6 +32,7 @@ vim.opt.hidden = true -- set hidden
 vim.opt.ignorecase = true -- set ignorecase
 vim.opt.smartcase = true -- set smartcase
 vim.opt.compatible = false -- set nocompatible
+vim.o.splitright = true
 
 vim.api.nvim_create_autocmd("VimEnter", {
 	callback = function()
