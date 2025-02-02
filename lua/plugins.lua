@@ -160,11 +160,19 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	--formatter
+	-- formatter
 	use({
 		"stevearc/conform.nvim",
 		config = function()
 			require("config.conform")
+		end,
+	})
+
+	-- multi select
+	use({
+		"mg979/vim-visual-multi",
+		config = function()
+			-- You can add any additional configuration for vim-visual-multi here if needed
 		end,
 	})
 end)
