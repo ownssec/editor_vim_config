@@ -158,8 +158,6 @@ return require("packer").startup(function(use)
 		"mg979/vim-visual-multi",
 		config = function()
 			-- Youqwqewqeqw can add any qwewqeadditional configuration for vim-visual-multi here if needed
-			-- Youqwqewqeqw can add any qwewqeadditional configuration for vim-visual-multi here if needed
-			-- Youqwqewqeqw can add any qwewqeadditional configuration for vim-visual-multi here if needed
 		end,
 	})
 
