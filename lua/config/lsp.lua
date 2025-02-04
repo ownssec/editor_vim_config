@@ -7,8 +7,9 @@ end
 
 local protocol = require("vim.lsp.protocol")
 
+-- Common on_attach function for all LSP servers
 local on_attach = function(client, bufnr)
-	-- format on save
+	-- Format on save
 	if client.server_capabilities.documentFormattingProvider then
 		vim.api.nvim_create_autocmd("BufWritePre", {
 			group = vim.api.nvim_create_augroup("Format", { clear = true }),
@@ -18,11 +19,8 @@ local on_attach = function(client, bufnr)
 			end,
 		})
 	end
-end
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-local function on_attach(client, bufnr)
+	-- LSP keymaps
 	local function buf_set_keymap(...)
 		vim.api.nvim_buf_set_keymap(bufnr, ...)
 	end
@@ -33,20 +31,18 @@ local function on_attach(client, bufnr)
 	buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 end
 
--- TypeScript
-nvim_lsp.ts_ls.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
--- CSS
-nvim_lsp.cssls.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
+-- Ensure LSP servers are installed before attempting setup
+local lsp_servers = {
+	"ts_ls",
+	"cssls",
+	"tailwindcss",
+}
 
--- Tailwind CSS
-nvim_lsp.tailwindcss.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-})
+for _, server in ipairs(lsp_servers) do
+	nvim_lsp[server].setup({
+		on_attach = on_attach,
+		capabilities = capabilities,
+	})
+end

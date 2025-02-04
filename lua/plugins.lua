@@ -25,6 +25,14 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	-- Git
+	use({
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("config.gitsigns")
+		end,
+	})
+
 	-- File tree: nvim-treesitter with TSUpdate
 	use({
 		"nvim-tree/nvim-tree.lua",
@@ -77,13 +85,20 @@ return require("packer").startup(function(use)
 			require("mason").setup()
 		end,
 	})
-
 	-- Terminal
 	use({
 		"akinsho/toggleterm.nvim",
 		tag = "*",
 		config = function()
 			require("config.toggleterm")
+		end,
+	})
+
+	--fuzzy finder and mini picker
+	use({
+		"echasnovski/mini.nvim",
+		config = function()
+			require("config.mini")
 		end,
 	})
 
@@ -157,30 +172,7 @@ return require("packer").startup(function(use)
 	use({
 		"mg979/vim-visual-multi",
 		config = function()
-			-- Youqwqewqeqw can add any qwewqeadditional configuration for vim-visual-multi here if needed
-		end,
-	})
-
-	-- Git
-	use({
-		"lewis6991/gitsigns.nvim",
-		config = function()
-			require("gitsigns").setup({
-				signs = {
-					add = { text = "+" },
-					change = { text = "?" },
-					delete = { text = "-" },
-				},
-				signcolumn = true,
-			})
-		end,
-	})
-
-	--fuzzy finder and mini picker
-	use({
-		"echasnovski/mini.nvim",
-		config = function()
-			require("config.mini")
+			-- You can add any additional configuration for vim-visual-multi here if needed
 		end,
 	})
 end)
