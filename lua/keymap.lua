@@ -11,11 +11,8 @@ vim.api.nvim_set_keymap("n", "<C-l>", "<C-W>l", { noremap = true, silent = true 
 vim.opt.number = true -- set number
 vim.opt.relativenumber = true -- set relativenumber
 
-vim.opt.expandtab = true -- set expandtab
 vim.opt.autoindent = true -- set autoindent
 vim.opt.smartindent = true -- set smartindent
-vim.opt.shiftwidth = 4 -- set shiftwidth=4
-vim.opt.tabstop = 4 -- set tabstop=4
 vim.opt.history = 5000 -- set history=5000
 vim.opt.clipboard = "unnamedplus"
 vim.opt.scl = "no" -- set scl=no
@@ -24,6 +21,11 @@ vim.opt.hlsearch = false
 vim.opt.showtabline = 0 -- set showtabline=0
 vim.opt.incsearch = true -- set incsearch
 vim.opt.encoding = "utf-8" -- set encoding=utf-8
+
+-- indentions
+vim.o.shiftwidth = 4
+vim.o.tabstop = 4
+vim.o.expandtab = true
 
 -- Additional options
 vim.opt.updatetime = 300 -- set updatetime=300

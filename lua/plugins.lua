@@ -161,12 +161,12 @@ return require("packer").startup(function(use)
 	})
 
 	-- formatter
-	use({
-		"stevearc/conform.nvim",
-		config = function()
-			require("config.conform")
-		end,
-	})
+	-- use({
+	-- 	"stevearc/conform.nvim",
+	-- 	config = function()
+	-- 		require("config.conform")
+	-- 	end,
+	-- })
 
 	-- multi select
 	use({
