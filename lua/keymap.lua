@@ -71,7 +71,11 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_create_autocmd("BufRead", {
     pattern = "*.http",
     callback = function()
-        vim.bo.filetype = "http"  -- Set the filetype to 'http'
+        vim.bo.filetype = "http"      -- Set the filetype to 'http'
         vim.cmd("setlocal syntax=on") -- Enable syntax highlighting
     end,
 })
+
+vim.opt_local.foldmethod = "expr"
+vim.opt_local.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt_local.foldenable = true
