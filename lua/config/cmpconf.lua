@@ -6,8 +6,14 @@ if not status then
     return
 end
 
--- Load the 'lspkind' module for icons (optional)
+-- Load lspkind for better icons (optional)
 local lspkind = require("lspkind")
+
+-- Function to check if there's a word before cursor
+local has_words_before = function()
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
 
 -- Configure nvim-cmp
 cmp.setup({
@@ -17,37 +23,45 @@ cmp.setup({
         end,
     },
     mapping = cmp.mapping.preset.insert({
-        ["<C-d>"] = cmp.mapping.scroll_docs(-4), -- Scroll documentation up
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),  -- Scroll documentation down
-        ["<C-Space>"] = cmp.mapping.complete(),  -- Trigger completion menu
-        ["<C-e>"] = cmp.mapping.close(),         -- Close completion menu
-        ["<Tab>"] = cmp.mapping.confirm({ select = true }),
+        -- ["<C-j>"] = cmp.mapping.scroll_docs(-4), -- Scroll documentation up
+        -- ["<C-k>"] = cmp.mapping.scroll_docs(4),  -- Scroll documentation down
+        ["<C-e>"] = cmp.mapping.abort(), -- Close completion menu
+        ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()         -- Select the next item in the list
+                cmp.confirm({ select = true }) -- Confirm the selection
+            elseif has_words_before() then
+                cmp.complete()                 -- Trigger completion
+            else
+                fallback()                     -- Default action if no completion
+            end
+        end, { "i", "s" }),
+
+        -- Add Ctrl+n and Ctrl+p for navigating completion menu
+        ["<C-n>"] = cmp.mapping.select_next_item(),
+        ["<C-p>"] = cmp.mapping.select_prev_item(),
     }),
     sources = cmp.config.sources({
+        { name = "blink" },
         { name = "nvim_lsp" }, -- LSP completions
         { name = "buffer" },   -- Buffer completions
     }),
-})
-
-cmp.event:on("confirm_done")
-
--- Cmdline completion
-cmp.setup.cmdline({ "/", "?" }, {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-        { name = "buffer" }, -- Suggest from the buffer in search mode
+    formatting = {
+        format = lspkind.cmp_format({
+            mode = "symbol_text",  -- Show symbols + text
+            maxwidth = 50,         -- Max width for completion items
+            ellipsis_char = "...", -- Show "..." for truncated text
+        }),
     },
 })
-
+-- Cmdline completion
 cmp.setup.cmdline(":", {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-        { name = "path" },
-        { name = "cmdline" },
+        { name = "blink" },
     }, {
-        { name = "cmdline", keyword_length = 1 }, -- Suggest commands in cmdline mode
         completion = {
-            keyword_length = 1,                   -- Trigger completion after typing the first letter
+            keyword_length = 1, -- Trigger completion after typing the first letter
         },
     }),
 })

@@ -35,12 +35,13 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- Ensure LSP servers are installed before attempting setup
 local lsp_servers = {
-    "ts_ls",     -- JavaScript/TypeScript LSP (corrected from "ts_ls")
-    "cssls",     -- CSS LSP
-    "tailwindcss", -- Tailwind CSS LSP
-    "lua_ls",    -- Lua LSP (for Neovim config)
+    "ts_ls",        -- JavaScript/TypeScript LSP (corrected from "ts_ls")
+    "cssls",        -- CSS LSP
+    "tailwindcss",  -- Tailwind CSS LSP
+    "lua_ls",       -- Lua LSP (for Neovim config)
     "intelephense", -- PHP LSP (Laravel)
-    "jsonls",    -- JSON LSP
+    "jsonls",       -- JSON LSP
+    "html",         -- JSON LSP
 }
 
 for _, server in ipairs(lsp_servers) do

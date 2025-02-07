@@ -8,19 +8,19 @@ vim.api.nvim_set_keymap("n", "<C-h>", "<C-W>h", { noremap = true, silent = true 
 vim.api.nvim_set_keymap("n", "<C-l>", "<C-W>l", { noremap = true, silent = true })
 
 -- Set options
-vim.opt.number = true -- set number
+vim.opt.number = true         -- set number
 vim.opt.relativenumber = true -- set relativenumber
 
-vim.opt.autoindent = true -- set autoindent
-vim.opt.smartindent = true -- set smartindent
-vim.opt.history = 5000 -- set history=5000
+vim.opt.autoindent = true     -- set autoindent
+vim.opt.smartindent = true    -- set smartindent
+vim.opt.history = 5000        -- set history=5000
 vim.opt.clipboard = "unnamedplus"
-vim.opt.scl = "no" -- set scl=no
-vim.opt.modifiable = true -- set modifiable
+vim.opt.scl = "no"            -- set scl=no
+vim.opt.modifiable = true     -- set modifiable
 vim.opt.hlsearch = false
-vim.opt.showtabline = 0 -- set showtabline=0
-vim.opt.incsearch = true -- set incsearch
-vim.opt.encoding = "utf-8" -- set encoding=utf-8
+vim.opt.showtabline = 0       -- set showtabline=0
+vim.opt.incsearch = true      -- set incsearch
+vim.opt.encoding = "utf-8"    -- set encoding=utf-8
 
 -- indentions
 vim.o.shiftwidth = 4
@@ -28,22 +28,22 @@ vim.o.tabstop = 4
 vim.o.expandtab = true
 
 -- Additional options
-vim.opt.updatetime = 300 -- set updatetime=300
+vim.opt.updatetime = 300     -- set updatetime=300
 vim.opt.termguicolors = true -- set termguicolors
-vim.opt.hidden = true -- set hidden
-vim.opt.ignorecase = true -- set ignorecase
-vim.opt.smartcase = true -- set smartcase
-vim.opt.compatible = false -- set nocompatible
+vim.opt.hidden = true        -- set hidden
+vim.opt.ignorecase = true    -- set ignorecase
+vim.opt.smartcase = true     -- set smartcase
+vim.opt.compatible = false   -- set nocompatible
 vim.o.splitright = true
 
 vim.opt.signcolumn = "yes" -- Ensure the sign column is always visible
 
 vim.api.nvim_create_autocmd("VimEnter", {
-	callback = function()
-		vim.opt.statuscolumn =
-			"%s%=%{v:lnum == line('.') ? printf('~ %d', v:lnum) : printf('%d', abs(v:lnum - line('.')))}"
-		vim.cmd("highlight EndOfBuffer guifg=Grey")
-	end,
+    callback = function()
+        vim.opt.statuscolumn =
+        "%s%=%{v:lnum == line('.') ? printf('~ %d', v:lnum) : printf('%d', abs(v:lnum - line('.')))}"
+        vim.cmd("highlight EndOfBuffer guifg=Grey")
+    end,
 })
 
 
@@ -62,9 +62,16 @@ vim.api.nvim_create_autocmd("VimEnter", {
 -- })
 
 vim.api.nvim_set_keymap(
-  "n",
-  "]r",
-  "<cmd>lua require('kulala').run()<cr>",
-  { noremap = true, silent = true, desc = "Execute the request with Kulala" }
+    "n",
+    "]r",
+    "<cmd>lua require('kulala').run()<cr>",
+    { noremap = true, silent = true, desc = "Execute the request with Kulala" }
 )
 
+vim.api.nvim_create_autocmd("BufRead", {
+    pattern = "*.http",
+    callback = function()
+        vim.bo.filetype = "http"  -- Set the filetype to 'http'
+        vim.cmd("setlocal syntax=on") -- Enable syntax highlighting
+    end,
+})
