@@ -175,4 +175,32 @@ return require("packer").startup(function(use)
 			-- You can add any additional configuration for vim-visual-multi here if needed
 		end,
 	})
+
+    -- http rest 
+    use({ "mistweaverco/kulala.nvim",
+        config = function()
+            require("kulala").setup({
+            debug=true,
+            default_env = "dev",
+            transparent = false,         
+            terminal_colors = true,      
+            styles = {
+                comments = { italic = true },
+                keywords = { italic = true },
+                functions = { bold = true },
+                variables = {},
+            },
+            sidebars = { "qf", "vista_kind", "terminal", "packer" },
+            on_colors = function(colors)
+                colors.border = "#ff0000" -- Example: Custom border color
+            end,
+            on_highlights = function(hl, c)
+                hl.Normal = { bg = c.bg, fg = c.fg }
+                hl.CursorLineNr = { fg = c.orange, bold = true }
+            end,
+        })
+
+
+		end,
+    })
 end)

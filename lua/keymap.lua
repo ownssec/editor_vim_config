@@ -45,3 +45,26 @@ vim.api.nvim_create_autocmd("VimEnter", {
 		vim.cmd("highlight EndOfBuffer guifg=Grey")
 	end,
 })
+
+
+-- http kulala
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "http", -- Adjust if Kulala uses a different file type
+--   callback = function()
+--     vim.api.nvim_buf_set_keymap(
+--       0,  -- Current buffer only
+--       "n",
+--       "<[-r>",
+--       "<cmd>:lua require('kulala').run()<cr>",
+--       { noremap = true, silent = false, desc = "Execute the request" }
+--     )
+--   end
+-- })
+
+vim.api.nvim_set_keymap(
+  "n",
+  "]r",
+  "<cmd>lua require('kulala').run()<cr>",
+  { noremap = true, silent = true, desc = "Execute the request with Kulala" }
+)
+

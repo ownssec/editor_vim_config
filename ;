@@ -24,8 +24,7 @@ Have git, make, pip, python, npm, node and cargo installed on your system.
 
 --neovim install--
 
--- kulala.nvim language support
-npm install -g @mistweaverco/kulala-ls
+
 
 Make sure all necessary dependencies are installed:
 git clone https://github.com/neovim/neovim.git
