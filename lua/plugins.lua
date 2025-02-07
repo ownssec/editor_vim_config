@@ -11,6 +11,21 @@ return require("packer").startup(function(use)
 	-- Packer
 	use("wbthomason/packer.nvim")
 
+	use({
+		"williamboman/mason-lspconfig.nvim",
+		config = function()
+			require("config.mason")
+		end,
+	})
+
+	-- Mason: Portable package manager
+	use({
+		"williamboman/mason.nvim",
+		config = function()
+			require("mason").setup()
+		end,
+	})
+
 	-- Common utilities
 	use("nvim-lua/plenary.nvim")
 
@@ -71,20 +86,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use({
-		"williamboman/mason-lspconfig.nvim",
-		config = function()
-			require("config.mason")
-		end,
-	})
 
-	-- Mason: Portable package manager
-	use({
-		"williamboman/mason.nvim",
-		config = function()
-			require("mason").setup()
-		end,
-	})
 	-- Terminal
 	use({
 		"akinsho/toggleterm.nvim",
@@ -141,6 +143,7 @@ return require("packer").startup(function(use)
 	-- cmp: Autocomplete
 	use({
 		"hrsh7th/nvim-cmp",
+        opt = false ,
 		event = "InsertEnter",
 		config = function()
 			require("config.cmpconf")

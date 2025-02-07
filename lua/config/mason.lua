@@ -13,6 +13,10 @@ masonlsp.setup({
 		"html",
 		"jsonls",
 		"ts_ls",
+        "tailwindcss",   -- Tailwind CSS LSP
+        "lua_ls",        -- Lua LSP (for Neovim config)
+        "intelephense",  -- PHP LSP (Laravel)
+        "jsonls",
 		-- "stylua",
 		-- "black",
 		-- "isort",

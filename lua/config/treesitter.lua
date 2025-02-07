@@ -25,6 +25,7 @@ require("nvim-treesitter.configs").setup({
 		"typescript",
 		"bash",
 		"regex",
+		"http",
 	},
 	sync_install = true,
 	auto_install = true,
