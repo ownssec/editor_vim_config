@@ -5,23 +5,29 @@ if not status then
 end
 
 toggleterm.setup({
-	open_mapping = [[<A-`>]],
 	shade_terminals = true,
 	direction = "horizontal",
+	size = function(term)
+		if term.direction == "horizontal" then
+			return vim.o.columns * 0.09
+		elseif term.direction == "vertical" then
+			return vim.o.columns * 0.4
+		end
+	end,
 	float_opts = {
-<<<<<<< HEAD
-		border = "curved",
-=======
 		border = "none",
->>>>>>> 6911c51b1e87d7b27ce021f19c8e12baa36c7f50
 		width = vim.o.columns,
-		height = vim.o.lines,
+		height = 200,
 		winblend = 0,
+	},
+	responsiveness = {
+		-- breakpoint in terms of `vim.o.columns` at which terminals will start to stack on top of each other
+		-- instead of next to each other
+		-- default = 0 which means the feature is turned off
+		horizontal_breakpoint = 135,
 	},
 })
 
-<<<<<<< HEAD
-=======
 vim.api.nvim_create_autocmd("TermOpen", {
 	pattern = "term://*",
 	callback = function()
@@ -31,12 +37,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
 	end,
 })
 
->>>>>>> 6911c51b1e87d7b27ce021f19c8e12baa36c7f50
 local keymap_opts = { noremap = true, silent = true }
-
-vim.api.nvim_set_keymap("n", "<A-`>", "<Cmd>ToggleTerm 5 direction=float<CR>", keymap_opts)
-vim.api.nvim_set_keymap("i", "<A-`>", "<Esc><Cmd>ToggleTerm 5 direction=float<CR>", keymap_opts)
-vim.api.nvim_set_keymap("t", "<A-`>", "<Cmd>ToggleTerm 5 direction=float<CR>", keymap_opts)
 
 -- Keep the existing keybindings for terminals 1-4
 for i = 1, 4 do

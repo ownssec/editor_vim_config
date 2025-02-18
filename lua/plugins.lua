@@ -135,8 +135,8 @@ return require("packer").startup(function(use)
 	-- 	"mcchrish/zenbones.nvim",
 	-- 	requires = "rktjmp/lush.nvim",
 	-- 	config = function()
-	-- 		vim.o.background = "dark"
-	-- 		vim.cmd("colorscheme neobones")
+	-- 		-- vim.o.background = "dark"
+	-- 		-- vim.cmd("colorscheme neobones")
 	-- 	end,
 	-- })
 
