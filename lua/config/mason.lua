@@ -2,26 +2,18 @@
 local status, masonlsp = pcall(require, "mason-lspconfig")
 
 if not status then
-    return
+	return
 end
 
 masonlsp.setup({
-    automatic_installation = true,
-    ensure_installed = {
-        "cssls",
-        "eslint",
-        "html",
-        "jsonls",
-        -- "ts_ls",
-        -- "tsserver",
-        "tailwindcss",  -- Tailwind CSS LSP
-        "lua_ls",       -- Lua LSP (for Neovim config)
-        "intelephense", -- PHP LSP (Laravel)
-        "jsonls",
-        "html",
-        -- "stylua",
-        -- "black",
-        -- "isort",
-        -- "prettierd",
-    },
+	automatic_installation = true,
+	ensure_installed = {
+		"lua_ls",
+		-- "typescript-language-server", -- FIXED
+		"cssls",
+		"tailwindcss",
+		"html",
+		"jsonls",
+		"intelephense",
+	},
 })

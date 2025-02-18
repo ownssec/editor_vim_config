@@ -64,8 +64,6 @@ require("mini.pick").setup({
 	},
 
 	window = {
-		config = nil,
-
 		prompt_cursor = "▏",
 
 		prompt_prefix = "> ",
@@ -73,11 +71,12 @@ require("mini.pick").setup({
 		config = {
 			width = 250,
 			height = 20,
-			border = "single",
+			border = "none",
 			row = vim.o.lines - 0,
-			col = 2,
 		},
+		winhl = "FloatBorder:NormalFloat",
 		winblend = 0,
+		prompt = { anchor = "SW", row = vim.o.lines - 3 },
 	},
 })
 
@@ -108,3 +107,16 @@ vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#473e43" })
 
 vim.api.nvim_set_keymap("n", "<S-p>", '<Cmd>exe ":Pick files"<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<S-o>", '<Cmd>exe ":Pick grep_live"<CR>', { noremap = true, silent = true })
+
+vim.api.nvim_create_autocmd("VimResized", {
+	callback = function()
+		require("toggleterm").setup({
+			float_opts = {
+				border = "none",
+				width = vim.o.columns,
+				height = get_half_screen_height(),
+				winblend = 0,
+			},
+		})
+	end,
+})

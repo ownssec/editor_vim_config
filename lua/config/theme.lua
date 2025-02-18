@@ -1,5 +1,9 @@
 -- lua/configs/editortheme.lua
 
+-- vim.opt.termguicolors = true
+-- vim.opt.background = "dark" -- Set background to light (or "dark" if preferred)
+-- vim.cmd("colorscheme zenwritten")
+
 require("tokyonight").setup({
 	style = "night",
 	light_style = "day",

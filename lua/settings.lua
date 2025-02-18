@@ -19,8 +19,8 @@ o.syntax = "on" -- When this option is set, the syntax with this name is loaded.
 o.autoindent = true -- Copy indent from current line when starting a new line.
 o.cursorline = true -- Highlight the screen line of the cursor with CursorLine.
 o.expandtab = true -- In Insert mode: Use the appropriate number of spaces to insert a <Tab>.
-o.shiftwidth = 2 -- Number of spaces to use for each step of (auto)indent.
-o.tabstop = 2 -- Number of spaces that a <Tab> in the file counts for.
+o.shiftwidth = 4 -- Number of spaces to use for each step of (auto)indent.
+o.tabstop = 4 -- Number of spaces that a <Tab> in the file counts for.
 o.encoding = "utf-8" -- Sets the character encoding used inside Vim.
 o.fileencoding = "utf-8" -- Sets the character encoding for the file of this buffer.
 o.ruler = true -- Show the line and column number of the cursor position, separated by a comma.
@@ -32,3 +32,35 @@ o.wildmenu = true -- When 'wildmenu' is on, command-line completion operates in 
 o.showcmd = true -- Show (partial) command in the last line of the screen. Set this option off if your terminal is slow.
 o.showmatch = true -- When a bracket is inserted, briefly jump to the matching one.
 o.inccommand = "split" -- When nonempty, shows the effects of :substitute, :smagic, :snomagic and user commands with the :command-preview flag as you type.
+o.smartindent = true -- set smartindent
+o.history = 5000 -- set history=5000
+
+-- Set options
+o.scl = "no" -- set scl=no
+o.modifiable = true -- set modifiable
+o.hlsearch = false
+o.showtabline = 0 -- set showtabline=0
+o.incsearch = true -- set incsearch
+
+-- Additional options
+o.updatetime = 300 -- set updatetime=300
+o.termguicolors = true -- set termguicolors
+o.ignorecase = true -- set ignorecase
+o.smartcase = true -- set smartcase
+o.compatible = false -- set nocompatible
+o.splitright = true
+
+o.signcolumn = "yes" -- Ensure the sign column is always visible
+
+-- Add recursive search to the 'path'
+-- vim.opt.path:append(vim.fn.fnamemodify(vim.loop.cwd(), ":h") .. "/**")
+-- Enable search for hidden files
+-- vim.opt.wildignore:append(".git,.cache,node_modules")
+
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		vim.opt.statuscolumn =
+			"%s%=%{v:lnum == line('.') ? printf('~ %d', v:lnum) : printf('%d', abs(v:lnum - line('.')))}"
+		vim.cmd("highlight EndOfBuffer guifg=Grey")
+	end,
+})

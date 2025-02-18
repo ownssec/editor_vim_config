@@ -37,9 +37,3 @@ sudo make install
 -- for tmux
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 git clone https://github.com/tmux-plugins/tmux-resurrect ~/.tmux/plugins/tmux-resurrect
-
-
--- imporatant auto complete
-cd ~/.local/share/nvim/site/pack/packer/start/blink.cmp
-git submodule update --init --recursive
-cargo build --release

@@ -9,13 +9,29 @@ toggleterm.setup({
 	shade_terminals = true,
 	direction = "horizontal",
 	float_opts = {
+<<<<<<< HEAD
 		border = "curved",
+=======
+		border = "none",
+>>>>>>> 6911c51b1e87d7b27ce021f19c8e12baa36c7f50
 		width = vim.o.columns,
 		height = vim.o.lines,
 		winblend = 0,
 	},
 })
 
+<<<<<<< HEAD
+=======
+vim.api.nvim_create_autocmd("TermOpen", {
+	pattern = "term://*",
+	callback = function()
+		vim.opt.relativenumber = true -- Enable relative line numbers
+		vim.opt.number = true -- Enable absolute line numbers
+		vim.opt.signcolumn = "yes" -- Ensure the sign column is always visible
+	end,
+})
+
+>>>>>>> 6911c51b1e87d7b27ce021f19c8e12baa36c7f50
 local keymap_opts = { noremap = true, silent = true }
 
 vim.api.nvim_set_keymap("n", "<A-`>", "<Cmd>ToggleTerm 5 direction=float<CR>", keymap_opts)

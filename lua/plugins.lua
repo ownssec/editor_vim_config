@@ -1,238 +1,189 @@
-
 -- lua/plugins.lua
 
 -- Automatically run: PackerCompile
 vim.api.nvim_create_autocmd("BufWritePost", {
-    group = vim.api.nvim_create_augroup("PACKER", { clear = true }),
-    pattern = "plugins.lua",
-    command = "source <afile> | PackerCompile",
+	group = vim.api.nvim_create_augroup("PACKER", { clear = true }),
+	pattern = "plugins.lua",
+	command = "source <afile> | PackerCompile",
 })
 
 return require("packer").startup(function(use)
-    -- Packer
-    use("wbthomason/packer.nvim")
+	-- Packer
+	use("wbthomason/packer.nvim")
 
-    -- Mason: Portable package manager
-    use({
-        "williamboman/mason-lspconfig.nvim",
-        after = "mason.nvim", -- Ensure Mason is loaded first
-        config = function()
-            require("mason-lspconfig").setup({
-                require("mason-lspconfig").setup({
-                    ensure_installed = {
-                        "lua_ls",
-                        "typescript-language-server", -- FIXED
-                        "cssls",
-                        "tailwindcss",
-                        "html",
-                        "jsonls",
-                        "intelephense"
-                    }
-                })
-            })
-        end,
-    })
+	use({
+		"williamboman/mason.nvim",
+		config = function()
+			require("mason").setup()
+		end,
+	})
 
-    use({
-        "williamboman/mason.nvim",
-        config = function()
-            require("mason").setup()
-        end,
-    })
+	-- Common utilities
+	use("nvim-lua/plenary.nvim")
 
+	-- Icons
+	use("nvim-tree/nvim-web-devicons")
 
-    -- Common utilities
-    use("nvim-lua/plenary.nvim")
+	-- Auto pairs
+	use({
+		"windwp/nvim-autopairs",
+		config = function()
+			require("config.autopairs")
+		end,
+	})
 
-    -- Icons
-    use("nvim-tree/nvim-web-devicons")
+	-- Git
+	use({
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("config.gitsigns")
+		end,
+	})
 
-    -- Auto pairs
-    use({
-        "windwp/nvim-autopairs",
-        config = function()
-            require("config.autopairs")
-        end,
-    })
+	-- File tree: nvim-treesitter with TSUpdate
+	use({
+		"nvim-tree/nvim-tree.lua",
+		config = function()
+			require("config.nvimtree")
+		end,
+	})
 
-    -- Git
-    use({
-        "lewis6991/gitsigns.nvim",
-        config = function()
-            require("config.gitsigns")
-        end,
-    })
+	-- Treesitter
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		run = function()
+			require("nvim-treesitter.install").update({ with_sync = true })
+		end,
+		config = function()
+			require("config.treesitter")
+		end,
+	})
 
-    -- File tree: nvim-treesitter with TSUpdate
-    use({
-        "nvim-tree/nvim-tree.lua",
-        config = function()
-            require("config.nvimtree")
-        end,
-    })
+	use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" })
 
-    -- Treesitter
-    use({
-        "nvim-treesitter/nvim-treesitter",
-        run = function()
-            require("nvim-treesitter.install").update({ with_sync = true })
-        end,
-        config = function()
-            require("config.treesitter")
-        end,
-    })
+	-- LSP
+	use({
+		"neovim/nvim-lspconfig",
+		config = function()
+			require("config.lsp")
+		end,
+	})
 
-    use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" })
+	use("onsails/lspkind-nvim")
+	use({
+		"L3MON4D3/LuaSnip",
+		tag = "v<CurrentMajor>.*",
+		config = function()
+			require("luasnip").setup()
+		end,
+	})
 
-    -- LSP
-    use({
-        "neovim/nvim-lspconfig",
-        config = function()
-            require("config.lsp")
-        end,
-    })
+	-- Terminal
+	use({
+		"akinsho/toggleterm.nvim",
+		tag = "*",
+		config = function()
+			require("config.toggleterm")
+		end,
+	})
 
-    use("onsails/lspkind-nvim")
-    use({
-        "L3MON4D3/LuaSnip",
-        tag = "v<CurrentMajor>.*",
-        config = function()
-            require("luasnip").setup()
-        end,
-    })
+	--fuzzy finder and mini picker
+	use({
+		"echasnovski/mini.nvim",
+		config = function()
+			require("config.mini")
+		end,
+	})
 
+	-- Statusline
+	use({
+		"nvim-lualine/lualine.nvim",
+		event = "BufEnter",
+		config = function()
+			require("config.lualine")
+		end,
+		requires = { "nvim-web-devicons" },
+	})
 
-    -- Terminal
-    use({
-        "akinsho/toggleterm.nvim",
-        tag = "*",
-        config = function()
-            require("config.toggleterm")
-        end,
-    })
+	-- Bufferline.nvim (added plugin)
+	use({
+		"akinsho/bufferline.nvim",
+		tag = "*", -- specify the tag as '*'
+		config = function()
+			require("config.bufferline")
+		end,
+	})
 
-    --fuzzy finder and mini picker
-    use({
-        "echasnovski/mini.nvim",
-        config = function()
-            require("config.mini")
-        end,
-    })
+	-- Git Conflict plugin
+	use({
+		"akinsho/git-conflict.nvim",
+		tag = "*",
+		config = function()
+			require("config.gitconflict")
+		end,
+	})
 
-    -- Statusline
-    use({
-        "nvim-lualine/lualine.nvim",
-        event = "BufEnter",
-        config = function()
-            require("config.lualine")
-        end,
-        requires = { "nvim-web-devicons" },
-    })
+	-- editor Theme
+	use({
+		"folke/tokyonight.nvim",
+		config = function()
+			require("config.theme")
+		end,
+	})
 
-    -- Bufferline.nvim (added plugin)
-    use({
-        "akinsho/bufferline.nvim",
-        tag = "*", -- specify the tag as '*'
-        config = function()
-            require("config.bufferline")
-        end,
-    })
+	-- use({
+	-- 	"mcchrish/zenbones.nvim",
+	-- 	requires = "rktjmp/lush.nvim",
+	-- 	config = function()
+	-- 		vim.o.background = "dark"
+	-- 		vim.cmd("colorscheme neobones")
+	-- 	end,
+	-- })
 
-    -- Git Conflict plugin
-    use({
-        "akinsho/git-conflict.nvim",
-        tag = "*",
-        config = function()
-            require("config.gitconflict")
-        end,
-    })
+	-- cmp: Autocomplete
+	use({
+		"hrsh7th/nvim-cmp",
+		opt = false,
+		event = "InsertEnter",
+		config = function()
+			require("config.cmpconf")
+		end,
+	})
 
-    -- editor Theme
-    use({
-        "folke/tokyonight.nvim",
-        config = function()
-            require("config.theme")
-        end,
-    })
+	use("hrsh7th/cmp-nvim-lsp")
+	use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
+	use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
 
-    -- cmp: Autocomplete
-    use({
-        "hrsh7th/nvim-cmp",
-        opt = false,
-        event = "InsertEnter",
-        config = function()
-            require("config.cmpconf")
-        end,
-    })
+	-- Add cmdline completion
+	use({
+		"hrsh7th/cmp-cmdline",
+		after = "nvim-cmp",
+		config = function()
+			require("config.cmpconf")
+		end,
+	})
 
-    use("hrsh7th/cmp-nvim-lsp")
-    use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
-    use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
+	-- formatter
+	use({
+		"stevearc/conform.nvim",
+		config = function()
+			require("config.conform")
+		end,
+	})
 
-    -- Add cmdline completion
-    use({
-        "hrsh7th/cmp-cmdline",
-        after = "nvim-cmp",
-        config = function()
-            require("config.cmpconf")
-        end,
-    })
+	-- http rest
+	use({
+		"mistweaverco/kulala.nvim",
+		config = function()
+			require("config.kulala")
+		end,
+	})
 
-    -- formatter
-    -- use({
-    -- 	"stevearc/conform.nvim",
-    -- 	config = function()
-    -- 		require("config.conform")
-    -- 	end,
-    -- })
-
-    -- multi select
-    use({
-        "mg979/vim-visual-multi",
-        config = function()
-            -- You can add any additional configuration for vim-visual-multi here if needed
-        end,
-    })
-
-    -- http rest
-    use({
-        "mistweaverco/kulala.nvim",
-        config = function()
-            require("kulala").setup({
-                debug = true,
-                default_env = "dev",
-                transparent = false,
-                terminal_colors = true,
-                styles = {
-                    comments = { italic = true },
-                    keywords = { italic = true },
-                    functions = { bold = true },
-                    variables = {},
-                },
-                sidebars = { "qf", "vista_kind", "terminal", "packer" },
-                on_colors = function(colors)
-                    colors.border = "#ff0000" -- Example: Custom border color
-                end,
-                on_highlights = function(hl, c)
-                    hl.Normal = { bg = c.bg, fg = c.fg }
-                    hl.CursorLineNr = { fg = c.orange, bold = true }
-                end,
-            })
-        end,
-    })
-
-    -- Other plugins...
-    use({
-        "saghen/blink.cmp",
-        requires = { "hrsh7th/nvim-cmp" },
-        config = function()
-            require("blink-cmp").setup({
-                fuzzy = {
-                    prebuilt_binaries = { force_version = "0.1.0" }, -- Adjust version if needed
-                },
-            })
-        end,
-    })
+	-- vim motion
+	use({
+		"easymotion/vim-easymotion",
+		config = function()
+			require("config.motion")
+		end,
+	})
 end)
-
-
