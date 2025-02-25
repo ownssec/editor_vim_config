@@ -24,11 +24,15 @@ return require("packer").startup(function(use)
 	-- Icons
 	use("nvim-tree/nvim-web-devicons")
 
-	-- Auto pairs
+	-- Auto close
+
+	use("m4xshen/autoclose.nvim")
+
 	use({
-		"windwp/nvim-autopairs",
+		"windwp/nvim-ts-autotag",
+		after = "nvim-treesitter",
 		config = function()
-			require("config.autopairs")
+			require("nvim-ts-autotag").setup()
 		end,
 	})
 
@@ -43,6 +47,8 @@ return require("packer").startup(function(use)
 	-- File tree: nvim-treesitter with TSUpdate
 	use({
 		"nvim-tree/nvim-tree.lua",
+		after = "nvim-web-devicons",
+		requires = "nvim-tree/nvim-web-devicons",
 		config = function()
 			require("config.nvimtree")
 		end,
@@ -59,7 +65,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" })
+	-- use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" })
 
 	-- LSP
 	use({
@@ -162,6 +168,8 @@ return require("packer").startup(function(use)
 			require("config.cmpconf")
 		end,
 	})
+
+	--autopairs
 
 	-- formatter
 	use({

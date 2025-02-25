@@ -11,9 +11,6 @@ require("conform").setup({
 		javascript = { "prettier" },
 		typescript = { "prettier" },
 		json = { "prettier" },
-		jsx = { "prettier" },
-		tsx = { "prettier" },
-		vue = { "prettier" },
 		-- php = { "php-cs-fixer" },
 		-- blade = { "blade-formatter" },
 		html = { "prettier" },
@@ -23,6 +20,7 @@ require("conform").setup({
 		markdown = { "prettier" },
 		javascriptreact = { "prettier" },
 		typescriptreact = { "prettier" },
+		http = { "prettier" },
 	},
 	formatters = {
 		prettier = {
@@ -34,6 +32,11 @@ require("conform").setup({
 				"--print-width",
 				"80", -- Set line width to 80 characters
 			},
+		},
+		kulala = {
+			command = "kulala-fmt",
+			args = { "format", "$FILENAME" },
+			stdin = false,
 		},
 		jq = {
 			command = "jq",
