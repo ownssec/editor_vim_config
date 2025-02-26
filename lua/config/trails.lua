@@ -1,4 +1,6 @@
 require("trailblazer").setup({
+	auto_save_trailblazer_state_on_exit = true,
+	auto_load_trailblazer_state_on_enter = true,
 	-- your custom config goes here
 	mappings = { -- rename this to "force_mappings" to completely override default mappings and not merge with them
 		nv = { -- Mode union: normal & visual mode. Can be extended by adding i, x, ...
@@ -20,5 +22,12 @@ require("trailblazer").setup({
 				-- set_trail_mark_stack_sort_mode = "<A-s>",
 			},
 		},
+	},
+	trail_options = {
+		mark_symbol = "✢", -- Used when trail_mark_symbol_line_indicators_enabled is true
+		newest_mark_symbol = "✢", -- Symbol for the most recent mark
+		cursor_mark_symbol = "✢", -- Symbol for the cursor mark
+		next_mark_symbol = "✢", -- Symbol for the next mark
+		previous_mark_symbol = "✢", -- Symbol for the previous mark
 	},
 })

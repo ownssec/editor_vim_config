@@ -124,7 +124,7 @@ return require("packer").startup(function(use)
 	use({
 		"LeonHeidelbach/trailblazer.nvim",
 		config = function()
-			require("config.tags")
+			require("config.trails")
 		end,
 	})
 
