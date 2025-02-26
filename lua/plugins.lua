@@ -112,11 +112,19 @@ return require("packer").startup(function(use)
 	})
 
 	-- Bufferline.nvim (added plugin)
+	-- use({
+	-- 	"akinsho/bufferline.nvim",
+	-- 	tag = "*", -- specify the tag as '*'
+	-- 	config = function()
+	-- 		require("config.bufferline")
+	-- 	end,
+	-- })        jj
+
+	-- marking instead of bufferline
 	use({
-		"akinsho/bufferline.nvim",
-		tag = "*", -- specify the tag as '*'
+		"LeonHeidelbach/trailblazer.nvim",
 		config = function()
-			require("config.bufferline")
+			require("config.tags")
 		end,
 	})
 

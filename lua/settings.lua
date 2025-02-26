@@ -52,7 +52,6 @@ o.splitright = true
 
 o.signcolumn = "yes" -- Ensure the sign column is always visible
 
-
 -- remove hotkey alt + `
 vim.keymap.set({ "n", "v", "t" }, "<A-`>", "<Nop>", { noremap = true, silent = true })
 
