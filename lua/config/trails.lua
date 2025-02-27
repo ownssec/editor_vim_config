@@ -1,6 +1,7 @@
 require("trailblazer").setup({
 	auto_save_trailblazer_state_on_exit = true,
 	auto_load_trailblazer_state_on_enter = true,
+	trail_mark_session_storage_dir = vim.fn.stdpath("data") .. "/trailblazer",
 	-- your custom config goes here
 	mappings = { -- rename this to "force_mappings" to completely override default mappings and not merge with them
 		nv = { -- Mode union: normal & visual mode. Can be extended by adding i, x, ...
@@ -30,4 +31,36 @@ require("trailblazer").setup({
 		next_mark_symbol = "✢", -- Symbol for the next mark
 		previous_mark_symbol = "✢", -- Symbol for the previous mark
 	},
+})
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+	callback = function()
+		vim.cmd("TrailBlazerLoadSession")
+	end,
+})
+
+-- Force set filetype for .http files on startup
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+			local bufname = vim.api.nvim_buf_get_name(buf)
+			if bufname:match("%.http$") then
+				vim.api.nvim_buf_set_option(buf, "filetype", "http")
+				vim.cmd("set filetype=http")
+			end
+		end
+	end,
+})
+
+-- Ensure .http files always have correct filetype and syntax
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+	pattern = "*.http",
+	callback = function()
+		vim.bo.filetype = "http"
+		vim.cmd("set filetype=http") -- Explicitly set filetype
+		vim.defer_fn(function()
+			vim.cmd("runtime syntax/http.vim") -- Load syntax file
+			vim.cmd("setlocal syntax=http") -- Ensure syntax highlighting
+		end, 100) -- Delay to avoid conflicts with plugins like TrailBlazer
+	end,
 })
