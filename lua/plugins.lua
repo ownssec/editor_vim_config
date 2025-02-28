@@ -26,15 +26,23 @@ return require("packer").startup(function(use)
 
 	-- Auto close
 
-	use("m4xshen/autoclose.nvim")
-
 	use({
-		"windwp/nvim-ts-autotag",
-		after = "nvim-treesitter",
+		"altermo/ultimate-autopair.nvim",
+		event = { "InsertEnter", "CmdlineEnter" },
+		branch = "v0.6", --recommended as each new version will have breaking changes
 		config = function()
-			require("nvim-ts-autotag").setup()
+			require("ultimate-autopair").setup({
+				--Config goes here
+			})
 		end,
 	})
+	-- use({
+	-- 	"windwp/nvim-ts-autotag",
+	-- 	after = "nvim-treesitter",
+	-- 	config = function()
+	-- 		require("nvim-ts-autotag").setup()
+	-- 	end,
+	-- })
 
 	-- Git
 	use({
