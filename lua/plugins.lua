@@ -167,15 +167,6 @@ return require("packer").startup(function(use)
 	use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
 	use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
 
-	-- Add cmdline completion
-	-- use({
-	-- 	"hrsh7th/cmp-cmdline",
-	-- 	after = "nvim-cmp",
-	-- 	config = function()
-	-- 		require("config.cmpconf")
-	-- 	end,
-	-- })
-
 	-- formatter
 	use({
 		"stevearc/conform.nvim",

@@ -9,12 +9,6 @@ end
 -- Load lspkind for better icons (optional)
 local lspkind = require("lspkind")
 
--- Function to check if there's a word before cursor
-local has_words_before = function()
-	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-
 -- Configure nvim-cmp
 cmp.setup({
 	snippet = {
@@ -56,19 +50,6 @@ cmp.setup({
 		}),
 	},
 })
--- Cmdline completion
--- cmp.setup.cmdline(":", {
--- 	mapping = cmp.mapping.preset.cmdline(),
--- 	sources = cmp.config.sources({
--- 		{ name = "path" },
--- 		{ name = "cmdline" },
--- 	}, {
--- 		completion = {
--- 			keyword_length = 1, -- Trigger completion after typing the first letter
--- 		},
--- 	}),
--- })
-
 -- Set completion options
 vim.o.completeopt = "menuone,noinsert,noselect"
 
