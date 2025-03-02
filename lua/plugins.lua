@@ -126,7 +126,7 @@ return require("packer").startup(function(use)
 	-- 	config = function()
 	-- 		require("config.bufferline")
 	-- 	end,
-	-- })        jj
+	-- })
 
 	-- marking instead of bufferline
 	use({
@@ -177,15 +177,13 @@ return require("packer").startup(function(use)
 	use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
 
 	-- Add cmdline completion
-	use({
-		"hrsh7th/cmp-cmdline",
-		after = "nvim-cmp",
-		config = function()
-			require("config.cmpconf")
-		end,
-	})
-
-	--autopairs
+	-- use({
+	-- 	"hrsh7th/cmp-cmdline",
+	-- 	after = "nvim-cmp",
+	-- 	config = function()
+	-- 		require("config.cmpconf")
+	-- 	end,
+	-- })
 
 	-- formatter
 	use({
@@ -204,13 +202,6 @@ return require("packer").startup(function(use)
 	})
 
 	-- vim motion
-	-- use({
-	-- 	"easymotion/vim-easymotion",
-	-- 	config = function()
-	-- 		require("config.motion")
-	-- 	end,
-	-- })
-
 	use({
 		"rlane/pounce.nvim",
 		config = function()
@@ -225,6 +216,56 @@ return require("packer").startup(function(use)
 			vim.api.nvim_set_keymap("n", "f", "<cmd>Pounce<CR>", { noremap = true, silent = true })
 			vim.api.nvim_set_keymap("v", "f", "<cmd>Pounce<CR>", { noremap = true, silent = true })
 			vim.api.nvim_set_keymap("o", "f", "<cmd>Pounce<CR>", { noremap = true, silent = true })
+		end,
+	})
+
+	-- cmdline
+
+	use("roxma/nvim-yarp")
+	use("roxma/vim-hug-neovim-rpc")
+
+	use({
+		"gelguy/wilder.nvim",
+		config = function()
+			local wilder = require("wilder")
+			-- Initialize Wilder
+
+			wilder.setup({
+				modes = { ":", "/", "?" },
+				next_key = "<C-n>", -- Move to the next suggestion
+				previous_key = "<C-p>", -- Move to the previous suggestion
+				reject_key = "<C-c>", -- Reject the current suggestion
+			})
+
+			-- Set up pipelines
+			wilder.set_option("pipeline", {
+				wilder.branch(
+					wilder.python_file_finder_pipeline({
+						file_command = { "find", ".", "-type", "f", "-printf", "%P\n" },
+						dir_command = { "find", ".", "-type", "d", "-printf", "%P\n" },
+						filters = { "fuzzy_filter", "difflib_sorter" },
+					}),
+					wilder.cmdline_pipeline({
+						language = "python",
+						fuzzy = 1,
+					}),
+					wilder.python_search_pipeline({
+						pattern = wilder.python_fuzzy_pattern(),
+						sorter = wilder.python_difflib_sorter(),
+						engine = "re",
+					})
+				),
+			})
+
+			-- Set up renderer with highlighting
+			wilder.set_option(
+				"renderer",
+				wilder.popupmenu_renderer({
+					highlighter = wilder.basic_highlighter(), -- Enables per-word highlighting
+					left = { " ", wilder.popupmenu_devicons() }, -- Adds file-type icons
+					right = { " ", wilder.popupmenu_scrollbar() }, -- Adds scrollbar
+				})
+			)
 		end,
 	})
 end)

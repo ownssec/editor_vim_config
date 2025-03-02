@@ -57,17 +57,17 @@ cmp.setup({
 	},
 })
 -- Cmdline completion
-cmp.setup.cmdline(":", {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = cmp.config.sources({
-		{ name = "path" },
-		{ name = "cmdline" },
-	}, {
-		completion = {
-			keyword_length = 1, -- Trigger completion after typing the first letter
-		},
-	}),
-})
+-- cmp.setup.cmdline(":", {
+-- 	mapping = cmp.mapping.preset.cmdline(),
+-- 	sources = cmp.config.sources({
+-- 		{ name = "path" },
+-- 		{ name = "cmdline" },
+-- 	}, {
+-- 		completion = {
+-- 			keyword_length = 1, -- Trigger completion after typing the first letter
+-- 		},
+-- 	}),
+-- })
 
 -- Set completion options
 vim.o.completeopt = "menuone,noinsert,noselect"
