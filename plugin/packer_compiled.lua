@@ -209,6 +209,12 @@ _G.packer_plugins = {
     path = "/home/e/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  ["pounce.nvim"] = {
+    config = { "\27LJ\2\nå\2\0\0\6\0\15\0\0316\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\0016\0\4\0009\0\5\0009\0\6\0'\2\a\0'\3\b\0'\4\t\0005\5\n\0B\0\5\0016\0\4\0009\0\5\0009\0\6\0'\2\v\0'\3\b\0'\4\t\0005\5\f\0B\0\5\0016\0\4\0009\0\5\0009\0\6\0'\2\r\0'\3\b\0'\4\t\0005\5\14\0B\0\5\1K\0\1\0\1\0\2\vsilent\2\fnoremap\2\6o\1\0\2\vsilent\2\fnoremap\2\6v\1\0\2\vsilent\2\fnoremap\2\20<cmd>Pounce<CR>\6f\6n\20nvim_set_keymap\bapi\bvim\1\0\4\17multi_window\2\20accept_best_key\f<enter>\ndebug\1\16accept_keys)asdfghjklqwertyuiopzxcvbnm0123456789\nsetup\vpounce\frequire\0" },
+    loaded = true,
+    path = "/home/e/.local/share/nvim/site/pack/packer/start/pounce.nvim",
+    url = "https://github.com/rlane/pounce.nvim"
+  },
   ["toggleterm.nvim"] = {
     config = { "\27LJ\2\n1\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\22config.toggleterm\frequire\0" },
     loaded = true,
@@ -234,12 +240,6 @@ _G.packer_plugins = {
     only_cond = false,
     path = "/home/e/.local/share/nvim/site/pack/packer/opt/ultimate-autopair.nvim",
     url = "https://github.com/altermo/ultimate-autopair.nvim"
-  },
-  ["vim-easymotion"] = {
-    config = { "\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\18config.motion\frequire\0" },
-    loaded = true,
-    path = "/home/e/.local/share/nvim/site/pack/packer/start/vim-easymotion",
-    url = "https://github.com/easymotion/vim-easymotion"
   }
 }
 
@@ -248,6 +248,10 @@ time([[Defining packer_plugins]], false)
 time([[Config for conform.nvim]], true)
 try_loadstring("\27LJ\2\n.\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\19config.conform\frequire\0", "config", "conform.nvim")
 time([[Config for conform.nvim]], false)
+-- Config for: trailblazer.nvim
+time([[Config for trailblazer.nvim]], true)
+try_loadstring("\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\18config.trails\frequire\0", "config", "trailblazer.nvim")
+time([[Config for trailblazer.nvim]], false)
 -- Config for: nvim-lspconfig
 time([[Config for nvim-lspconfig]], true)
 try_loadstring("\27LJ\2\n*\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\15config.lsp\frequire\0", "config", "nvim-lspconfig")
@@ -256,14 +260,14 @@ time([[Config for nvim-lspconfig]], false)
 time([[Config for git-conflict.nvim]], true)
 try_loadstring("\27LJ\2\n2\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\23config.gitconflict\frequire\0", "config", "git-conflict.nvim")
 time([[Config for git-conflict.nvim]], false)
+-- Config for: pounce.nvim
+time([[Config for pounce.nvim]], true)
+try_loadstring("\27LJ\2\nå\2\0\0\6\0\15\0\0316\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\0016\0\4\0009\0\5\0009\0\6\0'\2\a\0'\3\b\0'\4\t\0005\5\n\0B\0\5\0016\0\4\0009\0\5\0009\0\6\0'\2\v\0'\3\b\0'\4\t\0005\5\f\0B\0\5\0016\0\4\0009\0\5\0009\0\6\0'\2\r\0'\3\b\0'\4\t\0005\5\14\0B\0\5\1K\0\1\0\1\0\2\vsilent\2\fnoremap\2\6o\1\0\2\vsilent\2\fnoremap\2\6v\1\0\2\vsilent\2\fnoremap\2\20<cmd>Pounce<CR>\6f\6n\20nvim_set_keymap\bapi\bvim\1\0\4\17multi_window\2\20accept_best_key\f<enter>\ndebug\1\16accept_keys)asdfghjklqwertyuiopzxcvbnm0123456789\nsetup\vpounce\frequire\0", "config", "pounce.nvim")
+time([[Config for pounce.nvim]], false)
 -- Config for: toggleterm.nvim
 time([[Config for toggleterm.nvim]], true)
 try_loadstring("\27LJ\2\n1\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\22config.toggleterm\frequire\0", "config", "toggleterm.nvim")
 time([[Config for toggleterm.nvim]], false)
--- Config for: tokyonight.nvim
-time([[Config for tokyonight.nvim]], true)
-try_loadstring("\27LJ\2\n,\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\17config.theme\frequire\0", "config", "tokyonight.nvim")
-time([[Config for tokyonight.nvim]], false)
 -- Config for: gitsigns.nvim
 time([[Config for gitsigns.nvim]], true)
 try_loadstring("\27LJ\2\n/\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\20config.gitsigns\frequire\0", "config", "gitsigns.nvim")
@@ -284,18 +288,14 @@ time([[Config for mini.nvim]], false)
 time([[Config for kulala.nvim]], true)
 try_loadstring("\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\18config.kulala\frequire\0", "config", "kulala.nvim")
 time([[Config for kulala.nvim]], false)
--- Config for: trailblazer.nvim
-time([[Config for trailblazer.nvim]], true)
-try_loadstring("\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\18config.trails\frequire\0", "config", "trailblazer.nvim")
-time([[Config for trailblazer.nvim]], false)
+-- Config for: tokyonight.nvim
+time([[Config for tokyonight.nvim]], true)
+try_loadstring("\27LJ\2\n,\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\17config.theme\frequire\0", "config", "tokyonight.nvim")
+time([[Config for tokyonight.nvim]], false)
 -- Config for: mason.nvim
 time([[Config for mason.nvim]], true)
 try_loadstring("\27LJ\2\n3\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\nmason\frequire\0", "config", "mason.nvim")
 time([[Config for mason.nvim]], false)
--- Config for: vim-easymotion
-time([[Config for vim-easymotion]], true)
-try_loadstring("\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\18config.motion\frequire\0", "config", "vim-easymotion")
-time([[Config for vim-easymotion]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd nvim-web-devicons ]]
@@ -309,9 +309,9 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au CmdlineEnter * ++once lua require("packer.load")({'ultimate-autopair.nvim'}, { event = "CmdlineEnter *" }, _G.packer_plugins)]]
 vim.cmd [[au BufEnter * ++once lua require("packer.load")({'lualine.nvim'}, { event = "BufEnter *" }, _G.packer_plugins)]]
 vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'ultimate-autopair.nvim', 'nvim-cmp'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au CmdlineEnter * ++once lua require("packer.load")({'ultimate-autopair.nvim'}, { event = "CmdlineEnter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 
