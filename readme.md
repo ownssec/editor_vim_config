@@ -21,6 +21,7 @@ Have git, make, pip, python, npm, node and cargo installed on your system.
 -- sudo apt install ripgrep
 -- sudo npm i -g neovim
 -- npm install -g tree-sitter-cli
+-- pip install pynvim
 
 --neovim install--
 

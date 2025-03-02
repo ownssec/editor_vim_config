@@ -129,12 +129,12 @@ return require("packer").startup(function(use)
 	-- })
 
 	-- marking instead of bufferline
-	use({
-		"LeonHeidelbach/trailblazer.nvim",
-		config = function()
-			require("config.trails")
-		end,
-	})
+	-- use({
+	-- 	"LeonHeidelbach/trailblazer.nvim",
+	-- 	config = function()
+	-- 		require("config.trails")
+	-- 	end,
+	-- })
 
 	-- Git Conflict plugin
 	use({
@@ -234,6 +234,7 @@ return require("packer").startup(function(use)
 				modes = { ":", "/", "?" },
 				next_key = "<C-n>", -- Move to the next suggestion
 				previous_key = "<C-p>", -- Move to the previous suggestion
+				accept_key = "<Tab>",
 				reject_key = "<C-c>", -- Reject the current suggestion
 			})
 
@@ -252,6 +253,7 @@ return require("packer").startup(function(use)
 					wilder.python_search_pipeline({
 						pattern = wilder.python_fuzzy_pattern(),
 						sorter = wilder.python_difflib_sorter(),
+						process_command = { "rg", "--vimgrep", "--smart-case" }, -- Searches inside files
 						engine = "re",
 					})
 				),
@@ -268,4 +270,6 @@ return require("packer").startup(function(use)
 			)
 		end,
 	})
+
+	-- grep fzf
 end)

@@ -11,7 +11,7 @@ require("trailblazer").setup({
 				peek_move_next_down = "]e",
 				peek_move_previous_up = "[e",
 				-- move_to_nearest = "<A-n>",
-				toggle_trail_mark_list = "<C-m>",
+				-- toggle_trail_mark_list = "<C-m>",
 			},
 			actions = {
 				delete_all_trail_marks = "[c",

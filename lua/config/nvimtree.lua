@@ -1,47 +1,46 @@
 local status, treesitter = pcall(require, "nvim-tree")
 if not status then
-  return
+	return
 end
 
 local function my_on_attach(bufnr)
-  local api = require("nvim-tree.api")
+	local api = require("nvim-tree.api")
 
-  local function opts(desc)
-    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-  end
+	local function opts(desc)
+		return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+	end
 
-  -- Set default mappings from nvim-tree
-  api.config.mappings.default_on_attach(bufnr)
+	-- Set default mappings from nvim-tree
+	api.config.mappings.default_on_attach(bufnr)
 
-  -- Custom key mappings
-  vim.keymap.set('n', '<C-e>', api.tree.toggle, opts('Toggle Tree'))
-  vim.keymap.set('n', 'f', api.tree.toggle_help, opts('Toggle Help'))
+	-- Custom key mappings
+	vim.keymap.set("n", "<C-e>", api.tree.toggle, opts("Toggle Tree"))
+	vim.keymap.set("n", "f", api.tree.toggle_help, opts("Toggle Help"))
 end
 
-require("nvim-tree").setup {
-  on_attach = my_on_attach,
-  view = {
-    width = 60,
-    number = true,
-    side = "left",
-    relativenumber = true
-  },
-  renderer = {
-    group_empty = true,
-  },
-  filters = {
-    dotfiles = false,
-    git_clean = false,
-    no_buffer = false,
-    custom = { "node_modules" },
-    exclude = { ".env" },
-  },
-  update_focused_file = {
-    enable = true,
-    update_cwd = true,
-  },
-  diagnostics = {
-    enable = true,
-  },
-}
-
+require("nvim-tree").setup({
+	on_attach = my_on_attach,
+	view = {
+		width = 60,
+		number = true,
+		side = "left",
+		relativenumber = true,
+	},
+	renderer = {
+		group_empty = true,
+	},
+	filters = {
+		dotfiles = false,
+		git_clean = false,
+		no_buffer = false,
+		custom = { "node_modules" },
+		exclude = { ".env" },
+	},
+	update_focused_file = {
+		enable = true,
+		update_cwd = true,
+	},
+	diagnostics = {
+		enable = true,
+	},
+})
