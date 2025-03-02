@@ -73,8 +73,6 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- use({ "windwp/nvim-ts-autotag", after = "nvim-treesitter" })
-
 	-- LSP
 	use({
 		"neovim/nvim-lspconfig",

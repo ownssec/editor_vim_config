@@ -17,22 +17,8 @@ cmp.setup({
 		end,
 	},
 	mapping = cmp.mapping.preset.insert({
-		-- ["<C-j>"] = cmp.mapping.scroll_docs(-4), -- Scroll documentation up
-		-- ["<C-k>"] = cmp.mapping.scroll_docs(4),  -- Scroll documentation down
 		["<C-e>"] = cmp.mapping.abort(), -- Close completion menu
 		["<Tab>"] = cmp.mapping.confirm({ select = true }),
-		-- ["<Tab>"] = cmp.mapping(function(fallback)
-		--     if cmp.visible() then
-		--         cmp.select_next_item()         -- Select the next item in the list
-		--         cmp.confirm({ select = true }) -- Confirm the selection
-		--     elseif has_words_before() then
-		--         cmp.complete()                 -- Trigger completion
-		--     else
-		--         fallback()                     -- Default action if no completion
-		--     end
-		-- end, { "i", "s" }),
-
-		-- Add Ctrl+n and Ctrl+p for navigating completion menu
 		["<C-n>"] = cmp.mapping.select_next_item(),
 		["<C-p>"] = cmp.mapping.select_prev_item(),
 	}),
