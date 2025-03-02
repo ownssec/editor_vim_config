@@ -8,10 +8,10 @@ require("trailblazer").setup({
 			motions = {
 				new_trail_mark = "ma",
 				-- track_back = "<A-b>",
-				peek_move_next_down = "]e",
-				peek_move_previous_up = "[e",
+				peek_move_next_down = "]t",
+				peek_move_previous_up = "[t",
 				-- move_to_nearest = "<A-n>",
-				-- toggle_trail_mark_list = "<C-m>",
+				toggle_trail_mark_list = "<A-m>",
 			},
 			actions = {
 				delete_all_trail_marks = "[c",
@@ -25,42 +25,12 @@ require("trailblazer").setup({
 		},
 	},
 	trail_options = {
-		mark_symbol = "✢", -- Used when trail_mark_symbol_line_indicators_enabled is true
-		newest_mark_symbol = "✢", -- Symbol for the most recent mark
-		cursor_mark_symbol = "✢", -- Symbol for the cursor mark
-		next_mark_symbol = "✢", -- Symbol for the next mark
-		previous_mark_symbol = "✢", -- Symbol for the previous mark
+		mark_symbol = "m", -- Used when trail_mark_symbol_line_indicators_enabled is true
+		newest_mark_symbol = "m", -- Symbol for the most recent mark
+		cursor_mark_symbol = "m", -- Symbol for the cursor mark
+		next_mark_symbol = "m", -- Symbol for the next mark
+		previous_mark_symbol = "m", -- Symbol for the previous mark
+		trail_mark_list_rows = 99999,
+		trail_mark_symbol_line_indicators_enabled = true,
 	},
 })
-
--- vim.api.nvim_create_autocmd("BufReadPost", {
--- 	callback = function()
--- 		vim.cmd("TrailBlazerLoadSession")
--- 	end,
--- })
-
--- Force set filetype for .http files on startup
--- vim.api.nvim_create_autocmd("VimEnter", {
--- 	callback = function()
--- 		for _, buf in ipairs(vim.api.nvim_list_bufs()) do
--- 			local bufname = vim.api.nvim_buf_get_name(buf)
--- 			if bufname:match("%.http$") then
--- 				vim.api.nvim_buf_set_option(buf, "filetype", "http")
--- 				vim.cmd("set filetype=http")
--- 			end
--- 		end
--- 	end,
--- })
-
--- Ensure .http files always have correct filetype and syntax
--- vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
--- 	pattern = "*.http",
--- 	callback = function()
--- 		vim.bo.filetype = "http"
--- 		vim.cmd("set filetype=http") -- Explicitly set filetype
--- 		vim.defer_fn(function()
--- 			vim.cmd("runtime syntax/http.vim") -- Load syntax file
--- 			vim.cmd("setlocal syntax=http") -- Ensure syntax highlighting
--- 		end, 100) -- Delay to avoid conflicts with plugins like TrailBlazer
--- 	end,
--- })

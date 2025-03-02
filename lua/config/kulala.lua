@@ -56,5 +56,19 @@ vim.api.nvim_create_autocmd("FileType", {
 			"<cmd>lua require('kulala').run()<CR>",
 			{ noremap = true, silent = true, desc = "Execute the request with Kulala" }
 		)
+
+		vim.api.nvim_set_keymap(
+			"n",
+			"[.",
+			"<cmd>lua require('kulala').set_selected_env()<CR>",
+			{ noremap = true, silent = true, desc = "Select environment with Kulala" }
+		)
+
+		vim.api.nvim_set_keymap(
+			"n",
+			"[a",
+			"<cmd>lua require('kulala').run_all()<CR>",
+			{ noremap = true, silent = true, desc = "Send all requests with Kulala" }
+		)
 	end,
 })
