@@ -119,22 +119,13 @@ return require("packer").startup(function(use)
 		requires = { "nvim-web-devicons" },
 	})
 
-	-- Bufferline.nvim (added plugin)
-	-- use({
-	-- 	"akinsho/bufferline.nvim",
-	-- 	tag = "*", -- specify the tag as '*'
-	-- 	config = function()
-	-- 		require("config.bufferline")
-	-- 	end,
-	-- })
-
 	-- marking instead of bufferline
-	-- use({
-	-- 	"LeonHeidelbach/trailblazer.nvim",
-	-- 	config = function()
-	-- 		require("config.trails")
-	-- 	end,
-	-- })
+	use({
+		"LeonHeidelbach/trailblazer.nvim",
+		config = function()
+			require("config.trails")
+		end,
+	})
 
 	-- Git Conflict plugin
 	use({
@@ -270,6 +261,4 @@ return require("packer").startup(function(use)
 			)
 		end,
 	})
-
-	-- grep fzf
 end)
