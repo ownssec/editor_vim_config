@@ -25,7 +25,6 @@ return require("packer").startup(function(use)
 	use("nvim-tree/nvim-web-devicons")
 
 	-- Auto close
-
 	use({
 		"altermo/ultimate-autopair.nvim",
 		event = { "InsertEnter", "CmdlineEnter" },
