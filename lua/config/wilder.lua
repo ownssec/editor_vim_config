@@ -41,29 +41,3 @@ wilder.set_option(
 		right = { " ", wilder.popupmenu_scrollbar() }, -- Adds scrollbar
 	})
 )
-
---- GREP
--- lua
-vim.opt.grepprg = "rg --vimgrep -uu"
-vim.opt.grepformat = "%f:%l:%c:%m"
-
--- lua
--- use <Leader>gg to open quickfix list and Grep for a query
-vim.keymap.set("n", "<C-o>", ":copen | :silent :grep ")
-vim.keymap.set("n", "<C-p>", ":e ")
-
--- use ]q and [q to cycle through quickfix list
-
-vim.keymap.set("n", "[q", function()
-	local qf_info = vim.fn.getqflist({ idx = 0, size = 0 })
-	if qf_info.size > 0 and qf_info.idx > 1 then
-		vim.cmd("cprev")
-	end
-end, { noremap = true, silent = true })
-
-vim.keymap.set("n", "]q", function()
-	local qf_info = vim.fn.getqflist({ idx = 0, size = 0 })
-	if qf_info.size > 0 and qf_info.idx < qf_info.size then
-		vim.cmd("cnext")
-	end
-end, { noremap = true, silent = true })
