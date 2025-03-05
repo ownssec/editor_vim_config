@@ -222,7 +222,7 @@ _G.packer_plugins = {
     url = "https://github.com/LeonHeidelbach/trailblazer.nvim"
   },
   ["ultimate-autopair.nvim"] = {
-    config = { "\27LJ\2\nC\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\22ultimate-autopair\frequire\0" },
+    config = { "\27LJ\2\nM\0\0\2\0\5\0\v6\0\0\0009\0\1\0009\0\2\0\6\0\3\0X\1\4€\6\0\4\0X\1\2€+\1\1\0X\2\1€+\1\2\0L\1\2\0\tjson\thttp\rfiletype\abo\bvim`\1\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0003\3\3\0=\3\5\2B\0\2\1K\0\1\0\fenabled\1\0\1\fenabled\0\0\nsetup\22ultimate-autopair\frequire\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
@@ -230,7 +230,7 @@ _G.packer_plugins = {
     url = "https://github.com/altermo/ultimate-autopair.nvim"
   },
   ["vim-grepper"] = {
-    config = { "\27LJ\2\nƒ\1\0\0\4\0\b\0\0186\0\0\0009\0\1\0009\0\2\0005\2\3\0B\0\2\0029\1\4\0)\2\0\0\1\2\1\0X\1\b€9\1\5\0)\2\1\0\1\2\1\0X\1\4€6\1\0\0009\1\6\1'\3\a\0B\1\2\1K\0\1\0\ncprev\bcmd\bidx\tsize\1\0\2\tsize\3\0\bidx\3\0\14getqflist\afn\bvimƒ\1\0\0\4\0\b\0\0186\0\0\0009\0\1\0009\0\2\0005\2\3\0B\0\2\0029\1\4\0)\2\0\0\1\2\1\0X\1\b€9\1\5\0009\2\4\0\1\1\2\0X\1\4€6\1\0\0009\1\6\1'\3\a\0B\1\2\1K\0\1\0\ncnext\bcmd\bidx\tsize\1\0\2\tsize\3\0\bidx\3\0\14getqflist\afn\bvimE\0\0\3\0\4\0\t6\0\0\0009\0\1\0'\2\2\0B\0\2\0016\0\0\0009\0\1\0'\2\3\0B\0\2\1K\0\1\0\15nohlsearch\vcclose\bcmd\bvim—\2\0\0\v\0\f\0(+\0\1\0006\1\0\0006\3\1\0009\3\2\0039\3\3\3B\3\1\0A\1\0\4X\4\14€6\6\1\0009\6\2\0069\6\4\0066\b\1\0009\b\2\b9\b\5\b\18\n\5\0B\b\2\2'\t\6\0B\6\3\2\a\6\a\0X\6\2€+\0\2\0X\1\2€E\4\3\3R\4ð\127\15\0\0\0X\1\t€6\1\1\0009\1\b\1'\3\t\0B\1\2\0016\1\1\0009\1\b\1'\3\n\0B\1\2\1X\1\4€6\1\1\0009\1\b\1'\3\v\0B\1\2\1K\0\1\0\ncopen\15nohlsearch\vcclose\bcmd\rquickfix\fbuftype\21nvim_win_get_buf\24nvim_buf_get_option\19nvim_list_wins\bapi\bvim\vipairsÕ\3\1\0\6\0\25\00006\0\0\0009\0\1\0'\1\3\0=\1\2\0006\0\0\0009\0\1\0'\1\5\0=\1\4\0006\0\0\0009\0\6\0009\0\a\0'\2\b\0'\3\t\0'\4\n\0005\5\v\0B\0\5\0016\0\0\0009\0\6\0009\0\a\0'\2\b\0'\3\f\0003\4\r\0005\5\14\0B\0\5\0016\0\0\0009\0\6\0009\0\a\0'\2\b\0'\3\15\0003\4\16\0005\5\17\0B\0\5\0016\0\0\0009\0\18\0009\0\19\0'\2\20\0003\3\21\0004\4\0\0B\0\4\0016\0\0\0009\0\6\0009\0\a\0'\2\b\0'\3\22\0003\4\23\0005\5\24\0B\0\5\1K\0\1\0\1\0\1\tdesc4Toggle Quickfix List and Clear Search Highlight\0\a[s\0\vCclose\29nvim_create_user_command\bapi\1\0\2\vsilent\2\fnoremap\2\0\n<C-n>\1\0\2\vsilent\2\fnoremap\2\0\n<C-p>\1\0\2\vsilent\2\fnoremap\2\28:Grepper -highlight<CR>\n<C-o>\6n\bset\vkeymap\16%f:%l:%c:%m\15grepformat\21rg --vimgrep -uu\fgrepprg\bopt\bvim\0" },
+    config = { "\27LJ\2\nƒ\1\0\0\4\0\b\0\0186\0\0\0009\0\1\0009\0\2\0005\2\3\0B\0\2\0029\1\4\0)\2\0\0\1\2\1\0X\1\b€9\1\5\0)\2\1\0\1\2\1\0X\1\4€6\1\0\0009\1\6\1'\3\a\0B\1\2\1K\0\1\0\ncprev\bcmd\bidx\tsize\1\0\2\tsize\3\0\bidx\3\0\14getqflist\afn\bvimƒ\1\0\0\4\0\b\0\0186\0\0\0009\0\1\0009\0\2\0005\2\3\0B\0\2\0029\1\4\0)\2\0\0\1\2\1\0X\1\b€9\1\5\0009\2\4\0\1\1\2\0X\1\4€6\1\0\0009\1\6\1'\3\a\0B\1\2\1K\0\1\0\ncnext\bcmd\bidx\tsize\1\0\2\tsize\3\0\bidx\3\0\14getqflist\afn\bvimE\0\0\3\0\4\0\t6\0\0\0009\0\1\0'\2\2\0B\0\2\0016\0\0\0009\0\1\0'\2\3\0B\0\2\1K\0\1\0\15nohlsearch\vcclose\bcmd\bvim—\2\0\0\v\0\f\0(+\0\1\0006\1\0\0006\3\1\0009\3\2\0039\3\3\3B\3\1\0A\1\0\4X\4\14€6\6\1\0009\6\2\0069\6\4\0066\b\1\0009\b\2\b9\b\5\b\18\n\5\0B\b\2\2'\t\6\0B\6\3\2\a\6\a\0X\6\2€+\0\2\0X\1\2€E\4\3\3R\4ð\127\15\0\0\0X\1\t€6\1\1\0009\1\b\1'\3\t\0B\1\2\0016\1\1\0009\1\b\1'\3\n\0B\1\2\1X\1\4€6\1\1\0009\1\b\1'\3\v\0B\1\2\1K\0\1\0\ncopen\15nohlsearch\vcclose\bcmd\rquickfix\fbuftype\21nvim_win_get_buf\24nvim_buf_get_option\19nvim_list_wins\bapi\bvim\vipairsÕ\3\1\0\6\0\25\00006\0\0\0009\0\1\0'\1\3\0=\1\2\0006\0\0\0009\0\1\0'\1\5\0=\1\4\0006\0\0\0009\0\6\0009\0\a\0'\2\b\0'\3\t\0'\4\n\0005\5\v\0B\0\5\0016\0\0\0009\0\6\0009\0\a\0'\2\b\0'\3\f\0003\4\r\0005\5\14\0B\0\5\0016\0\0\0009\0\6\0009\0\a\0'\2\b\0'\3\15\0003\4\16\0005\5\17\0B\0\5\0016\0\0\0009\0\18\0009\0\19\0'\2\20\0003\3\21\0004\4\0\0B\0\4\0016\0\0\0009\0\6\0009\0\a\0'\2\b\0'\3\22\0003\4\23\0005\5\24\0B\0\5\1K\0\1\0\1\0\1\tdesc4Toggle Quickfix List and Clear Search Highlight\0\a[s\0\vCclose\29nvim_create_user_command\bapi\1\0\2\fnoremap\2\vsilent\2\0\n<C-n>\1\0\2\fnoremap\2\vsilent\2\0\n<C-p>\1\0\2\fnoremap\2\vsilent\2\28:Grepper -highlight<CR>\n<C-o>\6n\bset\vkeymap\16%f:%l:%c:%m\15grepformat\21rg --vimgrep -uu\fgrepprg\bopt\bvim\0" },
     loaded = true,
     path = "/home/e/.local/share/nvim/site/pack/packer/start/vim-grepper",
     url = "https://github.com/mhinz/vim-grepper"
@@ -249,14 +249,26 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: conform.nvim
+time([[Config for conform.nvim]], true)
+try_loadstring("\27LJ\2\n.\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\19config.conform\frequire\0", "config", "conform.nvim")
+time([[Config for conform.nvim]], false)
+-- Config for: trailblazer.nvim
+time([[Config for trailblazer.nvim]], true)
+try_loadstring("\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\18config.trails\frequire\0", "config", "trailblazer.nvim")
+time([[Config for trailblazer.nvim]], false)
+-- Config for: git-conflict.nvim
+time([[Config for git-conflict.nvim]], true)
+try_loadstring("\27LJ\2\n2\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\23config.gitconflict\frequire\0", "config", "git-conflict.nvim")
+time([[Config for git-conflict.nvim]], false)
 -- Config for: pounce.nvim
 time([[Config for pounce.nvim]], true)
 try_loadstring("\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\18config.pounce\frequire\0", "config", "pounce.nvim")
 time([[Config for pounce.nvim]], false)
--- Config for: vim-grepper
-time([[Config for vim-grepper]], true)
-try_loadstring("\27LJ\2\nƒ\1\0\0\4\0\b\0\0186\0\0\0009\0\1\0009\0\2\0005\2\3\0B\0\2\0029\1\4\0)\2\0\0\1\2\1\0X\1\b€9\1\5\0)\2\1\0\1\2\1\0X\1\4€6\1\0\0009\1\6\1'\3\a\0B\1\2\1K\0\1\0\ncprev\bcmd\bidx\tsize\1\0\2\tsize\3\0\bidx\3\0\14getqflist\afn\bvimƒ\1\0\0\4\0\b\0\0186\0\0\0009\0\1\0009\0\2\0005\2\3\0B\0\2\0029\1\4\0)\2\0\0\1\2\1\0X\1\b€9\1\5\0009\2\4\0\1\1\2\0X\1\4€6\1\0\0009\1\6\1'\3\a\0B\1\2\1K\0\1\0\ncnext\bcmd\bidx\tsize\1\0\2\tsize\3\0\bidx\3\0\14getqflist\afn\bvimE\0\0\3\0\4\0\t6\0\0\0009\0\1\0'\2\2\0B\0\2\0016\0\0\0009\0\1\0'\2\3\0B\0\2\1K\0\1\0\15nohlsearch\vcclose\bcmd\bvim—\2\0\0\v\0\f\0(+\0\1\0006\1\0\0006\3\1\0009\3\2\0039\3\3\3B\3\1\0A\1\0\4X\4\14€6\6\1\0009\6\2\0069\6\4\0066\b\1\0009\b\2\b9\b\5\b\18\n\5\0B\b\2\2'\t\6\0B\6\3\2\a\6\a\0X\6\2€+\0\2\0X\1\2€E\4\3\3R\4ð\127\15\0\0\0X\1\t€6\1\1\0009\1\b\1'\3\t\0B\1\2\0016\1\1\0009\1\b\1'\3\n\0B\1\2\1X\1\4€6\1\1\0009\1\b\1'\3\v\0B\1\2\1K\0\1\0\ncopen\15nohlsearch\vcclose\bcmd\rquickfix\fbuftype\21nvim_win_get_buf\24nvim_buf_get_option\19nvim_list_wins\bapi\bvim\vipairsÕ\3\1\0\6\0\25\00006\0\0\0009\0\1\0'\1\3\0=\1\2\0006\0\0\0009\0\1\0'\1\5\0=\1\4\0006\0\0\0009\0\6\0009\0\a\0'\2\b\0'\3\t\0'\4\n\0005\5\v\0B\0\5\0016\0\0\0009\0\6\0009\0\a\0'\2\b\0'\3\f\0003\4\r\0005\5\14\0B\0\5\0016\0\0\0009\0\6\0009\0\a\0'\2\b\0'\3\15\0003\4\16\0005\5\17\0B\0\5\0016\0\0\0009\0\18\0009\0\19\0'\2\20\0003\3\21\0004\4\0\0B\0\4\0016\0\0\0009\0\6\0009\0\a\0'\2\b\0'\3\22\0003\4\23\0005\5\24\0B\0\5\1K\0\1\0\1\0\1\tdesc4Toggle Quickfix List and Clear Search Highlight\0\a[s\0\vCclose\29nvim_create_user_command\bapi\1\0\2\vsilent\2\fnoremap\2\0\n<C-n>\1\0\2\vsilent\2\fnoremap\2\0\n<C-p>\1\0\2\vsilent\2\fnoremap\2\28:Grepper -highlight<CR>\n<C-o>\6n\bset\vkeymap\16%f:%l:%c:%m\15grepformat\21rg --vimgrep -uu\fgrepprg\bopt\bvim\0", "config", "vim-grepper")
-time([[Config for vim-grepper]], false)
+-- Config for: wilder.nvim
+time([[Config for wilder.nvim]], true)
+try_loadstring("\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\18config.wilder\frequire\0", "config", "wilder.nvim")
+time([[Config for wilder.nvim]], false)
 -- Config for: nvim-treesitter
 time([[Config for nvim-treesitter]], true)
 try_loadstring("\27LJ\2\n1\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\22config.treesitter\frequire\0", "config", "nvim-treesitter")
@@ -265,6 +277,14 @@ time([[Config for nvim-treesitter]], false)
 time([[Config for gitsigns.nvim]], true)
 try_loadstring("\27LJ\2\n/\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\20config.gitsigns\frequire\0", "config", "gitsigns.nvim")
 time([[Config for gitsigns.nvim]], false)
+-- Config for: vim-grepper
+time([[Config for vim-grepper]], true)
+try_loadstring("\27LJ\2\nƒ\1\0\0\4\0\b\0\0186\0\0\0009\0\1\0009\0\2\0005\2\3\0B\0\2\0029\1\4\0)\2\0\0\1\2\1\0X\1\b€9\1\5\0)\2\1\0\1\2\1\0X\1\4€6\1\0\0009\1\6\1'\3\a\0B\1\2\1K\0\1\0\ncprev\bcmd\bidx\tsize\1\0\2\tsize\3\0\bidx\3\0\14getqflist\afn\bvimƒ\1\0\0\4\0\b\0\0186\0\0\0009\0\1\0009\0\2\0005\2\3\0B\0\2\0029\1\4\0)\2\0\0\1\2\1\0X\1\b€9\1\5\0009\2\4\0\1\1\2\0X\1\4€6\1\0\0009\1\6\1'\3\a\0B\1\2\1K\0\1\0\ncnext\bcmd\bidx\tsize\1\0\2\tsize\3\0\bidx\3\0\14getqflist\afn\bvimE\0\0\3\0\4\0\t6\0\0\0009\0\1\0'\2\2\0B\0\2\0016\0\0\0009\0\1\0'\2\3\0B\0\2\1K\0\1\0\15nohlsearch\vcclose\bcmd\bvim—\2\0\0\v\0\f\0(+\0\1\0006\1\0\0006\3\1\0009\3\2\0039\3\3\3B\3\1\0A\1\0\4X\4\14€6\6\1\0009\6\2\0069\6\4\0066\b\1\0009\b\2\b9\b\5\b\18\n\5\0B\b\2\2'\t\6\0B\6\3\2\a\6\a\0X\6\2€+\0\2\0X\1\2€E\4\3\3R\4ð\127\15\0\0\0X\1\t€6\1\1\0009\1\b\1'\3\t\0B\1\2\0016\1\1\0009\1\b\1'\3\n\0B\1\2\1X\1\4€6\1\1\0009\1\b\1'\3\v\0B\1\2\1K\0\1\0\ncopen\15nohlsearch\vcclose\bcmd\rquickfix\fbuftype\21nvim_win_get_buf\24nvim_buf_get_option\19nvim_list_wins\bapi\bvim\vipairsÕ\3\1\0\6\0\25\00006\0\0\0009\0\1\0'\1\3\0=\1\2\0006\0\0\0009\0\1\0'\1\5\0=\1\4\0006\0\0\0009\0\6\0009\0\a\0'\2\b\0'\3\t\0'\4\n\0005\5\v\0B\0\5\0016\0\0\0009\0\6\0009\0\a\0'\2\b\0'\3\f\0003\4\r\0005\5\14\0B\0\5\0016\0\0\0009\0\6\0009\0\a\0'\2\b\0'\3\15\0003\4\16\0005\5\17\0B\0\5\0016\0\0\0009\0\18\0009\0\19\0'\2\20\0003\3\21\0004\4\0\0B\0\4\0016\0\0\0009\0\6\0009\0\a\0'\2\b\0'\3\22\0003\4\23\0005\5\24\0B\0\5\1K\0\1\0\1\0\1\tdesc4Toggle Quickfix List and Clear Search Highlight\0\a[s\0\vCclose\29nvim_create_user_command\bapi\1\0\2\fnoremap\2\vsilent\2\0\n<C-n>\1\0\2\fnoremap\2\vsilent\2\0\n<C-p>\1\0\2\fnoremap\2\vsilent\2\28:Grepper -highlight<CR>\n<C-o>\6n\bset\vkeymap\16%f:%l:%c:%m\15grepformat\21rg --vimgrep -uu\fgrepprg\bopt\bvim\0", "config", "vim-grepper")
+time([[Config for vim-grepper]], false)
+-- Config for: mason.nvim
+time([[Config for mason.nvim]], true)
+try_loadstring("\27LJ\2\n3\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\nmason\frequire\0", "config", "mason.nvim")
+time([[Config for mason.nvim]], false)
 -- Config for: toggleterm.nvim
 time([[Config for toggleterm.nvim]], true)
 try_loadstring("\27LJ\2\n1\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\22config.toggleterm\frequire\0", "config", "toggleterm.nvim")
@@ -273,10 +293,10 @@ time([[Config for toggleterm.nvim]], false)
 time([[Config for kulala.nvim]], true)
 try_loadstring("\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\18config.kulala\frequire\0", "config", "kulala.nvim")
 time([[Config for kulala.nvim]], false)
--- Config for: wilder.nvim
-time([[Config for wilder.nvim]], true)
-try_loadstring("\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\18config.wilder\frequire\0", "config", "wilder.nvim")
-time([[Config for wilder.nvim]], false)
+-- Config for: tokyonight.nvim
+time([[Config for tokyonight.nvim]], true)
+try_loadstring("\27LJ\2\n,\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\17config.theme\frequire\0", "config", "tokyonight.nvim")
+time([[Config for tokyonight.nvim]], false)
 -- Config for: LuaSnip
 time([[Config for LuaSnip]], true)
 try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fluasnip\frequire\0", "config", "LuaSnip")
@@ -285,26 +305,6 @@ time([[Config for LuaSnip]], false)
 time([[Config for nvim-lspconfig]], true)
 try_loadstring("\27LJ\2\n*\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\15config.lsp\frequire\0", "config", "nvim-lspconfig")
 time([[Config for nvim-lspconfig]], false)
--- Config for: conform.nvim
-time([[Config for conform.nvim]], true)
-try_loadstring("\27LJ\2\n.\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\19config.conform\frequire\0", "config", "conform.nvim")
-time([[Config for conform.nvim]], false)
--- Config for: mason.nvim
-time([[Config for mason.nvim]], true)
-try_loadstring("\27LJ\2\n3\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\nmason\frequire\0", "config", "mason.nvim")
-time([[Config for mason.nvim]], false)
--- Config for: trailblazer.nvim
-time([[Config for trailblazer.nvim]], true)
-try_loadstring("\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\18config.trails\frequire\0", "config", "trailblazer.nvim")
-time([[Config for trailblazer.nvim]], false)
--- Config for: tokyonight.nvim
-time([[Config for tokyonight.nvim]], true)
-try_loadstring("\27LJ\2\n,\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\17config.theme\frequire\0", "config", "tokyonight.nvim")
-time([[Config for tokyonight.nvim]], false)
--- Config for: git-conflict.nvim
-time([[Config for git-conflict.nvim]], true)
-try_loadstring("\27LJ\2\n2\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\23config.gitconflict\frequire\0", "config", "git-conflict.nvim")
-time([[Config for git-conflict.nvim]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd nvim-web-devicons ]]
@@ -318,9 +318,9 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
+vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'ultimate-autopair.nvim', 'nvim-cmp'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
 vim.cmd [[au CmdlineEnter * ++once lua require("packer.load")({'ultimate-autopair.nvim'}, { event = "CmdlineEnter *" }, _G.packer_plugins)]]
 vim.cmd [[au BufEnter * ++once lua require("packer.load")({'lualine.nvim'}, { event = "BufEnter *" }, _G.packer_plugins)]]
-vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'nvim-cmp', 'ultimate-autopair.nvim'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 

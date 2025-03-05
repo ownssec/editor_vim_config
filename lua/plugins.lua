@@ -32,6 +32,11 @@ return require("packer").startup(function(use)
 		config = function()
 			require("ultimate-autopair").setup({
 				--Config goes here
+				enabled = function()
+					-- Enable only for .http and .json files
+					local ft = vim.bo.filetype
+					return ft == "http" or ft == "json"
+				end,
 			})
 		end,
 	})
