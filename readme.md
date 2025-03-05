@@ -22,6 +22,7 @@ Have git, make, pip, python, npm, node and cargo installed on your system.
 -- sudo npm i -g neovim
 -- npm install -g tree-sitter-cli
 -- pip install pynvim
+-- npm install -g prettier
 
 --neovim install--
 
