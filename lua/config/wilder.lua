@@ -15,8 +15,35 @@ wilder.setup({
 wilder.set_option("pipeline", {
 	wilder.branch(
 		wilder.python_file_finder_pipeline({
-			file_command = { "find", ".", "-type", "f", "-printf", "%P\n" },
-			dir_command = { "find", ".", "-type", "d", "-printf", "%P\n" },
+			file_command = {
+				"find",
+				".",
+				"-type",
+				"f",
+				"!",
+				"-path",
+				"*/.git/*",
+				"!",
+				"-path",
+				"*/node_modules/*",
+				"-printf",
+				"%P\n",
+			},
+			dir_command = {
+				"find",
+				".",
+				"-type",
+				"d",
+				"!",
+				"-path",
+				"*/.git/*",
+				"!",
+				"-path",
+				"*/node_modules/*",
+				"-printf",
+				"%P\n",
+			},
+
 			filters = { "fuzzy_filter", "difflib_sorter" },
 		}),
 		wilder.cmdline_pipeline({
