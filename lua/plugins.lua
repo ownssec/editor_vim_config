@@ -115,12 +115,12 @@ return require("packer").startup(function(use)
 	})
 
 	-- marking instead of bufferline
-	use({
-		"LeonHeidelbach/trailblazer.nvim",
-		config = function()
-			require("config.trails")
-		end,
-	})
+	-- use({
+	-- 	"LeonHeidelbach/trailblazer.nvim",
+	-- 	config = function()
+	-- 		require("config.trails")
+	-- 	end,
+	-- })
 
 	-- Git Conflict plugin
 	use({
@@ -259,6 +259,15 @@ return require("packer").startup(function(use)
 					vim.cmd("copen")
 				end
 			end, { desc = "Toggle Quickfix List and Clear Search Highlight" })
+		end,
+	})
+
+	-- Bufferline.nvim (added plugin)
+	use({
+		"akinsho/bufferline.nvim",
+		tag = "*", -- specify the tag as '*'
+		config = function()
+			require("config.bufferline")
 		end,
 	})
 

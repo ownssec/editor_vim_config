@@ -6,7 +6,8 @@ require("kulala").setup({
 	transparent = false,
 	terminal_colors = true,
 	winbar = true,
-	default_winbar_panes = { "body", "headers", "verbose" },
+	default_winbar_panes = { "body", "verbose", "report" },
+	-- default_winbar_panes = { "body", "headers", "verbose" },
 	styles = {
 		comments = { italic = true },
 		keywords = { italic = true },
