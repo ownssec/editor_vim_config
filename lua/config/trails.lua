@@ -11,7 +11,7 @@ require("trailblazer").setup({
 				peek_move_next_down = "]t",
 				peek_move_previous_up = "[t",
 				-- move_to_nearest = "<A-n>",
-				toggle_trail_mark_list = "<A-m>",
+				toggle_trail_mark_list = "<c-m>",
 			},
 			actions = {
 				delete_all_trail_marks = "[c",
@@ -31,7 +31,13 @@ require("trailblazer").setup({
 		cursor_mark_symbol = "m", -- Symbol for the cursor mark
 		next_mark_symbol = "m", -- Symbol for the next mark
 		previous_mark_symbol = "m", -- Symbol for the previous mark
-		trail_mark_list_rows = 99999,
+		trail_mark_list_rows = 10,
 		trail_mark_symbol_line_indicators_enabled = true,
 	},
 })
+
+vim.cmd([[highlight TrailBlazerTrailMarkHL guifg=NONE guibg=NONE]])
+vim.cmd([[highlight TrailBlazerNewestTrailMarkHL guifg=NONE guibg=NONE]])
+vim.cmd([[highlight TrailBlazerCursorTrailMarkHL guifg=NONE guibg=NONE]])
+vim.cmd([[highlight TrailBlazerNextTrailMarkHL guifg=NONE guibg=NONE]])
+vim.cmd([[highlight TrailBlazerPreviousTrailMarkHL guifg=NONE guibg=NONE]])
