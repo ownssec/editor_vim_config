@@ -32,6 +32,84 @@ require("trailblazer").setup({
 		next_mark_symbol = "m", -- Symbol for the next mark
 		previous_mark_symbol = "m", -- Symbol for the previous mark
 		trail_mark_list_rows = 10,
-		trail_mark_symbol_line_indicators_enabled = true,
+		trail_mark_symbor_line_indicators_enabled = true,
+	},
+	hl_groups = {
+		TrailBlazerTrailMark = {
+			-- You can add any valid highlight group attribute to this table
+			guifg = "none",
+			guibg = "none",
+			gui = "none",
+		},
+		TrailBlazerTrailMarkNext = {
+			guifg = "none",
+			guibg = "none",
+			gui = "none",
+		},
+		TrailBlazerTrailMarkPrevious = {
+			guifg = "none",
+			guibg = "none",
+			gui = "none",
+		},
+		TrailBlazerTrailMarkCursor = {
+			guifg = "none",
+			guibg = "none",
+			gui = "none",
+		},
+		TrailBlazerTrailMarkNewest = {
+			guifg = "none",
+			guibg = "none",
+			gui = "none",
+		},
+		TrailBlazerTrailMarkCustomOrd = {
+			guifg = "none",
+			guibg = "none",
+			gui = "none",
+		},
+		TrailBlazerTrailMarkGlobalChron = {
+			guifg = "none",
+			guibg = "none",
+			gui = "none",
+		},
+		TrailBlazerTrailMarkGlobalBufLineSorted = {
+			guifg = "none",
+			guibg = "none",
+			gui = "none",
+		},
+		TrailBlazerTrailMarkGlobalFpathLineSorted = {
+			guifg = "none",
+			guibg = "none",
+			gui = "none",
+		},
+		TrailBlazerTrailMarkGlobalChronBufLineSorted = {
+			guifg = "none",
+			guibg = "none",
+			gui = "none",
+		},
+		TrailBlazerTrailMarkGlobalChronFpathLineSorted = {
+			guifg = "none",
+			guibg = "none",
+			gui = "none",
+		},
+		TrailBlazerTrailMarkGlobalChronBufSwitchGroupChron = {
+			guifg = "none",
+			guibg = "none",
+			gui = "none",
+		},
+		TrailBlazerTrailMarkGlobalChronBufSwitchGroupLineSorted = {
+			guifg = "none",
+			guibg = "none",
+			gui = "none",
+		},
+		TrailBlazerTrailMarkBufferLocalChron = {
+			guifg = "none",
+			guibg = "none",
+			gui = "none",
+		},
+		TrailBlazerTrailMarkBufferLocalLineSorted = {
+			guifg = "none",
+			guibg = "none",
+			gui = "none",
+		},
 	},
 })
