@@ -1,7 +1,7 @@
 require("trailblazer").setup({
 	auto_save_trailblazer_state_on_exit = true,
 	auto_load_trailblazer_state_on_enter = true,
-	trail_mark_session_storage_dir = vim.fn.stdpath("data") .. "/trailblazer",
+	custom_session_storage_dir = "",
 	-- your custom config goes here
 	mappings = { -- rename this to "force_mappings" to completely override default mappings and not merge with them
 		nv = { -- Mode union: normal & visual mode. Can be extended by adding i, x, ...
@@ -35,9 +35,3 @@ require("trailblazer").setup({
 		trail_mark_symbol_line_indicators_enabled = true,
 	},
 })
-
-vim.cmd([[highlight TrailBlazerTrailMarkHL guifg=NONE guibg=NONE]])
-vim.cmd([[highlight TrailBlazerNewestTrailMarkHL guifg=NONE guibg=NONE]])
-vim.cmd([[highlight TrailBlazerCursorTrailMarkHL guifg=NONE guibg=NONE]])
-vim.cmd([[highlight TrailBlazerNextTrailMarkHL guifg=NONE guibg=NONE]])
-vim.cmd([[highlight TrailBlazerPreviousTrailMarkHL guifg=NONE guibg=NONE]])
