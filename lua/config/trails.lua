@@ -24,6 +24,7 @@ require("trailblazer").setup({
 			},
 		},
 	},
+	trail_mark_in_text_highlights_enabled = false,
 	trail_options = {
 		mark_symbol = "m", -- Used when trail_mark_symbol_line_indicators_enabled is true
 		newest_mark_symbol = "m", -- Symbol for the most recent mark
