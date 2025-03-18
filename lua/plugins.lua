@@ -115,12 +115,12 @@ return require("packer").startup(function(use)
 	})
 
 	-- marking instead of bufferline
-	use({
-		"LeonHeidelbach/trailblazer.nvim",
-		config = function()
-			require("config.trails")
-		end,
-	})
+	-- use({
+	-- 	"LeonHeidelbach/trailblazer.nvim",
+	-- 	config = function()
+	-- 		require("config.trails")
+	-- 	end,
+	-- })
 
 	-- Git Conflict plugin
 	use({
