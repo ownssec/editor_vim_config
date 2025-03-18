@@ -96,14 +96,6 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	--fuzzy finder and mini picker
-	-- use({
-	-- 	"echasnovski/mini.nvim",
-	-- 	config = function()
-	-- 		require("config.mini")
-	-- 	end,
-	-- })
-
 	-- Statusline
 	use({
 		"nvim-lualine/lualine.nvim",
@@ -113,14 +105,6 @@ return require("packer").startup(function(use)
 		end,
 		requires = { "nvim-web-devicons" },
 	})
-
-	-- marking instead of bufferline
-	-- use({
-	-- 	"LeonHeidelbach/trailblazer.nvim",
-	-- 	config = function()
-	-- 		require("config.trails")
-	-- 	end,
-	-- })
 
 	-- Git Conflict plugin
 	use({
@@ -198,44 +182,10 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- autosession
-	-- use({
-	-- 	"rmagatti/auto-session",
-	-- 	config = function()
-	-- 		require("auto-session").setup({
-	-- 			suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
-	-- 		})
-	-- 	end,
-	-- })
-
 	use({
 		"mhinz/vim-grepper",
 		config = function()
 			require("config.grepper")
 		end,
 	})
-
-	-- php
-	-- use({
-	-- 	"gbprod/phpactor.nvim",
-	-- 	requires = { "nvim-lua/plenary.nvim" },
-	-- 	config = function()
-	-- 		require("phpactor").setup({
-	-- 			install = {
-	-- 				path = vim.fn.stdpath("data") .. "/phpactor",
-	-- 			},
-	-- 			lspconfig = {
-	-- 				enabled = true,
-	-- 			},
-	-- 			keymaps = {
-	-- 				["gd"] = "definition", -- Go to definition
-	-- 				["gr"] = "references", -- Find references
-	-- 				["gi"] = "implementation", -- Go to implementation
-	-- 				-- ["<leader>rn"] = "rename", -- Rename symbol
-	-- 				-- ["<leader>cc"] = "class_new",
-	-- 				-- ["<leader>cm"] = "context_menu",
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- })
 end)
