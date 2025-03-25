@@ -97,14 +97,14 @@ return require("packer").startup(function(use)
 	})
 
 	-- Statusline
-	use({
-		"nvim-lualine/lualine.nvim",
-		event = "BufEnter",
-		config = function()
-			require("config.lualine")
-		end,
-		requires = { "nvim-web-devicons" },
-	})
+	-- use({
+	-- 	"nvim-lualine/lualine.nvim",
+	-- 	event = "BufEnter",
+	-- 	config = function()
+	-- 		require("config.lualine")
+	-- 	end,
+	-- 	requires = { "nvim-web-devicons" },
+	-- })
 
 	-- Git Conflict plugin
 	use({
