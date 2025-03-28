@@ -1,4 +1,5 @@
 require("settings")
 require("plugins")
 require("keymap")
-require("buffer")
+local buffer_utils = require("buffer_utils")
+buffer_utils.setup()
