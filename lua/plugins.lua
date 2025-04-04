@@ -188,4 +188,13 @@ return require("packer").startup(function(use)
 			require("config.grepper")
 		end,
 	})
+
+	-- Bufferline.nvim (added plugin)
+	use({
+		"akinsho/bufferline.nvim",
+		tag = "*", -- specify the tag as '*'
+		config = function()
+			require("config.bufferline")
+		end,
+	})
 end)

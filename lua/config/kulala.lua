@@ -60,11 +60,28 @@ vim.api.nvim_create_autocmd("FileType", {
 
 		vim.api.nvim_set_keymap(
 			"n",
-			"[.",
-			"<cmd>lua require('kulala').set_selected_env()<CR>",
+			"[1",
+			"<cmd>lua require('kulala').set_selected_env('dev')<CR>",
 			{ noremap = true, silent = true, desc = "Select environment with Kulala" }
 		)
-
+		vim.api.nvim_set_keymap(
+			"n",
+			"[2",
+			"<cmd>lua require('kulala').set_selected_env('testing')<CR>",
+			{ noremap = true, silent = true, desc = "Select environment with Kulala" }
+		)
+		vim.api.nvim_set_keymap(
+			"n",
+			"[3",
+			"<cmd>lua require('kulala').set_selected_env('stating')<CR>",
+			{ noremap = true, silent = true, desc = "Select environment with Kulala" }
+		)
+		vim.api.nvim_set_keymap(
+			"n",
+			"[4",
+			"<cmd>lua require('kulala').set_selected_env('prod')<CR>",
+			{ noremap = true, silent = true, desc = "Select environment with Kulala" }
+		)
 		vim.api.nvim_set_keymap(
 			"n",
 			"[a",
