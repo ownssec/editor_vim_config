@@ -10,19 +10,29 @@ https://www.nerdfonts.com/font-downloads
 Make sure you have installed the latest version of Neovim v0.9.0++.
 Have git, make, pip, python, npm, node and cargo installed on your system.
 
--- npm i -g typescript-language-server
--- npm install -g eslint_d
--- cargo install stylua
--- sudo apt install shellcheck
--- pip install pylint
--- cargo install stylua
--- sudo apt install luarocks
--- sudo luarocks install jsregexp
--- sudo apt install ripgrep
--- sudo npm i -g neovim
--- npm install -g tree-sitter-cli
--- pip install pynvim
--- npm install -g prettier
+#!/bin/bash
+
+# Node tools
+npm install -g \
+  typescript-language-server \
+  eslint_d \
+  neovim \
+  tree-sitter-cli \
+  prettier
+
+# Rust tools
+cargo install stylua
+
+# Python tools
+pip install pynvim pylint
+
+# Apt packages
+sudo apt update
+sudo apt install -y shellcheck luarocks ripgrep
+
+# LuaRocks
+sudo luarocks install jsregexp
+
 
 --neovim install--
 
