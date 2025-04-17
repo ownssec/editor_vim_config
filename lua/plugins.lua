@@ -143,8 +143,34 @@ return require("packer").startup(function(use)
 	})
 
 	use({
-		"jdhao/blink.nvim-cmp",
-		requires = { "hrsh7th/nvim-cmp" },
+		"saghen/blink.cmp",
+		requires = {
+			"rafamadriz/friendly-snippets", -- optional for snippet support
+		},
+		run = function()
+			-- Only required if you're building from source manually (e.g., no prebuilt binary available)
+			-- Uncomment below if you want to force build:
+			-- vim.fn.system { "cargo", "build", "--release" }
+		end,
+		config = function()
+			require("blink.cmp").setup({
+				keymap = "default", -- 'default', 'super-tab', 'enter', or 'none'
+				appearance = {
+					nerd_font_variant = "mono", -- use 'mono' or 'normal'
+				},
+				completion = {
+					documentation = {
+						auto_show = false,
+					},
+				},
+				sources = {
+					default = { "lsp", "path", "snippets", "buffer" },
+				},
+				fuzzy = {
+					implementation = "prefer_rust_with_warning", -- or 'lua', or 'rust'
+				},
+			})
+		end,
 	})
 
 	use("hrsh7th/cmp-nvim-lsp")
