@@ -22,19 +22,42 @@ cmp.setup({
 		["<C-n>"] = cmp.mapping.select_next_item(),
 		["<C-p>"] = cmp.mapping.select_prev_item(),
 	}),
+
 	sources = cmp.config.sources({
+		{ name = "blink" },
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 		{ name = "buffer" },
 		{ name = "path" },
 	}),
+
 	formatting = {
-		format = lspkind.cmp_format({
-			mode = "symbol_text", -- Show symbols + text
-			maxwidth = 50, -- Max width for completion items
-			ellipsis_char = "...", -- Show "..." for truncated text
-		}),
+		format = function(entry, vim_item)
+			vim_item = lspkind.cmp_format({
+				mode = "symbol_text",
+				maxwidth = 50,
+				ellipsis_char = "...",
+			})(entry, vim_item)
+
+			if entry.source.name == "blink" then
+				vim_item.kind = "🧠 [Blink]"
+			end
+			return vim_item
+		end,
 	},
+	-- sources = cmp.config.sources({
+	-- 	{ name = "nvim_lsp" },
+	-- 	{ name = "luasnip" },
+	-- 	{ name = "buffer" },
+	-- 	{ name = "path" },
+	-- }),
+	-- formatting = {
+	-- 	format = lspkind.cmp_format({
+	-- 		mode = "symbol_text", -- Show symbols + text
+	-- 		maxwidth = 50, -- Max width for completion items
+	-- 		ellipsis_char = "...", -- Show "..." for truncated text
+	-- 	}),
+	-- },
 })
 -- Set completion options
 vim.o.completeopt = "menuone,noinsert,noselect"

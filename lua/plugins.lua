@@ -142,6 +142,11 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	use({
+		"jdhao/blink.nvim-cmp",
+		requires = { "hrsh7th/nvim-cmp" },
+	})
+
 	use("hrsh7th/cmp-nvim-lsp")
 	use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
 	use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
@@ -195,6 +200,26 @@ return require("packer").startup(function(use)
 		tag = "*", -- specify the tag as '*'
 		config = function()
 			require("config.bufferline")
+		end,
+	})
+
+	-- cursor
+	use({
+		"sphamba/smear-cursor.nvim",
+		config = function()
+			require("smear_cursor").setup({
+				cursor_color = "#ffffff", -- Cursor smear color
+				normal_bg = "#1e1e2e", -- Background color of your theme
+				smear_between_buffers = true, -- Enable smear when switching buffers
+				smear_between_neighbor_lines = true, -- Smear on line-to-line movement
+				legacy_computing_symbols_support = false, -- Set to true if your font supports legacy block characters
+				transparent_bg_fallback_color = "#1e1e2e", -- Fallback for transparent backgrounds
+				stiffness = 0.8, -- Smear stiffness
+				trailing_stiffness = 0.4, -- Trailing effect stiffness
+				trailing_exponent = 0.1, -- Exponent for trail decay
+				distance_stop_animating = 1, -- Distance threshold to stop smear
+				hide_target_hack = false, -- Hides the target cursor for a smoother smear
+			})
 		end,
 	})
 end)
