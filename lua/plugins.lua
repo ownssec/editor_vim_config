@@ -248,4 +248,13 @@ return require("packer").startup(function(use)
 			})
 		end,
 	})
+
+	-- print using js
+
+	use({
+		"andrewferrier/debugprint.nvim",
+		config = function()
+			require("debugprint").setup()
+		end,
+	})
 end)
