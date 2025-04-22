@@ -80,12 +80,6 @@ _G.packer_plugins = {
     path = "/home/e/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
-  ["blink.cmp"] = {
-    config = { "\27LJ\2\ní\2\0\0\5\0\16\0\0196\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\a\0005\4\6\0=\4\b\3=\3\t\0025\3\v\0005\4\n\0=\4\f\3=\3\r\0025\3\14\0=\3\15\2B\0\2\1K\0\1\0\nfuzzy\1\0\1\19implementation\29prefer_rust_with_warning\fsources\fdefault\1\0\1\fdefault\0\1\5\0\0\blsp\tpath\rsnippets\vbuffer\15completion\18documentation\1\0\1\18documentation\0\1\0\1\14auto_show\1\15appearance\1\0\1\22nerd_font_variant\tmono\1\0\5\nfuzzy\0\15completion\0\15appearance\0\fsources\0\vkeymap\fdefault\nsetup\14blink.cmp\frequire\0" },
-    loaded = true,
-    path = "/home/e/.local/share/nvim/site/pack/packer/start/blink.cmp",
-    url = "https://github.com/saghen/blink.cmp"
-  },
   ["bufferline.nvim"] = {
     config = { "\27LJ\2\n1\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\22config.bufferline\frequire\0" },
     loaded = true,
@@ -129,11 +123,6 @@ _G.packer_plugins = {
     path = "/home/e/.local/share/nvim/site/pack/packer/start/debugprint.nvim",
     url = "https://github.com/andrewferrier/debugprint.nvim"
   },
-  ["friendly-snippets"] = {
-    loaded = true,
-    path = "/home/e/.local/share/nvim/site/pack/packer/start/friendly-snippets",
-    url = "https://github.com/rafamadriz/friendly-snippets"
-  },
   ["git-conflict.nvim"] = {
     config = { "\27LJ\2\n2\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\23config.gitconflict\frequire\0" },
     loaded = true,
@@ -164,7 +153,7 @@ _G.packer_plugins = {
     url = "https://github.com/williamboman/mason.nvim"
   },
   ["nvim-cmp"] = {
-    after = { "cmp-buffer", "cmp-path" },
+    after = { "cmp-path", "cmp-buffer" },
     config = { "\27LJ\2\n.\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\19config.cmpconf\frequire\0" },
     loaded = false,
     needs_bufread = false,
@@ -219,7 +208,7 @@ _G.packer_plugins = {
     url = "https://github.com/rlane/pounce.nvim"
   },
   ["smear-cursor.nvim"] = {
-    config = { "\27LJ\2\ná\2\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\v\28distance_stop_animating\3\1\22trailing_exponent\4š³æÌ\t™³æý\3\23trailing_stiffness\4š³æÌ\t™³æþ\3\14stiffness\4š³æÌ\t™³¦ÿ\3\"transparent_bg_fallback_color\f#1e1e2e%legacy_computing_symbols_support\1!smear_between_neighbor_lines\2\26smear_between_buffers\2\14normal_bg\f#1e1e2e\17cursor_color\f#ffffff\21hide_target_hack\1\nsetup\17smear_cursor\frequire\0" },
+    config = { "\27LJ\2\ná\2\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\v\26smear_between_buffers\2\14normal_bg\f#1e1e2e\17cursor_color\f#ffffff\21hide_target_hack\1\28distance_stop_animating\3\1\22trailing_exponent\4š³æÌ\t™³æý\3\23trailing_stiffness\4š³æÌ\t™³æþ\3\14stiffness\4š³æÌ\t™³¦ÿ\3\"transparent_bg_fallback_color\f#1e1e2e%legacy_computing_symbols_support\1!smear_between_neighbor_lines\2\nsetup\17smear_cursor\frequire\0" },
     loaded = true,
     path = "/home/e/.local/share/nvim/site/pack/packer/start/smear-cursor.nvim",
     url = "https://github.com/sphamba/smear-cursor.nvim"
@@ -264,74 +253,70 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: LuaSnip
-time([[Config for LuaSnip]], true)
-try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fluasnip\frequire\0", "config", "LuaSnip")
-time([[Config for LuaSnip]], false)
--- Config for: vim-grepper
-time([[Config for vim-grepper]], true)
-try_loadstring("\27LJ\2\n.\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\19config.grepper\frequire\0", "config", "vim-grepper")
-time([[Config for vim-grepper]], false)
--- Config for: gitsigns.nvim
-time([[Config for gitsigns.nvim]], true)
-try_loadstring("\27LJ\2\n/\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\20config.gitsigns\frequire\0", "config", "gitsigns.nvim")
-time([[Config for gitsigns.nvim]], false)
--- Config for: bufferline.nvim
-time([[Config for bufferline.nvim]], true)
-try_loadstring("\27LJ\2\n1\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\22config.bufferline\frequire\0", "config", "bufferline.nvim")
-time([[Config for bufferline.nvim]], false)
 -- Config for: kulala.nvim
 time([[Config for kulala.nvim]], true)
 try_loadstring("\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\18config.kulala\frequire\0", "config", "kulala.nvim")
 time([[Config for kulala.nvim]], false)
--- Config for: blink.cmp
-time([[Config for blink.cmp]], true)
-try_loadstring("\27LJ\2\ní\2\0\0\5\0\16\0\0196\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\4\0=\3\5\0025\3\a\0005\4\6\0=\4\b\3=\3\t\0025\3\v\0005\4\n\0=\4\f\3=\3\r\0025\3\14\0=\3\15\2B\0\2\1K\0\1\0\nfuzzy\1\0\1\19implementation\29prefer_rust_with_warning\fsources\fdefault\1\0\1\fdefault\0\1\5\0\0\blsp\tpath\rsnippets\vbuffer\15completion\18documentation\1\0\1\18documentation\0\1\0\1\14auto_show\1\15appearance\1\0\1\22nerd_font_variant\tmono\1\0\5\nfuzzy\0\15completion\0\15appearance\0\fsources\0\vkeymap\fdefault\nsetup\14blink.cmp\frequire\0", "config", "blink.cmp")
-time([[Config for blink.cmp]], false)
--- Config for: pounce.nvim
-time([[Config for pounce.nvim]], true)
-try_loadstring("\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\18config.pounce\frequire\0", "config", "pounce.nvim")
-time([[Config for pounce.nvim]], false)
--- Config for: mason.nvim
-time([[Config for mason.nvim]], true)
-try_loadstring("\27LJ\2\n3\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\nmason\frequire\0", "config", "mason.nvim")
-time([[Config for mason.nvim]], false)
--- Config for: smear-cursor.nvim
-time([[Config for smear-cursor.nvim]], true)
-try_loadstring("\27LJ\2\ná\2\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\v\28distance_stop_animating\3\1\22trailing_exponent\4š³æÌ\t™³æý\3\23trailing_stiffness\4š³æÌ\t™³æþ\3\14stiffness\4š³æÌ\t™³¦ÿ\3\"transparent_bg_fallback_color\f#1e1e2e%legacy_computing_symbols_support\1!smear_between_neighbor_lines\2\26smear_between_buffers\2\14normal_bg\f#1e1e2e\17cursor_color\f#ffffff\21hide_target_hack\1\nsetup\17smear_cursor\frequire\0", "config", "smear-cursor.nvim")
-time([[Config for smear-cursor.nvim]], false)
--- Config for: debugprint.nvim
-time([[Config for debugprint.nvim]], true)
-try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15debugprint\frequire\0", "config", "debugprint.nvim")
-time([[Config for debugprint.nvim]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\2\n/\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\20config.gitsigns\frequire\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
 -- Config for: toggleterm.nvim
 time([[Config for toggleterm.nvim]], true)
 try_loadstring("\27LJ\2\n1\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\22config.toggleterm\frequire\0", "config", "toggleterm.nvim")
 time([[Config for toggleterm.nvim]], false)
+-- Config for: bufferline.nvim
+time([[Config for bufferline.nvim]], true)
+try_loadstring("\27LJ\2\n1\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\22config.bufferline\frequire\0", "config", "bufferline.nvim")
+time([[Config for bufferline.nvim]], false)
 -- Config for: nvim-lspconfig
 time([[Config for nvim-lspconfig]], true)
 try_loadstring("\27LJ\2\n*\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\15config.lsp\frequire\0", "config", "nvim-lspconfig")
 time([[Config for nvim-lspconfig]], false)
--- Config for: conform.nvim
-time([[Config for conform.nvim]], true)
-try_loadstring("\27LJ\2\n.\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\19config.conform\frequire\0", "config", "conform.nvim")
-time([[Config for conform.nvim]], false)
--- Config for: tokyonight.nvim
-time([[Config for tokyonight.nvim]], true)
-try_loadstring("\27LJ\2\n,\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\17config.theme\frequire\0", "config", "tokyonight.nvim")
-time([[Config for tokyonight.nvim]], false)
--- Config for: git-conflict.nvim
-time([[Config for git-conflict.nvim]], true)
-try_loadstring("\27LJ\2\n2\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\23config.gitconflict\frequire\0", "config", "git-conflict.nvim")
-time([[Config for git-conflict.nvim]], false)
 -- Config for: wilder.nvim
 time([[Config for wilder.nvim]], true)
 try_loadstring("\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\18config.wilder\frequire\0", "config", "wilder.nvim")
 time([[Config for wilder.nvim]], false)
+-- Config for: tokyonight.nvim
+time([[Config for tokyonight.nvim]], true)
+try_loadstring("\27LJ\2\n,\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\17config.theme\frequire\0", "config", "tokyonight.nvim")
+time([[Config for tokyonight.nvim]], false)
+-- Config for: smear-cursor.nvim
+time([[Config for smear-cursor.nvim]], true)
+try_loadstring("\27LJ\2\ná\2\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\v\26smear_between_buffers\2\14normal_bg\f#1e1e2e\17cursor_color\f#ffffff\21hide_target_hack\1\28distance_stop_animating\3\1\22trailing_exponent\4š³æÌ\t™³æý\3\23trailing_stiffness\4š³æÌ\t™³æþ\3\14stiffness\4š³æÌ\t™³¦ÿ\3\"transparent_bg_fallback_color\f#1e1e2e%legacy_computing_symbols_support\1!smear_between_neighbor_lines\2\nsetup\17smear_cursor\frequire\0", "config", "smear-cursor.nvim")
+time([[Config for smear-cursor.nvim]], false)
+-- Config for: mason.nvim
+time([[Config for mason.nvim]], true)
+try_loadstring("\27LJ\2\n3\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\nmason\frequire\0", "config", "mason.nvim")
+time([[Config for mason.nvim]], false)
+-- Config for: debugprint.nvim
+time([[Config for debugprint.nvim]], true)
+try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15debugprint\frequire\0", "config", "debugprint.nvim")
+time([[Config for debugprint.nvim]], false)
+-- Config for: pounce.nvim
+time([[Config for pounce.nvim]], true)
+try_loadstring("\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\18config.pounce\frequire\0", "config", "pounce.nvim")
+time([[Config for pounce.nvim]], false)
+-- Config for: conform.nvim
+time([[Config for conform.nvim]], true)
+try_loadstring("\27LJ\2\n.\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\19config.conform\frequire\0", "config", "conform.nvim")
+time([[Config for conform.nvim]], false)
 -- Config for: nvim-treesitter
 time([[Config for nvim-treesitter]], true)
 try_loadstring("\27LJ\2\n1\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\22config.treesitter\frequire\0", "config", "nvim-treesitter")
 time([[Config for nvim-treesitter]], false)
+-- Config for: git-conflict.nvim
+time([[Config for git-conflict.nvim]], true)
+try_loadstring("\27LJ\2\n2\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\23config.gitconflict\frequire\0", "config", "git-conflict.nvim")
+time([[Config for git-conflict.nvim]], false)
+-- Config for: vim-grepper
+time([[Config for vim-grepper]], true)
+try_loadstring("\27LJ\2\n.\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\19config.grepper\frequire\0", "config", "vim-grepper")
+time([[Config for vim-grepper]], false)
+-- Config for: LuaSnip
+time([[Config for LuaSnip]], true)
+try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fluasnip\frequire\0", "config", "LuaSnip")
+time([[Config for LuaSnip]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd nvim-web-devicons ]]
@@ -345,7 +330,7 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'ultimate-autopair.nvim', 'nvim-cmp'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'nvim-cmp', 'ultimate-autopair.nvim'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
 vim.cmd [[au CmdlineEnter * ++once lua require("packer.load")({'ultimate-autopair.nvim'}, { event = "CmdlineEnter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")

@@ -14,12 +14,7 @@ toggleterm.setup({
 			return vim.o.columns * 0.4
 		end
 	end,
-	float_opts = {
-		border = "none",
-		width = vim.o.columns,
-		height = 200,
-		winblend = 0,
-	},
+	shading_factor = 1,
 	responsiveness = {
 		-- breakpoint in terms of `vim.o.columns` at which terminals will start to stack on top of each other
 		-- instead of next to each other

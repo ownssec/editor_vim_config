@@ -24,7 +24,7 @@ cmp.setup({
 	}),
 
 	sources = cmp.config.sources({
-		{ name = "blink" },
+		-- { name = "blink" },
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 		{ name = "buffer" },
@@ -39,9 +39,9 @@ cmp.setup({
 				ellipsis_char = "...",
 			})(entry, vim_item)
 
-			if entry.source.name == "blink" then
-				vim_item.kind = "🧠 [Blink]"
-			end
+			-- if entry.source.name == "blink" then
+			-- 	vim_item.kind = "🧠 [Blink]"
+			-- end
 			return vim_item
 		end,
 	},
