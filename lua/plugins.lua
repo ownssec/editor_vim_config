@@ -197,12 +197,12 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use({
-		"mhinz/vim-grepper",
-		config = function()
-			require("config.grepper")
-		end,
-	})
+	-- use({
+	-- 	"mhinz/vim-grepper",
+	-- 	config = function()
+	-- 		require("config.grepper")
+	-- 	end,
+	-- })
 
 	-- Bufferline.nvim (added plugin)
 	use({
@@ -225,20 +225,45 @@ return require("packer").startup(function(use)
 				legacy_computing_symbols_support = false, -- Set to true if your font supports legacy block characters
 				transparent_bg_fallback_color = "#1e1e2e", -- Fallback for transparent backgrounds
 				stiffness = 0.8, -- Smear stiffness
-				trailing_stiffness = 0.4, -- Trailing effect stiffness
+				trailing_stiffness = 0.5, -- Trailing effect stiffness
 				trailing_exponent = 0.1, -- Exponent for trail decay
-				distance_stop_animating = 1, -- Distance threshold to stop smear
+				trailing_stiffness_insert_mode = 0.6,
+				distance_stop_animating = 0.5, -- Distance threshold to stop smear
 				hide_target_hack = false, -- Hides the target cursor for a smoother smear
+				gamma = 1,
 			})
 		end,
 	})
 
 	-- print using js
-
 	use({
 		"andrewferrier/debugprint.nvim",
 		config = function()
-			require("debugprint").setup()
+			require("debugprint").setup({
+				"andrewferrier/debugprint.nvim",
+				opts = {
+					keymaps = {
+						visual = {
+							variable_below = "g?v",
+							variable_above = "g?V",
+						},
+					},
+					commands = {
+						toggle_comment_debug_prints = "ToggleCommentDebugPrints",
+						delete_debug_prints = "DeleteDebugPrints",
+						reset_debug_prints_counter = "ResetDebugPrintsCounter",
+					},
+					-- … Other options
+				},
+			})
+		end,
+	})
+
+	--fuzzy finder and mini picker
+	use({
+		"echasnovski/mini.nvim",
+		config = function()
+			require("config.mini")
 		end,
 	})
 
