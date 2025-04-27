@@ -80,6 +80,12 @@ _G.packer_plugins = {
     path = "/home/e/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ["black-metal-theme-neovim"] = {
+    config = { "\27LJ\2\nú\b\0\0\t\0001\0ž\0016\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\0016\0\0\0'\2\1\0B\0\2\0029\0\4\0B\0\1\0016\0\5\0009\0\6\0009\0\a\0)\2\0\0'\3\b\0005\4\t\0B\0\4\0016\0\5\0009\0\6\0009\0\a\0)\2\0\0'\3\n\0005\4\v\0B\0\4\1'\0\f\0'\1\r\0'\2\14\0'\3\15\0006\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a\b\0005\b\16\0=\0\17\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a\n\0005\b\18\0=\0\17\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a\19\0005\b\20\0=\1\17\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a\21\0005\b\22\0=\1\17\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a\23\0005\b\24\0=\2\17\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a\25\0005\b\26\0=\0\17\b=\3\27\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a\28\0005\b\29\0=\0\17\b=\3\27\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a\30\0005\b\31\0=\0\17\b=\3\27\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a \0005\b!\0=\0\17\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a\"\0005\b#\0=\0\17\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a$\0005\b%\0=\0\17\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a&\0005\b'\0=\0\17\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a(\0005\b)\0=\0\17\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a*\0005\b+\0=\0\17\b=\0\27\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a,\0005\b-\0=\0\17\bB\4\4\0016\4\5\0009\4.\0045\0050\0=\5/\4K\0\1\0\1\0\2\tvert\bâ”‚\beob\6~\14fillchars\bopt\1\0\1\abg\0\16FloatNormal\1\0\2\afg\0\abg\0\16EndOfBuffer\1\0\2\afg\f#444455\abg\0\17WinSeparator\1\0\2\afg\f#777777\abg\0\17StatusLineNC\1\0\2\afg\f#aaaaaa\abg\0\15StatusLine\1\0\2\afg\f#444455\abg\0\14VertSplit\1\0\1\abg\0\15SignColumn\1\0\2\afg\0\abg\0\16LineNrBelow\1\0\2\afg\0\abg\0\16LineNrAbove\afg\1\0\2\afg\0\abg\0\vLineNr\1\0\1\abg\0\vVisual\1\0\3\tbold\2\afg\f#ff8800\abg\0\17CursorLineNr\1\0\1\abg\0\15CursorLine\1\0\1\abg\0\abg\1\0\1\abg\0\f#888888\f#444466\f#222244\f#0a0a1a\1\0\1\abg\f#1f1f1f\rNormalNC\1\0\1\abg\f#1f1f1f\vNormal\16nvim_set_hl\bapi\bvim\tload\1\0\1\ntheme\ntaake\nsetup\16black-metal\frequire\0" },
+    loaded = true,
+    path = "/home/e/.local/share/nvim/site/pack/packer/start/black-metal-theme-neovim",
+    url = "https://github.com/metalelf0/black-metal-theme-neovim"
+  },
   ["bufferline.nvim"] = {
     config = { "\27LJ\2\n1\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\22config.bufferline\frequire\0" },
     loaded = true,
@@ -118,7 +124,7 @@ _G.packer_plugins = {
     url = "https://github.com/stevearc/conform.nvim"
   },
   ["debugprint.nvim"] = {
-    config = { "\27LJ\2\nü\2\0\0\6\0\f\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\a\0005\4\5\0005\5\4\0=\5\6\4=\4\b\0035\4\t\0=\4\n\3=\3\v\2B\0\2\1K\0\1\0\topts\rcommands\1\0\3 toggle_comment_debug_prints\29ToggleCommentDebugPrints\31reset_debug_prints_counter\28ResetDebugPrintsCounter\24delete_debug_prints\22DeleteDebugPrints\fkeymaps\1\0\2\rcommands\0\fkeymaps\0\vvisual\1\0\1\vvisual\0\1\0\2\19variable_above\bg?V\19variable_below\bg?v\1\2\1\0\"andrewferrier/debugprint.nvim\topts\0\nsetup\15debugprint\frequire\0" },
+    config = { "\27LJ\2\nü\2\0\0\6\0\f\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\a\0005\4\5\0005\5\4\0=\5\6\4=\4\b\0035\4\t\0=\4\n\3=\3\v\2B\0\2\1K\0\1\0\topts\rcommands\1\0\3\31reset_debug_prints_counter\28ResetDebugPrintsCounter\24delete_debug_prints\22DeleteDebugPrints toggle_comment_debug_prints\29ToggleCommentDebugPrints\fkeymaps\1\0\2\fkeymaps\0\rcommands\0\vvisual\1\0\1\vvisual\0\1\0\2\19variable_below\bg?v\19variable_above\bg?V\1\2\1\0\"andrewferrier/debugprint.nvim\topts\0\nsetup\15debugprint\frequire\0" },
     loaded = true,
     path = "/home/e/.local/share/nvim/site/pack/packer/start/debugprint.nvim",
     url = "https://github.com/andrewferrier/debugprint.nvim"
@@ -159,7 +165,7 @@ _G.packer_plugins = {
     url = "https://github.com/echasnovski/mini.nvim"
   },
   ["nvim-cmp"] = {
-    after = { "cmp-buffer", "cmp-path" },
+    after = { "cmp-path", "cmp-buffer" },
     config = { "\27LJ\2\n.\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\19config.cmpconf\frequire\0" },
     loaded = false,
     needs_bufread = false,
@@ -214,7 +220,7 @@ _G.packer_plugins = {
     url = "https://github.com/rlane/pounce.nvim"
   },
   ["smear-cursor.nvim"] = {
-    config = { "\27LJ\2\n”\3\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\r\26smear_between_buffers\2\14normal_bg\f#1e1e2e\17cursor_color\f#ffffff\ngamma\3\1\21hide_target_hack\1\28distance_stop_animating\4\0€€€ÿ\3#trailing_stiffness_insert_mode\4³æÌ™\3³æŒÿ\3\22trailing_exponent\4š³æÌ\t™³æý\3\23trailing_stiffness\4\0€€€ÿ\3\14stiffness\4š³æÌ\t™³¦ÿ\3\"transparent_bg_fallback_color\f#1e1e2e%legacy_computing_symbols_support\1!smear_between_neighbor_lines\2\nsetup\17smear_cursor\frequire\0" },
+    config = { "\27LJ\2\n”\3\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\r\ngamma\3\1\21hide_target_hack\1\28distance_stop_animating\4\0€€€ÿ\3#trailing_stiffness_insert_mode\4³æÌ™\3³æŒÿ\3\22trailing_exponent\4š³æÌ\t™³æý\3\23trailing_stiffness\4\0€€€ÿ\3\14stiffness\4š³æÌ\t™³¦ÿ\3\"transparent_bg_fallback_color\f#1e1e2e%legacy_computing_symbols_support\1!smear_between_neighbor_lines\2\26smear_between_buffers\2\14normal_bg\f#1e1e2e\17cursor_color\f#ffffff\nsetup\17smear_cursor\frequire\0" },
     loaded = true,
     path = "/home/e/.local/share/nvim/site/pack/packer/start/smear-cursor.nvim",
     url = "https://github.com/sphamba/smear-cursor.nvim"
@@ -224,12 +230,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/e/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
     url = "https://github.com/akinsho/toggleterm.nvim"
-  },
-  ["tokyonight.nvim"] = {
-    config = { "\27LJ\2\n,\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\17config.theme\frequire\0" },
-    loaded = true,
-    path = "/home/e/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
-    url = "https://github.com/folke/tokyonight.nvim"
   },
   ["ultimate-autopair.nvim"] = {
     config = { "\27LJ\2\nM\0\0\2\0\5\0\v6\0\0\0009\0\1\0009\0\2\0\6\0\3\0X\1\4€\6\0\4\0X\1\2€+\1\1\0X\2\1€+\1\2\0L\1\2\0\tjson\thttp\rfiletype\abo\bvim`\1\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0003\3\3\0=\3\5\2B\0\2\1K\0\1\0\fenabled\1\0\1\fenabled\0\0\nsetup\22ultimate-autopair\frequire\0" },
@@ -253,70 +253,70 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: kulala.nvim
-time([[Config for kulala.nvim]], true)
-try_loadstring("\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\18config.kulala\frequire\0", "config", "kulala.nvim")
-time([[Config for kulala.nvim]], false)
--- Config for: conform.nvim
-time([[Config for conform.nvim]], true)
-try_loadstring("\27LJ\2\n.\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\19config.conform\frequire\0", "config", "conform.nvim")
-time([[Config for conform.nvim]], false)
--- Config for: debugprint.nvim
-time([[Config for debugprint.nvim]], true)
-try_loadstring("\27LJ\2\nü\2\0\0\6\0\f\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\a\0005\4\5\0005\5\4\0=\5\6\4=\4\b\0035\4\t\0=\4\n\3=\3\v\2B\0\2\1K\0\1\0\topts\rcommands\1\0\3 toggle_comment_debug_prints\29ToggleCommentDebugPrints\31reset_debug_prints_counter\28ResetDebugPrintsCounter\24delete_debug_prints\22DeleteDebugPrints\fkeymaps\1\0\2\rcommands\0\fkeymaps\0\vvisual\1\0\1\vvisual\0\1\0\2\19variable_above\bg?V\19variable_below\bg?v\1\2\1\0\"andrewferrier/debugprint.nvim\topts\0\nsetup\15debugprint\frequire\0", "config", "debugprint.nvim")
-time([[Config for debugprint.nvim]], false)
--- Config for: pounce.nvim
-time([[Config for pounce.nvim]], true)
-try_loadstring("\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\18config.pounce\frequire\0", "config", "pounce.nvim")
-time([[Config for pounce.nvim]], false)
--- Config for: mason.nvim
-time([[Config for mason.nvim]], true)
-try_loadstring("\27LJ\2\n3\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\nmason\frequire\0", "config", "mason.nvim")
-time([[Config for mason.nvim]], false)
--- Config for: nvim-treesitter
-time([[Config for nvim-treesitter]], true)
-try_loadstring("\27LJ\2\n1\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\22config.treesitter\frequire\0", "config", "nvim-treesitter")
-time([[Config for nvim-treesitter]], false)
--- Config for: git-conflict.nvim
-time([[Config for git-conflict.nvim]], true)
-try_loadstring("\27LJ\2\n2\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\23config.gitconflict\frequire\0", "config", "git-conflict.nvim")
-time([[Config for git-conflict.nvim]], false)
--- Config for: smear-cursor.nvim
-time([[Config for smear-cursor.nvim]], true)
-try_loadstring("\27LJ\2\n”\3\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\r\26smear_between_buffers\2\14normal_bg\f#1e1e2e\17cursor_color\f#ffffff\ngamma\3\1\21hide_target_hack\1\28distance_stop_animating\4\0€€€ÿ\3#trailing_stiffness_insert_mode\4³æÌ™\3³æŒÿ\3\22trailing_exponent\4š³æÌ\t™³æý\3\23trailing_stiffness\4\0€€€ÿ\3\14stiffness\4š³æÌ\t™³¦ÿ\3\"transparent_bg_fallback_color\f#1e1e2e%legacy_computing_symbols_support\1!smear_between_neighbor_lines\2\nsetup\17smear_cursor\frequire\0", "config", "smear-cursor.nvim")
-time([[Config for smear-cursor.nvim]], false)
 -- Config for: LuaSnip
 time([[Config for LuaSnip]], true)
 try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fluasnip\frequire\0", "config", "LuaSnip")
 time([[Config for LuaSnip]], false)
--- Config for: mini.nvim
-time([[Config for mini.nvim]], true)
-try_loadstring("\27LJ\2\n+\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\16config.mini\frequire\0", "config", "mini.nvim")
-time([[Config for mini.nvim]], false)
--- Config for: gitsigns.nvim
-time([[Config for gitsigns.nvim]], true)
-try_loadstring("\27LJ\2\n/\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\20config.gitsigns\frequire\0", "config", "gitsigns.nvim")
-time([[Config for gitsigns.nvim]], false)
--- Config for: toggleterm.nvim
-time([[Config for toggleterm.nvim]], true)
-try_loadstring("\27LJ\2\n1\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\22config.toggleterm\frequire\0", "config", "toggleterm.nvim")
-time([[Config for toggleterm.nvim]], false)
--- Config for: bufferline.nvim
-time([[Config for bufferline.nvim]], true)
-try_loadstring("\27LJ\2\n1\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\22config.bufferline\frequire\0", "config", "bufferline.nvim")
-time([[Config for bufferline.nvim]], false)
--- Config for: nvim-lspconfig
-time([[Config for nvim-lspconfig]], true)
-try_loadstring("\27LJ\2\n*\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\15config.lsp\frequire\0", "config", "nvim-lspconfig")
-time([[Config for nvim-lspconfig]], false)
 -- Config for: wilder.nvim
 time([[Config for wilder.nvim]], true)
 try_loadstring("\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\18config.wilder\frequire\0", "config", "wilder.nvim")
 time([[Config for wilder.nvim]], false)
--- Config for: tokyonight.nvim
-time([[Config for tokyonight.nvim]], true)
-try_loadstring("\27LJ\2\n,\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\17config.theme\frequire\0", "config", "tokyonight.nvim")
-time([[Config for tokyonight.nvim]], false)
+-- Config for: debugprint.nvim
+time([[Config for debugprint.nvim]], true)
+try_loadstring("\27LJ\2\nü\2\0\0\6\0\f\0\0156\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\a\0005\4\5\0005\5\4\0=\5\6\4=\4\b\0035\4\t\0=\4\n\3=\3\v\2B\0\2\1K\0\1\0\topts\rcommands\1\0\3\31reset_debug_prints_counter\28ResetDebugPrintsCounter\24delete_debug_prints\22DeleteDebugPrints toggle_comment_debug_prints\29ToggleCommentDebugPrints\fkeymaps\1\0\2\fkeymaps\0\rcommands\0\vvisual\1\0\1\vvisual\0\1\0\2\19variable_below\bg?v\19variable_above\bg?V\1\2\1\0\"andrewferrier/debugprint.nvim\topts\0\nsetup\15debugprint\frequire\0", "config", "debugprint.nvim")
+time([[Config for debugprint.nvim]], false)
+-- Config for: mason.nvim
+time([[Config for mason.nvim]], true)
+try_loadstring("\27LJ\2\n3\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\nmason\frequire\0", "config", "mason.nvim")
+time([[Config for mason.nvim]], false)
+-- Config for: git-conflict.nvim
+time([[Config for git-conflict.nvim]], true)
+try_loadstring("\27LJ\2\n2\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\23config.gitconflict\frequire\0", "config", "git-conflict.nvim")
+time([[Config for git-conflict.nvim]], false)
+-- Config for: pounce.nvim
+time([[Config for pounce.nvim]], true)
+try_loadstring("\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\18config.pounce\frequire\0", "config", "pounce.nvim")
+time([[Config for pounce.nvim]], false)
+-- Config for: mini.nvim
+time([[Config for mini.nvim]], true)
+try_loadstring("\27LJ\2\n+\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\16config.mini\frequire\0", "config", "mini.nvim")
+time([[Config for mini.nvim]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+try_loadstring("\27LJ\2\n1\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\22config.treesitter\frequire\0", "config", "nvim-treesitter")
+time([[Config for nvim-treesitter]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\2\n/\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\20config.gitsigns\frequire\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
+-- Config for: smear-cursor.nvim
+time([[Config for smear-cursor.nvim]], true)
+try_loadstring("\27LJ\2\n”\3\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\r\ngamma\3\1\21hide_target_hack\1\28distance_stop_animating\4\0€€€ÿ\3#trailing_stiffness_insert_mode\4³æÌ™\3³æŒÿ\3\22trailing_exponent\4š³æÌ\t™³æý\3\23trailing_stiffness\4\0€€€ÿ\3\14stiffness\4š³æÌ\t™³¦ÿ\3\"transparent_bg_fallback_color\f#1e1e2e%legacy_computing_symbols_support\1!smear_between_neighbor_lines\2\26smear_between_buffers\2\14normal_bg\f#1e1e2e\17cursor_color\f#ffffff\nsetup\17smear_cursor\frequire\0", "config", "smear-cursor.nvim")
+time([[Config for smear-cursor.nvim]], false)
+-- Config for: conform.nvim
+time([[Config for conform.nvim]], true)
+try_loadstring("\27LJ\2\n.\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\19config.conform\frequire\0", "config", "conform.nvim")
+time([[Config for conform.nvim]], false)
+-- Config for: bufferline.nvim
+time([[Config for bufferline.nvim]], true)
+try_loadstring("\27LJ\2\n1\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\22config.bufferline\frequire\0", "config", "bufferline.nvim")
+time([[Config for bufferline.nvim]], false)
+-- Config for: kulala.nvim
+time([[Config for kulala.nvim]], true)
+try_loadstring("\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\18config.kulala\frequire\0", "config", "kulala.nvim")
+time([[Config for kulala.nvim]], false)
+-- Config for: toggleterm.nvim
+time([[Config for toggleterm.nvim]], true)
+try_loadstring("\27LJ\2\n1\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\22config.toggleterm\frequire\0", "config", "toggleterm.nvim")
+time([[Config for toggleterm.nvim]], false)
+-- Config for: black-metal-theme-neovim
+time([[Config for black-metal-theme-neovim]], true)
+try_loadstring("\27LJ\2\nú\b\0\0\t\0001\0ž\0016\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\0016\0\0\0'\2\1\0B\0\2\0029\0\4\0B\0\1\0016\0\5\0009\0\6\0009\0\a\0)\2\0\0'\3\b\0005\4\t\0B\0\4\0016\0\5\0009\0\6\0009\0\a\0)\2\0\0'\3\n\0005\4\v\0B\0\4\1'\0\f\0'\1\r\0'\2\14\0'\3\15\0006\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a\b\0005\b\16\0=\0\17\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a\n\0005\b\18\0=\0\17\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a\19\0005\b\20\0=\1\17\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a\21\0005\b\22\0=\1\17\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a\23\0005\b\24\0=\2\17\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a\25\0005\b\26\0=\0\17\b=\3\27\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a\28\0005\b\29\0=\0\17\b=\3\27\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a\30\0005\b\31\0=\0\17\b=\3\27\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a \0005\b!\0=\0\17\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a\"\0005\b#\0=\0\17\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a$\0005\b%\0=\0\17\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a&\0005\b'\0=\0\17\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a(\0005\b)\0=\0\17\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a*\0005\b+\0=\0\17\b=\0\27\bB\4\4\0016\4\5\0009\4\6\0049\4\a\4)\6\0\0'\a,\0005\b-\0=\0\17\bB\4\4\0016\4\5\0009\4.\0045\0050\0=\5/\4K\0\1\0\1\0\2\tvert\bâ”‚\beob\6~\14fillchars\bopt\1\0\1\abg\0\16FloatNormal\1\0\2\afg\0\abg\0\16EndOfBuffer\1\0\2\afg\f#444455\abg\0\17WinSeparator\1\0\2\afg\f#777777\abg\0\17StatusLineNC\1\0\2\afg\f#aaaaaa\abg\0\15StatusLine\1\0\2\afg\f#444455\abg\0\14VertSplit\1\0\1\abg\0\15SignColumn\1\0\2\afg\0\abg\0\16LineNrBelow\1\0\2\afg\0\abg\0\16LineNrAbove\afg\1\0\2\afg\0\abg\0\vLineNr\1\0\1\abg\0\vVisual\1\0\3\tbold\2\afg\f#ff8800\abg\0\17CursorLineNr\1\0\1\abg\0\15CursorLine\1\0\1\abg\0\abg\1\0\1\abg\0\f#888888\f#444466\f#222244\f#0a0a1a\1\0\1\abg\f#1f1f1f\rNormalNC\1\0\1\abg\f#1f1f1f\vNormal\16nvim_set_hl\bapi\bvim\tload\1\0\1\ntheme\ntaake\nsetup\16black-metal\frequire\0", "config", "black-metal-theme-neovim")
+time([[Config for black-metal-theme-neovim]], false)
+-- Config for: nvim-lspconfig
+time([[Config for nvim-lspconfig]], true)
+try_loadstring("\27LJ\2\n*\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\15config.lsp\frequire\0", "config", "nvim-lspconfig")
+time([[Config for nvim-lspconfig]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd nvim-web-devicons ]]
@@ -331,7 +331,7 @@ vim.cmd [[au!]]
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
 vim.cmd [[au CmdlineEnter * ++once lua require("packer.load")({'ultimate-autopair.nvim'}, { event = "CmdlineEnter *" }, _G.packer_plugins)]]
-vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'ultimate-autopair.nvim', 'nvim-cmp'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'nvim-cmp', 'ultimate-autopair.nvim'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 
