@@ -208,6 +208,19 @@ return require("packer").startup(function(use)
 			vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = background_color, fg = background_color })
 			vim.api.nvim_set_hl(0, "FloatNormal", { bg = background_color })
 
+			-- BufferLine offsets or inactive buffers
+			vim.api.nvim_set_hl(0, "BufferLineBackground", { bg = background_color, fg = number_fg_color }) -- unselected buffer
+			vim.api.nvim_set_hl(0, "BufferLineFill", { bg = background_color })
+			vim.api.nvim_set_hl(0, "BufferLineSeparator", { bg = background_color, fg = "#444455" })
+			vim.api.nvim_set_hl(0, "BufferLineSeparatorSelected", { bg = background_color, fg = "#ffffff" })
+
+			vim.api.nvim_set_hl(0, "BufferLineTab", { bg = background_color, fg = "#666688" }) -- tabs
+			vim.api.nvim_set_hl(0, "BufferLineTabSelected", { bg = cursorline_color, fg = "#ffffff", bold = true })
+			vim.api.nvim_set_hl(0, "BufferLineTabClose", { bg = background_color, fg = "#666688" })
+
+			vim.api.nvim_set_hl(0, "BufferLineCloseButton", { bg = background_color, fg = "#666688" })
+			vim.api.nvim_set_hl(0, "BufferLineCloseButtonSelected", { bg = cursorline_color, fg = "#ff8800" })
+
 			-- Hide ~ symbols
 			vim.opt.fillchars = {
 				eob = "~", -- EOB = End Of Buffer character
