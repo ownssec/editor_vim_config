@@ -91,11 +91,11 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("BufWinEnter", {
-	callback = function()
-		local bufname = vim.api.nvim_buf_get_name(0) -- Get full buffer name (with path)
-		if vim.fn.fnamemodify(bufname, ":t") == "ui" then -- Extract filename and check
-			vim.cmd("vertical resize 80")
-		end
-	end,
-})
+-- vim.api.nvim_create_autocmd("BufWinEnter", {
+-- 	callback = function()
+-- 		local bufname = vim.api.nvim_buf_get_name(0) -- Get full buffer name (with path)
+-- 		if vim.fn.fnamemodify(bufname, ":t") == "ui" then -- Extract filename and check
+-- 			vim.cmd("vertical resize 80")
+-- 		end
+-- 	end,
+-- })
