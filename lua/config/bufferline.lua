@@ -33,14 +33,14 @@ bufferline.setup({
 		},
 
 		-- Hide buffers named "ui"
-		custom_filter = function(buf_number, buf_numbers)
-			local buf_name = vim.api.nvim_buf_get_name(buf_number)
-			-- Exclude buffers containing "ui" in their name
-			if buf_name:match("ui") then
-				return false
-			end
-			return true
-		end,
+		-- custom_filter = function(buf_number, buf_numbers)
+		-- 	local buf_name = vim.api.nvim_buf_get_name(buf_number)
+		-- 	-- Exclude buffers containing "ui" in their name
+		-- 	if buf_name:match("ui") then
+		-- 		return false
+		-- 	end
+		-- 	return true
+		-- end,
 	},
 })
 

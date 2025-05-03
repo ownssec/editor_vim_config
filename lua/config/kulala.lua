@@ -24,15 +24,15 @@ require("kulala").setup({
 	end,
 })
 
-vim.api.nvim_create_autocmd("BufRead", {
-	pattern = "*.http",
-	callback = function()
-		vim.bo.filetype = "http" -- Set the filetype to 'http'
-		vim.cmd("set filetype=http") -- Explicitly set filetype
-		vim.cmd("runtime syntax/http.vim") -- Load the custom syntax file
-		vim.cmd("setlocal syntax=http") -- Enable syntax highlighting
-	end,
-})
+-- vim.api.nvim_create_autocmd("BufRead", {
+-- 	pattern = "*.http",
+-- 	callback = function()
+-- 		vim.bo.filetype = "http" -- Set the filetype to 'http'
+-- 		vim.cmd("set filetype=http") -- Explicitly set filetype
+-- 		vim.cmd("runtime syntax/http.vim") -- Load the custom syntax file
+-- 		vim.cmd("setlocal syntax=http") -- Enable syntax highlighting
+-- 	end,
+-- })
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "http", -- Adjust this to match the file type used by kulala
