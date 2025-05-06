@@ -116,6 +116,15 @@ return require("packer").startup(function(use)
 	})
 
 	-- editor Theme
+	-- use({
+	-- 	"mcchrish/zenbones.nvim",
+	-- 	requires = { "rktjmp/lush.nvim" },
+	-- 	config = function()
+	-- 		vim.o.background = "dark"
+	-- 		vim.cmd([[colorscheme zenwritten]])
+	-- 	end,
+	-- })
+
 	use({
 		"folke/tokyonight.nvim",
 		config = function()
@@ -258,38 +267,37 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- vim otion
-	use({
-		"ggandor/leap.nvim",
-		config = function()
-			local leap = require("leap")
-
-			-- leap.preview_filter = false
-
-			-- Disable default mappings
-			leap.set_default_keymaps(false)
-
-			-- Set custom mappings
-			-- vim.keymap.set({ "x", "o" }, "f", function()
-			-- 	require("leap.treesitter").select()
-			-- end)
-
-			vim.api.nvim_set_hl(0, "LeapBackdrop", { link = "Comment" })
-			vim.keymap.set({ "n", "x", "o" }, "f", function()
-				leap.leap({ target_windows = { vim.api.nvim_get_current_win() } })
-			end, { desc = "Leap forward (custom f)" })
-		end,
-	})
-
+	-- vim motion
 	-- use({
-	-- 	"rlane/pounce.nvim",
+	-- 	"ggandor/leap.nvim",
 	-- 	config = function()
-	-- 		require("config.pounce")
+	-- 		local leap = require("leap")
+	--
+	-- 		-- leap.preview_filter = false
+	--
+	-- 		-- Disable default mappings
+	-- 		leap.set_default_keymaps(false)
+	--
+	-- 		-- Set custom mappings
+	-- 		-- vim.keymap.set({ "x", "o" }, "f", function()
+	-- 		-- 	require("leap.treesitter").select()
+	-- 		-- end)
+	--
+	-- 		vim.api.nvim_set_hl(0, "LeapBackdrop", { link = "Comment" })
+	-- 		vim.keymap.set({ "n", "x", "o" }, "f", function()
+	-- 			leap.leap({ target_windows = { vim.api.nvim_get_current_win() } })
+	-- 		end, { desc = "Leap forward (custom f)" })
 	-- 	end,
 	-- })
 
-	-- cmdline
+	use({
+		"rlane/pounce.nvim",
+		config = function()
+			require("config.pounce")
+		end,
+	})
 
+	-- cmdline
 	use("roxma/nvim-yarp")
 	use("roxma/vim-hug-neovim-rpc")
 

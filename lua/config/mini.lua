@@ -63,7 +63,7 @@ require("mini.pick").setup({
 	},
 
 	window = {
-		prompt_cursor = "▏",
+		prompt_caret = "▏",
 
 		prompt_prefix = "> ",
 
@@ -99,13 +99,13 @@ require("mini.indentscope").setup({
 		try_as_border = false,
 	},
 
-	symbol = "", --'╎',
+	symbol = "╎",
 })
 
 vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#473e43" })
 
 -- vim.api.nvim_set_keymap("n", "<C-p>", '<Cmd>exe ":Pick files"<CR>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap("n", "<A-b>", '<Cmd>exe ":Pick buffers"<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<C-E>", '<Cmd>exe ":Pick buffers"<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-o>", '<Cmd>exe ":Pick grep_live"<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_create_autocmd("VimResized", {
