@@ -116,21 +116,32 @@ return require("packer").startup(function(use)
 	})
 
 	-- editor Theme
-	-- use({
-	-- 	"mcchrish/zenbones.nvim",
-	-- 	requires = { "rktjmp/lush.nvim" },
-	-- 	config = function()
-	-- 		vim.o.background = "dark"
-	-- 		vim.cmd([[colorscheme zenwritten]])
-	-- 	end,
-	-- })
-
 	use({
-		"folke/tokyonight.nvim",
+		"zenbones-theme/zenbones.nvim",
+		requires = "rktjmp/lush.nvim",
 		config = function()
-			require("config.theme")
+			vim.o.background = "dark"
+			vim.cmd("colorscheme zenwritten") -- Default dark mode
+
+			-- Optional: Customize font/background colors
+			vim.api.nvim_set_hl(0, "Normal", { fg = "#dbcccc", bg = "#151a1a" }) -- Soft white text, darker background
+			vim.api.nvim_set_hl(0, "Comment", { fg = "#7c7c7c", italic = true }) -- Gray comments, italic
+			vim.api.nvim_set_hl(0, "String", { fg = "#F5F5F5" }) -- Green strings
+			vim.api.nvim_set_hl(0, "Number", { fg = "#ff6c6b" })
+
+			vim.api.nvim_set_hl(0, "LineNr", { fg = "#6a737d", bg = "#151a1a" })
+
+			vim.api.nvim_set_hl(0, "Identifier", { fg = "#dadada" }) -- Variables (red-brown)
+			vim.api.nvim_set_hl(0, "Function", { fg = "#8B6F61" }) -- Functions (dark green)
 		end,
 	})
+
+	-- use({
+	-- 	"folke/tokyonight.nvim",
+	-- 	config = function()
+	-- 		require("config.theme")
+	-- 	end,
+	-- })
 
 	-- use({
 	-- 	"metalelf0/black-metal-theme-neovim",
