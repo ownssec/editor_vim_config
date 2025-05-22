@@ -121,20 +121,22 @@ return require("packer").startup(function(use)
 		requires = "rktjmp/lush.nvim",
 		config = function()
 			vim.o.background = "dark"
-			vim.cmd("colorscheme zenwritten") -- Default dark mode
+			vim.cmd("colorscheme neobones") -- Default dark mode
 
-			-- Optional: Customize font/background colors
-			vim.api.nvim_set_hl(0, "Normal", { fg = "#d5dae0", bg = "#181d24" }) -- Soft white text, darker background
-			vim.api.nvim_set_hl(0, "Comment", { fg = "#7c7c7c", italic = true }) -- Gray comments, italic
-			vim.api.nvim_set_hl(0, "String", { fg = "#e8f1fc" }) -- Green strings
-			vim.api.nvim_set_hl(0, "Number", { fg = "#ff6c6b" })
-			vim.api.nvim_set_hl(0, "Boolean", { fg = "#dca561" })
-
+			-- vim.o.guifont = "Iosevka Term:h14"
+			--
+			-- -- Optional: Customize font/background colors
+			vim.api.nvim_set_hl(0, "Normal", { fg = "#F7F7F7", bg = "#181d24" })
+			-- vim.api.nvim_set_hl(0, "Comment", { fg = "#6a737d", italic = true })
+			-- vim.api.nvim_set_hl(0, "String", { fg = "#6a737d" })
+			vim.api.nvim_set_hl(0, "Number", { fg = "#F7A072" })
+			-- vim.api.nvim_set_hl(0, "Boolean", { fg = "#dca561" })
+			--
 			vim.api.nvim_set_hl(0, "LineNr", { fg = "#6a737d", bg = "#181d24" })
-
-			vim.api.nvim_set_hl(0, "Identifier", { fg = "#dadada" }) -- Variables (red-brown)
-
-			vim.api.nvim_set_hl(0, "Function", { fg = "#8B6F61" }) -- Functions (dark green)
+			--
+			-- vim.api.nvim_set_hl(0, "Identifier", { fg = "#e2dce8" })
+			--
+			-- vim.api.nvim_set_hl(0, "Function", { fg = "#AAAE7F" })
 		end,
 	})
 
@@ -142,6 +144,7 @@ return require("packer").startup(function(use)
 	-- 	"folke/tokyonight.nvim",
 	-- 	config = function()
 	-- 		require("config.theme")
+	-- 		-- -- Optional: Customize font/background colors
 	-- 	end,
 	-- })
 

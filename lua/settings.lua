@@ -67,3 +67,15 @@ vim.api.nvim_create_autocmd("VimEnter", {
 		vim.cmd("highlight EndOfBuffer guifg=Grey")
 	end,
 })
+
+-- vim.api.nvim_set_hl(0, "Normal", { fg = "#d2d5d9", bg = "#181d24" })
+-- vim.api.nvim_set_hl(0, "Comment", { fg = "#6a737d", italic = true })
+-- vim.api.nvim_set_hl(0, "String", { fg = "#d2d5d9" })
+-- vim.api.nvim_set_hl(0, "Number", { fg = "#F7A072" })
+-- vim.api.nvim_set_hl(0, "Boolean", { fg = "#dca561" })
+-- --
+-- vim.api.nvim_set_hl(0, "LineNr", { fg = "#6a737d", bg = "#181d24" })
+-- --
+-- vim.api.nvim_set_hl(0, "Identifier", { fg = "#e2dce8" })
+-- --
+-- vim.api.nvim_set_hl(0, "Function", { fg = "#d2d5d9" })
