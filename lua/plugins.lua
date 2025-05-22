@@ -126,17 +126,20 @@ return require("packer").startup(function(use)
 			-- vim.o.guifont = "Iosevka Term:h14"
 			--
 			-- -- Optional: Customize font/background colors
-			vim.api.nvim_set_hl(0, "Normal", { fg = "#F7F7F7", bg = "#181d24" })
-			-- vim.api.nvim_set_hl(0, "Comment", { fg = "#6a737d", italic = true })
-			-- vim.api.nvim_set_hl(0, "String", { fg = "#6a737d" })
+			vim.api.nvim_set_hl(0, "Normal", { fg = "#F7F7F7", bg = "#041d30" })
+			vim.api.nvim_set_hl(0, "Comment", { fg = "#6a737d", italic = true })
+			vim.api.nvim_set_hl(0, "String", { fg = "#6a737d" })
 			vim.api.nvim_set_hl(0, "Number", { fg = "#F7A072" })
-			-- vim.api.nvim_set_hl(0, "Boolean", { fg = "#dca561" })
+			vim.api.nvim_set_hl(0, "Boolean", { fg = "#dca561" })
+
+            vim.api.nvim_set_hl(0, "Keyword", { fg = "#c18fbe" }) 
+            vim.api.nvim_set_hl(0, "Statement", { fg = "#c18fbe" })
 			--
-			vim.api.nvim_set_hl(0, "LineNr", { fg = "#6a737d", bg = "#181d24" })
+			vim.api.nvim_set_hl(0, "LineNr", { fg = "#6a737d", bg = "#041d30" })
 			--
-			-- vim.api.nvim_set_hl(0, "Identifier", { fg = "#e2dce8" })
+			-- vim.api.nvim_set_hl(0, "Identifier", { fg = "#F7A072" })
 			--
-			-- vim.api.nvim_set_hl(0, "Function", { fg = "#AAAE7F" })
+			vim.api.nvim_set_hl(0, "Function", { fg = "#AAAE7F" })
 		end,
 	})
 
