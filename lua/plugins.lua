@@ -121,19 +121,22 @@ return require("packer").startup(function(use)
 		requires = "rktjmp/lush.nvim",
 		config = function()
 			vim.o.background = "dark"
-			vim.cmd("colorscheme neobones") -- Default dark mode
+			vim.cmd("colorscheme zenwritten") -- Default dark mode
 
 			-- vim.o.guifont = "Iosevka Term:h14"
-			--
-			-- -- Optional: Customize font/background colors
-			vim.api.nvim_set_hl(0, "Normal", { fg = "#F7F7F7", bg = "#041d30" })
+
+			vim.api.nvim_set_hl(0, "SignColumn", { bg = "#041d30" }) -- Same as number line bg
+			vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#303030", bg = "#041d30" }) -- vertical split line
+
+			-- Optional: Customize font/background colors
+			vim.api.nvim_set_hl(0, "Normal", { fg = "#c3c7d4", bg = "#041d30" })
 			vim.api.nvim_set_hl(0, "Comment", { fg = "#6a737d", italic = true })
-			vim.api.nvim_set_hl(0, "String", { fg = "#6a737d" })
+			vim.api.nvim_set_hl(0, "String", { fg = "#c3c7d4" })
 			vim.api.nvim_set_hl(0, "Number", { fg = "#F7A072" })
 			vim.api.nvim_set_hl(0, "Boolean", { fg = "#dca561" })
 
-            vim.api.nvim_set_hl(0, "Keyword", { fg = "#c18fbe" }) 
-            vim.api.nvim_set_hl(0, "Statement", { fg = "#c18fbe" })
+			vim.api.nvim_set_hl(0, "Keyword", { fg = "#c18fbe" })
+			vim.api.nvim_set_hl(0, "Statement", { fg = "#c18fbe" })
 			--
 			vim.api.nvim_set_hl(0, "LineNr", { fg = "#6a737d", bg = "#041d30" })
 			--
@@ -357,17 +360,17 @@ return require("packer").startup(function(use)
 		"sphamba/smear-cursor.nvim",
 		config = function()
 			require("smear_cursor").setup({
-				cursor_color = "#ffffff", -- Cursor smear color
+				cursor_color = "#c3c7d4", -- Cursor smear color
 				normal_bg = "#1e1e2e", -- Background color of your theme
 				smear_between_buffers = true, -- Enable smear when switching buffers
 				smear_between_neighbor_lines = true, -- Smear on line-to-line movement
 				legacy_computing_symbols_support = false, -- Set to true if your font supports legacy block characters
-				transparent_bg_fallback_color = "#1e1e2e", -- Fallback for transparent backgrounds
-				stiffness = 0.8, -- Smear stiffness
-				trailing_stiffness = 0.5, -- Trailing effect stiffness
-				trailing_exponent = 0.1, -- Exponent for trail decay
-				trailing_stiffness_insert_mode = 0.6,
-				distance_stop_animating = 0.5, -- Distance threshold to stop smear
+				transparent_bg_fallback_color = "#c3c7d4", -- Fallback for transparent backgrounds
+				stiffness = 1, -- Smear stiffness
+				trailing_stiffness = 0.3, -- Trailing effect stiffness
+				trailing_exponent = 0.9, -- Exponent for trail decay
+				trailing_stiffness_insert_mode = 1,
+				distance_stop_animating = 0.8, -- Distance threshold to stop smear
 				hide_target_hack = false, -- Hides the target cursor for a smoother smear
 				gamma = 1,
 			})
