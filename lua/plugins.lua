@@ -127,14 +127,22 @@ return require("packer").startup(function(use)
 			vim.api.nvim_set_hl(0, "Keyword", { fg = "#c18fbe" })
 			vim.api.nvim_set_hl(0, "Statement", { fg = "#c18fbe" })
 
+			vim.api.nvim_set_hl(0, "Normal", { bg = "#1a1b26", fg = "#a3a19e" })
+			-- Set relative number background color
+			vim.api.nvim_set_hl(0, "LineNr", { bg = "#1a1b26", fg = "#a3a19e" }) -- Example fg color
+			vim.api.nvim_set_hl(0, "SignColumn", { bg = "#1a1b26" })
+
+			-- Also highlight absolute line number
+			vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "#1a1b26", fg = "#c93c96", bold = true })
+
 			-- vim.api.nvim_set_hl(0, "Number", { fg = "#F7A072" })
 
 			-- vim.api.nvim_set_hl(0, "Function", { fg = "#AAAE7F" })
 			vim.api.nvim_set_hl(0, "String", { fg = "#4aa8bd" })
 			-- vim.api.nvim_set_hl(0, "Identifier", { fg = "#F7A072" })
 
-			-- vim.api.nvim_set_hl(0, "Keyword", { fg = "#c18fbe" })
-			-- vim.api.nvim_set_hl(0, "Statement", { fg = "#c18fbe" })
+			vim.api.nvim_set_hl(0, "Keyword", { fg = "#c18fbe" })
+			vim.api.nvim_set_hl(0, "Statement", { fg = "#c18fbe" })
 		end,
 	})
 
