@@ -116,33 +116,25 @@ return require("packer").startup(function(use)
 	})
 
 	-- editor Theme
+	-- candle-grey colorscheme with config
 	use({
-		"zenbones-theme/zenbones.nvim",
-		requires = "rktjmp/lush.nvim",
+		"n1ghtmare/noirblaze-vim",
 		config = function()
-			vim.o.background = "dark"
-			vim.cmd("colorscheme zenwritten") -- Default dark mode
-
-			-- vim.o.guifont = "Iosevka Term:h14"
-
-			vim.api.nvim_set_hl(0, "SignColumn", { bg = "#041d30" }) -- Same as number line bg
-			vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#303030", bg = "#041d30" }) -- vertical split line
-
-			-- Optional: Customize font/background colors
-			vim.api.nvim_set_hl(0, "Normal", { fg = "#c3c7d4", bg = "#041d30" })
-			vim.api.nvim_set_hl(0, "Comment", { fg = "#6a737d", italic = true })
-			vim.api.nvim_set_hl(0, "String", { fg = "#c3c7d4" })
-			vim.api.nvim_set_hl(0, "Number", { fg = "#F7A072" })
-			vim.api.nvim_set_hl(0, "Boolean", { fg = "#dca561" })
+			-- Set the background if needed
+			vim.opt.background = "dark"
+			vim.cmd("colorscheme noirblaze")
 
 			vim.api.nvim_set_hl(0, "Keyword", { fg = "#c18fbe" })
 			vim.api.nvim_set_hl(0, "Statement", { fg = "#c18fbe" })
-			--
-			vim.api.nvim_set_hl(0, "LineNr", { fg = "#6a737d", bg = "#041d30" })
-			--
+
+			-- vim.api.nvim_set_hl(0, "Number", { fg = "#F7A072" })
+
+			-- vim.api.nvim_set_hl(0, "Function", { fg = "#AAAE7F" })
+			vim.api.nvim_set_hl(0, "String", { fg = "#4aa8bd" })
 			-- vim.api.nvim_set_hl(0, "Identifier", { fg = "#F7A072" })
-			--
-			vim.api.nvim_set_hl(0, "Function", { fg = "#AAAE7F" })
+
+			-- vim.api.nvim_set_hl(0, "Keyword", { fg = "#c18fbe" })
+			-- vim.api.nvim_set_hl(0, "Statement", { fg = "#c18fbe" })
 		end,
 	})
 
