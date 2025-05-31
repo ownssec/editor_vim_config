@@ -116,36 +116,38 @@ return require("packer").startup(function(use)
 	})
 
 	-- editor Theme
-	-- candle-grey colorscheme with config
-	-- use({
-	-- 	"n1ghtmare/noirblaze-vim",
-	-- 	config = function()
-	-- 		-- Set the background if needed
-	-- 		vim.opt.background = "dark"
-	-- 		vim.cmd("colorscheme noirblaze")
-	--
-	-- 		-- vim.api.nvim_set_hl(0, "Keyword", { fg = "#c18fbe" })
-	-- 		-- vim.api.nvim_set_hl(0, "Statement", { fg = "#c18fbe" })
-	--
-	-- 		vim.api.nvim_set_hl(0, "Normal", { bg = "#1a1b26", fg = "#a3a19e" })
-	-- 		-- Set relative number background color
-	-- 		vim.api.nvim_set_hl(0, "LineNr", { bg = "#1a1b26", fg = "#a3a19e" }) -- Example fg color
-	-- 		vim.api.nvim_set_hl(0, "SignColumn", { bg = "#1a1b26" })
-	--
-	-- 		-- Also highlight absolute line number
-	-- 		vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "#1a1b26", fg = "#dedede", bold = true })
-	--
-	-- 		vim.api.nvim_set_hl(0, "String", { fg = "#4aa8bd" })
-	-- 	end,
-	-- })
 
+	-- candle-grey colorscheme with config
 	use({
-		"folke/tokyonight.nvim",
+		"zenbones-theme/zenbones.nvim",
+		requires = "rktjmp/lush.nvim",
 		config = function()
-			require("config.theme")
-			-- -- Optional: Customize font/background colors
+			vim.o.termguicolors = true
+			vim.o.background = "dark" -- or "dark"
+			vim.cmd("colorscheme neobones")
+
+			vim.api.nvim_set_hl(0, "Keyword", { fg = "#c18fbe" })
+			vim.api.nvim_set_hl(0, "Statement", { fg = "#c18fbe" })
+
+			vim.api.nvim_set_hl(0, "Normal", { bg = "#1a1b26", fg = "#a3a19e" })
+			-- Set relative number background color
+			vim.api.nvim_set_hl(0, "LineNr", { bg = "#1a1b26", fg = "#a3a19e" }) -- Example fg color
+			vim.api.nvim_set_hl(0, "SignColumn", { bg = "#1a1b26" })
+
+			-- Also highlight absolute line number
+			vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "#1a1b26", fg = "#dedede", bold = true })
+
+			vim.api.nvim_set_hl(0, "String", { fg = "#4aa8bd" })
 		end,
 	})
+
+	-- use({
+	-- 	"folke/tokyonight.nvim",
+	-- 	config = function()
+	-- 		require("config.theme")
+	-- 		-- -- Optional: Customize font/background colors
+	-- 	end,
+	-- })
 
 	-- cmp: Autocomplete
 	use({
@@ -413,8 +415,11 @@ return require("packer").startup(function(use)
 	-- Add nvim-ts-autotag
 	use({
 		"windwp/nvim-ts-autotag",
+		ft = { "html", "javascript", "jsx", "typescript", "tsx", "php" },
 		config = function()
-			require("nvim-ts-autotag").setup()
+			require("nvim-ts-autotag").setup({
+				filetypes = { "html", "javascript", "jsx", "typescript", "tsx", "php" },
+			})
 		end,
 	})
 end)

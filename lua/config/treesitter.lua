@@ -28,7 +28,6 @@ require("nvim-treesitter.configs").setup({
 		"regex",
 		"tsx",
 	},
-	autotag = { enable = true },
 	sync_install = true,
 	auto_install = true,
 
