@@ -116,26 +116,24 @@ return require("packer").startup(function(use)
 	})
 
 	-- editor Theme
-
-	-- candle-grey colorscheme with config
 	use({
 		"zenbones-theme/zenbones.nvim",
 		requires = "rktjmp/lush.nvim",
 		config = function()
 			vim.o.termguicolors = true
-			vim.o.background = "dark" -- or "dark"
+			vim.o.background = "dark"
 			vim.cmd("colorscheme neobones")
 
-			vim.api.nvim_set_hl(0, "Keyword", { fg = "#c18fbe" })
+			vim.api.nvim_set_hl(0, "Keyword", { fg = "#c18fbe", bold = true })
 			vim.api.nvim_set_hl(0, "Statement", { fg = "#c18fbe" })
 
-			vim.api.nvim_set_hl(0, "Normal", { bg = "#1a1b26", fg = "#a3a19e" })
+			vim.api.nvim_set_hl(0, "Normal", { bg = "#1a1a1a", fg = "#a3a19e" })
 			-- Set relative number background color
-			vim.api.nvim_set_hl(0, "LineNr", { bg = "#1a1b26", fg = "#a3a19e" }) -- Example fg color
-			vim.api.nvim_set_hl(0, "SignColumn", { bg = "#1a1b26" })
+			vim.api.nvim_set_hl(0, "LineNr", { bg = "#1a1a1a", fg = "#a3a19e" }) -- Example fg color
+			vim.api.nvim_set_hl(0, "SignColumn", { bg = "#1a1a1a" })
 
 			-- Also highlight absolute line number
-			vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "#1a1b26", fg = "#dedede", bold = true })
+			vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "#1a1a1a", fg = "#dedede", bold = true })
 
 			vim.api.nvim_set_hl(0, "String", { fg = "#4aa8bd" })
 		end,
@@ -195,32 +193,20 @@ return require("packer").startup(function(use)
 	})
 
 	-- vim motion
-	-- use({
-	-- 	"ggandor/leap.nvim",
-	-- 	config = function()
-	-- 		local leap = require("leap")
-	--
-	-- 		-- leap.preview_filter = false
-	--
-	-- 		-- Disable default mappings
-	-- 		leap.set_default_keymaps(false)
-	--
-	-- 		-- Set custom mappings
-	-- 		-- vim.keymap.set({ "x", "o" }, "f", function()
-	-- 		-- 	require("leap.treesitter").select()
-	-- 		-- end)
-	--
-	-- 		vim.api.nvim_set_hl(0, "LeapBackdrop", { link = "Comment" })
-	-- 		vim.keymap.set({ "n", "x", "o" }, "f", function()
-	-- 			leap.leap({ target_windows = { vim.api.nvim_get_current_win() } })
-	-- 		end, { desc = "Leap forward (custom f)" })
-	-- 	end,
-	-- })
-
 	use({
-		"rlane/pounce.nvim",
+		"ggandor/leap.nvim",
 		config = function()
-			require("config.pounce")
+			local leap = require("leap")
+
+			-- leap.preview_filter = false
+
+			-- Disable default mappings
+			leap.set_default_keymaps(false)
+
+			vim.api.nvim_set_hl(0, "LeapBackdrop", { link = "Comment" })
+			vim.keymap.set({ "n", "x", "o" }, "f", function()
+				leap.leap({ target_windows = { vim.api.nvim_get_current_win() } })
+			end, { desc = "Leap forward (custom f)" })
 		end,
 	})
 
@@ -234,13 +220,6 @@ return require("packer").startup(function(use)
 			require("config.wilder")
 		end,
 	})
-
-	-- use({
-	-- 	"mhinz/vim-grepper",
-	-- 	config = function()
-	-- 		require("config.grepper")
-	-- 	end,
-	-- })
 
 	-- Bufferline.nvim (added plugin)
 	use({
