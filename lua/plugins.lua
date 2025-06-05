@@ -121,19 +121,20 @@ return require("packer").startup(function(use)
 		requires = "rktjmp/lush.nvim",
 		config = function()
 			vim.o.termguicolors = true
+			local bgColor = "#1e1e1e"
 			vim.o.background = "dark"
 			vim.cmd("colorscheme neobones")
 
 			vim.api.nvim_set_hl(0, "Keyword", { fg = "#c18fbe", bold = true })
 			vim.api.nvim_set_hl(0, "Statement", { fg = "#c18fbe" })
 
-			vim.api.nvim_set_hl(0, "Normal", { bg = "#1a1a1a", fg = "#a3a19e" })
+			vim.api.nvim_set_hl(0, "Normal", { bg = bgColor, fg = "#a3a19e" })
 			-- Set relative number background color
-			vim.api.nvim_set_hl(0, "LineNr", { bg = "#1a1a1a", fg = "#a3a19e" }) -- Example fg color
-			vim.api.nvim_set_hl(0, "SignColumn", { bg = "#1a1a1a" })
+			vim.api.nvim_set_hl(0, "LineNr", { bg = bgColor, fg = "#a3a19e" }) -- Example fg color
+			vim.api.nvim_set_hl(0, "SignColumn", { bg = bgColor })
 
 			-- Also highlight absolute line number
-			vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "#1a1a1a", fg = "#dedede", bold = true })
+			vim.api.nvim_set_hl(0, "CursorLineNr", { bg = bgColor, fg = "#dedede", bold = true })
 
 			vim.api.nvim_set_hl(0, "String", { fg = "#4aa8bd" })
 		end,
