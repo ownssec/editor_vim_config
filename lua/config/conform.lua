@@ -10,7 +10,7 @@ require("conform").setup({
 		lua = { "stylua" },
 		javascript = { "prettier" },
 		typescript = { "prettier" },
-		-- php = { "php-cs-fixer" },
+		php = { "php-cs-fixer" },
 		-- blade = { "blade-formatter" },
 		html = { "prettier" },
 		css = { "prettier" },

@@ -117,6 +117,99 @@ return require("packer").startup(function(use)
 
 	-- editor Theme
 	use({
+		"vague2k/vague.nvim",
+		config = function()
+			require("vague").setup({
+				transparent = false, -- don't set background
+				-- disable bold/italic globally in `style`
+				bold = true,
+				italic = true,
+				style = {
+					-- "none" is the same thing as default. But "italic" and "bold" are also valid options
+					boolean = "bold",
+					number = "none",
+					float = "none",
+					error = "bold",
+					comments = "italic",
+					conditionals = "none",
+					functions = "none",
+					headings = "bold",
+					operators = "none",
+					strings = "italic",
+					variables = "none",
+
+					-- keywords
+					keywords = "none",
+					keyword_return = "italic",
+					keywords_loop = "none",
+					keywords_label = "none",
+					keywords_exception = "none",
+
+					-- builtin
+					builtin_constants = "bold",
+					builtin_functions = "none",
+					builtin_types = "bold",
+					builtin_variables = "none",
+				},
+				-- plugin styles where applicable
+				-- make an issue/pr if you'd like to see more styling options!
+				plugins = {
+					cmp = {
+						match = "bold",
+						match_fuzzy = "bold",
+					},
+					dashboard = {
+						footer = "italic",
+					},
+					lsp = {
+						diagnostic_error = "bold",
+						diagnostic_hint = "none",
+						diagnostic_info = "italic",
+						diagnostic_ok = "none",
+						diagnostic_warn = "bold",
+					},
+					neotest = {
+						focused = "bold",
+						adapter_name = "bold",
+					},
+					telescope = {
+						match = "bold",
+					},
+				},
+
+				-- Override highlights or add new highlights
+				on_highlights = function(highlights, colors) end,
+
+				-- Override colors
+				colors = {
+					bg = "#141415",
+					fg = "#cdcdcd",
+					floatBorder = "#878787",
+					line = "#252530",
+					comment = "#606079",
+					builtin = "#b4d4cf",
+					func = "#c48282",
+					string = "#e8b589",
+					number = "#e0a363",
+					property = "#c3c3d5",
+					constant = "#aeaed1",
+					parameter = "#bb9dbd",
+					visual = "#333738",
+					error = "#d8647e",
+					warning = "#f3be7c",
+					hint = "#7e98e8",
+					operator = "#90a0b5",
+					keyword = "#6e94b2",
+					type = "#9bb4bc",
+					search = "#405065",
+					plus = "#7fa563",
+					delta = "#f3be7c",
+				},
+			})
+		end,
+	})
+
+	use({
 		"zenbones-theme/zenbones.nvim",
 		requires = "rktjmp/lush.nvim",
 		config = function()
@@ -236,18 +329,19 @@ return require("packer").startup(function(use)
 		"sphamba/smear-cursor.nvim",
 		config = function()
 			require("smear_cursor").setup({
-				cursor_color = "#c3c7d4", -- Cursor smear color
-				normal_bg = "#1e1e2e", -- Background color of your theme
-				smear_between_buffers = true, -- Enable smear when switching buffers
-				smear_between_neighbor_lines = true, -- Smear on line-to-line movement
-				legacy_computing_symbols_support = false, -- Set to true if your font supports legacy block characters
-				transparent_bg_fallback_color = "#c3c7d4", -- Fallback for transparent backgrounds
-				stiffness = 1, -- Smear stiffness
-				trailing_stiffness = 0.3, -- Trailing effect stiffness
-				trailing_exponent = 0.9, -- Exponent for trail decay
-				trailing_stiffness_insert_mode = 1,
-				distance_stop_animating = 0.8, -- Distance threshold to stop smear
-				hide_target_hack = false, -- Hides the target cursor for a smoother smear
+				cursor_color = "#ededed",
+				stiffness = 0.8,
+				trailing_stiffness = 0.5,
+				stiffness_insert_mode = 0.6,
+				time_interval = 7,
+				trailing_stiffness_insert_mode = 0.6,
+				distance_stop_animating = 0.8,
+				trailing_exponent = 5,
+				never_draw_over_target = true,
+				smear_between_buffers = true,
+				smear_between_neighbor_lines = true,
+				smear_insert_mode = true,
+				hide_target_hack = true,
 				gamma = 1,
 			})
 		end,
