@@ -213,7 +213,6 @@ return require("packer").startup(function(use)
 		"zenbones-theme/zenbones.nvim",
 		requires = "rktjmp/lush.nvim",
 		config = function()
-			vim.o.termguicolors = true
 			local bgColor = "#1e1e1e"
 			vim.o.background = "dark"
 			vim.cmd("colorscheme neobones")
@@ -251,20 +250,16 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- use({
-	-- 	"saghen/blink.cmp",
-	-- 	requires = {
-	-- 		"rafamadriz/friendly-snippets", -- optional for snippet support
-	-- 	},
-	-- 	run = function()
-	-- 		-- Only required if you're building from source manually (e.g., no prebuilt binary available)
-	-- 		-- Uncomment below if you want to force build:
-	-- 		-- vim.fn.system { "cargo", "build", "--release" }
-	-- 	end,
-	-- 	config = function()
-	-- 		require("blink.cmp").setup({})
-	-- 	end,
-	-- })
+	use({
+		"saghen/blink.cmp",
+		tag = "1.*", -- <--- add this line to use prebuilt binaries
+		requires = {
+			"rafamadriz/friendly-snippets",
+		},
+		config = function()
+			require("blink.cmp").setup({})
+		end,
+	})
 
 	use("hrsh7th/cmp-nvim-lsp")
 	use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
@@ -328,15 +323,17 @@ return require("packer").startup(function(use)
 	use({
 		"sphamba/smear-cursor.nvim",
 		config = function()
+			vim.o.termguicolors = true
 			require("smear_cursor").setup({
 				cursor_color = "#ededed",
-				stiffness = 0.8,
-				trailing_stiffness = 0.5,
-				stiffness_insert_mode = 0.6,
-				time_interval = 7,
-				trailing_stiffness_insert_mode = 0.6,
-				distance_stop_animating = 0.8,
-				trailing_exponent = 5,
+				speed = 10,
+				stiffness = 0.9,
+				trailing_stiffness = 0.6,
+				stiffness_insert_mode = 0.7,
+				time_interval = 8,
+				trailing_stiffness_insert_mode = 0.7,
+				distance_stop_animating = 0.9,
+				trailing_exponent = 6,
 				never_draw_over_target = true,
 				smear_between_buffers = true,
 				smear_between_neighbor_lines = true,
@@ -409,6 +406,20 @@ return require("packer").startup(function(use)
 					{ text = { "  " } },
 				},
 			})
+		end,
+	})
+
+	use({
+		"tzachar/fuzzy.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+		run = "cargo build --release", -- OR use prebuilt binaries, but NOT both
+	})
+
+	use({
+		"tzachar/cmp-fuzzy-buffer",
+		after = { "fuzzy.nvim", "nvim-cmp" },
+		config = function()
+			require("cmp_fuzzy_buffer").setup()
 		end,
 	})
 end)
