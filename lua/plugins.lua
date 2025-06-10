@@ -257,7 +257,11 @@ return require("packer").startup(function(use)
 			"rafamadriz/friendly-snippets",
 		},
 		config = function()
-			require("blink.cmp").setup({})
+			require("blink.cmp").setup({
+				fuzzy = {
+					implementation = "lua", -- explicitly use the Lua version
+				},
+			})
 		end,
 	})
 

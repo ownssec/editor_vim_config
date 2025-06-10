@@ -44,6 +44,9 @@ cmp.setup({
 			return vim_item
 		end,
 	},
+	fuzzy = {
+		implementation = "lua",
+	},
 })
 
 -- Set completion options
