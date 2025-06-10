@@ -50,6 +50,6 @@ require("conform").setup({
 	},
 	format_on_save = {
 		timeout_ms = 650,
-		lsp_fallback = true, -- Use LSP if no formatter is found
+		lsp_fallback = false, -- Use LSP if no formatter is found
 	},
 })

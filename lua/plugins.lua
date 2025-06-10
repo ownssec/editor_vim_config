@@ -391,7 +391,7 @@ return require("packer").startup(function(use)
 	-- Add nvim-ts-autotag
 	use({
 		"windwp/nvim-ts-autotag",
-		ft = { "html", "javascript", "jsx", "typescript", "tsx", "php" },
+		ft = { "html", "javascriptreact", "typescriptreact", "javascript", "typescript", "tsx" },
 		config = function()
 			require("nvim-ts-autotag").setup({
 				filetypes = { "html", "javascript", "jsx", "typescript", "tsx", "php" },
