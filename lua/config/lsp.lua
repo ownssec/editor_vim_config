@@ -135,11 +135,11 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
 	vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-	vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
-	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-	vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+	-- vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+	-- vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+	-- vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+	-- vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+	-- vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 
 	-- Disable built-in formatting (handled by conform.nvim / null-ls / etc.)
 	client.server_capabilities.documentFormattingProvider = false
@@ -159,12 +159,12 @@ local servers = {
 	},
 
 	-- ESLint
-	eslint = {
-		root_dir = lspconfig.util.root_pattern(".eslintrc", ".eslintrc.js", ".eslintrc.json", "package.json"),
-		settings = {
-			workingDirectory = { mode = "auto" }, -- monorepo-friendly
-		},
-	},
+	-- eslint = {
+	-- 	root_dir = lspconfig.util.root_pattern(".eslintrc", ".eslintrc.js", ".eslintrc.json", "package.json"),
+	-- 	settings = {
+	-- 		workingDirectory = { mode = "auto" }, -- monorepo-friendly
+	-- 	},
+	-- },
 
 	cssls = {},
 

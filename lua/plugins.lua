@@ -250,20 +250,20 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use({
-		"saghen/blink.cmp",
-		tag = "1.*", -- <--- add this line to use prebuilt binaries
-		requires = {
-			"rafamadriz/friendly-snippets",
-		},
-		config = function()
-			require("blink.cmp").setup({
-				fuzzy = {
-					implementation = "lua", -- explicitly use the Lua version
-				},
-			})
-		end,
-	})
+	-- use({
+	-- 	"saghen/blink.cmp",
+	-- 	tag = "1.*", -- <--- add this line to use prebuilt binaries
+	-- 	requires = {
+	-- 		"rafamadriz/friendly-snippets",
+	-- 	},
+	-- 	config = function()
+	-- 		require("blink.cmp").setup({
+	-- 			fuzzy = {
+	-- 				implementation = "lua", -- explicitly use the Lua version
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- })
 
 	use("hrsh7th/cmp-nvim-lsp")
 	use({ "hrsh7th/cmp-path", after = "nvim-cmp" })

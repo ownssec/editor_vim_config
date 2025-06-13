@@ -24,7 +24,7 @@ cmp.setup({
 		["<C-p>"] = cmp.mapping.select_prev_item(),
 	}),
 	sources = cmp.config.sources({
-		{ name = "blink" },
+		-- { name = "blink" },
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 		{ name = "buffer" },

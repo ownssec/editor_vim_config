@@ -4,6 +4,25 @@ if not status then
 	return
 end
 
+-- toggleterm.setup({
+-- 	shade_terminals = true,
+-- 	direction = "horizontal",
+-- 	size = function(term)
+-- 		if term.direction == "horizontal" then
+-- 			return vim.o.columns * 0.09
+-- 		elseif term.direction == "vertical" then
+-- 			return vim.o.columns * 0.4
+-- 		end
+-- 	end,
+-- 	shading_factor = 1,
+-- 	responsiveness = {
+-- 		-- breakpoint in terms of `vim.o.columns` at which terminals will start to stack on top of each other
+-- 		-- instead of next to each other
+-- 		-- default = 0 which means the feature is turned off
+-- 		horizontal_breakpoint = 135,
+-- 	},
+-- })
+
 toggleterm.setup({
 	shade_terminals = true,
 	direction = "horizontal",
@@ -20,7 +39,27 @@ toggleterm.setup({
 		-- instead of next to each other
 		-- default = 0 which means the feature is turned off
 		horizontal_breakpoint = 135,
+		hades,
 	},
+
+	on_open = function(term)
+		if term.direction == "horizontal" then
+			local width = vim.api.nvim_win_get_width(term.window)
+			local border = string.rep(".", width) -- You can use "─", "═", "▔", etc.
+
+			-- Set the winbar with proper highlighting
+			vim.api.nvim_win_set_option(term.window, "winbar", "%#ToggleTermBorderRed#" .. border)
+
+			-- Alternative approach that might work better in some cases:
+			-- vim.api.nvim_win_set_option(term.window, "winbar", border)
+			-- vim.api.nvim_win_set_option(term.window, "winhl", "WinBar:ToggleTermBorderRed")
+		end
+	end, -- Optional: Clear the border when terminal closes
+	on_close = function(term)
+		if term.direction == "horizontal" then
+			vim.api.nvim_win_set_option(term.window, "winbar", "")
+		end
+	end,
 })
 
 vim.api.nvim_create_autocmd("TermOpen", {
