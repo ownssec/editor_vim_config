@@ -182,7 +182,7 @@ return require("packer").startup(function(use)
 
 				-- Override colors
 				colors = {
-					bg = "#141415",
+					bg = "#181818",
 					fg = "#cdcdcd",
 					floatBorder = "#878787",
 					line = "#252530",
@@ -213,9 +213,9 @@ return require("packer").startup(function(use)
 		"zenbones-theme/zenbones.nvim",
 		requires = "rktjmp/lush.nvim",
 		config = function()
-			local bgColor = "#1e1e1e"
+			local bgColor = "#181818"
 			vim.o.background = "dark"
-			vim.cmd("colorscheme neobones")
+			vim.cmd("colorscheme zenbones")
 
 			vim.api.nvim_set_hl(0, "Keyword", { fg = "#c18fbe", bold = true })
 			vim.api.nvim_set_hl(0, "Statement", { fg = "#c18fbe" })
