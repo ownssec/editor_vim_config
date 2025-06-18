@@ -71,9 +71,9 @@ local servers = {
 		filetypes = {
 			"html",
 			"css",
-			"javascript",
+			-- "javascript",
 			"javascriptreact",
-			"typescript",
+			-- "typescript",
 			"typescriptreact",
 		},
 		init_options = {
