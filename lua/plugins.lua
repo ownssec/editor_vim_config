@@ -182,7 +182,7 @@ return require("packer").startup(function(use)
 
 				-- Override colors
 				colors = {
-					bg = "#141415",
+					bg = "#1e1e1e",
 					fg = "#cdcdcd",
 					floatBorder = "#878787",
 					line = "#252530",
@@ -215,7 +215,7 @@ return require("packer").startup(function(use)
 		config = function()
 			local bgColor = "#1e1e1e"
 			vim.o.background = "dark"
-			vim.cmd("colorscheme neobones")
+			vim.cmd("colorscheme zenwritten")
 
 			vim.api.nvim_set_hl(0, "Keyword", { fg = "#c18fbe", bold = true })
 			vim.api.nvim_set_hl(0, "Statement", { fg = "#c18fbe" })
@@ -229,6 +229,10 @@ return require("packer").startup(function(use)
 			vim.api.nvim_set_hl(0, "CursorLineNr", { bg = bgColor, fg = "#dedede", bold = true })
 
 			vim.api.nvim_set_hl(0, "String", { fg = "#4aa8bd" })
+
+			-- ===== TERMINAL FIXES =====
+			vim.cmd("set termguicolors") -- Enable true colors
+			vim.cmd("let &t_ut=''") -- Fix background bleed in terminals
 		end,
 	})
 
