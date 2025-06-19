@@ -1,4 +1,4 @@
--- lua/plugins.lua
+-- -- lua/plugins.lua
 
 -- Automatically run: PackerCompile
 vim.api.nvim_create_autocmd("BufWritePost", {
@@ -8,58 +8,64 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 })
 
 return require("packer").startup(function(use)
-	-- Packer
+	-- Package Manager
 	use("wbthomason/packer.nvim")
 
+	-- Core Utilities
+	use("nvim-lua/plenary.nvim")
+	use("nvim-tree/nvim-web-devicons") -- Icons
+
+	-- LSP and Completion
 	use({
 		"williamboman/mason.nvim",
 		config = function()
 			require("mason").setup()
 		end,
 	})
-
-	-- Common utilities
-	use("nvim-lua/plenary.nvim")
-
-	-- Icons
-	use("nvim-tree/nvim-web-devicons")
-
-	-- Auto close
 	use({
-		"altermo/ultimate-autopair.nvim",
-		event = { "InsertEnter", "CmdlineEnter" },
-		branch = "v0.6", --recommended as each new version will have breaking changes
+		"neovim/nvim-lspconfig",
+		after = "nvim-cmp",
 		config = function()
-			require("ultimate-autopair").setup({
-				--Config goes here
-				enabled = function()
-					-- Enable only for .http and .json files
-					local ft = vim.bo.filetype
-					return ft == "http" or ft == "json"
-				end,
-			})
+			require("config.lsp")
+		end,
+	})
+	use("onsails/lspkind-nvim")
+	use({
+		"hrsh7th/nvim-cmp",
+		config = function()
+			require("config.cmpconf")
+		end,
+	})
+	-- Cmp extensions
+	use({
+		"saadparwaiz1/cmp_luasnip",
+		after = { "nvim-cmp", "LuaSnip" },
+	})
+	use({
+		"hrsh7th/cmp-nvim-lsp",
+		after = "nvim-cmp",
+	})
+	use({
+		"hrsh7th/cmp-path",
+		after = "nvim-cmp",
+	})
+	use({
+		"hrsh7th/cmp-buffer",
+		after = "nvim-cmp",
+	})
+	use({
+		"tzachar/cmp-fuzzy-buffer",
+		requires = { "tzachar/fuzzy.nvim" },
+	})
+	use({
+		"L3MON4D3/LuaSnip",
+		tag = "v<CurrentMajor>.*",
+		config = function()
+			require("luasnip").setup()
 		end,
 	})
 
-	-- Git
-	use({
-		"lewis6991/gitsigns.nvim",
-		config = function()
-			require("config.gitsigns")
-		end,
-	})
-
-	-- File tree: nvim-treesitter with TSUpdate
-	use({
-		"nvim-tree/nvim-tree.lua",
-		after = "nvim-web-devicons",
-		requires = "nvim-tree/nvim-web-devicons",
-		config = function()
-			require("config.nvimtree")
-		end,
-	})
-
-	-- Treesitter
+	-- Syntax and Language Support
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = function()
@@ -69,45 +75,23 @@ return require("packer").startup(function(use)
 			require("config.treesitter")
 		end,
 	})
-
-	-- LSP
 	use({
-		"neovim/nvim-lspconfig",
-		after = "nvim-cmp",
+		"windwp/nvim-ts-autotag",
+		ft = { "html", "javascriptreact", "typescriptreact", "javascript", "typescript", "tsx" },
 		config = function()
-			require("config.lsp")
+			require("nvim-ts-autotag").setup({
+				filetypes = { "html", "javascript", "jsx", "typescript", "tsx", "php" },
+			})
 		end,
 	})
 
-	use("onsails/lspkind-nvim")
+	-- Git Integration
 	use({
-		"L3MON4D3/LuaSnip",
-		tag = "v<CurrentMajor>.*",
+		"lewis6991/gitsigns.nvim",
 		config = function()
-			require("luasnip").setup()
+			require("config.gitsigns")
 		end,
 	})
-
-	-- Terminal
-	use({
-		"akinsho/toggleterm.nvim",
-		tag = "*",
-		config = function()
-			require("config.toggleterm")
-		end,
-	})
-
-	-- Statusline
-	use({
-		"nvim-lualine/lualine.nvim",
-		event = "BufEnter",
-		config = function()
-			require("config.lualine")
-		end,
-		requires = { "nvim-web-devicons" },
-	})
-
-	-- Git Conflict plugin
 	use({
 		"akinsho/git-conflict.nvim",
 		tag = "*",
@@ -116,17 +100,61 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- editor Theme
+	-- UI and Appearance
+	use({
+		"nvim-lualine/lualine.nvim",
+		event = "BufEnter",
+		config = function()
+			require("config.lualine")
+		end,
+		requires = { "nvim-web-devicons" },
+	})
+	use({
+		"akinsho/bufferline.nvim",
+		tag = "*",
+		config = function()
+			require("config.bufferline")
+		end,
+	})
+	use({
+		"luukvbaal/statuscol.nvim",
+		config = function()
+			require("statuscol").setup({
+				relculright = true,
+				segments = {
+					{ text = { "`%s" }, click = "v:lua.ScSa" },
+					{ text = { "%l" }, click = "v:lua.ScLa" },
+					{ text = { " " } },
+				},
+			})
+		end,
+	})
+
+	-- Colorschemes
+	use({
+		"zenbones-theme/zenbones.nvim",
+		requires = "rktjmp/lush.nvim",
+		config = function()
+			local bgColor = "#181818"
+			vim.o.background = "dark"
+			vim.cmd.colorscheme("zenwritten")
+			vim.api.nvim_set_hl(0, "Keyword", { fg = "#c18fbe", bold = true })
+			vim.api.nvim_set_hl(0, "Statement", { fg = "#c18fbe" })
+			vim.api.nvim_set_hl(0, "Normal", { bg = bgColor, fg = "#a3a19e" })
+			vim.api.nvim_set_hl(0, "LineNr", { bg = bgColor, fg = "#a3a19e" })
+			vim.api.nvim_set_hl(0, "SignColumn", { bg = bgColor })
+			vim.api.nvim_set_hl(0, "CursorLineNr", { bg = bgColor, fg = "#dedede", bold = true })
+			vim.api.nvim_set_hl(0, "String", { fg = "#4aa8bd" })
+		end,
+	})
 	use({
 		"vague2k/vague.nvim",
 		config = function()
 			require("vague").setup({
-				transparent = false, -- don't set background
-				-- disable bold/italic globally in `style`
+				transparent = false,
 				bold = true,
 				italic = true,
 				style = {
-					-- "none" is the same thing as default. But "italic" and "bold" are also valid options
 					boolean = "bold",
 					number = "bold",
 					float = "none",
@@ -138,22 +166,16 @@ return require("packer").startup(function(use)
 					operators = "none",
 					strings = "italic",
 					variables = "none",
-
-					-- keywords
 					keywords = "none",
 					keyword_return = "italic",
 					keywords_loop = "none",
 					keywords_label = "none",
 					keywords_exception = "none",
-
-					-- builtin
 					builtin_constants = "bold",
 					builtin_functions = "none",
 					builtin_types = "bold",
 					builtin_variables = "none",
 				},
-				-- plugin styles where applicable
-				-- make an issue/pr if you'd like to see more styling options!
 				plugins = {
 					cmp = {
 						match = "bold",
@@ -177,11 +199,6 @@ return require("packer").startup(function(use)
 						match = "bold",
 					},
 				},
-
-				-- Override highlights or add new highlights
-				on_highlights = function(highlights, colors) end,
-
-				-- Override colors
 				colors = {
 					bg = "#181818",
 					fg = "#cdcdcd",
@@ -210,100 +227,87 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	-- Navigation and File Management
 	use({
-		"zenbones-theme/zenbones.nvim",
-		requires = "rktjmp/lush.nvim",
+		"nvim-tree/nvim-tree.lua",
+		after = "nvim-web-devicons",
+		requires = "nvim-tree/nvim-web-devicons",
 		config = function()
-			local bgColor = "#181818"
-			vim.o.background = "dark"
-			vim.cmd("colorscheme zenwritten")
-			vim.api.nvim_set_hl(0, "Keyword", { fg = "#c18fbe", bold = true })
-			vim.api.nvim_set_hl(0, "Statement", { fg = "#c18fbe" })
-
-			vim.api.nvim_set_hl(0, "Normal", { bg = bgColor, fg = "#a3a19e" })
-			-- Set relative number background color
-			vim.api.nvim_set_hl(0, "LineNr", { bg = bgColor, fg = "#a3a19e" }) -- Example fg color
-			vim.api.nvim_set_hl(0, "SignColumn", { bg = bgColor })
-
-			-- Also highlight absolute line number
-			vim.api.nvim_set_hl(0, "CursorLineNr", { bg = bgColor, fg = "#dedede", bold = true })
-
-			vim.api.nvim_set_hl(0, "String", { fg = "#4aa8bd" })
-
-			-- ===== TERMINAL FIXES =====
-			vim.cmd("set termguicolors") -- Enable true colors
-			vim.cmd("let &t_ut=''") -- Fix background bleed in terminals
+			require("config.nvimtree")
+		end,
+	})
+	use({
+		"echasnovski/mini.nvim",
+		config = function()
+			require("config.mini")
 		end,
 	})
 
-	-- cmp: Autocomplete
-	-- Main nvim-cmp plugin should be loaded first
+	-- Editing Enhancements
 	use({
-		"hrsh7th/nvim-cmp",
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
 		config = function()
-			require("config.cmpconf")
+			require("nvim-autopairs").setup({})
 		end,
 	})
-
-	-- Cmp extensions with proper after dependencies
 	use({
-		"saadparwaiz1/cmp_luasnip",
-		after = { "nvim-cmp", "LuaSnip" }, -- Needs both to be loaded first
-	})
-
-	use({
-		"hrsh7th/cmp-nvim-lsp",
-		after = "nvim-cmp",
-	})
-
-	use({
-		"hrsh7th/cmp-path",
-		after = "nvim-cmp",
-	})
-
-	use({
-		"hrsh7th/cmp-buffer",
-		after = "nvim-cmp",
-	})
-
-	-- formatter
-	use({
-		"stevearc/conform.nvim",
+		"altermo/ultimate-autopair.nvim",
+		event = { "InsertEnter", "CmdlineEnter" },
+		branch = "v0.6",
 		config = function()
-			require("config.conform")
+			require("ultimate-autopair").setup({
+				enabled = function()
+					local ft = vim.bo.filetype
+					return ft == "http" or ft == "json"
+				end,
+			})
 		end,
 	})
-
-	-- http rest
-	use({
-		"mistweaverco/kulala.nvim",
-		config = function()
-			require("config.kulala")
-		end,
-	})
-
-	-- vim motion
 	use({
 		"ggandor/leap.nvim",
 		config = function()
 			local leap = require("leap")
-
-			-- leap.preview_filter = false
-
-			-- Disable default mappings
 			leap.set_default_keymaps(false)
-
 			vim.api.nvim_set_hl(0, "LeapBackdrop", { link = "Comment" })
 			vim.keymap.set({ "n", "x", "o" }, "f", function()
 				leap.leap({ target_windows = { vim.api.nvim_get_current_win() } })
 			end, { desc = "Leap forward (custom f)" })
 		end,
 	})
+	use({
+		"andrewferrier/debugprint.nvim",
+		config = function()
+			require("debugprint").setup({
+				opts = {
+					keymaps = {
+						visual = {
+							variable_below = "g?v",
+							variable_above = "g?V",
+						},
+					},
+					commands = {
+						toggle_comment_debug_prints = "ToggleCommentDebugPrints",
+						delete_debug_prints = "DeleteDebugPrints",
+						reset_debug_prints_counter = "ResetDebugPrintsCounter",
+					},
+				},
+			})
+		end,
+	})
 
-	-- cmdline
+	-- Terminal
+	use({
+		"akinsho/toggleterm.nvim",
+		tag = "*",
+		config = function()
+			require("config.toggleterm")
+		end,
+	})
+
+	-- Command Line
 	use("roxma/nvim-yarp")
 	use("roxma/vim-hug-neovim-rpc")
-
 	use({
 		"gelguy/wilder.nvim",
 		config = function()
@@ -311,16 +315,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- Bufferline.nvim (added plugin)
-	use({
-		"akinsho/bufferline.nvim",
-		tag = "*", -- specify the tag as '*'
-		config = function()
-			require("config.bufferline")
-		end,
-	})
-
-	-- cursor
+	-- Cursor Enhancements
 	use({
 		"sphamba/smear-cursor.nvim",
 		config = function()
@@ -345,103 +340,431 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- print using js
+	-- Formatters
 	use({
-		"andrewferrier/debugprint.nvim",
+		"stevearc/conform.nvim",
 		config = function()
-			require("debugprint").setup({
-				"andrewferrier/debugprint.nvim",
-				opts = {
-					keymaps = {
-						visual = {
-							variable_below = "g?v",
-							variable_above = "g?V",
-						},
-					},
-					commands = {
-						toggle_comment_debug_prints = "ToggleCommentDebugPrints",
-						delete_debug_prints = "DeleteDebugPrints",
-						reset_debug_prints_counter = "ResetDebugPrintsCounter",
-					},
-					-- … Other options
-				},
-			})
+			require("config.conform")
 		end,
 	})
 
-	--fuzzy finder and mini picker
+	-- HTTP Requests
 	use({
-		"echasnovski/mini.nvim",
+		"mistweaverco/kulala.nvim",
 		config = function()
-			require("config.mini")
-		end,
-	})
-
-	use({
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = function()
-			require("nvim-autopairs").setup({})
-		end,
-	})
-
-	-- Add nvim-ts-autotag
-	use({
-		"windwp/nvim-ts-autotag",
-		ft = { "html", "javascriptreact", "typescriptreact", "javascript", "typescript", "tsx" },
-		config = function()
-			require("nvim-ts-autotag").setup({
-				filetypes = { "html", "javascript", "jsx", "typescript", "tsx", "php" },
-			})
-		end,
-	})
-
-	use({
-		"luukvbaal/statuscol.nvim",
-		config = function()
-			require("statuscol").setup({
-				relculright = true,
-				segments = {
-					{ text = { "`%s" }, click = "v:lua.ScSa" },
-					{ text = { "%l" }, click = "v:lua.ScLa" },
-					{ text = { " " } },
-				},
-			})
-		end,
-	})
-
-	use({
-		"tzachar/cmp-fuzzy-buffer",
-		requires = { "tzachar/fuzzy.nvim" },
-	})
-
-	-- Plugin dependencies
-	use("MunifTanjim/nui.nvim")
-
-	-- Configure notify before noice (since noice depends on it)
-	use({
-		"rcarriga/nvim-notify",
-		config = function()
-			require("notify").setup({
-				background_colour = "#181818",
-				stages = "fade",
-				timeout = 5000,
-				render = "minimal",
-				max_width = 80,
-				max_height = 10,
-				top_down = false,
-				icons = {
-					ERROR = "",
-					WARN = "",
-					INFO = "",
-					DEBUG = "",
-					TRACE = "✎",
-				},
-				highlight = {
-					background = "#1a1a1a",
-					foreground = "#a0a0a0",
-				},
-			})
+			require("config.kulala")
 		end,
 	})
 end)
+
+-- -- Automatically run: PackerCompile
+-- vim.api.nvim_create_autocmd("BufWritePost", {
+-- 	group = vim.api.nvim_create_augroup("PACKER", { clear = true }),
+-- 	pattern = "plugins.lua",
+-- 	command = "source <afile> | PackerCompile",
+-- })
+--
+-- return require("packer").startup(function(use)
+-- 	-- Packer
+-- 	use("wbthomason/packer.nvim")
+--
+-- 	use({
+-- 		"williamboman/mason.nvim",
+-- 		config = function()
+-- 			require("mason").setup()
+-- 		end,
+-- 	})
+--
+-- 	-- Common utilities
+-- 	use("nvim-lua/plenary.nvim")
+--
+-- 	-- Icons
+-- 	use("nvim-tree/nvim-web-devicons")
+--
+-- 	-- Auto close
+-- 	use({
+-- 		"altermo/ultimate-autopair.nvim",
+-- 		event = { "InsertEnter", "CmdlineEnter" },
+-- 		branch = "v0.6", --recommended as each new version will have breaking changes
+-- 		config = function()
+-- 			require("ultimate-autopair").setup({
+-- 				--Config goes here
+-- 				enabled = function()
+-- 					-- Enable only for .http and .json files
+-- 					local ft = vim.bo.filetype
+-- 					return ft == "http" or ft == "json"
+-- 				end,
+-- 			})
+-- 		end,
+-- 	})
+--
+-- 	-- Git
+-- 	use({
+-- 		"lewis6991/gitsigns.nvim",
+-- 		config = function()
+-- 			require("config.gitsigns")
+-- 		end,
+-- 	})
+--
+-- 	-- File tree: nvim-treesitter with TSUpdate
+-- 	use({
+-- 		"nvim-tree/nvim-tree.lua",
+-- 		after = "nvim-web-devicons",
+-- 		requires = "nvim-tree/nvim-web-devicons",
+-- 		config = function()
+-- 			require("config.nvimtree")
+-- 		end,
+-- 	})
+--
+-- 	-- Treesitter
+-- 	use({
+-- 		"nvim-treesitter/nvim-treesitter",
+-- 		run = function()
+-- 			require("nvim-treesitter.install").update({ with_sync = true })
+-- 		end,
+-- 		config = function()
+-- 			require("config.treesitter")
+-- 		end,
+-- 	})
+--
+-- 	-- LSP
+-- 	use({
+-- 		"neovim/nvim-lspconfig",
+-- 		after = "nvim-cmp",
+-- 		config = function()
+-- 			require("config.lsp")
+-- 		end,
+-- 	})
+--
+-- 	use("onsails/lspkind-nvim")
+-- 	use({
+-- 		"L3MON4D3/LuaSnip",
+-- 		tag = "v<CurrentMajor>.*",
+-- 		config = function()
+-- 			require("luasnip").setup()
+-- 		end,
+-- 	})
+--
+-- 	-- Terminal
+-- 	use({
+-- 		"akinsho/toggleterm.nvim",
+-- 		tag = "*",
+-- 		config = function()
+-- 			require("config.toggleterm")
+-- 		end,
+-- 	})
+--
+-- 	-- Statusline
+-- 	use({
+-- 		"nvim-lualine/lualine.nvim",
+-- 		event = "BufEnter",
+-- 		config = function()
+-- 			require("config.lualine")
+-- 		end,
+-- 		requires = { "nvim-web-devicons" },
+-- 	})
+--
+-- 	-- Git Conflict plugin
+-- 	use({
+-- 		"akinsho/git-conflict.nvim",
+-- 		tag = "*",
+-- 		config = function()
+-- 			require("config.gitconflict")
+-- 		end,
+-- 	})
+--
+-- 	use({
+-- 		"zenbones-theme/zenbones.nvim",
+-- 		requires = "rktjmp/lush.nvim",
+-- 		config = function()
+-- 			local bgColor = "#181818"
+-- 			vim.o.background = "dark"
+-- 			vim.cmd.colorscheme("zenwritten")
+-- 			vim.api.nvim_set_hl(0, "Keyword", { fg = "#c18fbe", bold = true })
+-- 			vim.api.nvim_set_hl(0, "Statement", { fg = "#c18fbe" })
+--
+-- 			vim.api.nvim_set_hl(0, "Normal", { bg = bgColor, fg = "#a3a19e" })
+-- 			-- Set relative number background color
+-- 			vim.api.nvim_set_hl(0, "LineNr", { bg = bgColor, fg = "#a3a19e" }) -- Example fg color
+-- 			vim.api.nvim_set_hl(0, "SignColumn", { bg = bgColor })
+--
+-- 			-- Also highlight absolute line number
+-- 			vim.api.nvim_set_hl(0, "CursorLineNr", { bg = bgColor, fg = "#dedede", bold = true })
+--
+-- 			vim.api.nvim_set_hl(0, "String", { fg = "#4aa8bd" })
+-- 		end,
+-- 	})
+--
+-- 	-- editor Theme
+-- 	use({
+-- 		"vague2k/vague.nvim",
+-- 		config = function()
+-- 			require("vague").setup({
+-- 				transparent = false, -- don't set background
+-- 				-- disable bold/italic globally in `style`
+-- 				bold = true,
+-- 				italic = true,
+-- 				style = {
+-- 					-- "none" is the same thing as default. But "italic" and "bold" are also valid options
+-- 					boolean = "bold",
+-- 					number = "bold",
+-- 					float = "none",
+-- 					error = "bold",
+-- 					comments = "italic",
+-- 					conditionals = "none",
+-- 					functions = "none",
+-- 					headings = "bold",
+-- 					operators = "none",
+-- 					strings = "italic",
+-- 					variables = "none",
+--
+-- 					-- keywords
+-- 					keywords = "none",
+-- 					keyword_return = "italic",
+-- 					keywords_loop = "none",
+-- 					keywords_label = "none",
+-- 					keywords_exception = "none",
+--
+-- 					-- builtin
+-- 					builtin_constants = "bold",
+-- 					builtin_functions = "none",
+-- 					builtin_types = "bold",
+-- 					builtin_variables = "none",
+-- 				},
+-- 				-- plugin styles where applicable
+-- 				-- make an issue/pr if you'd like to see more styling options!
+-- 				plugins = {
+-- 					cmp = {
+-- 						match = "bold",
+-- 						match_fuzzy = "bold",
+-- 					},
+-- 					dashboard = {
+-- 						footer = "italic",
+-- 					},
+-- 					lsp = {
+-- 						diagnostic_error = "bold",
+-- 						diagnostic_hint = "none",
+-- 						diagnostic_info = "italic",
+-- 						diagnostic_ok = "none",
+-- 						diagnostic_warn = "bold",
+-- 					},
+-- 					neotest = {
+-- 						focused = "bold",
+-- 						adapter_name = "bold",
+-- 					},
+-- 					telescope = {
+-- 						match = "bold",
+-- 					},
+-- 				},
+--
+-- 				-- Override highlights or add new highlights
+-- 				on_highlights = function(highlights, colors) end,
+--
+-- 				-- Override colors
+-- 				colors = {
+-- 					bg = "#181818",
+-- 					fg = "#cdcdcd",
+-- 					floatBorder = "#878787",
+-- 					line = "#252530",
+-- 					comment = "#606079",
+-- 					builtin = "#b4d4cf",
+-- 					func = "#c48282",
+-- 					string = "#e8b589",
+-- 					number = "#e0a363",
+-- 					property = "#c3c3d5",
+-- 					constant = "#aeaed1",
+-- 					parameter = "#bb9dbd",
+-- 					visual = "#333738",
+-- 					error = "#d8647e",
+-- 					warning = "#f3be7c",
+-- 					hint = "#7e98e8",
+-- 					operator = "#90a0b5",
+-- 					keyword = "#6e94b2",
+-- 					type = "#9bb4bc",
+-- 					search = "#405065",
+-- 					plus = "#7fa563",
+-- 					delta = "#f3be7c",
+-- 				},
+-- 			})
+-- 		end,
+-- 	})
+--
+-- 	-- cmp: Autocomplete
+-- 	-- Main nvim-cmp plugin should be loaded first
+-- 	use({
+-- 		"hrsh7th/nvim-cmp",
+-- 		config = function()
+-- 			require("config.cmpconf")
+-- 		end,
+-- 	})
+--
+-- 	-- Cmp extensions with proper after dependencies
+-- 	use({
+-- 		"saadparwaiz1/cmp_luasnip",
+-- 		after = { "nvim-cmp", "LuaSnip" }, -- Needs both to be loaded first
+-- 	})
+--
+-- 	use({
+-- 		"hrsh7th/cmp-nvim-lsp",
+-- 		after = "nvim-cmp",
+-- 	})
+--
+-- 	use({
+-- 		"hrsh7th/cmp-path",
+-- 		after = "nvim-cmp",
+-- 	})
+--
+-- 	use({
+-- 		"hrsh7th/cmp-buffer",
+-- 		after = "nvim-cmp",
+-- 	})
+--
+-- 	-- formatter
+-- 	use({
+-- 		"stevearc/conform.nvim",
+-- 		config = function()
+-- 			require("config.conform")
+-- 		end,
+-- 	})
+--
+-- 	-- http rest
+-- 	use({
+-- 		"mistweaverco/kulala.nvim",
+-- 		config = function()
+-- 			require("config.kulala")
+-- 		end,
+-- 	})
+--
+-- 	-- vim motion
+-- 	use({
+-- 		"ggandor/leap.nvim",
+-- 		config = function()
+-- 			local leap = require("leap")
+--
+-- 			-- leap.preview_filter = false
+--
+-- 			-- Disable default mappings
+-- 			leap.set_default_keymaps(false)
+--
+-- 			vim.api.nvim_set_hl(0, "LeapBackdrop", { link = "Comment" })
+-- 			vim.keymap.set({ "n", "x", "o" }, "f", function()
+-- 				leap.leap({ target_windows = { vim.api.nvim_get_current_win() } })
+-- 			end, { desc = "Leap forward (custom f)" })
+-- 		end,
+-- 	})
+--
+-- 	-- cmdline
+-- 	use("roxma/nvim-yarp")
+-- 	use("roxma/vim-hug-neovim-rpc")
+--
+-- 	use({
+-- 		"gelguy/wilder.nvim",
+-- 		config = function()
+-- 			require("config.wilder")
+-- 		end,
+-- 	})
+--
+-- 	-- Bufferline.nvim (added plugin)
+-- 	use({
+-- 		"akinsho/bufferline.nvim",
+-- 		tag = "*", -- specify the tag as '*'
+-- 		config = function()
+-- 			require("config.bufferline")
+-- 		end,
+-- 	})
+--
+-- 	-- cursor
+-- 	use({
+-- 		"sphamba/smear-cursor.nvim",
+-- 		config = function()
+-- 			vim.o.termguicolors = true
+-- 			require("smear_cursor").setup({
+-- 				cursor_color = "#151515",
+-- 				speed = 10,
+-- 				stiffness = 0.9,
+-- 				trailing_stiffness = 0.6,
+-- 				stiffness_insert_mode = 0.7,
+-- 				time_interval = 8,
+-- 				trailing_stiffness_insert_mode = 0.7,
+-- 				distance_stop_animating = 0.9,
+-- 				trailing_exponent = 6,
+-- 				never_draw_over_target = true,
+-- 				smear_between_buffers = true,
+-- 				smear_between_neighbor_lines = true,
+-- 				smear_insert_mode = true,
+-- 				hide_target_hack = true,
+-- 				gamma = 1,
+-- 			})
+-- 		end,
+-- 	})
+--
+-- 	-- print using js
+-- 	use({
+-- 		"andrewferrier/debugprint.nvim",
+-- 		config = function()
+-- 			require("debugprint").setup({
+-- 				"andrewferrier/debugprint.nvim",
+-- 				opts = {
+-- 					keymaps = {
+-- 						visual = {
+-- 							variable_below = "g?v",
+-- 							variable_above = "g?V",
+-- 						},
+-- 					},
+-- 					commands = {
+-- 						toggle_comment_debug_prints = "ToggleCommentDebugPrints",
+-- 						delete_debug_prints = "DeleteDebugPrints",
+-- 						reset_debug_prints_counter = "ResetDebugPrintsCounter",
+-- 					},
+-- 					-- … Other options
+-- 				},
+-- 			})
+-- 		end,
+-- 	})
+--
+-- 	--fuzzy finder and mini picker
+-- 	use({
+-- 		"echasnovski/mini.nvim",
+-- 		config = function()
+-- 			require("config.mini")
+-- 		end,
+-- 	})
+--
+-- 	use({
+-- 		"windwp/nvim-autopairs",
+-- 		event = "InsertEnter",
+-- 		config = function()
+-- 			require("nvim-autopairs").setup({})
+-- 		end,
+-- 	})
+--
+-- 	-- Add nvim-ts-autotag
+-- 	use({
+-- 		"windwp/nvim-ts-autotag",
+-- 		ft = { "html", "javascriptreact", "typescriptreact", "javascript", "typescript", "tsx" },
+-- 		config = function()
+-- 			require("nvim-ts-autotag").setup({
+-- 				filetypes = { "html", "javascript", "jsx", "typescript", "tsx", "php" },
+-- 			})
+-- 		end,
+-- 	})
+--
+-- 	use({
+-- 		"luukvbaal/statuscol.nvim",
+-- 		config = function()
+-- 			require("statuscol").setup({
+-- 				relculright = true,
+-- 				segments = {
+-- 					{ text = { "`%s" }, click = "v:lua.ScSa" },
+-- 					{ text = { "%l" }, click = "v:lua.ScLa" },
+-- 					{ text = { " " } },
+-- 				},
+-- 			})
+-- 		end,
+-- 	})
+--
+-- 	use({
+-- 		"tzachar/cmp-fuzzy-buffer",
+-- 		requires = { "tzachar/fuzzy.nvim" },
+-- 	})
+-- end)

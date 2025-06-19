@@ -57,5 +57,3 @@ o.shadafile =
 vim.deprecate = function() end
 
 vim.opt.termguicolors = true
-
-vim.notify = require("notify")

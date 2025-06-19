@@ -16,6 +16,15 @@ if not ok_cmp then
 	return M
 end
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+local ok, cmp_lsp = pcall(require, "cmp_nvim_lsp")
+if ok then
+	capabilities = cmp_lsp.default_capabilities(capabilities)
+else
+	vim.notify("⚠️ cmp_nvim_lsp not found", vim.log.levels.WARN)
+end
+
 -- ─────────────────────────────────────────────────────────────
 -- 2.  on_attach & capabilities
 -- ─────────────────────────────────────────────────────────────
@@ -39,9 +48,7 @@ local on_attach = function(client, bufnr)
 	client.server_capabilities.documentFormattingProvider = false
 end
 
--- local capabilities = cmp_nvim_lsp.default_capabilities()
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-require("lspconfig").tsserver.setup({ capabilities = capabilities })
+local capabilities = cmp_nvim_lsp.default_capabilities()
 
 -- ─────────────────────────────────────────────────────────────
 -- 3.  Per-server settings
