@@ -39,7 +39,9 @@ local on_attach = function(client, bufnr)
 	client.server_capabilities.documentFormattingProvider = false
 end
 
-local capabilities = cmp_nvim_lsp.default_capabilities()
+-- local capabilities = cmp_nvim_lsp.default_capabilities()
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+require("lspconfig").tsserver.setup({ capabilities = capabilities })
 
 -- ─────────────────────────────────────────────────────────────
 -- 3.  Per-server settings
@@ -67,19 +69,19 @@ local servers = {
 	},
 
 	-- Emmet
-	emmet_ls = {
-		filetypes = {
-			"html",
-			"css",
-			-- "javascript",
-			"javascriptreact",
-			-- "typescript",
-			"typescriptreact",
-		},
-		init_options = {
-			html = { options = { ["bem.enabled"] = true } },
-		},
-	},
+	-- emmet_ls = {
+	-- 	filetypes = {
+	-- 		"html",
+	-- 		"css",
+	-- 		-- "javascript",
+	-- 		"javascriptreact",
+	-- 		-- "typescript",
+	-- 		"typescriptreact",
+	-- 	},
+	-- 	init_options = {
+	-- 		html = { options = { ["bem.enabled"] = true } },
+	-- 	},
+	-- },
 
 	-- HTML
 	html = { filetypes = { "html" } },

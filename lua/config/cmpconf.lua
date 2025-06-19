@@ -24,12 +24,10 @@ cmp.setup({
 		["<C-p>"] = cmp.mapping.select_prev_item(),
 	}),
 	sources = cmp.config.sources({
-		-- { name = "blink" },
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 		{ name = "buffer" },
 		{ name = "path" },
-		-- { name = "fuzzy_buffer" },
 	}),
 	formatting = {
 		format = function(entry, vim_item)
@@ -39,9 +37,6 @@ cmp.setup({
 				ellipsis_char = "...",
 			})(entry, vim_item)
 
-			if entry.source.name == "blink" then
-				vim_item.kind = "🧠 [Blink]"
-			end
 			return vim_item
 		end,
 	},
@@ -60,11 +55,3 @@ vim.cmd([[
   set completeopt=menuone,noinsert,noselect
   highlight! default link CmpItemKind CmpItemMenuDefault
 ]])
-
--- Cmdline completion using cmp-cmdline
--- cmp.setup.cmdline(":", {
--- 	mapping = cmp.mapping.preset.cmdline(),
--- 	sources = {
--- 		{ name = "cmdline" },
--- 	},
--- })

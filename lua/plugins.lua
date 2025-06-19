@@ -73,6 +73,7 @@ return require("packer").startup(function(use)
 	-- LSP
 	use({
 		"neovim/nvim-lspconfig",
+		after = "nvim-cmp",
 		config = function()
 			require("config.lsp")
 		end,
@@ -127,7 +128,7 @@ return require("packer").startup(function(use)
 				style = {
 					-- "none" is the same thing as default. But "italic" and "bold" are also valid options
 					boolean = "bold",
-					number = "none",
+					number = "bold",
 					float = "none",
 					error = "bold",
 					comments = "italic",
@@ -235,78 +236,35 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- use({
-	-- 	"folke/tokyonight.nvim",
-	-- 	config = function()
-	-- 		require("config.theme")
-	-- 		-- -- Optional: Customize font/background colors
-	-- 	end,
-	-- })
-
 	-- cmp: Autocomplete
+	-- Main nvim-cmp plugin should be loaded first
 	use({
 		"hrsh7th/nvim-cmp",
-		opt = false,
-		event = "InsertEnter",
-		requires = {
-			"L3MON4D3/LuaSnip", -- for snippets
-			"saadparwaiz1/cmp_luasnip",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-nvim-lsp",
-		},
 		config = function()
 			require("config.cmpconf")
 		end,
 	})
 
+	-- Cmp extensions with proper after dependencies
 	use({
-		"hrsh7th/cmp-cmdline",
-		after = "nvim-cmp", -- ✅ ensure cmp is loaded first
-		config = function()
-			local cmp = require("cmp")
-
-			-- cmp.setup.cmdline(":", {
-			-- 	mapping = cmp.mapping.preset.cmdline(),
-			-- 	sources = {
-			-- 		{ name = "cmdline" },
-			-- 	},
-			-- })
-
-			cmp.setup.cmdline("/", {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = {
-					{ name = "buffer" },
-				},
-			})
-
-			cmp.setup.cmdline("?", {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = {
-					{ name = "buffer" },
-				},
-			})
-		end,
+		"saadparwaiz1/cmp_luasnip",
+		after = { "nvim-cmp", "LuaSnip" }, -- Needs both to be loaded first
 	})
 
-	-- use({
-	-- 	"saghen/blink.cmp",
-	-- 	tag = "1.*", -- <--- add this line to use prebuilt binaries
-	-- 	requires = {
-	-- 		"rafamadriz/friendly-snippets",
-	-- 	},
-	-- 	config = function()
-	-- 		require("blink.cmp").setup({
-	-- 			fuzzy = {
-	-- 				implementation = "lua", -- explicitly use the Lua version
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- })
+	use({
+		"hrsh7th/cmp-nvim-lsp",
+		after = "nvim-cmp",
+	})
 
-	use("hrsh7th/cmp-nvim-lsp")
-	use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
-	use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
+	use({
+		"hrsh7th/cmp-path",
+		after = "nvim-cmp",
+	})
+
+	use({
+		"hrsh7th/cmp-buffer",
+		after = "nvim-cmp",
+	})
 
 	-- formatter
 	use({
@@ -368,7 +326,7 @@ return require("packer").startup(function(use)
 		config = function()
 			vim.o.termguicolors = true
 			require("smear_cursor").setup({
-				cursor_color = "#ededed",
+				cursor_color = "#151515",
 				speed = 10,
 				stiffness = 0.9,
 				trailing_stiffness = 0.6,
@@ -419,42 +377,6 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- Plugin installation
-	-- use({
-	-- 	"nvim-telescope/telescope.nvim",
-	-- 	tag = "0.1.8",
-	-- 	requires = { { "nvim-lua/plenary.nvim" } },
-	-- 	config = function()
-	-- 		-- Telescope setup
-	-- 		require("telescope").setup({
-	-- 			defaults = {
-	-- 				layout_strategy = "horizontal",
-	-- 				layout_config = {
-	-- 					horizontal = {
-	-- 						preview_width = 0.6,
-	-- 					},
-	-- 				},
-	-- 				sorting_strategy = "ascending",
-	-- 				prompt_prefix = " ",
-	-- 				selection_caret = " + ",
-	-- 				path_display = { "smart" },
-	-- 			},
-	-- 			pickers = {
-	-- 				find_files = {
-	-- 					hidden = true,
-	-- 				},
-	-- 			},
-	-- 		})
-	--
-	-- 		-- Telescope keymaps
-	-- 		local builtin = require("telescope.builtin")
-	-- 		vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find Files" })
-	-- 		vim.keymap.set("n", "<C-o>", builtin.live_grep, { desc = "Live Grep" })
-	-- 		vim.keymap.set("n", "<C-b>", builtin.buffers, { desc = "Find Buffers" })
-	-- 		-- vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help Tags" })
-	-- 	end,
-	-- })
-
 	use({
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
@@ -480,7 +402,7 @@ return require("packer").startup(function(use)
 			require("statuscol").setup({
 				relculright = true,
 				segments = {
-					{ text = { "~%s" }, click = "v:lua.ScSa" },
+					{ text = { "`%s" }, click = "v:lua.ScSa" },
 					{ text = { "%l" }, click = "v:lua.ScLa" },
 					{ text = { " " } },
 				},
@@ -489,19 +411,37 @@ return require("packer").startup(function(use)
 	})
 
 	use({
-		"tzachar/fuzzy.nvim",
-		requires = { "nvim-lua/plenary.nvim" },
-		run = "cargo build --release", -- OR use prebuilt binaries, but NOT both
+		"tzachar/cmp-fuzzy-buffer",
+		requires = { "tzachar/fuzzy.nvim" },
 	})
 
-	-- use({
-	-- 	"tzachar/cmp-fuzzy-buffer",
-	-- 	requires = { "tzachar/fuzzy.nvim" },
-	-- })
-
-	-- cmd line popup
-
 	-- Plugin dependencies
-	use({ "MunifTanjim/nui.nvim" })
-	use({ "rcarriga/nvim-notify" })
+	use("MunifTanjim/nui.nvim")
+
+	-- Configure notify before noice (since noice depends on it)
+	use({
+		"rcarriga/nvim-notify",
+		config = function()
+			require("notify").setup({
+				background_colour = "#181818",
+				stages = "fade",
+				timeout = 5000,
+				render = "minimal",
+				max_width = 80,
+				max_height = 10,
+				top_down = false,
+				icons = {
+					ERROR = "",
+					WARN = "",
+					INFO = "",
+					DEBUG = "",
+					TRACE = "✎",
+				},
+				highlight = {
+					background = "#1a1a1a",
+					foreground = "#a0a0a0",
+				},
+			})
+		end,
+	})
 end)
