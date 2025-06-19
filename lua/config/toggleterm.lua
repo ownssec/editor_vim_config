@@ -4,25 +4,74 @@ if not status then
 	return
 end
 
--- toggleterm.setup({
+toggleterm.setup({
+	shade_terminals = true,
+	direction = "horizontal",
+	size = function(term)
+		if term.direction == "horizontal" then
+			return vim.o.columns * 0.09
+		elseif term.direction == "vertical" then
+			return vim.o.columns * 0.4
+		end
+	end,
+	shading_factor = 1,
+	responsiveness = {
+		-- breakpoint in terms of `vim.o.columns` at which terminals will start to stack on top of each other
+		-- instead of next to each other
+		-- default = 0 which means the feature is turned off
+		horizontal_breakpoint = 135,
+	},
+})
+
+-- require("toggleterm").setup({
 -- 	shade_terminals = true,
--- 	direction = "horizontal",
+-- 	direction = "float", -- change to "float" to use floating terminal
+-- 	float_opts = {
+-- 		border = "double", -- or 'single', 'double', etc.
+-- 		winblend = 0,
+-- 		highlights = {
+-- 			border = "Normal",
+-- 			background = "Normal",
+-- 		},
+-- 	},
 -- 	size = function(term)
 -- 		if term.direction == "horizontal" then
--- 			return vim.o.columns * 0.09
+-- 			return math.floor(vim.o.lines * 0.25)
 -- 		elseif term.direction == "vertical" then
--- 			return vim.o.columns * 0.4
+-- 			return math.floor(vim.o.columns * 0.4)
 -- 		end
 -- 	end,
 -- 	shading_factor = 1,
+-- 	shade_filetypes = { "none", "fzf" },
+--
+-- 	-- optional responsiveness config if you want it
 -- 	responsiveness = {
--- 		-- breakpoint in terms of `vim.o.columns` at which terminals will start to stack on top of each other
--- 		-- instead of next to each other
--- 		-- default = 0 which means the feature is turned off
 -- 		horizontal_breakpoint = 135,
 -- 	},
+--
+-- 	float_opts = {
+-- 		border = "curved", -- 'single', 'double', 'shadow', etc.
+-- 		winblend = 0,
+-- 		highlights = {
+-- 			background = "Normal",
+-- 			border = "Normal", -- ✅ uses your custom color
+-- 		},
+-- 	},
+--
+-- 	on_open = function(term)
+-- 		if term.direction == "horizontal" then
+-- 			local width = vim.api.nvim_win_get_width(term.window)
+-- 			local border = string.rep("─", width)
+-- 			vim.api.nvim_win_set_option(term.window, "winbar", "%#ToggleTermBorderRed#" .. border)
+-- 		end
+-- 	end,
+--
+-- 	on_close = function(term)
+-- 		if term.direction == "horizontal" then
+-- 			vim.api.nvim_win_set_option(term.window, "winbar", "")
+-- 		end
+-- 	end,
 -- })
-
 toggleterm.setup({
 	shade_terminals = true,
 	direction = "horizontal",

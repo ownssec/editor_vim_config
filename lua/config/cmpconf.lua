@@ -29,6 +29,7 @@ cmp.setup({
 		{ name = "luasnip" },
 		{ name = "buffer" },
 		{ name = "path" },
+		-- { name = "fuzzy_buffer" },
 	}),
 	formatting = {
 		format = function(entry, vim_item)
@@ -59,3 +60,11 @@ vim.cmd([[
   set completeopt=menuone,noinsert,noselect
   highlight! default link CmpItemKind CmpItemMenuDefault
 ]])
+
+-- Cmdline completion using cmp-cmdline
+cmp.setup.cmdline(":", {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = {
+		{ name = "cmdline" },
+	},
+})

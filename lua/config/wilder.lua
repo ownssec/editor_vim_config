@@ -58,7 +58,6 @@ wilder.set_option("pipeline", {
 		})
 	),
 })
-
 -- Set up renderer with highlighting
 wilder.set_option(
 	"renderer",

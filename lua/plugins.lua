@@ -245,8 +245,44 @@ return require("packer").startup(function(use)
 		"hrsh7th/nvim-cmp",
 		opt = false,
 		event = "InsertEnter",
+		requires = {
+			"L3MON4D3/LuaSnip", -- for snippets
+			"saadparwaiz1/cmp_luasnip",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-nvim-lsp",
+		},
 		config = function()
 			require("config.cmpconf")
+		end,
+	})
+
+	use({
+		"hrsh7th/cmp-cmdline",
+		after = "nvim-cmp", -- ✅ ensure cmp is loaded first
+		config = function()
+			local cmp = require("cmp")
+
+			cmp.setup.cmdline(":", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = {
+					{ name = "cmdline" },
+				},
+			})
+
+			cmp.setup.cmdline("/", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = {
+					{ name = "buffer" },
+				},
+			})
+
+			cmp.setup.cmdline("?", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = {
+					{ name = "buffer" },
+				},
+			})
 		end,
 	})
 
@@ -380,6 +416,42 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	-- Plugin installation
+	-- use({
+	-- 	"nvim-telescope/telescope.nvim",
+	-- 	tag = "0.1.8",
+	-- 	requires = { { "nvim-lua/plenary.nvim" } },
+	-- 	config = function()
+	-- 		-- Telescope setup
+	-- 		require("telescope").setup({
+	-- 			defaults = {
+	-- 				layout_strategy = "horizontal",
+	-- 				layout_config = {
+	-- 					horizontal = {
+	-- 						preview_width = 0.6,
+	-- 					},
+	-- 				},
+	-- 				sorting_strategy = "ascending",
+	-- 				prompt_prefix = " ",
+	-- 				selection_caret = " + ",
+	-- 				path_display = { "smart" },
+	-- 			},
+	-- 			pickers = {
+	-- 				find_files = {
+	-- 					hidden = true,
+	-- 				},
+	-- 			},
+	-- 		})
+	--
+	-- 		-- Telescope keymaps
+	-- 		local builtin = require("telescope.builtin")
+	-- 		vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find Files" })
+	-- 		vim.keymap.set("n", "<C-o>", builtin.live_grep, { desc = "Live Grep" })
+	-- 		vim.keymap.set("n", "<C-b>", builtin.buffers, { desc = "Find Buffers" })
+	-- 		-- vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help Tags" })
+	-- 	end,
+	-- })
+
 	use({
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
@@ -405,9 +477,9 @@ return require("packer").startup(function(use)
 			require("statuscol").setup({
 				relculright = true,
 				segments = {
-					{ text = { "%s" }, click = "v:lua.ScSa" },
+					{ text = { "~%s" }, click = "v:lua.ScSa" },
 					{ text = { "%l" }, click = "v:lua.ScLa" },
-					{ text = { "  " } },
+					{ text = { " " } },
 				},
 			})
 		end,
@@ -419,11 +491,14 @@ return require("packer").startup(function(use)
 		run = "cargo build --release", -- OR use prebuilt binaries, but NOT both
 	})
 
-	use({
-		"tzachar/cmp-fuzzy-buffer",
-		after = { "fuzzy.nvim", "nvim-cmp" },
-		config = function()
-			require("cmp_fuzzy_buffer").setup()
-		end,
-	})
+	-- use({
+	-- 	"tzachar/cmp-fuzzy-buffer",
+	-- 	requires = { "tzachar/fuzzy.nvim" },
+	-- })
+
+	-- cmd line popup
+
+	-- Plugin dependencies
+	use({ "MunifTanjim/nui.nvim" })
+	use({ "rcarriga/nvim-notify" })
 end)
