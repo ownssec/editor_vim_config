@@ -88,9 +88,14 @@ toggleterm.setup({
 		-- instead of next to each other
 		-- default = 0 which means the feature is turned off
 		horizontal_breakpoint = 135,
-		hades,
+		-- hades,
 	},
 
+	highlights = {
+		Normal = {
+			guibg = bg_dark,
+		},
+	},
 	on_open = function(term)
 		if term.direction == "horizontal" then
 			local width = vim.api.nvim_win_get_width(term.window)

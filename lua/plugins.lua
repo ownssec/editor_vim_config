@@ -215,8 +215,7 @@ return require("packer").startup(function(use)
 		config = function()
 			local bgColor = "#181818"
 			vim.o.background = "dark"
-			vim.cmd("colorscheme zenbones")
-
+			vim.cmd("colorscheme zenwritten")
 			vim.api.nvim_set_hl(0, "Keyword", { fg = "#c18fbe", bold = true })
 			vim.api.nvim_set_hl(0, "Statement", { fg = "#c18fbe" })
 
@@ -229,6 +228,10 @@ return require("packer").startup(function(use)
 			vim.api.nvim_set_hl(0, "CursorLineNr", { bg = bgColor, fg = "#dedede", bold = true })
 
 			vim.api.nvim_set_hl(0, "String", { fg = "#4aa8bd" })
+
+			-- ===== TERMINAL FIXES =====
+			vim.cmd("set termguicolors") -- Enable true colors
+			vim.cmd("let &t_ut=''") -- Fix background bleed in terminals
 		end,
 	})
 
@@ -263,12 +266,12 @@ return require("packer").startup(function(use)
 		config = function()
 			local cmp = require("cmp")
 
-			cmp.setup.cmdline(":", {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = {
-					{ name = "cmdline" },
-				},
-			})
+			-- cmp.setup.cmdline(":", {
+			-- 	mapping = cmp.mapping.preset.cmdline(),
+			-- 	sources = {
+			-- 		{ name = "cmdline" },
+			-- 	},
+			-- })
 
 			cmp.setup.cmdline("/", {
 				mapping = cmp.mapping.preset.cmdline(),
