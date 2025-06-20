@@ -1,7 +1,5 @@
 -- lua/configs/lualine.lua
 
--- lua/configs/lualine.lua
-
 local status, lualine = pcall(require, "lualine")
 if not status then
 	return
