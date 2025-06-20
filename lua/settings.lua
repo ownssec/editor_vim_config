@@ -48,12 +48,10 @@ o.ignorecase = true -- set ignorecase
 o.smartcase = true -- set smartcase
 o.compatible = false -- set nocompatible
 o.splitright = true
-
+--
 o.signcolumn = "yes" -- Ensure the sign column is always visible
 o.shadafile =
 	-- remove hotkey alt + `
 	vim.keymap.set({ "n", "v", "t" }, "<A-`>", "<Nop>", { noremap = true, silent = true })
 
 vim.deprecate = function() end
-
-vim.opt.termguicolors = true

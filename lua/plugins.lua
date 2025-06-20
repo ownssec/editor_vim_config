@@ -109,6 +109,7 @@ return require("packer").startup(function(use)
 		end,
 		requires = { "nvim-web-devicons" },
 	})
+
 	use({
 		"akinsho/bufferline.nvim",
 		tag = "*",
@@ -116,6 +117,7 @@ return require("packer").startup(function(use)
 			require("config.bufferline")
 		end,
 	})
+
 	use({
 		"luukvbaal/statuscol.nvim",
 		config = function()
@@ -136,17 +138,25 @@ return require("packer").startup(function(use)
 		requires = "rktjmp/lush.nvim",
 		config = function()
 			local bgColor = "#181818"
+			local fgImportant = "#c18fbe"
 			vim.o.background = "dark"
+
 			vim.cmd.colorscheme("zenwritten")
-			vim.api.nvim_set_hl(0, "Keyword", { fg = "#c18fbe", bold = true })
-			vim.api.nvim_set_hl(0, "Statement", { fg = "#c18fbe" })
+
+			vim.api.nvim_set_hl(0, "Keyword", { fg = fgImportant, bold = true })
+			vim.api.nvim_set_hl(0, "Statement", { fg = fgImportant })
 			vim.api.nvim_set_hl(0, "Normal", { bg = bgColor, fg = "#a3a19e" })
 			vim.api.nvim_set_hl(0, "LineNr", { bg = bgColor, fg = "#a3a19e" })
 			vim.api.nvim_set_hl(0, "SignColumn", { bg = bgColor })
 			vim.api.nvim_set_hl(0, "CursorLineNr", { bg = bgColor, fg = "#dedede", bold = true })
-			vim.api.nvim_set_hl(0, "String", { fg = "#4aa8bd" })
+			vim.api.nvim_set_hl(0, "String", { fg = "#547d87" })
+
+			-- For init.lua
+			vim.opt.guicursor = "n-v-c:block-Cursor"
+			vim.api.nvim_set_hl(0, "Cursor", { fg = "#FFFFFF", bg = "#FFFFFF" })
 		end,
 	})
+
 	use({
 		"vague2k/vague.nvim",
 		config = function()
@@ -161,7 +171,7 @@ return require("packer").startup(function(use)
 					error = "bold",
 					comments = "italic",
 					conditionals = "none",
-					functions = "none",
+					functions = "bold",
 					headings = "bold",
 					operators = "none",
 					strings = "italic",
@@ -321,7 +331,13 @@ return require("packer").startup(function(use)
 		config = function()
 			vim.o.termguicolors = true
 			require("smear_cursor").setup({
-				cursor_color = "#151515",
+				cterm_cursor_colors = { 240, 245, 250, 255 },
+				legacy_computing_symbols_support = true,
+				cterm_bg = 235,
+				hide_target_hack = true,
+				never_draw_over_target = true,
+				cursor_color = "#ffffff",
+				transparent_bg_fallback_color = "#ffffff",
 				speed = 10,
 				stiffness = 0.9,
 				trailing_stiffness = 0.6,
