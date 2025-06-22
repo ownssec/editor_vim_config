@@ -33,10 +33,8 @@ return require("packer").startup(function(use)
 	use("onsails/lspkind-nvim")
 
 	use({
-		"hrsh7th/nvim-cmp",
-		config = function()
-			require("config.cmpconf")
-		end,
+		"hrsh7th/cmp-nvim-lsp",
+		requires = { "hrsh7th/nvim-cmp" },
 	})
 
 	-- Cmp extensions
@@ -125,11 +123,12 @@ return require("packer").startup(function(use)
 	-- 	"luukvbaal/statuscol.nvim",
 	-- 	config = function()
 	-- 		require("statuscol").setup({
-	-- 			-- relculright = true,
+	-- 			relculright = true,
 	-- 			segments = {
-	-- 				-- { text = { "`%s" }, click = "v:lua.ScSa" },
-	-- 				-- { text = { "%l" }, click = "v:lua.ScLa" },
-	-- 				-- { text = { " " } },
+	-- 				{ text = { "`%s" } },
+	-- 				{ text = { "%l" } },
+	-- 				{ text = { " " } },
+	-- 				-- fillcharhl = true,
 	-- 			},
 	-- 		})
 	-- 	end,
@@ -343,6 +342,7 @@ return require("packer").startup(function(use)
 				"o:hor50",
 				"sm:block-blinkwait175-blinkon150-blinkoff150",
 			}, ",")
+
 			require("smear_cursor").setup({
 				never_draw_over_target = true,
 				smear_between_buffers = true,
