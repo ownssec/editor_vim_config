@@ -105,7 +105,7 @@ require("mini.indentscope").setup({
 
 vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#473e43" })
 
--- vim.api.nvim_set_keymap("n", "<C-p>", '<Cmd>exe ":Pick files"<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-p>", '<Cmd>exe ":Pick files"<CR>', { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap("n", "<C-E>", '<Cmd>exe ":Pick buffers"<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-o>", '<Cmd>exe ":Pick grep_live"<CR>', { noremap = true, silent = true })
 

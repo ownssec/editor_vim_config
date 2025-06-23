@@ -22,6 +22,26 @@ return require("packer").startup(function(use)
 			require("mason").setup()
 		end,
 	})
+
+	use({
+		"hrsh7th/nvim-cmp",
+		requires = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
+		},
+		opt = false,
+		-- event = "InsertEnter",
+		config = function()
+			require("config.cmpconf")
+		end,
+	})
+
+	-- use("hrsh7th/cmp-nvim-lsp")
+	-- use({ "hrsh7th/cmp-path", after = "nvim-cmp" })
+	-- use({ "hrsh7th/cmp-buffer", after = "nvim-cmp" })
 	use({
 		"neovim/nvim-lspconfig",
 		after = "nvim-cmp",
@@ -29,43 +49,9 @@ return require("packer").startup(function(use)
 			require("config.lsp")
 		end,
 	})
+	-- use("saadparwaiz1/cmp_luasnip")
 
 	use("onsails/lspkind-nvim")
-
-	use({
-		"hrsh7th/cmp-nvim-lsp",
-		requires = { "hrsh7th/nvim-cmp" },
-	})
-
-	-- Cmp extensions
-	use({
-		"saadparwaiz1/cmp_luasnip",
-		after = { "nvim-cmp", "LuaSnip" },
-	})
-	-- use({
-	-- 	"hrsh7th/cmp-nvim-lsp",
-	-- 	after = "nvim-cmp",
-	-- })
-
-	use({
-		"hrsh7th/cmp-path",
-		after = "nvim-cmp",
-	})
-	use({
-		"hrsh7th/cmp-buffer",
-		after = "nvim-cmp",
-	})
-	use({
-		"tzachar/cmp-fuzzy-buffer",
-		requires = { "tzachar/fuzzy.nvim" },
-	})
-	use({
-		"L3MON4D3/LuaSnip",
-		tag = "v<CurrentMajor>.*",
-		config = function()
-			require("luasnip").setup()
-		end,
-	})
 
 	-- Syntax and Language Support
 	use({
@@ -380,20 +366,4 @@ return require("packer").startup(function(use)
 			require("config.kulala")
 		end,
 	})
-
-	-- use({
-	-- 	"kevinhwang91/rnvimr",
-	-- 	cmd = "RnvimrToggle", -- load on command
-	-- 	config = function()
-	-- 		-- Optional: custom mappings
-	-- 		vim.g.rnvimr_enable_ex = 1 -- Enable Explorer-ex mode
-	-- 		vim.g.rnvimr_pick_enable = 1 -- Enable file picking
-	-- 		vim.g.rnvimr_enable_picker = 1 -- Enable picker mode
-	-- 		vim.g.rnvimr_draw_border = 1 -- Draw border around the window
-	-- 		vim.g.rnvimr_border_attr = { fg = "#8fbcbb" } -- Border color
-	--
-	-- 		-- Map a key to toggle rnvimr; change '<leader>r' if desired
-	-- 		vim.api.nvim_set_keymap("n", "<C-e>", ":RnvimrToggle<CR>", { noremap = true, silent = true })
-	-- 	end,
-	-- })
 end)

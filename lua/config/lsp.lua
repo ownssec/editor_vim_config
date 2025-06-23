@@ -5,30 +5,35 @@ if not status then
 	return
 end
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+require("vim.lsp.protocol")
 
 -- Common on_attach function for all LSP servers
 local on_attach = function(client, bufnr)
-	local opts = { noremap = true, silent = true, buffer = bufnr }
+	-- LSP keymaps
+	local function buf_set_keymap(...)
+		vim.api.nvim_buf_set_keymap(bufnr, ...)
+	end
+	local opts = { noremap = true, silent = true }
 
-	-- Safe mappings using vim.keymap.set (avoids E325 crash)
-	vim.keymap.set("n", "gd", vim.schedule_wrap(vim.lsp.buf.definition), opts)
-	vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-	vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+	buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+	buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+	buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 end
 
--- List of servers
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+-- Ensure LSP servers are installed before attempting setup
 local lsp_servers = {
-	"tsserver", -- ✅ correct name
-	"cssls",
-	"tailwindcss",
-	"lua_ls",
-	"intelephense",
-	"jsonls",
-	"html",
+	"ts_ls", -- JavaScript/TypeScript LSP (corrected from "ts_ls")
+	"cssls", -- CSS LSP
+	"tssserver", -- CSS LSP
+	"tailwindcss", -- Tailwind CSS LSP
+	"lua_ls", -- Lua LSP (for Neovim config)
+	"intelephense", -- PHP LSP (Laravel)
+	"jsonls", -- JSON LSP
+	"html", -- JSON LSP
 }
 
--- Setup loop
 for _, server in ipairs(lsp_servers) do
 	nvim_lsp[server].setup({
 		on_attach = on_attach,
