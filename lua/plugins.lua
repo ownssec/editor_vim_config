@@ -42,10 +42,11 @@ return require("packer").startup(function(use)
 		"saadparwaiz1/cmp_luasnip",
 		after = { "nvim-cmp", "LuaSnip" },
 	})
-	use({
-		"hrsh7th/cmp-nvim-lsp",
-		after = "nvim-cmp",
-	})
+	-- use({
+	-- 	"hrsh7th/cmp-nvim-lsp",
+	-- 	after = "nvim-cmp",
+	-- })
+
 	use({
 		"hrsh7th/cmp-path",
 		after = "nvim-cmp",
@@ -344,7 +345,7 @@ return require("packer").startup(function(use)
 			}, ",")
 
 			require("smear_cursor").setup({
-				never_draw_over_target = true,
+				-- never_draw_over_target = true,
 				smear_between_buffers = true,
 				smear_between_neighbor_lines = true,
 				smear_insert_mode = true,
@@ -353,15 +354,12 @@ return require("packer").startup(function(use)
 				stiffness_insert_mode = 0.8, -- 0.6      [0, 1]
 				trailing_stiffness_insert_mode = 0.8, -- 0.6      [0, 1]
 				damping = 0.65, -- 0.6      [0, 1]
-				distance_stop_animating = 0.5,
-				time_interval = 7,
+				-- distance_stop_animating = 0.1,
+				-- time_interval = 7,
 				cursor_color = "#8c8888",
-				stiffness = 0.3,
-				trailing_stiffness = 0.15,
-				damping = 0.5,
-				trailing_exponent = 5,
-				never_draw_over_target = true,
-				hide_target_hack = true,
+				-- damping = 0.5,
+				-- never_draw_over_target = true,
+				-- hide_target_hack = true,
 				gamma = 1,
 			})
 		end,
@@ -382,4 +380,20 @@ return require("packer").startup(function(use)
 			require("config.kulala")
 		end,
 	})
+
+	-- use({
+	-- 	"kevinhwang91/rnvimr",
+	-- 	cmd = "RnvimrToggle", -- load on command
+	-- 	config = function()
+	-- 		-- Optional: custom mappings
+	-- 		vim.g.rnvimr_enable_ex = 1 -- Enable Explorer-ex mode
+	-- 		vim.g.rnvimr_pick_enable = 1 -- Enable file picking
+	-- 		vim.g.rnvimr_enable_picker = 1 -- Enable picker mode
+	-- 		vim.g.rnvimr_draw_border = 1 -- Draw border around the window
+	-- 		vim.g.rnvimr_border_attr = { fg = "#8fbcbb" } -- Border color
+	--
+	-- 		-- Map a key to toggle rnvimr; change '<leader>r' if desired
+	-- 		vim.api.nvim_set_keymap("n", "<C-e>", ":RnvimrToggle<CR>", { noremap = true, silent = true })
+	-- 	end,
+	-- })
 end)
