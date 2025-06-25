@@ -55,3 +55,7 @@ o.shadafile =
 	vim.keymap.set({ "n", "v", "t" }, "<A-`>", "<Nop>", { noremap = true, silent = true })
 
 vim.deprecate = function() end
+
+vim.opt.swapfile = false
+vim.opt.shadafile = "NONE"
+vim.opt.undofile = false
