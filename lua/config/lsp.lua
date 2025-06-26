@@ -26,7 +26,7 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local lsp_servers = {
 	"ts_ls", -- JavaScript/TypeScript LSP (corrected from "ts_ls")
 	"cssls", -- CSS LSP
-	"tssserver", -- CSS LSP
+	-- "tssserver", -- CSS LSP
 	"tailwindcss", -- Tailwind CSS LSP
 	"lua_ls", -- Lua LSP (for Neovim config)
 	"intelephense", -- PHP LSP (Laravel)
