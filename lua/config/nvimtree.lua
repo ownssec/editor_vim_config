@@ -23,7 +23,7 @@ require("nvim-tree").setup({
 	view = {
 		width = 60,
 		number = true,
-		side = "left",
+		side = "right",
 		relativenumber = true,
 	},
 	renderer = {
@@ -34,7 +34,7 @@ require("nvim-tree").setup({
 		root_folder_label = false,
 
 		-- icons = { webdev_colors = false, show = { folder_arrow = false } },
-		indent_markers = { enable = true },
+		-- indent_markers = { enable = true },
 	},
 	filters = {
 		dotfiles = false,
