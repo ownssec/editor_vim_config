@@ -106,21 +106,6 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- use({
-	-- 	"luukvbaal/statuscol.nvim",
-	-- 	config = function()
-	-- 		require("statuscol").setup({
-	-- 			relculright = true,
-	-- 			segments = {
-	-- 				{ text = { "`%s" } },
-	-- 				{ text = { "%l" } },
-	-- 				{ text = { " " } },
-	-- 				-- fillcharhl = true,
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- })
-
 	-- Colorschemes
 	use({
 		"zenbones-theme/zenbones.nvim",
