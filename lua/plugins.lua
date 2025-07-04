@@ -111,7 +111,8 @@ return require("packer").startup(function(use)
 		"zenbones-theme/zenbones.nvim",
 		requires = "rktjmp/lush.nvim",
 		config = function()
-			local bgColor = "#181818"
+			local bgColor = "#191616"
+			-- local bgColor = "#181818"
 			local fgImportant = "#c18fbe"
 			vim.o.background = "dark"
 
