@@ -185,7 +185,7 @@ return require("packer").startup(function(use)
 					},
 				},
 				colors = {
-					bg = "#181818",
+					bg = "#191616",
 					fg = "#cdcdcd",
 					floatBorder = "#878787",
 					line = "#252530",

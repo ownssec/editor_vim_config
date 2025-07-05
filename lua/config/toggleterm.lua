@@ -23,6 +23,8 @@ toggleterm.setup({
 	},
 })
 
+local bgColor = "#191616"
+
 toggleterm.setup({
 	shade_terminals = true,
 	direction = "horizontal",
@@ -44,13 +46,13 @@ toggleterm.setup({
 
 	highlights = {
 		Normal = {
-			guibg = bg_dark,
+			guibg = bgColor,
 		},
 	},
 	on_open = function(term)
 		if term.direction == "horizontal" then
 			local width = vim.api.nvim_win_get_width(term.window)
-			local border = string.rep("`", width) -- You can use "─", "═", "▔", etc.
+			local border = string.rep(".", width) -- You can use "─", "═", "▔", etc.
 
 			-- Set the winbar with proper highlighting
 			vim.api.nvim_win_set_option(term.window, "winbar", "%#ToggleTermBorderRed#" .. border)
