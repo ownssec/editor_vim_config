@@ -98,3 +98,20 @@ end
 
 -- Autocommand to set keymaps for terminal buffers
 vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
+
+-- 💡 Force background on all relevant groups
+local function set_toggleterm_highlights()
+	vim.cmd("highlight! TermNormal guibg=" .. bgColor .. " guifg=NONE")
+	vim.cmd("highlight! TermNormalNC guibg=" .. bgColor .. " guifg=NONE")
+	vim.cmd("highlight! NormalFloat guibg=" .. bgColor .. " guifg=NONE")
+	vim.cmd("highlight! FloatBorder guibg=" .. bgColor .. " guifg=#878787")
+end
+
+-- Apply once now
+set_toggleterm_highlights()
+
+-- Re-apply on colorscheme change to make it permanent
+vim.api.nvim_create_autocmd("ColorScheme", {
+	pattern = "*",
+	callback = set_toggleterm_highlights,
+})

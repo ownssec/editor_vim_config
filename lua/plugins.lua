@@ -127,8 +127,8 @@ return require("packer").startup(function(use)
 			vim.api.nvim_set_hl(0, "String", { fg = "#547d87" })
 
 			-- For init.lua
-			vim.opt.guicursor = "n-v-c:block-Cursor"
-			vim.api.nvim_set_hl(0, "Cursor", { fg = "#FFFFFF", bg = "#FFFFFF" })
+			-- vim.opt.guicursor = "n-v-c:block-Cursor"
+			-- vim.api.nvim_set_hl(0, "Cursor", { fg = "#FFFFFF", bg = "#FFFFFF" })
 		end,
 	})
 
@@ -187,28 +187,31 @@ return require("packer").startup(function(use)
 				colors = {
 					bg = "#191616",
 					fg = "#cdcdcd",
-					floatBorder = "#878787",
-					line = "#252530",
-					comment = "#606079",
-					builtin = "#b4d4cf",
-					func = "#c48282",
-					string = "#e8b589",
-					number = "#e0a363",
-					property = "#c3c3d5",
-					constant = "#aeaed1",
-					parameter = "#bb9dbd",
-					visual = "#333738",
-					error = "#d8647e",
-					warning = "#f3be7c",
-					hint = "#7e98e8",
-					operator = "#90a0b5",
-					keyword = "#6e94b2",
-					type = "#9bb4bc",
-					search = "#405065",
-					plus = "#7fa563",
-					delta = "#f3be7c",
+					-- floatBorder = "#878787",
+					-- line = "#252530",
+					-- comment = "#606079",
+					-- builtin = "#b4d4cf",
+					-- func = "#c48282",
+					-- string = "#e8b589",
+					-- number = "#e0a363",
+					-- property = "#c3c3d5",
+					-- constant = "#aeaed1",
+					-- parameter = "#bb9dbd",
+					-- visual = "#333738",
+					-- error = "#d8647e",
+					-- warning = "#f3be7c",
+					-- hint = "#7e98e8",
+					-- operator = "#90a0b5",
+					-- keyword = "#6e94b2",
+					-- type = "#9bb4bc",
+					-- search = "#405065",
+					-- plus = "#7fa563",
+					-- delta = "#f3be7c",
 				},
 			})
+
+			vim.cmd("autocmd VimEnter * hi NvimTreeNormal guibg=#191616")
+			vim.cmd("autocmd VimEnter * hi NvimTreeNormalNC guibg=#191616")
 		end,
 	})
 

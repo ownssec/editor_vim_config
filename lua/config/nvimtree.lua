@@ -52,5 +52,8 @@ require("nvim-tree").setup({
 	},
 })
 
-vim.cmd("autocmd VimEnter * hi NvimTreeNormal guibg=NONE")
-vim.cmd("autocmd VimEnter * hi NvimTreeNormalNC guibg=NONE")
+-- vim.cmd("autocmd VimEnter * hi NvimTreeNormal guibg=NONE")
+-- vim.cmd("autocmd VimEnter * hi NvimTreeNormalNC guibg=NONE")
+
+vim.cmd("autocmd VimEnter * hi NvimTreeNormal guibg=#191616")
+vim.cmd("autocmd VimEnter * hi NvimTreeNormalNC guibg=#191616")
