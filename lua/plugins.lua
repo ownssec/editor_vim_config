@@ -112,6 +112,7 @@ return require("packer").startup(function(use)
 		requires = "rktjmp/lush.nvim",
 		config = function()
 			local bgColor = "#191616"
+			local bgHighLight = "#6e7073"
 			-- local bgColor = "#181818"
 			local fgImportant = "#c18fbe"
 			vim.o.background = "dark"
@@ -126,6 +127,14 @@ return require("packer").startup(function(use)
 			vim.api.nvim_set_hl(0, "CursorLineNr", { bg = bgColor, fg = "#dedede", bold = true })
 			vim.api.nvim_set_hl(0, "String", { fg = "#547d87" })
 
+			-- Change the background color of the command line input area
+			vim.api.nvim_set_hl(0, "Cmdline", { bg = bgColor, fg = "#ffffff" })
+
+			-- Change the background color of the popup menu (suggestions list)
+			vim.api.nvim_set_hl(0, "Pmenu", { bg = bgColor, fg = "#c0c0c0" })
+			vim.api.nvim_set_hl(0, "PmenuSel", { bg = bgHighLight, fg = "#ffffff" }) -- selected item
+			vim.api.nvim_set_hl(0, "PmenuSbar", { bg = bgHighLight }) -- scrollbar
+			vim.api.nvim_set_hl(0, "PmenuThumb", { bg = bgHighLight }) -- scrollbar thumb
 			-- For init.lua
 			-- vim.opt.guicursor = "n-v-c:block-Cursor"
 			-- vim.api.nvim_set_hl(0, "Cursor", { fg = "#FFFFFF", bg = "#FFFFFF" })
@@ -135,6 +144,8 @@ return require("packer").startup(function(use)
 	use({
 		"vague2k/vague.nvim",
 		config = function()
+			-- local bg_color = "#191616"
+
 			require("vague").setup({
 				transparent = false,
 				bold = true,
@@ -184,34 +195,56 @@ return require("packer").startup(function(use)
 						match = "bold",
 					},
 				},
-				colors = {
-					bg = "#191616",
-					fg = "#cdcdcd",
-					-- floatBorder = "#878787",
-					-- line = "#252530",
-					-- comment = "#606079",
-					-- builtin = "#b4d4cf",
-					-- func = "#c48282",
-					-- string = "#e8b589",
-					-- number = "#e0a363",
-					-- property = "#c3c3d5",
-					-- constant = "#aeaed1",
-					-- parameter = "#bb9dbd",
-					-- visual = "#333738",
-					-- error = "#d8647e",
-					-- warning = "#f3be7c",
-					-- hint = "#7e98e8",
-					-- operator = "#90a0b5",
-					-- keyword = "#6e94b2",
-					-- type = "#9bb4bc",
-					-- search = "#405065",
-					-- plus = "#7fa563",
-					-- delta = "#f3be7c",
-				},
+				-- colors = {
+				-- 	bg = bg_color,
+				-- 	fg = "#cdcdcd", -- only this stays the same
+				-- 	floatBorder = bg_color,
+				-- 	line = bg_color,
+				-- 	comment = bg_color,
+				-- 	builtin = bg_color,
+				-- 	func = bg_color,
+				-- 	string = bg_color,
+				-- 	number = bg_color,
+				-- 	property = bg_color,
+				-- 	constant = bg_color,
+				-- 	parameter = bg_color,
+				-- 	visual = bg_color,
+				-- 	error = bg_color,
+				-- 	warning = bg_color,
+				-- 	hint = bg_color,
+				-- 	operator = bg_color,
+				-- 	keyword = bg_color,
+				-- 	type = bg_color,
+				-- 	search = bg_color,
+				-- 	plus = bg_color,
+				-- 	delta = bg_color,
+				-- },
+				-- colors = {
+				--
+				-- 	bg = "#191616",
+				-- 	fg = "#cdcdcd",
+				-- 	floatBorder = "#878787",
+				-- 	line = "#252530",
+				-- 	comment = "#606079",
+				-- 	builtin = "#b4d4cf",
+				-- 	func = "#c48282",
+				-- 	string = "#e8b589",
+				-- 	number = "#e0a363",
+				-- 	property = "#c3c3d5",
+				-- 	constant = "#aeaed1",
+				-- 	parameter = "#bb9dbd",
+				-- 	visual = "#333738",
+				-- 	error = "#d8647e",
+				-- 	warning = "#f3be7c",
+				-- 	hint = "#7e98e8",
+				-- 	operator = "#90a0b5",
+				-- 	keyword = "#6e94b2",
+				-- 	type = "#9bb4bc",
+				-- 	search = "#405065",
+				-- 	plus = "#7fa563",
+				-- 	delta = "#f3be7c",
+				-- },
 			})
-
-			vim.cmd("autocmd VimEnter * hi NvimTreeNormal guibg=#191616")
-			vim.cmd("autocmd VimEnter * hi NvimTreeNormalNC guibg=#191616")
 		end,
 	})
 
