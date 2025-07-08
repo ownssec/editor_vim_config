@@ -59,3 +59,7 @@ vim.deprecate = function() end
 vim.opt.swapfile = false
 vim.opt.shadafile = "NONE"
 vim.opt.undofile = false
+
+-- dont save logs
+vim.lsp.set_log_level("OFF")
+vim.env.VIM_LOG_LEVEL = "OFF"
