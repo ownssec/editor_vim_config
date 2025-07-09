@@ -26,3 +26,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 		force_bg_highlights()
 	end,
 })
+
+vim.lsp.set_log_level("off") -- Disable LSP logging
+vim.g.neo_tree_log_to_file = 0 -- Disable NeoTree logs (if using NeoTree)
+vim.g.loaded_netrwPlugin = 1 -- Disable file explorer logs (if applicable)
