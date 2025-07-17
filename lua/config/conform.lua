@@ -21,7 +21,7 @@ require("conform").setup({
 		typescriptreact = { "prettier" },
 		-- http = { "prettier" }, -- Use Prettier for .http files
 		json = { "jq" }, -- Use jq for .json files
-		http = { "kulala" },
+		-- http = { "kulala" },
 	},
 	formatters = {
 		prettier = {
