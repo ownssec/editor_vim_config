@@ -80,11 +80,14 @@ vim.api.nvim_create_autocmd("TermOpen", {
 
 local keymap_opts = { noremap = true, silent = true }
 
--- Keep the existing keybindings for terminals 1-4
+-- Ensure the leader key is set (usually Space)
+vim.g.mapleader = "\\"
+
+-- Use <Leader>1 to <Leader>4 to toggle ToggleTerm terminals 1–4
 for i = 1, 4 do
-	vim.api.nvim_set_keymap("n", "<A-" .. i .. ">", "<Cmd>exe 'ToggleTerm " .. i .. "'<CR>", keymap_opts)
-	vim.api.nvim_set_keymap("i", "<A-" .. i .. ">", "<Esc><Cmd>exe 'ToggleTerm " .. i .. "'<CR>", keymap_opts)
-	vim.api.nvim_set_keymap("t", "<A-" .. i .. ">", "<Cmd>exe 'ToggleTerm " .. i .. "'<CR>", keymap_opts)
+	vim.api.nvim_set_keymap("n", "<Leader>" .. i, "<Cmd>exe 'ToggleTerm " .. i .. "'<CR>", keymap_opts)
+	vim.api.nvim_set_keymap("i", "<Leader>" .. i, "<Esc><Cmd>exe 'ToggleTerm " .. i .. "'<CR>", keymap_opts)
+	vim.api.nvim_set_keymap("t", "<Leader>" .. i, "<Cmd>exe 'ToggleTerm " .. i .. "'<CR>", keymap_opts)
 end
 
 function _G.set_terminal_keymaps()

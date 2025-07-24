@@ -339,4 +339,16 @@ return require("packer").startup(function(use)
 			require("config.kulala")
 		end,
 	})
+
+	-- php
+	-- use({
+	-- 	"gbprod/phpactor.nvim",
+	-- 	requires = {
+	-- 		"nvim-lua/plenary.nvim", -- required
+	-- 		"neovim/nvim-lspconfig", -- optional but recommended
+	-- 	},
+	-- 	config = function()
+	-- 		require("phpactor").setup()
+	-- 	end,
+	-- })
 end)
