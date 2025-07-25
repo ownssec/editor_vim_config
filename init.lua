@@ -29,4 +29,13 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 
 vim.lsp.set_log_level("off") -- Disable LSP logging
 vim.g.neo_tree_log_to_file = 0 -- Disable NeoTree logs (if using NeoTree)
-vim.g.loaded_netrwPlugin = 1 -- Disable file explorer logs (if applicable)
+vim.g.loaded_netrwPlugin = 2 -- Disable file explorer logs (if applicable)
+
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		local log_path = vim.fn.expand(".nvimlog")
+		if vim.fn.filereadable(log_path) == 1 then
+			os.remove(log_path)
+		end
+	end,
+})

@@ -81,7 +81,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
 local keymap_opts = { noremap = true, silent = true }
 
 -- Ensure the leader key is set (usually Space)
-vim.g.mapleader = "\\"
+vim.g.mapleader = "["
 
 -- Use <Leader>1 to <Leader>4 to toggle ToggleTerm terminals 1–4
 for i = 1, 4 do
