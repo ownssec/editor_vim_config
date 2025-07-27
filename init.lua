@@ -3,7 +3,6 @@
 require("plugins")
 require("settings")
 require("keymap")
-require("custom")
 
 local bgColor = "#191616"
 
