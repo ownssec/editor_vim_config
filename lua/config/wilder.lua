@@ -1,7 +1,6 @@
 -- lua/configs/wilder.lua
 
 local wilder = require("wilder")
--- Initialize Wilder
 
 wilder.setup({
 	modes = { ":", "/", "?" },

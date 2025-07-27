@@ -32,9 +32,6 @@ require("nvim-tree").setup({
 		highlight_git = true,
 
 		root_folder_label = false,
-
-		-- icons = { webdev_colors = false, show = { folder_arrow = false } },
-		-- indent_markers = { enable = true },
 	},
 	filters = {
 		dotfiles = false,
@@ -51,9 +48,6 @@ require("nvim-tree").setup({
 		enable = true,
 	},
 })
-
--- vim.cmd("autocmd VimEnter * hi NvimTreeNormal guibg=NONE")
--- vim.cmd("autocmd VimEnter * hi NvimTreeNormalNC guibg=NONE")
 
 vim.cmd("autocmd VimEnter * hi NvimTreeNormal guibg=#191616")
 vim.cmd("autocmd VimEnter * hi NvimTreeNormalNC guibg=#191616")

@@ -25,7 +25,6 @@ cmp.setup({
 	}),
 
 	sources = cmp.config.sources({
-		-- { name = "blink" },
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 		{ name = "buffer" },
@@ -40,25 +39,9 @@ cmp.setup({
 				ellipsis_char = "...",
 			})(entry, vim_item)
 
-			-- if entry.source.name == "blink" then
-			-- 	vim_item.kind = "🧠 [Blink]"
-			-- end
 			return vim_item
 		end,
 	},
-	-- sources = cmp.config.sources({
-	-- 	{ name = "nvim_lsp" },
-	-- 	{ name = "luasnip" },
-	-- 	{ name = "buffer" },
-	-- 	{ name = "path" },
-	-- }),
-	-- formatting = {
-	-- 	format = lspkind.cmp_format({
-	-- 		mode = "symbol_text", -- Show symbols + text
-	-- 		maxwidth = 50, -- Max width for completion items
-	-- 		ellipsis_char = "...", -- Show "..." for truncated text
-	-- 	}),
-	-- },
 })
 -- Set completion options
 vim.o.completeopt = "menuone,noinsert,noselect"

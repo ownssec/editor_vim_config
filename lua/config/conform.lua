@@ -11,7 +11,6 @@ require("conform").setup({
 		javascript = { "prettier" },
 		typescript = { "prettier" },
 		php = { "phpcbf" },
-		-- blade = { "blade-formatter" },
 		html = { "prettier" },
 		css = { "prettier" },
 		scss = { "prettier" },
@@ -19,9 +18,7 @@ require("conform").setup({
 		markdown = { "prettier" },
 		javascriptreact = { "prettier" },
 		typescriptreact = { "prettier" },
-		-- http = { "prettier" }, -- Use Prettier for .http files
 		json = { "jq" }, -- Use jq for .json files
-		-- http = { "kulala" },
 	},
 	formatters = {
 		prettier = {
