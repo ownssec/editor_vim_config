@@ -13,26 +13,30 @@ Have git, make, pip, python, npm, node and cargo installed on your system.
 #!/bin/bash
 
 # Node tools
+
 npm install -g \
-  typescript-language-server \
-  eslint_d \
-  neovim \
-  tree-sitter-cli \
-  prettier
+ typescript-language-server \
+ eslint_d \
+ neovim \
+ tree-sitter-cli \
+ prettier
 
 # Rust tools
+
 cargo install stylua
 
 # Python tools
+
 pip install pynvim pylint
 
 # Apt packages
+
 sudo apt update
 sudo apt install -y shellcheck luarocks ripgrep
 
 # LuaRocks
-sudo luarocks install jsregexp
 
+sudo luarocks install jsregexp
 
 --neovim install--
 

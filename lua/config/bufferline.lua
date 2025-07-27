@@ -1,6 +1,7 @@
 -- lua/configs/bufferline.lua
 
 local bufferline = require("bufferline")
+local bgColor = "#191616"
 
 bufferline.setup({
 	options = {
@@ -32,6 +33,65 @@ bufferline.setup({
 			},
 		},
 
+		highlights = {
+			fill = {
+				bg = bgColor,
+			},
+			background = {
+				bg = bgColor,
+			},
+			buffer_selected = {
+				bg = bgColor,
+				italic = false,
+				bold = false,
+			},
+			buffer_visible = {
+				bg = bgColor,
+			},
+			separator = {
+				bg = bgColor,
+				fg = bgColor,
+			},
+			separator_selected = {
+				bg = bgColor,
+				fg = bgColor,
+			},
+			separator_visible = {
+				bg = bgColor,
+				fg = bgColor,
+			},
+			modified = {
+				bg = bgColor,
+			},
+			modified_selected = {
+				bg = bgColor,
+			},
+			modified_visible = {
+				bg = bgColor,
+			},
+			duplicate = {
+				bg = bgColor,
+			},
+			duplicate_selected = {
+				bg = bgColor,
+			},
+			duplicate_visible = {
+				bg = bgColor,
+			},
+			close_button = {
+				bg = bgColor,
+			},
+			close_button_selected = {
+				bg = bgColor,
+			},
+			close_button_visible = {
+				bg = bgColor,
+			},
+			indicator_selected = {
+				bg = bgColor,
+			},
+		},
+
 		-- Hide buffers named "ui"
 		-- custom_filter = function(buf_number, buf_numbers)
 		-- 	local buf_name = vim.api.nvim_buf_get_name(buf_number)
@@ -45,6 +105,10 @@ bufferline.setup({
 })
 
 -- Key mappings for BufferLine
-vim.api.nvim_set_keymap("n", "]t", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "[t", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<C-H>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<C-L>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<C-CT>", ":BufferLineCloseOthers<CR>", { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap("n", "<C-n>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-p>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "[ct", ":BufferLineCloseOthers<CR>", { noremap = true, silent = true })
