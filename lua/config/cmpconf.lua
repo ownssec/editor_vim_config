@@ -1,4 +1,5 @@
 -- lua/configs/🌑cmp.lua
+local bgColor = "#191616"
 
 -- Attempt to load the 'cmp' module
 local status, cmp = pcall(require, "cmp")

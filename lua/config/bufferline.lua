@@ -2,112 +2,71 @@
 
 local bufferline = require("bufferline")
 local bgColor = "#191616"
+local bgActiveColor = "#2f3030"
+local fgColor = "#a3a19e"
+
+-- Track the current active buffer ID
+_G.current_buf_id = vim.api.nvim_get_current_buf()
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = function()
+		_G.current_buf_id = vim.api.nvim_get_current_buf()
+	end,
+})
 
 bufferline.setup({
 	options = {
-		indicator = {
-			icon = "", -- Set the indicator icon
-		},
-		show_buffer_icons = false, -- Hide buffer icons
-		show_duplicate_prefix = false, -- Hide duplicate prefixes
+		show_buffer_icons = false,
 		show_tab_indicators = false,
-		buffer_close_icon = "-",
-		modified_icon = "-",
-		close_icon = "-",
-		style_preset = { -- Set style presets
+		style_preset = {
 			bufferline.style_preset.no_italic,
 			bufferline.style_preset.no_bold,
 		},
-		enforce_regular_tabs = true, -- Enforce regular tabs
-		diagnostics_indicator = function(count, level, diagnostics_dict, context)
-			if context.buffer:current() then
-				return ""
-			end
-			return "" -- Show diagnostics indicator
-		end,
-		offsets = {
-			{
-				filetype = "NvimTree", -- Set offset for NvimTree
-				text = "",
-				highlight = "Directory",
-			},
+		buffer_close_icon = "-",
+		modified_icon = "-",
+		close_icon = "-",
+		indicator = {
+			icon = "",
+			style = "none",
 		},
-
-		highlights = {
-			fill = {
-				bg = bgColor,
-			},
-			background = {
-				bg = bgColor,
-			},
-			buffer_selected = {
-				bg = bgColor,
-				italic = false,
-				bold = false,
-			},
-			buffer_visible = {
-				bg = bgColor,
-			},
-			separator = {
-				bg = bgColor,
-				fg = bgColor,
-			},
-			separator_selected = {
-				bg = bgColor,
-				fg = bgColor,
-			},
-			separator_visible = {
-				bg = bgColor,
-				fg = bgColor,
-			},
-			modified = {
-				bg = bgColor,
-			},
-			modified_selected = {
-				bg = bgColor,
-			},
-			modified_visible = {
-				bg = bgColor,
-			},
-			duplicate = {
-				bg = bgColor,
-			},
-			duplicate_selected = {
-				bg = bgColor,
-			},
-			duplicate_visible = {
-				bg = bgColor,
-			},
-			close_button = {
-				bg = bgColor,
-			},
-			close_button_selected = {
-				bg = bgColor,
-			},
-			close_button_visible = {
-				bg = bgColor,
-			},
-			indicator_selected = {
-				bg = bgColor,
-			},
+	},
+	highlights = {
+		fill = { bg = bgColor },
+		background = { bg = bgColor },
+		buffer_visible = { bg = bgColor },
+		buffer_selected = {
+			-- bg = bgColor,
+			bg = bgActiveColor,
+			fg = fgColor,
+			bold = true,
+			underline = false,
 		},
-
-		-- Hide buffers named "ui"
-		-- custom_filter = function(buf_number, buf_numbers)
-		-- 	local buf_name = vim.api.nvim_buf_get_name(buf_number)
-		-- 	-- Exclude buffers containing "ui" in their name
-		-- 	if buf_name:match("ui") then
-		-- 		return false
-		-- 	end
-		-- 	return true
-		-- end,
+		close_button = {
+			bg = bgColor,
+			fg = fgColor,
+		},
+		close_button_visible = {
+			bg = bgColor,
+			fg = fgColor,
+		},
+		close_button_selected = {
+			bg = bgColor,
+			fg = fgColor,
+		},
+		separator = { bg = bgColor, fg = bgColor },
+		separator_visible = { bg = bgColor, fg = bgColor },
+		separator_selected = { bg = bgColor, fg = bgColor },
+		duplicate = { bg = bgColor },
+		duplicate_visible = { bg = bgColor },
+		duplicate_selected = { bg = bgColor },
+		modified = { bg = bgColor },
+		modified_visible = { bg = bgColor },
+		modified_selected = { bg = bgColor },
+		tab = { bg = bgColor },
+		tab_selected = { bg = bgColor },
+		tab_close = { bg = bgColor },
+		indicator_selected = { bg = bgColor },
 	},
 })
-
--- Key mappings for BufferLine
--- vim.api.nvim_set_keymap("n", "<C-H>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
--- vim.api.nvim_set_keymap("n", "<C-L>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
--- vim.api.nvim_set_keymap("n", "<C-CT>", ":BufferLineCloseOthers<CR>", { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap("n", "<C-n>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-p>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })

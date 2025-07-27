@@ -1,6 +1,7 @@
 -- lua/settings.lua
 local global = vim.g
 local o = vim.o
+local bgColor = "#191616"
 
 vim.scriptencoding = "utf-8"
 
@@ -59,3 +60,7 @@ vim.deprecate = function() end
 vim.opt.swapfile = false
 vim.opt.shadafile = "NONE"
 vim.opt.undofile = false
+
+-- bufferline background updated
+vim.api.nvim_set_hl(0, "BufferLineFill", { bg = bgColor })
+vim.api.nvim_set_hl(0, "BufferLineBackground", { bg = bgColor })
