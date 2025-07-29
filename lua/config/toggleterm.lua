@@ -27,7 +27,7 @@ local bgColor = "#191616"
 
 toggleterm.setup({
 	shade_terminals = true,
-	direction = "horizontal",
+	direction = "float",
 	size = function(term)
 		if term.direction == "horizontal" then
 			return vim.o.columns * 0.09
@@ -35,6 +35,16 @@ toggleterm.setup({
 			return vim.o.columns * 0.4
 		end
 	end,
+
+	float_opts = {
+		border = "curved", -- options: "single", "double", "shadow", "curved"
+		winblend = 0,
+		highlights = {
+			border = "Normal",
+			background = "Normal",
+		},
+	},
+
 	shading_factor = 1,
 	responsiveness = {
 		-- breakpoint in terms of `vim.o.columns` at which terminals will start to stack on top of each other

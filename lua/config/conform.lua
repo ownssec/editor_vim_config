@@ -1,24 +1,24 @@
---lua/configs/gitsigns.lua
+-- lua/configs/gitsigns.lua (or consider renaming to conform.lua for clarity)
 
 local status, conform = pcall(require, "conform")
 if not status then
 	return
 end
 
-require("conform").setup({
+conform.setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
 		javascript = { "prettier" },
+		javascriptreact = { "prettier" }, -- For .jsx files
 		typescript = { "prettier" },
+		typescriptreact = { "prettier" }, -- For .tsx files
 		php = { "phpcbf" },
 		html = { "prettier" },
 		css = { "prettier" },
 		scss = { "prettier" },
 		yaml = { "prettier" },
 		markdown = { "prettier" },
-		javascriptreact = { "prettier" },
-		typescriptreact = { "prettier" },
-		json = { "jq" }, -- Use jq for .json files
+		json = { "jq" },
 	},
 	formatters = {
 		prettier = {
@@ -42,11 +42,11 @@ require("conform").setup({
 			stdin = true,
 		},
 		["blade-formatter"] = {
-			prepend_args = { "--indent-size", "2" }, -- Set Blade template indentation
+			prepend_args = { "--indent-size", "2" },
 		},
 	},
 	format_on_save = {
 		timeout_ms = 650,
-		lsp_fallback = false, -- Use LSP if no formatter is found
+		lsp_fallback = false,
 	},
 })
