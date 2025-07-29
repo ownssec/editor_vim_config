@@ -29,14 +29,14 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function()
 		vim.api.nvim_set_keymap(
 			"n",
-			"[p",
+			"[[",
 			":lua require('kulala').jump_prev()<CR>",
 			{ noremap = true, silent = true, desc = "Jump to the previous request" }
 		)
 
 		vim.api.nvim_set_keymap(
 			"n",
-			"]n",
+			"]]",
 			":lua require('kulala').jump_next()<CR>",
 			{ noremap = true, silent = true, desc = "Jump to the previous request" }
 		)
@@ -50,25 +50,25 @@ vim.api.nvim_create_autocmd("FileType", {
 
 		vim.api.nvim_set_keymap(
 			"n",
-			"[1",
+			"[d",
 			"<cmd>lua require('kulala').set_selected_env('dev')<CR>",
 			{ noremap = true, silent = true, desc = "Select environment with Kulala" }
 		)
+		-- vim.api.nvim_set_keymap(
+		-- 	"n",
+		-- 	"[t",
+		-- 	"<cmd>lua require('kulala').set_selected_env('testing')<CR>",
+		-- 	{ noremap = true, silent = true, desc = "Select environment with Kulala" }
+		-- )
 		vim.api.nvim_set_keymap(
 			"n",
-			"[2",
-			"<cmd>lua require('kulala').set_selected_env('testing')<CR>",
+			"[s",
+			"<cmd>lua require('kulala').set_selected_env('staging')<CR>",
 			{ noremap = true, silent = true, desc = "Select environment with Kulala" }
 		)
 		vim.api.nvim_set_keymap(
 			"n",
-			"[3",
-			"<cmd>lua require('kulala').set_selected_env('stating')<CR>",
-			{ noremap = true, silent = true, desc = "Select environment with Kulala" }
-		)
-		vim.api.nvim_set_keymap(
-			"n",
-			"[4",
+			"[p",
 			"<cmd>lua require('kulala').set_selected_env('prod')<CR>",
 			{ noremap = true, silent = true, desc = "Select environment with Kulala" }
 		)

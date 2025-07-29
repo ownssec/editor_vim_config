@@ -98,13 +98,13 @@ return require("packer").startup(function(use)
 		requires = { "nvim-web-devicons" },
 	})
 
-	use({
-		"akinsho/bufferline.nvim",
-		tag = "*",
-		config = function()
-			require("config.bufferline")
-		end,
-	})
+	-- use({
+	-- 	"akinsho/bufferline.nvim",
+	-- 	tag = "*",
+	-- 	config = function()
+	-- 		require("config.bufferline")
+	-- 	end,
+	-- })
 
 	-- Colorschemes
 	use({
@@ -209,12 +209,27 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	-- use({
+	-- 	"echasnovski/mini.nvim",
+	-- 	config = function()
+	-- 		require("config.mini")
+	-- 	end,
+	-- })
+
 	use({
-		"echasnovski/mini.nvim",
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.6",
+		requires = { { "nvim-lua/plenary.nvim" } },
 		config = function()
-			require("config.mini")
+			require("config.telescope")
 		end,
 	})
+
+	-- Optional, for performance
+	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+
+	-- Optional, for file explorer
+	use({ "nvim-telescope/telescope-file-browser.nvim" })
 
 	-- Editing Enhancements
 	use({
