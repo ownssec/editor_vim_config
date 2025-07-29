@@ -98,14 +98,6 @@ return require("packer").startup(function(use)
 		requires = { "nvim-web-devicons" },
 	})
 
-	-- use({
-	-- 	"akinsho/bufferline.nvim",
-	-- 	tag = "*",
-	-- 	config = function()
-	-- 		require("config.bufferline")
-	-- 	end,
-	-- })
-
 	-- Colorschemes
 	use({
 		"zenbones-theme/zenbones.nvim",
@@ -208,13 +200,6 @@ return require("packer").startup(function(use)
 			require("config.nvimtree")
 		end,
 	})
-
-	-- use({
-	-- 	"echasnovski/mini.nvim",
-	-- 	config = function()
-	-- 		require("config.mini")
-	-- 	end,
-	-- })
 
 	use({
 		"nvim-telescope/telescope.nvim",
