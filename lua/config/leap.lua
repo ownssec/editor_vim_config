@@ -1,0 +1,6 @@
+local leap = require("leap")
+leap.set_default_keymaps(false)
+vim.api.nvim_set_hl(0, "LeapBackdrop", { link = "Comment" })
+vim.keymap.set({ "n", "x", "o" }, "f", function()
+	leap.leap({ target_windows = { vim.api.nvim_get_current_win() } })
+end, { desc = "Leap forward (custom f)" })
