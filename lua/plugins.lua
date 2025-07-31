@@ -143,19 +143,26 @@ return require("packer").startup(function(use)
 	})
 
 	use({
-		"nvim-telescope/telescope.nvim",
-		tag = "0.1.6",
-		requires = { { "nvim-lua/plenary.nvim" } },
+		"echasnovski/mini.nvim",
 		config = function()
-			require("config.telescope")
+			require("config.mini")
 		end,
 	})
 
-	-- Optional, for performance
-	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+	-- use({
+	-- 	"nvim-telescope/telescope.nvim",
+	-- 	tag = "0.1.6",
+	-- 	requires = { { "nvim-lua/plenary.nvim" } },
+	-- 	config = function()
+	-- 		require("config.telescope")
+	-- 	end,
+	-- })
 
-	-- Optional, for file explorer
-	use({ "nvim-telescope/telescope-file-browser.nvim" })
+	-- Optional, for performance
+	-- use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+	--
+	-- -- Optional, for file explorer
+	-- use({ "nvim-telescope/telescope-file-browser.nvim" })
 
 	use({
 		"ggandor/leap.nvim",
