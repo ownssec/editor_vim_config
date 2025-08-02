@@ -9,7 +9,7 @@ telescope.setup({
 		buffers = {
 			sort_lastused = true,
 			-- Other options for the buffers picker can go here, e.g.,
-			-- ignore_current_buffer = true,
+			ignore_current_buffer = true,
 			-- show_all_buffers = false,
 		},
 	},
