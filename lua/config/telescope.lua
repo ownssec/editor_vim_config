@@ -3,23 +3,74 @@ local builtin = require("telescope.builtin")
 local actions = require("telescope.actions")
 
 -- Setup
+-- telescope.setup({
+-- 	defaults = {
+-- 		layout_strategy = "horizontal",
+-- 		layout_config = {
+-- 			prompt_position = "top", -- typing at the top left
+-- 			preview_width = 0.7, -- 60% preview pane on the right
+-- 			width = 0.85,
+-- 			height = 0.65,
+-- 			preview_cutoff = 0, -- force preview to show even if window is small
+-- 		},
+-- 		sorting_strategy = "ascending",
+-- 		path_display = { "smart", "shorten" },
+-- 		prompt_prefix = " ",
+-- 		selection_caret = " ",
+-- 	},
+-- })
+
+local telescope = require("telescope")
+
 telescope.setup({
+	pickers = {
+		buffers = {
+			sort_lastused = true,
+			-- Other options for the buffers picker can go here, e.g.,
+			-- ignore_current_buffer = true,
+			-- show_all_buffers = false,
+		},
+	},
 	defaults = {
 		layout_strategy = "horizontal",
 		layout_config = {
-			prompt_position = "top", -- typing at the top left
-			preview_width = 0.7, -- 60% preview pane on the right
-			width = 0.85,
+			prompt_position = "bottom",
+			preview_width = 0.7,
+			width = 0.80,
 			height = 0.65,
-			preview_cutoff = 0, -- force preview to show even if window is small
+			preview_cutoff = 1,
 		},
-		sorting_strategy = "ascending",
-		path_display = { "smart", "shorten" },
+		sorting_strategy = "descending",
+		path_display = { "smart", "truncate" },
 		prompt_prefix = " ",
 		selection_caret = " ",
+		entry_prefix = " ",
+		winblend = 5,
+		results_title = false,
+		preview_title = false,
+		preview = {
+			-- Set line numbers
+			number = true,
+			relativenumber = false,
+		},
+		file_ignore_patterns = {
+			"%.git/",
+			"node_modules/",
+			"%.cache/",
+			"%.o",
+			"%.out",
+			"%.class",
+			"__pycache__",
+		},
+		mappings = {
+			i = {
+				["<C-k>"] = require("telescope.actions").move_selection_previous,
+				["<C-j>"] = require("telescope.actions").move_selection_next,
+				["<Esc>"] = require("telescope.actions").close,
+			},
+		},
 	},
 })
-
 -- Load extensions if installed
 pcall(telescope.load_extension, "fzf")
 pcall(telescope.load_extension, "file_browser")

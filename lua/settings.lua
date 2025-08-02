@@ -64,3 +64,5 @@ vim.opt.undofile = false
 -- bufferline background updated
 vim.api.nvim_set_hl(0, "BufferLineFill", { bg = bgColor })
 vim.api.nvim_set_hl(0, "BufferLineBackground", { bg = bgColor })
+
+vim.opt.cmdheight = 0
