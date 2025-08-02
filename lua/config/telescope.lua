@@ -2,24 +2,6 @@ local telescope = require("telescope")
 local builtin = require("telescope.builtin")
 local actions = require("telescope.actions")
 
--- Setup
--- telescope.setup({
--- 	defaults = {
--- 		layout_strategy = "horizontal",
--- 		layout_config = {
--- 			prompt_position = "top", -- typing at the top left
--- 			preview_width = 0.7, -- 60% preview pane on the right
--- 			width = 0.85,
--- 			height = 0.65,
--- 			preview_cutoff = 0, -- force preview to show even if window is small
--- 		},
--- 		sorting_strategy = "ascending",
--- 		path_display = { "smart", "shorten" },
--- 		prompt_prefix = " ",
--- 		selection_caret = " ",
--- 	},
--- })
-
 local telescope = require("telescope")
 
 telescope.setup({
