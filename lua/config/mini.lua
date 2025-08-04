@@ -1,4 +1,6 @@
 -- lua/configs/mini.lua
+local ui_width = math.floor(vim.o.columns * 0.4)
+local ui_height = math.floor(vim.o.lines * 0.2)
 
 require("mini.pick").setup({
 
@@ -63,14 +65,17 @@ require("mini.pick").setup({
 		choose_marked = nil,
 	},
 
+
 	window = {
 		prompt_caret= "▏",
 
 		prompt_prefix = "> ",
 
 		config = {
-			width = 100,
-			height = 20,
+			-- width = 70,
+			-- height = 10,
+            width = ui_width,
+            height = ui_height,
 			-- border = "none",
 			border = "rounded",
 			row = vim.o.lines - 0,

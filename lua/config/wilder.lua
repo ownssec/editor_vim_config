@@ -44,8 +44,10 @@ wilder.set_option('renderer', wilder.popupmenu_renderer(
   highlights = {
     border = "WilderBorder",  -- Link to your custom highlight group
   },
-    min_width = '20%', -- minimum height of the popupmenu, can also be a number
-    min_height = '5%', -- to set a fixed height, set max_height to the same value
+    max_width = '35%', -- minimum height of the popupmenu, can also be a number
+    min_width = '35%', -- minimum height of the popupmenu, can also be a number
+    max_height = '20%', -- to set a fixed height, set max_height to the same value
+    min_height = '20%', -- to set a fixed height, set max_height to the same value
     reverse = 0,        -- if 1, shows the candidates from bottom to top
   })
 ))
