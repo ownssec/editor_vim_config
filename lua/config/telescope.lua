@@ -58,7 +58,7 @@ pcall(telescope.load_extension, "fzf")
 pcall(telescope.load_extension, "file_browser")
 
 -- Keymaps
--- vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find Files" })
+vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find Files" })
 vim.keymap.set("n", "<C-o>", builtin.live_grep, { desc = "Live Grep" })
 vim.keymap.set("n", "<C-i>", builtin.buffers, { desc = "List Buffers" })
 
