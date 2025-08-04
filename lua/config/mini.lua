@@ -1,5 +1,5 @@
 -- lua/configs/mini.lua
-local ui_width = math.floor(vim.o.columns * 0.4)
+local ui_width = math.floor(vim.o.columns * 1)
 local ui_height = math.floor(vim.o.lines * 0.2)
 
 require("mini.pick").setup({

@@ -36,6 +36,9 @@ wilder.set_option('pipeline', {
   )
 })
 
+local width = "100%"
+local height = "20%"
+
 wilder.set_option('renderer', wilder.popupmenu_renderer(
   wilder.popupmenu_border_theme({
   left = { " ", wilder.popupmenu_devicons() },
@@ -44,10 +47,10 @@ wilder.set_option('renderer', wilder.popupmenu_renderer(
   highlights = {
     border = "WilderBorder",  -- Link to your custom highlight group
   },
-    max_width = '35%', -- minimum height of the popupmenu, can also be a number
-    min_width = '35%', -- minimum height of the popupmenu, can also be a number
-    max_height = '20%', -- to set a fixed height, set max_height to the same value
-    min_height = '20%', -- to set a fixed height, set max_height to the same value
+    max_width = width, -- minimum height of the popupmenu, can also be a number
+    min_width = width, -- minimum height of the popupmenu, can also be a number
+    max_height = height, -- to set a fixed height, set max_height to the same value
+    min_height = height, -- to set a fixed height, set max_height to the same value
     reverse = 0,        -- if 1, shows the candidates from bottom to top
   })
 ))
