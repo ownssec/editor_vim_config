@@ -56,3 +56,11 @@ git clone https://github.com/tmux-plugins/tmux-resurrect ~/.tmux/plugins/tmux-re
 
 -- kulala
 npm install -g @mistweaverco/kulala-fmt
+
+-- wilder
+https://github.com/mhinz/neovim-remote/blob/master/INSTALLATION.md
+sudo apt install fd-find ripgrep
+pip3 install neovim-remote
+pipx ensurepath
+pipx install pynvim
+sudo apt install python3-pynvim

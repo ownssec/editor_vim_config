@@ -183,12 +183,20 @@ return require("packer").startup(function(use)
 	-- Command Line
 	use("roxma/nvim-yarp")
 	use("roxma/vim-hug-neovim-rpc")
-	use({
-		"gelguy/wilder.nvim",
-		config = function()
-			require("config.wilder")
-		end,
-	})
+    use({
+      'gelguy/wilder.nvim',
+      config = function()
+        require('config.wilder')  -- or wherever your config is
+      end,
+      requires = { 'romgrk/fzy-lua-native' }  -- for Lua filters
+    })
+	-- use({
+	-- 	"gelguy/wilder.nvim",
+	--      requires = { 'romgrk/fzy-lua-native' },
+	-- 	config = function()
+	-- 		require("config.wilder")
+	-- 	end,
+	-- })
 
 	-- Cursor Enhancements
 	use({

@@ -14,12 +14,12 @@ telescope.setup({
 		},
 	},
 	defaults = {
-		layout_strategy = "horizontal",
+		layout_strategy = "bottom_pane",
 		layout_config = {
 			prompt_position = "bottom",
 			preview_width = 0.7,
 			width = 0.80,
-			height = 0.65,
+			height = 0.35,
 			preview_cutoff = 1,
 		},
 		sorting_strategy = "descending",
@@ -58,7 +58,7 @@ pcall(telescope.load_extension, "fzf")
 pcall(telescope.load_extension, "file_browser")
 
 -- Keymaps
-vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find Files" })
+-- vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "Find Files" })
 vim.keymap.set("n", "<C-o>", builtin.live_grep, { desc = "Live Grep" })
 vim.keymap.set("n", "<C-i>", builtin.buffers, { desc = "List Buffers" })
 

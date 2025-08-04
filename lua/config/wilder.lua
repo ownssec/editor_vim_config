@@ -1,68 +1,68 @@
 -- lua/configs/wilder.lua
 
+
+
 local wilder = require("wilder")
 
 wilder.setup({
-	modes = { ":", "/", "?" },
-	next_key = "<C-n>", -- Move to the next suggestion
-	previous_key = "<C-p>", -- Move to the previous suggestion
-	accept_key = "<Tab>",
-	reject_key = "<C-c>", -- Reject the current suggestion
+  modes = { ":", "/", "?" },
+  next_key = "<C-n>",
+  previous_key = "<C-p>",
+  accept_key = "<Tab>",
+  reject_key = "<C-c>",
+  use_python_remote_plugin = 0,
 })
 
--- Set up pipelines
-wilder.set_option("pipeline", {
-	wilder.branch(
-		wilder.python_file_finder_pipeline({
-			file_command = {
-				"find",
-				".",
-				"-type",
-				"f",
-				"!",
-				"-path",
-				"*/.git/*",
-				"!",
-				"-path",
-				"*/node_modules/*",
-				"-printf",
-				"%P\n",
-			},
-			dir_command = {
-				"find",
-				".",
-				"-type",
-				"d",
-				"!",
-				"-path",
-				"*/.git/*",
-				"!",
-				"-path",
-				"*/node_modules/*",
-				"-printf",
-				"%P\n",
-			},
+-- wilder.set_option("pipeline", {
+--   wilder.branch(
+--     wilder.cmdline_pipeline({
+--       fuzzy = 1,
+--       fuzzy_filter = wilder.lua_fzy_filter(),
+--     }),
+--     wilder.search_pipeline()
+--   )
+-- })
 
-			filters = { "fuzzy_filter", "difflib_sorter" },
-		}),
-		wilder.cmdline_pipeline({
-			language = "python",
-			fuzzy = 1,
-		}),
-		wilder.python_search_pipeline({
-			pattern = wilder.python_fuzzy_pattern(),
-			sorter = wilder.python_difflib_sorter(),
-			process_command = { "rg", "--vimgrep", "--smart-case" }, -- Searches inside files
-			engine = "re",
-		})
-	),
+wilder.set_option('pipeline', {
+  wilder.branch(
+    -- Use fd and rg
+    wilder.python_file_finder_pipeline({
+      file_command = { 'rg', '--files' },  -- fastest option
+      dir_command = { 'fd', '-td' },       -- fd for directories
+      filters = { 'fuzzy_filter', 'difflib_sorter' },
+    }),
+
+    wilder.cmdline_pipeline({
+      language = 'python',
+      fuzzy = 1,
+    }),
+
+    wilder.python_search_pipeline({
+      pattern = wilder.python_fuzzy_pattern(),
+      sorter = wilder.python_difflib_sorter(),
+      engine = 're',
+      process_command = { 'rg', '--smart-case',  '--vimgrep' },
+    })
+  )
 })
--- Set up renderer with highlighting
-wilder.set_option(
-	"renderer",
-	wilder.popupmenu_renderer({
-		highlighter = wilder.basic_highlighter(), -- Enables per-word highlighting
-		left = { " ", wilder.popupmenu_devicons() }, -- Adds file-type icons
-		right = { " ", wilder.popupmenu_scrollbar() }, -- Adds scrollbar
-	})
-)
+
+wilder.set_option("renderer", wilder.popupmenu_renderer({
+  highlighter = wilder.lua_fzy_highlighter(),
+  left = { " ", wilder.popupmenu_devicons() },
+  right = { " ", wilder.popupmenu_scrollbar() },
+  pumblend = 10,
+}))
+
+wilder.set_option('renderer', wilder.popupmenu_renderer(
+  wilder.popupmenu_border_theme({
+  highlights = {
+    border = "WilderBorder",  -- Link to your custom highlight group
+  },
+    min_width = '100%', -- minimum height of the popupmenu, can also be a number
+    min_height = '35%', -- to set a fixed height, set max_height to the same value
+    reverse = 1,        -- if 1, shows the candidates from bottom to top
+  })
+))
+
+vim.api.nvim_set_hl(0, "WilderBorder", { fg = "#434241" })  -- pink border
+
