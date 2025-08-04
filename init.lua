@@ -3,6 +3,7 @@
 require("plugins")
 require("settings")
 require("keymap")
+require("config.customBufferLists")
 
 local bgColor = "#191616"
 
@@ -38,3 +39,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 		end
 	end,
 })
+
+
+
+

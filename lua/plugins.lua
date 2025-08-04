@@ -142,12 +142,20 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	-- use({
+	-- 	"nvim-telescope/telescope.nvim",
+	-- 	tag = "0.1.6",
+	-- 	requires = { { "nvim-lua/plenary.nvim" } },
+	-- 	config = function()
+	-- 		require("config.telescope")
+	-- 	end,
+	-- })
+
+    --fuzzy finder and mini picker
 	use({
-		"nvim-telescope/telescope.nvim",
-		tag = "0.1.6",
-		requires = { { "nvim-lua/plenary.nvim" } },
+		"echasnovski/mini.nvim",
 		config = function()
-			require("config.telescope")
+			require("config.mini")
 		end,
 	})
 
