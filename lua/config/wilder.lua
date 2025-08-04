@@ -13,16 +13,6 @@ wilder.setup({
   use_python_remote_plugin = 0,
 })
 
--- wilder.set_option("pipeline", {
---   wilder.branch(
---     wilder.cmdline_pipeline({
---       fuzzy = 1,
---       fuzzy_filter = wilder.lua_fzy_filter(),
---     }),
---     wilder.search_pipeline()
---   )
--- })
-
 wilder.set_option('pipeline', {
   wilder.branch(
     -- Use fd and rg
@@ -46,21 +36,17 @@ wilder.set_option('pipeline', {
   )
 })
 
-wilder.set_option("renderer", wilder.popupmenu_renderer({
-  highlighter = wilder.lua_fzy_highlighter(),
+wilder.set_option('renderer', wilder.popupmenu_renderer(
+  wilder.popupmenu_border_theme({
   left = { " ", wilder.popupmenu_devicons() },
   right = { " ", wilder.popupmenu_scrollbar() },
   pumblend = 10,
-}))
-
-wilder.set_option('renderer', wilder.popupmenu_renderer(
-  wilder.popupmenu_border_theme({
   highlights = {
     border = "WilderBorder",  -- Link to your custom highlight group
   },
-    min_width = '100%', -- minimum height of the popupmenu, can also be a number
-    min_height = '35%', -- to set a fixed height, set max_height to the same value
-    reverse = 1,        -- if 1, shows the candidates from bottom to top
+    min_width = '20%', -- minimum height of the popupmenu, can also be a number
+    min_height = '5%', -- to set a fixed height, set max_height to the same value
+    reverse = 0,        -- if 1, shows the candidates from bottom to top
   })
 ))
 
