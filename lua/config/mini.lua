@@ -110,8 +110,7 @@ require("mini.indentscope").setup({
 		try_as_border = false,
 	},
 
-	-- symbol = "", --'╎',
-	symbol = '╎',
+	symbol = "", --'╎',
 })
 
 vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#434241" })

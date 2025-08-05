@@ -198,13 +198,6 @@ return require("packer").startup(function(use)
       end,
       requires = { 'romgrk/fzy-lua-native' }  -- for Lua filters
     })
-	-- use({
-	-- 	"gelguy/wilder.nvim",
-	--      requires = { 'romgrk/fzy-lua-native' },
-	-- 	config = function()
-	-- 		require("config.wilder")
-	-- 	end,
-	-- })
 
 	-- Cursor Enhancements
 	use({
@@ -229,4 +222,12 @@ return require("packer").startup(function(use)
 			require("config.kulala")
 		end,
 	})
+
+    -- comment
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
 end)
