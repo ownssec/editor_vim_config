@@ -151,7 +151,7 @@ return require("packer").startup(function(use)
 	-- 	end,
 	-- })
 
-    --fuzzy finder and mini picker
+	--fuzzy finder and mini picker
 	use({
 		"echasnovski/mini.nvim",
 		config = function()
@@ -191,13 +191,13 @@ return require("packer").startup(function(use)
 	-- Command Line
 	use("roxma/nvim-yarp")
 	use("roxma/vim-hug-neovim-rpc")
-    use({
-      'gelguy/wilder.nvim',
-      config = function()
-        require('config.wilder')  -- or wherever your config is
-      end,
-      requires = { 'romgrk/fzy-lua-native' }  -- for Lua filters
-    })
+	use({
+		"gelguy/wilder.nvim",
+		config = function()
+			require("config.wilder") -- or wherever your config is
+		end,
+		requires = { "romgrk/fzy-lua-native" }, -- for Lua filters
+	})
 
 	-- Cursor Enhancements
 	use({
@@ -223,11 +223,11 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-    -- comment
-    use {
-        'numToStr/Comment.nvim',
-        config = function()
-            require('Comment').setup()
-        end
-    }
+	-- comment
+	use({
+		"numToStr/Comment.nvim",
+		config = function()
+			require("Comment").setup()
+		end,
+	})
 end)
