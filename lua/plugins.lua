@@ -230,4 +230,13 @@ return require("packer").startup(function(use)
 			require("Comment").setup()
 		end,
 	})
+
+	-- git
+	use({
+		"tpope/vim-fugitive",
+		config = function()
+			-- You can put optional config or key mappings here
+			-- vim.keymap.set("n", "<leader>gs", ":Git<CR>", { desc = "Git status" })
+		end,
+	})
 end)
