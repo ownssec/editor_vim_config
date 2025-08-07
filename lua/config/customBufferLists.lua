@@ -111,16 +111,6 @@ vim.keymap.set("n", "[ct", function()
 end, { desc = "Delete all buffers except current" })
 
 
-
-
-
-
-
-
-
-
-
-
 -- -- bufferlist.lua
 -- -- Store the current list of buffers with order
 -- local buffer_map = {}
