@@ -226,7 +226,7 @@ return require("packer").startup(function(use)
 					delete = "-",
 					change = "~",
 				},
-				auto_refresh = true, -- Whether to automatically refresh diff when buffer chan1123@@gaaes
+				auto_refresh = true, -- Whether to automatically refresh diff when buffer chan1123@@gaaeshh
 			})
 			vim.keymap.set("n", "]h", function()
 				require("unified.navigation").next_hunk()
