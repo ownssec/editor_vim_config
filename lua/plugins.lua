@@ -12,9 +12,6 @@ return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 
 	-- Core Utilities
-	-- Core Utilities
-	-- Core Utilities
-	-- Core Utilities
 	use("nvim-lua/plenary.nvim")
 	use("nvim-tree/nvim-web-devicons") -- Icons
 
@@ -202,14 +199,52 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- git
+	-- comment
 	use({
-		"tpope/vim-fugitive",
+		"numToStr/Comment.nvim",
 		config = function()
-
-			-- You can put optional config or key mappings here
-			--
-			-- vim.keymap.set("n", "<leader>gs", ":Git<CR>", { desc = "Git status" })
+			require("Comment").setup()
 		end,
 	})
+
+	use({
+		"axkirillov/unified.nvim",
+		config = function()
+			require("unified").setup({
+				signs = {
+					add = "│",
+					delete = "│",
+					change = "│",
+				},
+				highlights = {
+					add = "DiffAdd",
+					delete = "DiffDelete",
+					change = "DiffChange",
+				},
+				line_symbols = {
+					add = "+",
+					delete = "-",
+					change = "~",
+				},
+				auto_refresh = true, -- Whether to automatically refresh diff when buffer changes
+			})
+			vim.keymap.set("n", "]h", function()
+				require("unified.navigation").next_hunk()
+			end)
+			vim.keymap.set("n", "[h", function()
+				require("unified.navigation").previous_hunk()
+			end)
+		end,
+	})
+
+	-- git
+	-- use({
+	-- 	"tpope/vim-fugitive",
+	-- 	config = function()
+	--
+	-- 		-- You can put optional config or key mappings here
+	-- 		--
+	-- 		-- vim.keymap.set("n", "<leader>gs", ":Git<CR>", { desc = "Git status" })
+	-- 	end,
+	-- })
 end)
