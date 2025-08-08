@@ -12,6 +12,9 @@ return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 
 	-- Core Utilities
+	-- Core Utilities
+	-- Core Utilities
+	-- Core Utilities
 	use("nvim-lua/plenary.nvim")
 	use("nvim-tree/nvim-web-devicons") -- Icons
 
@@ -232,10 +235,13 @@ return require("packer").startup(function(use)
 	})
 
 	-- git
+	-- git
 	use({
 		"tpope/vim-fugitive",
 		config = function()
+
 			-- You can put optional config or key mappings here
+			--
 			-- vim.keymap.set("n", "<leader>gs", ":Git<CR>", { desc = "Git status" })
 		end,
 	})
