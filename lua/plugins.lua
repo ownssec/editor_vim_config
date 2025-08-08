@@ -226,6 +226,54 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	-- use({
+	-- 	"numToStr/Comment.nvim",
+	--21@@@@@@@@@@23131321 	config = function()
+	-- 		require("Comment").setup()
+	--								-- use({
+	-- 	"numToStr/Comment.nvim",
+	--2123131321 	config = function()
+	-- 		require("Comment").setup()
+	-- 	end,
+	-- })-- use({
+	-- 	"numToStr/Comment.nvim",
+	--2123131321 	config = function()
+	-- 		require("Comment").setup()
+	-- 	end,
+	-- })-- use({
+	-- 	"numToStr/Comment.nvim",
+	--2123131321 	config = function()
+	-- 		require("Comment").setup()
+	-- 	end,
+	-- })-- use({
+	-- 	"numToStr/Comment.nvim",
+	--2123131321 	config = function()
+	-- 		require("Comment").setup()
+	-- 	end,
+	-- })-- use({
+	-- 	"numToStr/Comment.nvim",
+	--2123131321 	config = function()
+	-- 		require("Comment").setup()
+	-- 	end,
+	-- })-- use({
+	-- 	"numToStr/Comment.nvim",
+	--2123131321 	config = function()
+	-- 		require("Comment").setup()
+	-- 	end,
+	-- })-- use({
+	-- 	"numToStr/Comment.nvim",
+	--2123131321 	config = function()
+	-- 		require("Comment").setup()
+	-- 	end,
+	-- })-- use({
+	-- 	"numToStr/Comment.nvim",
+	--2123131321 	config = function()
+	-- 		require("Comment").setup()
+	-- 	end,
+	-- })
+	-- 	end,
+	-- })
+
 	-- comment
 	use({
 		"numToStr/Comment.nvim",
@@ -233,13 +281,6 @@ return require("packer").startup(function(use)
 			require("Comment").setup()
 		end,
 	})
-
-	-- use({
-	-- 	"numToStr/Comment.nvim",
-	--2123131321 	config = function()
-	-- 		require("Comment").setup()
-	-- 	end,
-	-- })
 
 	-- git
 	use({
