@@ -160,10 +160,10 @@ return require("packer").startup(function(use)
 	-- })
 
 	-- Optional, for performance
-	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-	--
-	-- -- Optional, for file explorer
-	use({ "nvim-telescope/telescope-file-browser.nvim" })
+	-- use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+	-- --
+	-- -- -- Optional, for file explorer
+	-- use({ "nvim-telescope/telescope-file-browser.nvim" })
 
 	use({
 		"ggandor/leap.nvim",
