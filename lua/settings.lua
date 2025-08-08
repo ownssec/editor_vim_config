@@ -61,8 +61,14 @@ vim.opt.swapfile = false
 vim.opt.shadafile = "NONE"
 vim.opt.undofile = false
 
+<<<<<<< HEAD
 -- bufferline background updated
 vim.api.nvim_set_hl(0, "BufferLineFill", { bg = bgColor })
 vim.api.nvim_set_hl(0, "BufferLineBackground", { bg = bgColor })
 
 vim.opt.cmdheight = 0
+=======
+-- dont save logs
+vim.lsp.set_log_level("OFF")
+vim.env.VIM_LOG_LEVEL = "OFF"
+>>>>>>> 9d3ab3fd9240d94486bfe3c16279586aed2ad766

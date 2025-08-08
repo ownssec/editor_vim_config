@@ -154,6 +154,7 @@ return require("packer").startup(function(use)
 	-- 	end,
 	-- })
 
+<<<<<<< HEAD
 	--fuzzy finder and mini picker
 	-- use({
 	-- 	"echasnovski/mini.nvim",
@@ -161,6 +162,48 @@ return require("packer").startup(function(use)
 	-- 		require("config.mini")
 	-- 	end,
 	-- })
+=======
+	-- use({
+	-- 	"nvim-telescope/telescope.nvim",
+	-- 	tag = "0.1.6",
+	-- 	requires = { { "nvim-lua/plenary.nvim" } },
+	-- 	config = function()
+	-- 		require("telescope").setup({
+	-- 			defaults = {
+	-- 				prompt_prefix = "🔍 ",
+	-- 				selection_caret = " ",
+	-- 				sorting_strategy = "ascending",
+	-- 				layout_config = {
+	-- 					horizontal = { preview_width = 0.6 },
+	-- 				},
+	-- 				file_ignore_patterns = { "node_modules", "%.git/" },
+	-- 			},
+	-- 			pickers = {
+	-- 				find_files = {
+	-- 					hidden = true,
+	-- 				},
+	-- 			},
+	-- 		})
+	--
+	-- 		-- Optional: Key mappings
+	-- 		local keymap = vim.keymap.set
+	-- 		local opts = { noremap = true, silent = true, desc = "" }
+	-- 		keymap("n", "<C-p>", "<cmd>Telescope find_files<CR>", { desc = "Find Files" })
+	-- 		keymap("n", "<C-o>", "<cmd>Telescope live_grep<CR>", { desc = "Live Grep" })
+	-- 		-- keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "Buffers" })
+	-- 		-- keymap("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "Help Tags" })
+	-- 	end,
+	-- })
+
+	-- Editing Enhancements
+	use({
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		config = function()
+			require("nvim-autopairs").setup({})
+		end,
+	})
+>>>>>>> 9d3ab3fd9240d94486bfe3c16279586aed2ad766
 
 	-- Optional, for performance
 	-- use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })

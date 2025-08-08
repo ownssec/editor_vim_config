@@ -117,6 +117,10 @@ vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#434241" })
 -- vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#ffffff" })
 
 -- vim.api.nvim_set_keymap("n", "<C-p>", '<Cmd>exe ":Pick files"<CR>', { noremap = true, silent = true })
+<<<<<<< HEAD
+=======
+-- vim.api.nvim_set_keymap("n", "<C-E>", '<Cmd>exe ":Pick buffers"<CR>', { noremap = true, silent = true })
+>>>>>>> 9d3ab3fd9240d94486bfe3c16279586aed2ad766
 vim.api.nvim_set_keymap("n", "<C-o>", '<Cmd>exe ":Pick grep_live"<CR>', { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap("n", "<C-i>", '<Cmd>exe ":Pick buffers"<CR>', { noremap = true, silent = true })
 

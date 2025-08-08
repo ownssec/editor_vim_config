@@ -4,26 +4,53 @@ if not status then
 	return
 end
 
-toggleterm.setup({
-	shade_terminals = true,
-	direction = "horizontal",
-	size = function(term)
-		if term.direction == "horizontal" then
-			return vim.o.columns * 0.09
-		elseif term.direction == "vertical" then
-			return vim.o.columns * 0.4
-		end
-	end,
-	shading_factor = 1,
-	responsiveness = {
-		-- breakpoint in terms of `vim.o.columns` at which terminals will start to stack on top of each other
-		-- instead of next to each other
-		-- default = 0 which means the feature is turned off
-		horizontal_breakpoint = 135,
-	},
-})
-
 local bgColor = "#191616"
+
+-- toggleterm.setup({
+-- 	shade_terminals = true,
+-- 	-- direction = "horizontal",
+-- 	direction = "float",
+-- 	size = function(term)
+-- 		if term.direction == "horizontal" then
+-- 			return vim.o.columns * 0.09
+-- 		elseif term.direction == "vertical" then
+-- 			return vim.o.columns * 0.4
+-- 		end
+-- 	end,
+--
+-- 	float_opts = {
+-- 		border = "single",
+-- 		width = function()
+-- 			return math.floor(vim.o.columns * 0.8) -- 80% of editor width
+-- 		end,
+-- 		height = function()
+-- 			return math.floor(vim.o.lines * 0.8) -- 80% of editor height
+-- 		end,
+-- 		row = function()
+-- 			return math.floor((vim.o.lines - (vim.o.lines * 0.8)) / 2)
+-- 		end,
+-- 		col = function()
+-- 			return math.floor((vim.o.columns - (vim.o.columns * 0.8)) / 2)
+-- 		end,
+-- 		winblend = 3,
+-- 		zindex = 1,
+-- 		title_pos = "center",
+-- 	},
+-- 	start_in_insert = true,
+-- 	winbar = {
+-- 		enabled = false,
+-- 		name_formatter = function(term) --  term: Terminal
+-- 			return term.name
+-- 		end,
+-- 	},
+-- 	shading_factor = 1,
+-- 	-- responsiveness = {
+-- 	-- 	-- breakpoint in terms of `vim.o.columns` at which terminals will start to stack on top of each other
+-- 	-- 	-- instead of next to each other
+-- 	-- 	-- default = 0 which means the feature is turned off
+-- 	-- 	horizontal_breakpoint = 135,
+-- 	-- },
+-- })
 
 toggleterm.setup({
 	shade_terminals = true,
