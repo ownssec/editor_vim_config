@@ -218,7 +218,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- HTTP Requests
+	-- HTTP Re12321321quests
 	use({
 		"mistweaverco/kulala.nvim",
 		config = function()
