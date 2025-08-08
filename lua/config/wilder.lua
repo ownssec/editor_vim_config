@@ -12,11 +12,28 @@ wilder.setup({
 
 wilder.set_option("pipeline", {
 	wilder.branch(
-		-- Use fd and rg
+		-- File and directory search with hidden files, excluding node_modules and .git
 		wilder.python_file_finder_pipeline({
-			-- file_command = { "rg", "--files" },
-			file_command = { "rg", "--files" },
-			dir_command = { "fd", "-td" }, -- fd for directories
+			file_command = {
+				"rg",
+				"--files",
+				"--hidden",
+				"--no-ignore",
+				"--glob",
+				"!**/node_modules/*",
+				"--glob",
+				"!**/.git/*",
+			},
+			dir_command = {
+				"fd",
+				"-td",
+				"--hidden",
+				"--no-ignore",
+				"--exclude",
+				"node_modules",
+				"--exclude",
+				".git",
+			},
 			filters = { "fuzzy_filter", "difflib_sorter" },
 		}),
 
@@ -29,7 +46,17 @@ wilder.set_option("pipeline", {
 			pattern = wilder.python_fuzzy_pattern(),
 			sorter = wilder.python_difflib_sorter(),
 			engine = "re",
-			process_command = { "rg", "--smart-case", "--vimgrep" },
+			process_command = {
+				"rg",
+				"--smart-case",
+				"--vimgrep",
+				"--hidden",
+				"--no-ignore",
+				"--glob",
+				"!**/node_modules/*",
+				"--glob",
+				"!**/.git/*",
+			},
 		})
 	),
 })
@@ -44,14 +71,14 @@ wilder.set_option(
 		right = { " ", wilder.popupmenu_scrollbar() },
 		pumblend = 10,
 		highlights = {
-			border = "WilderBorder", -- Link to your custom highlight group
+			border = "WilderBorder",
 		},
-		max_width = width, -- minimum height of the popupmenu, can also be a number
-		min_width = width, -- minimum height of the popupmenu, can also be a number
-		max_height = height, -- to set a fixed height, set max_height to the same value
-		min_height = height, -- to set a fixed height, set max_height to the same value
-		reverse = 0, -- if 1, shows the candidates from bottom to top
+		max_width = width,
+		min_width = width,
+		max_height = height,
+		min_height = height,
+		reverse = 0,
 	}))
 )
 
-vim.api.nvim_set_hl(0, "WilderBorder", { fg = "#434241" }) -- pink border
+vim.api.nvim_set_hl(0, "WilderBorder", { fg = "#434241" }) -- border color
