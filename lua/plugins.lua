@@ -232,11 +232,11 @@ return require("packer").startup(function(use)
 	})
 
 	-- git
-	use({
-		"tpope/vim-fugitive",
-		config = function()
-			-- You can put optional config or key mappings here
-			-- vim.keymap.set("n", "<leader>gs", ":Git<CR>", { desc = "Git status" })
-		end,
-	})
+	-- use({
+	-- 	"tpope/vim-fugitive",
+	-- 	config = function()
+	-- 		-- You can put optional config or key mappings here
+	-- 		-- vim.keymap.set("n", "<leader>gs", ":Git<CR>", { desc = "Git status" })
+	-- 	end,
+	-- })
 end)
