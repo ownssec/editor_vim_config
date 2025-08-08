@@ -234,7 +234,13 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- git
+	-- use({
+	-- 	"numToStr/Comment.nvim",
+	-- 	config = function()
+	-- 		require("Comment").setup()
+	-- 	end,
+	-- })
+
 	-- git
 	use({
 		"tpope/vim-fugitive",
