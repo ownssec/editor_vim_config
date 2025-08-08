@@ -1,0 +1,8 @@
+ERR 2025-08-09T06:27:52.285 nvim.470117.0 decor_provider_error:36: Error in decoration provider "win" (ns=git-conflict):
+Error executing lua: ...pack/packer/start/git-conflict.nvim/lua/git-conflict.lua:266: Invalid 'line': out of range
+stack traceback:
+	[C]: in function 'draw_section_label'
+	...pack/packer/start/git-conflict.nvim/lua/git-conflict.lua:266: in function 'highlight_conflicts'
+	...pack/packer/start/git-conflict.nvim/lua/git-conflict.lua:400: in function 'parse_buffer'
+	...pack/packer/start/git-conflict.nvim/lua/git-conflict.lua:479: in function 'process'
+	...pack/packer/start/git-conflict.nvim/lua/git-conflict.lua:670: in function <...pack/packer/start/git-conflict.nvim/lua/git-conflict.lua:669>
