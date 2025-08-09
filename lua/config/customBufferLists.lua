@@ -81,7 +81,7 @@ vim.api.nvim_create_user_command("Buffer", function(opts)
 			display_path = "[No Name]"
 		end
 
-		local formatted = string.format(" %2d | %-60s", i, display_path)
+		local formatted = string.format("~ %2d | %-60s", i, display_path)
 		table.insert(lines, formatted)
 		buffer_map[tostring(i)] = buf.bufnr
 	end
@@ -92,9 +92,13 @@ vim.api.nvim_create_user_command("Buffer", function(opts)
 	-- Display all lines at once using echo
 	vim.api.nvim_echo({ { table.concat(lines, "\n") } }, false, {})
 
+	local dashes = string.rep("-", 10)
+
 	-- design dashes
 	vim.api.nvim_echo({
-		{ "\n" },
+		-- { dashes, "Normal" },
+		-- { "\n" },
+		{ "" },
 	}, false, {})
 
 	activate_buffer_keys()
