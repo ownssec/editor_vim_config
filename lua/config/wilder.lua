@@ -1,6 +1,5 @@
 -- lua/configs/wilder.lua
 local wilder = require("wilder")
-
 wilder.setup({
 	modes = { ":", "/", "?" },
 	next_key = "<C-n>",
@@ -69,10 +68,9 @@ wilder.set_option(
 	wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
 		left = { " ", wilder.popupmenu_devicons() },
 		right = { " ", wilder.popupmenu_scrollbar() },
-		pumblend = 10,
-		highlights = {
-			border = "WilderBorder",
-		},
+		pumblend = 0,
+		border = { " ", " ", " ", " ~ ", " ", "", "", " " },
+		highlights = { border = "WilderBorder" },
 		max_width = width,
 		min_width = width,
 		max_height = height,
@@ -81,4 +79,4 @@ wilder.set_option(
 	}))
 )
 
-vim.api.nvim_set_hl(0, "WilderBorder", { fg = "#434241" }) -- border color
+vim.api.nvim_set_hl(0, "WilderBorder", { fg = "#414243" }) -- border color

@@ -5,108 +5,114 @@ local buffer_keys_active = false
 
 -- Unmap number keys 1–9 and clean up temporary mappings
 local function deactivate_buffer_keys()
-    for i = 1, 9 do
-        pcall(vim.keymap.del, "n", tostring(i))
-    end
-    
-    -- Clean up temporary mappings
-    pcall(vim.keymap.del, "n", "<Esc>")
-    pcall(vim.keymap.del, "n", "<CR>")
-    
-    buffer_keys_active = false
+	for i = 1, 9 do
+		pcall(vim.keymap.del, "n", tostring(i))
+	end
+
+	-- Clean up temporary mappings
+	pcall(vim.keymap.del, "n", "<Esc>")
+	pcall(vim.keymap.del, "n", "<CR>")
+
+	buffer_keys_active = false
 end
 
 -- Map number keys 1–9 to switch buffers
 local function activate_buffer_keys()
-    if buffer_keys_active then
-        return
-    end
+	if buffer_keys_active then
+		return
+	end
 
-    -- First clean up any existing mappings
-    deactivate_buffer_keys()
+	-- First clean up any existing mappings
+	deactivate_buffer_keys()
 
-    -- Set up number key mappings
-    for i = 1, 9 do
-        vim.keymap.set("n", tostring(i), function()
-            local buffers = vim.fn.getbufinfo({ buflisted = 1 })
-            local bufnr = buffers[i] and buffers[i].bufnr
-            if bufnr and vim.api.nvim_buf_is_valid(bufnr) then
-                vim.api.nvim_set_current_buf(bufnr)
-            else
-                vim.cmd("echo 'Invalid buffer number'")
-            end
-            deactivate_buffer_keys()
-        end, { noremap = true, silent = true, desc = "Switch to buffer " .. i })
-    end
+	-- Set up number key mappings
+	for i = 1, 9 do
+		vim.keymap.set("n", tostring(i), function()
+			local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+			local bufnr = buffers[i] and buffers[i].bufnr
+			if bufnr and vim.api.nvim_buf_is_valid(bufnr) then
+				vim.api.nvim_set_current_buf(bufnr)
+			else
+				vim.cmd("echo 'Invalid buffer number'")
+			end
+			deactivate_buffer_keys()
+		end, { noremap = true, silent = true, desc = "Switch to buffer " .. i })
+	end
 
-    -- Set up temporary mappings for Escape and Enter
-    vim.keymap.set("n", "<Esc>", function()
-        deactivate_buffer_keys()
-        vim.cmd("echo ''")  -- Clear any echo messages
-    end, { noremap = true, silent = true, desc = "Deactivate buffer keys" })
+	-- Set up temporary mappings for Escape and Enter
+	vim.keymap.set("n", "<Esc>", function()
+		deactivate_buffer_keys()
+		vim.cmd("echo ''") -- Clear any echo messages
+	end, { noremap = true, silent = true, desc = "Deactivate buffer keys" })
 
-    vim.keymap.set("n", "<CR>", function()
-        deactivate_buffer_keys()
-        vim.cmd("echo ''")  -- Clear any echo messages
-    end, { noremap = true, silent = true, desc = "Deactivate buffer keys" })
+	vim.keymap.set("n", "<CR>", function()
+		deactivate_buffer_keys()
+		vim.cmd("echo ''") -- Clear any echo messages
+	end, { noremap = true, silent = true, desc = "Deactivate buffer keys" })
 
-    buffer_keys_active = true
+	buffer_keys_active = true
 end
+
+-- Define the highlight group
+local dashes = string.rep("-", 50)
 
 -- Command to show numbered buffer list
 vim.api.nvim_create_user_command("Buffer", function(opts)
-    buffer_map = {}
-    local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+	buffer_map = {}
+	local buffers = vim.fn.getbufinfo({ buflisted = 1 })
 
-    if #buffers == 0 then
-        print("No open buffers.")
-        return
-    end
+	if #buffers == 0 then
+		print("No open buffers.")
+		return
+	end
 
-    -- Collect all lines first
-    local lines = {}
-    for i, buf in ipairs(buffers) do
-        local fullpath = buf.name ~= "" and vim.fn.fnamemodify(buf.name, ":p") or nil
-        local display_path
+	-- Collect all lines first
+	local lines = {}
+	for i, buf in ipairs(buffers) do
+		local fullpath = buf.name ~= "" and vim.fn.fnamemodify(buf.name, ":p") or nil
+		local display_path
 
-        if fullpath then
-            local relative_path = vim.fn.fnamemodify(fullpath, ":~:.")
-            local parts = vim.split(relative_path, "/")
-            local start_index = math.max(1, #parts - 2)
-            display_path = table.concat(parts, "/", start_index)
-        else
-            display_path = "[No Name]"
-        end
+		if fullpath then
+			local relative_path = vim.fn.fnamemodify(fullpath, ":~:.")
+			local parts = vim.split(relative_path, "/")
+			local start_index = math.max(1, #parts - 2)
+			display_path = table.concat(parts, "/", start_index)
+		else
+			display_path = "[No Name]"
+		end
 
-        local formatted = string.format(" %2d | %-60s", i, display_path)
-        table.insert(lines, formatted)
-        buffer_map[tostring(i)] = buf.bufnr
-    end
+		local formatted = string.format(" %2d | %-60s", i, display_path)
+		table.insert(lines, formatted)
+		buffer_map[tostring(i)] = buf.bufnr
+	end
 
-    -- Add an empty line at the end
-    table.insert(lines, "")
+	-- Add an empty line at the end
+	table.insert(lines, "")
 
-    -- Display all lines at once using echo
-    vim.api.nvim_echo({ { table.concat(lines, "\n") } }, false, {})
+	-- Display all lines at once using echo
+	vim.api.nvim_echo({ { table.concat(lines, "\n") } }, false, {})
 
-    activate_buffer_keys()
-end, { range = false })  -- Explicitly disable range for this command
+	-- design dashes
+	vim.api.nvim_echo({
+		{ "\n" },
+	}, false, {})
+
+	activate_buffer_keys()
+end, { range = false }) -- Explicitly disable range for this command
 
 -- Show buffer list with <C-i>
 vim.keymap.set("n", "<C-i>", ":Buffer<CR>", { noremap = true, silent = true, desc = "Show buffer list" })
 
 -- Delete all buffers except the current one
 vim.keymap.set("n", "[ct", function()
+	local current = vim.api.nvim_get_current_buf()
+	local buffers = vim.api.nvim_list_bufs()
 
-    local current = vim.api.nvim_get_current_buf()
-    local buffers = vim.api.nvim_list_bufs()
-
-    for _, buf in ipairs(buffers) do
-        if vim.api.nvim_buf_is_loaded(buf) and vim.api.nvim_buf_get_option(buf, "buflisted") then
-            if buf ~= current then
-                vim.cmd("bdelete " .. buf)
-            end
-        end
-    end
+	for _, buf in ipairs(buffers) do
+		if vim.api.nvim_buf_is_loaded(buf) and vim.api.nvim_buf_get_option(buf, "buflisted") then
+			if buf ~= current then
+				vim.cmd("bdelete " .. buf)
+			end
+		end
+	end
 end, { desc = "Delete all buffers except current" })
-
