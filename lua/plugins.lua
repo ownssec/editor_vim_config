@@ -206,12 +206,4 @@ return require("packer").startup(function(use)
 			require("Comment").setup()
 		end,
 	})
-
-	--mini added for file manager
-	-- use({
-	-- 	"echasnovski/mini.nvim",
-	-- 	config = function()
-	-- 		require("config.mini")
-	-- 	end,
-	-- })
 end)
