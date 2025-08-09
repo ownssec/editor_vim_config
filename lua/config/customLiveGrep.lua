@@ -1,6 +1,6 @@
 -- Create a custom command to grep the parent directory using ripgrep
 vim.api.nvim_create_user_command("ParentGrep", function()
-	vim.ui.input({ prompt = "Search (ripgrep) in parent dir: " }, function(input)
+	vim.ui.input({ prompt = " ripgrep : " }, function(input)
 		if not input or input == "" then
 			return
 		end
@@ -30,7 +30,7 @@ vim.api.nvim_create_user_command("ParentGrep", function()
 			end,
 		})
 	end)
-end, { desc = "Search parent dir using ripgrep (case-insensitive)" })
+end, { desc = " ripgrep : " })
 
 vim.keymap.set("n", "<C-o>", function()
 	local is_open = false
