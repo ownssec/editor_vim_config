@@ -2,93 +2,8 @@
 local ui_width = math.floor(vim.o.columns * 1)
 local ui_height = math.floor(vim.o.lines * 0.2)
 
-require("mini.pick").setup({
-
-	delay = {
-		async = 10,
-		busy = 50,
-	},
-
-	mappings = {
-		caret_left = "<Left>",
-		caret_right = "<Right>",
-
-		choose = "<CR>",
-		choose_in_split = "<C-s>",
-		choose_in_tabpage = "<C-t>",
-		choose_in_vsplit = "<C-v>",
-		choose_marked = "<M-CR>",
-
-		delete_char = "<BS>",
-		delete_char_right = "<Del>",
-		delete_left = "<C-u>",
-		delete_word = "<C-w>",
-
-		mark = "<C-x>",
-		mark_all = "<C-a>",
-
-		move_down = "<C-n>",
-		move_start = "<C-g>",
-		move_up = "<C-p>",
-
-		paste = "<C-r>",
-
-		refine = "<C-Space>",
-		refine_marked = "<M-Space>",
-
-		scroll_down = "<C-f>",
-		scroll_left = "<C-h>",
-		scroll_right = "<C-l>",
-		scroll_up = "<C-b>",
-
-		stop = "<Esc>",
-
-		toggle_info = "<S-Tab>",
-		toggle_preview = "<Tab>",
-	},
-
-	options = {
-		content_from_bottom = false,
-		use_cache = false,
-	},
-
-	source = {
-		items = nil,
-		name = nil,
-		cwd = nil,
-
-		match = nil,
-		show = nil,
-		preview = nil,
-
-		choose = nil,
-		choose_marked = nil,
-	},
-
-
-	window = {
-		prompt_caret= "▏",
-
-		prompt_prefix = "> ",
-
-		config = {
-			-- width = 70,
-			-- height = 10,
-            width = ui_width,
-            height = ui_height,
-			-- border = "none",
-			border = "rounded",
-			row = vim.o.lines - 0,
-		},
-		-- winhl = "FloatBorder:NormalFloat",
-        winhl = "FloatBorder:MiniPickBorder",
-		winblend = 0,
-		prompt = { anchor = "SW", row = vim.o.lines - 3},
-	},
-})
-
 -- vim.api.nvim_set_hl(0, "MiniPickBorder", { fg = "#434241", bg = "#434241" })
-vim.api.nvim_set_hl(0, "MiniPickBorder", { fg = "#434241"  })
+-- vim.api.nvim_set_hl(0, "MiniPickBorder", { fg = "#434241" })
 
 require("mini.indentscope").setup({
 	draw = {
@@ -113,26 +28,97 @@ require("mini.indentscope").setup({
 	symbol = "", --'╎',
 })
 
+require("mini.files").setup({
+	-- Customization of shown content
+	content = {
+		-- Predicate for which file system entries to show
+		filter = nil,
+		-- What prefix to show to the left of file system entry
+		prefix = nil,
+		-- In which order to show file system entries
+		sort = nil,
+	},
+
+	-- Module mappings created only inside explorer.
+	-- Use `''` (empty string) to not create one.
+	mappings = {
+		close = "q",
+		go_in = "l",
+		go_in_plus = "L",
+		go_out = "h",
+		go_out_plus = "H",
+		mark_goto = "'",
+		mark_set = "m",
+		reset = "<BS>",
+		reveal_cwd = "@",
+		show_help = "g?",
+		synchronize = "=",
+		trim_left = "<",
+		trim_right = ">",
+	},
+
+	-- General options
+	options = {
+		-- Whether to delete permanently or move into module-specific trash
+		permanent_delete = true,
+		-- Whether to use for editing directories
+		use_as_default_explorer = true,
+	},
+
+	-- Customization of explorer windows
+	windows = {
+		-- Maximum number of windows to show side by side
+		max_number = math.huge,
+		-- Whether to show preview of file/directory under cursor
+		preview = false,
+		-- Width of focused window
+		width_focus = 50,
+		-- Width of non-focused window
+		width_nofocus = 15,
+		-- Width of preview window
+		width_preview = 25,
+	},
+})
+
 vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#434241" })
 -- vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#ffffff" })
 
 -- vim.api.nvim_set_keymap("n", "<C-p>", '<Cmd>exe ":Pick files"<CR>', { noremap = true, silent = true })
-<<<<<<< HEAD
-=======
 -- vim.api.nvim_set_keymap("n", "<C-E>", '<Cmd>exe ":Pick buffers"<CR>', { noremap = true, silent = true })
->>>>>>> 9d3ab3fd9240d94486bfe3c16279586aed2ad766
-vim.api.nvim_set_keymap("n", "<C-o>", '<Cmd>exe ":Pick grep_live"<CR>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap("n", "<C-i>", '<Cmd>exe ":Pick buffers"<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<C-o>", '<Cmd>exe ":Pick grep_live"<CR>', { noremap = true, silent = true })
 
-vim.api.nvim_create_autocmd("VimResized", {
-	callback = function()
-		require("toggleterm").setup({
-			float_opts = {
-				border = "none",
-				width = vim.o.columns,
-				height = get_half_screen_height(),
-				winblend = 0,
-			},
-		})
-	end,
-})
+-- vim.keymap.set("n", "<C-e>", function()
+-- 	local mini_files = require("mini.files")
+--
+-- 	-- Check if MiniFiles is open
+-- 	if mini_files.close() then
+-- 		-- If it was open, close() will return true, so just exit
+-- 		return
+-- 	end
+--
+-- 	-- Otherwise, open it
+-- 	mini_files.open()
+-- end, { noremap = true, silent = true })
+
+vim.keymap.set("n", "<C-e>", function()
+	local mini_files = require("mini.files")
+
+	-- If MiniFiles is open, close it
+	if mini_files.close() then
+		return
+	end
+
+	-- Otherwise, open MiniFiles showing current buffer's parent directory
+	local buf_path = vim.api.nvim_buf_get_name(0)
+	if buf_path == "" then
+		-- No file path (e.g., empty buffer) -> fallback to current working dir
+		mini_files.open(vim.loop.cwd(), false)
+		return
+	end
+
+	local parent_dir = vim.fn.fnamemodify(buf_path, ":h")
+	mini_files.open(parent_dir, false)
+
+	-- Reveal the file inside MiniFiles
+	mini_files.reveal(buf_path, false)
+end, { noremap = true, silent = true })
