@@ -65,3 +65,12 @@ vim.keymap.set("n", "<C-p>", function()
 		vim.notify("Looped to last quickfix item", vim.log.levels.INFO)
 	end
 end, { desc = "Quickfix: Previous (loop)", noremap = true, silent = true })
+
+-- Disable numbers in quickfix
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "qf",
+	callback = function()
+		vim.opt_local.relativenumber = false
+		vim.opt_local.number = false
+	end,
+})
