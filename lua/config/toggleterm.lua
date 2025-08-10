@@ -54,6 +54,29 @@ toggleterm.setup({
 		-- default = 0 which means the feature is turned off
 		horizontal_breakpoint = 135,
 	},
+	highlights = {
+		Normal = {
+			guibg = bgColor,
+		},
+	},
+	on_open = function(term)
+		if term.direction == "horizontal" then
+			local width = vim.api.nvim_win_get_width(term.window)
+			local border = string.rep(".", width) -- You can use "─", "═", "▔", etc.
+
+			-- Set the winbar with proper highlighting
+			vim.api.nvim_win_set_option(term.window, "winbar", "%#ToggleTermBorderRed#" .. border)
+
+			-- Alternative approach that might work better in some cases:
+			-- vim.api.nvim_win_set_option(term.window, "winbar", border)
+			-- vim.api.nvim_win_set_option(term.window, "winhl", "WinBar:ToggleTermBorderRed")
+		end
+	end, -- Optional: Clear the border when terminal closes
+	on_close = function(term)
+		if term.direction == "horizontal" then
+			vim.api.nvim_win_set_option(term.window, "winbar", "")
+		end
+	end,
 })
 vim.api.nvim_create_autocmd("TermOpen", {
 	pattern = "term://*",
@@ -68,13 +91,6 @@ local keymap_opts = { noremap = true, silent = true }
 
 -- Ensure the leader key is set (usually Space)
 vim.g.mapleader = "["
-
--- Use <Leader>1 to <Leader>4 to toggle ToggleTerm terminals 1–4
--- for i = 1, 4 do
--- 	vim.api.nvim_set_keymap("n", "<Leader>" .. i, "<Cmd>exe 'ToggleTerm " .. i .. "'<CR>", keymap_opts)
--- 	vim.api.nvim_set_keymap("i", "<Leader>" .. i, "<Esc><Cmd>exe 'ToggleTerm " .. i .. "'<CR>", keymap_opts)
--- 	vim.api.nvim_set_keymap("t", "<Leader>" .. i, "<Cmd>exe 'ToggleTerm " .. i .. "'<CR>", keymap_opts)
--- end
 
 for i = 1, 4 do
 	vim.keymap.set("n", "<Leader>" .. i, function()
