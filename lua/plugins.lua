@@ -98,13 +98,6 @@ return require("packer").startup(function(use)
 			require("config.gitsigns")
 		end,
 	})
-	use({
-		"akinsho/git-conflict.nvim",
-		tag = "*",
-		config = function()
-			require("config.gitconflict")
-		end,
-	})
 
 	-- UI and Appearance
 	use({
