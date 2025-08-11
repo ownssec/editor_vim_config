@@ -206,4 +206,13 @@ return require("packer").startup(function(use)
 			require("Comment").setup()
 		end,
 	})
+
+
+    use({
+      'sindrets/diffview.nvim',
+      requires = 'nvim-lua/plenary.nvim',
+		config = function()
+            -- hello
+		end,
+    })
 end)
