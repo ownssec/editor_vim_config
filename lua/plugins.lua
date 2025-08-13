@@ -214,7 +214,11 @@ return require("packer").startup(function(use)
 		config = function()
             -- he1232313122131312llo
             -- he1232313122131312llo
+<<<<<<< HEAD
             -- hsd313112312321@@@12312e1232313122131312llo
+=======
+            -- hsd313112312321e1232313122131312llo
+>>>>>>> f2573fdaeb808ba1aee13e153a9940b1b40d9291
 		end,
     })
 end)
