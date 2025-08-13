@@ -98,13 +98,6 @@ return require("packer").startup(function(use)
 			require("config.gitsigns")
 		end,
 	})
-	use({
-		"akinsho/git-conflict.nvim",
-		tag = "*",
-		config = function()
-			require("config.gitconflict")
-		end,
-	})
 
 	-- UI and Appearance
 	use({
@@ -207,18 +200,21 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-
-    use({
-      'sindrets/diffview.nvim',
-      requires = 'nvim-lua/plenary.nvim',
+	-- git
+	use({
+		"sindrets/diffview.nvim",
+		requires = "nvim-lua/plenary.nvim",
 		config = function()
-            -- he1232313122131312llo
-            -- he1232313122131312llo
-<<<<<<< HEAD
-            -- hsd313112312321@@@12312e1232313122131312llo
-=======
-            -- hsd313112312321e1232313122131312llo
->>>>>>> f2573fdaeb808ba1aee13e153a9940b1b40d9291
+			require("config.diffView")
 		end,
-    })
+	})
+
+	-- syntax
+	use({
+		"kylechui/nvim-surround",
+		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+		config = function()
+			require("nvim-surround").setup({})
+		end,
+	})
 end)
