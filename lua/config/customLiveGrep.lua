@@ -16,7 +16,8 @@ vim.api.nvim_create_user_command("ParentGrep", function()
 				if data then
 					vim.fn.setqflist({}, "a", { lines = data })
 					vim.cmd("copen")
-				end
+				end -- vim.fn.setqflist({}, "a", { lines = "+ ", data })
+				-- vim.cmd("copen")
 			end,
 			on_stderr = function(_, data)
 				if data and data[1] ~= "" then

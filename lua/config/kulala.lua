@@ -43,7 +43,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 		vim.api.nvim_set_keymap(
 			"n",
-			"]r",
+			"[r",
 			"<cmd>lua require('kulala').run()<CR>",
 			{ noremap = true, silent = true, desc = "Execute the request with Kulala" }
 		)

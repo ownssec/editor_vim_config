@@ -217,4 +217,12 @@ return require("packer").startup(function(use)
 			require("nvim-surround").setup({})
 		end,
 	})
+
+	--fuzzy finder and mini picker
+	use({
+		"echasnovski/mini.nvim",
+		config = function()
+			require("config.mini")
+		end,
+	})
 end)
