@@ -42,3 +42,8 @@ vim.api.nvim_create_autocmd("VimEnter", {
 		end
 	end,
 })
+
+vim.cmd([[
+  hi Normal guibg=NONE ctermbg=NONE
+  hi NormalNC guibg=NONE ctermbg=NONE
+]])
