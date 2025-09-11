@@ -48,12 +48,12 @@ vim.api.nvim_create_autocmd("FileType", {
 			{ noremap = true, silent = true, desc = "Jump to the previous request" }
 		)
 
-		-- vim.api.nvim_set_keymap(
-		-- 	"n",
-		-- 	"[f",
-		-- 	":lua require('kulala').open()<CR>",
-		-- 	{ noremap = true, silent = true, desc = "Jump to the previous request" }
-		-- )
+		vim.api.nvim_set_keymap(
+			"n",
+			"[o",
+			":lua require('kulala').open()<CR>",
+			{ noremap = true, silent = true, desc = "Jump to the previous request" }
+		)
 
 		vim.api.nvim_set_keymap(
 			"n",
