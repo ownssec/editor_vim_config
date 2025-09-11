@@ -3,25 +3,39 @@
 require("kulala").setup({
 	debug = true,
 	default_env = "dev",
-	transparent = false,
-	terminal_colors = true,
-	winbar = true,
-	default_winbar_panes = { "body", "verbose", "report" },
-	-- default_winbar_panes = { "body", "headers", "verbose" },
-	styles = {
-		comments = { italic = true },
-		keywords = { italic = true },
-		functions = { bold = true },
-		variables = {},
+	ui = {
+		default_winbar_panes = { "body", "verbose", "report" },
+		winbar = true,
+		disable_news_popup = false,
+		display_mode = "float", -- float / split
+		max_response_size = 1132768,
+		disable_script_print_output = true,
 	},
-	sidebars = { "qf", "vista_kind", "terminal", "packer" },
-	on_colors = function(colors)
-		colors.border = "#ff0000" -- Example: Custom border color
-	end,
-	on_highlights = function(hl, c)
-		hl.Normal = { bg = c.bg, fg = c.fg }
-		hl.CursorLineNr = { fg = c.orange, bold = true }
-	end,
+	lsp = {
+		-- enable/disable built-in LSP server
+		enable = true,
+
+		-- filetypes to attach Kulala LSP to
+		filetypes = { "http", "rest", "json", "yaml", "bruno" },
+
+		--enable/disable/customize  LSP keymaps
+		---@type boolean|table
+		keymaps = false, -- disabled by default, as Kulala relies on default Neovim LSP keymaps
+
+		-- enable/disable/customize HTTP formatter
+		formatter = {
+			sort = { -- enable/disable alphabetical sorting in request body
+				metadata = true,
+				variables = true,
+				commands = false,
+				json = true,
+			},
+			quote_json_variables = true, -- add quotes around {{variable}} in JSON bodies
+			indent = 2, -- base indentation for scripts
+		},
+
+		on_attach = nil, -- function called when Kulala LSP attaches to the buffer
+	},
 })
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -33,6 +47,13 @@ vim.api.nvim_create_autocmd("FileType", {
 			":lua require('kulala').jump_prev()<CR>",
 			{ noremap = true, silent = true, desc = "Jump to the previous request" }
 		)
+
+		-- vim.api.nvim_set_keymap(
+		-- 	"n",
+		-- 	"[f",
+		-- 	":lua require('kulala').open()<CR>",
+		-- 	{ noremap = true, silent = true, desc = "Jump to the previous request" }
+		-- )
 
 		vim.api.nvim_set_keymap(
 			"n",

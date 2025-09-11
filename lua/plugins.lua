@@ -187,7 +187,7 @@ return require("packer").startup(function(use)
 
 	use({
 		"mistweaverco/kulala.nvim",
-		config = function()
+         config = function()
 			require("config.kulala")
 		end,
 	})
