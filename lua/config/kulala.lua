@@ -7,7 +7,7 @@ require("kulala").setup({
 		default_winbar_panes = { "body", "verbose", "report" },
 		winbar = true,
 		disable_news_popup = false,
-		display_mode = "float", -- float / split
+		display_mode = "split", -- float / split
 		max_response_size = 1132768,
 		disable_script_print_output = true,
 	},
